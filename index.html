@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การ์ดเชิญงานแต่งงาน - เมย์ & เต้ย</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font จาก Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome สำหรับไอคอน (เช่น ไอคอนเลื่อนลง) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- 1. ส่วนหัว (Hero Section): โลโก้/ชื่อเจ้าบ่าวเจ้าสาว พร้อมแอนิเมชั่นและพื้นหลังซุ้มดอกไม้ -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <!-- ตำแหน่งสำหรับโลโก้/ชื่อเจ้าบ่าวเจ้าสาว (เป็นรูปภาพ) -->
+            <img src="images/wedding-logo.png" alt="May & Toey Wedding Logo" class="wedding-logo">
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+            <p>เลื่อนลง</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. ส่วนเชิญชวน: ข้อความเชิญ, รูปคู่, ชื่อ, และนับถอยหลัง -->
+        <section id="invitation-section" class="section invitation-section">
+            <h2>ขอเชิญท่านร่วมงานมงคลสมรสระหว่าง</h2>
+            <div class="couple-main-photo">
+                <img src="images/couple-main-photo.jpg" alt="รูปคู่เมย์และเต้ย">
+            </div>
+            <p class="couple-names-text">เมย์ & เต้ย</p>
+            <div class="date-location">
+                <p>วันจันทร์ที่ 28 กรกฏาคม 2568</p>
+                <p>โรงแรมอาปาเก้การ์เด้น</p>
+            </div>
+            <div id="countdown" class="countdown"></div>
+            <button id="scrollToSchedule" class="btn-scroll">ดูรายละเอียดกำหนดการ</button>
+        </section>
+
+        <!-- 3. กำหนดการ: รายละเอียดพิธีการ -->
+        <section id="schedule-section" class="section details-section">
+            <h2>กำหนดการ</h2>
+            <div class="detail-item">
+                <h3>พิธีมงคลสมรส (ช่วงเช้า)</h3>
+                <p>เวลา: 09:00 - 11:00 น.</p>
+                <p>ณ: ห้องจัดเลี้ยงรุ่งอรุณ โรงแรมอาปาเก้การ์เด้น</p>
+                <p>พิธีหมั้น, พิธีหลั่งน้ำพระพุทธมนต์</p>
+            </div>
+        </section>
+
+        <!-- 4. สถานที่จัดงาน: แผนที่ -->
+        <section id="location-section" class="section map-section">
+            <h2>สถานที่จัดงาน</h2>
+            <div class="map-container">
+                <h3>โรงแรมอาปาเก้การ์เด้น</h3>
+                <!-- แผนที่ Google Maps Embed API (เปลี่ยน URL เป็นแผนที่จริงของคุณ) -->
+                <!-- วิธีการคัดลอก: ไปที่ Google Maps > ค้นหาสถานที่ > คลิก "แชร์" > เลือก "ฝังแผนที่" > คัดลอกโค้ด iframe แล้วนำเฉพาะ src="..." มาวาง -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.4395649882194!2d100.626728!3d13.932412999999999!2m3
+                !1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d7d8c41fa35ff%3A0x9e00d26ce693dbc5!2sAgape%20Garden!5e0!3m2!1sen!2sth!4v1749062522212!5m2!1sen!2sth" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+               <p><a href="https://maps.app.goo.gl/awRS8yrkfKq5aboS7" target="_blank" class="map-link">เปิดใน Google Maps</a></p>
+                <small>(ลิงก์แผนที่นี้เป็นแค่ตัวอย่าง กรุณาเปลี่ยนเป็นลิงก์โรงแรมจริงของคุณ)</small>
+            </div>
+        </section>
+
+        <!-- 5. แกลเลอรี่ภาพ: แกลเลอรีความทรงจำ -->
+        <section id="gallery-section" class="section gallery-section">
+            <h2>แกลเลอรีความทรงจำ</h2>
+            <div class="gallery-grid">
+                <img src="images/gallery-photo-1.jpg" alt="รูปพรีเวดดิ้ง 1">
+                <img src="images/gallery-photo-2.jpg" alt="รูปพรีเวดดิ้ง 2">
+                <img src="images/gallery-photo-3.jpg" alt="รูปพรีเวดดิ้ง 3">
+                <img src="images/gallery-photo-4.jpg" alt="รูปพรีเวดดิ้ง 4">
+            </div>
+            <small>(เปลี่ยนชื่อไฟล์รูปภาพเป็นรูปของคุณที่อยู่ใน Folder images)</small>
+        </section>
+
+        <!-- 6. RSVP: ตอบรับการเข้าร่วมงาน -->
+        <section id="rsvp-section" class="section rsvp-section">
+            <h2>ตอบรับการเข้าร่วมงาน (RSVP)</h2>
+            <form id="rsvpForm">
+                <label for="guestName">ชื่อ-นามสกุล:</label>
+                <input type="text" id="guestName" name="guestName" required>
+
+                <label for="numGuests">จำนวนผู้เข้าร่วม (รวมตัวท่าน):</label>
+                <input type="number" id="numGuests" name="numGuests" min="1" value="1" required>
+
+                <label for="message">ข้อความอวยพร (ไม่บังคับ):</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+
+                <button type="submit" class="btn-submit">ยืนยันการเข้าร่วม</button>
+                <p id="rsvpStatus" class="status-message"></p>
+            </form>
+        </section>
+
+        <!-- 7. ร่วมยินดี & ของขวัญ: ช่องทางการโอนเงินและของขวัญ -->
+        <section id="gift-section" class="section gift-section">
+            <h2>ร่วมยินดี & ของขวัญ</h2>
+            <p>สำหรับแขกผู้มีเกียรติที่ต้องการร่วมแสดงความยินดีผ่านของขวัญ หรือช่องทางอิเล็กทรอนิกส์ เราได้เตรียมข้อมูลไว้ดังนี้ค่ะ</p>
+            <div class="gift-options">
+                <div class="qr-code">
+                    <img src="images/qr-code.jpg" alt="QR Code">
+                    <p>สแกน QR Code เพื่อโอนเงิน</p>
+                    <small>(แทนที่ด้วย QR Code จริงของคุณ)</small>
+                </div>
+                <div class="bank-info">
+                    <p><strong>บัญชีธนาคาร:</strong> ธนาคาร SCB</p>
+                    <p><strong>ชื่อบัญชี:</strong> นางสาวกัลยานี และ นายรัชพล</p>
+                    <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
+                </div>
+            </div>
+            <p>หรือสามารถร่วมอวยพรได้ในสมุดประสาทพรหน้างานค่ะ</p>
+        </section>
+
+        <!-- 8. สมุดอวยพร (Guestbook) -->
+        <section id="guestbook-section" class="section guestbook-section">
+            <h2>สมุดอวยพร</h2>
+            <form id="guestbookForm">
+                <label for="guestbookName">ชื่อ-นามสกุล:</label>
+                <input type="text" id="guestbookName" name="guestbookName" required>
+
+                <label for="guestbookMessage">ข้อความอวยพร:</label>
+                <textarea id="guestbookMessage" name="guestbookMessage" rows="5" required></textarea>
+
+                <button type="submit" class="btn-submit">ส่งคำอวยพร</button>
+                <p id="guestbookStatus" class="status-message"></p>
+            </form>
+            <div class="guestbook-entries" id="guestbookEntries">
+                <!-- คำอวยพรจะแสดงที่นี่ -->
+                <div class="guestbook-entry">
+                    <p class="entry-name">คุณพ่อคุณแม่</p>
+                    <p class="entry-message">ขอให้ลูกทั้งสองมีความสุขมากๆ รักกันตลอดไปนะจ๊ะ</p>
+                </div>
+                <div class="guestbook-entry">
+                    <p class="entry-name">เพื่อนซี้</p>
+                    <p class="entry-message">ยินดีด้วยนะเพื่อน! ขอให้ชีวิตคู่มีแต่ความหวานชื่น</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Audio Player (ซ่อนไว้และควบคุมด้วย JS) -->
+    <audio id="backgroundMusic" loop>
+        <source src="audio/wedding-song.mp3" type="audio/mpeg">
+        <!-- คุณสามารถเพิ่ม <source> สำหรับไฟล์ .ogg ได้ด้วย -->
+        Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggle" class="music-toggle-btn"><i class="fas fa-music"></i></button>
+
+    <script src="script.js"></script>
+</body>
+</html>

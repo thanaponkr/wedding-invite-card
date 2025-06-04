@@ -1,0 +1,608 @@
+/* Import Fonts */
+body {
+    font-family: 'Sarabun', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f0e8; /* สีพื้นหลังอ่อนๆ */
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
+    /* พื้นหลังหลักของ body */
+    background-image: url('images/main-bg-pattern.png'); /* รูปแบบแพทเทิร์นเล็กๆ หรือสีพื้นหลัง */
+    background-repeat: repeat;
+    background-attachment: scroll; /* ให้พื้นหลัง body เลื่อนตาม */
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #8B4513; /* สีน้ำตาลเข้ม */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+h2 {
+    font-size: 2.5em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+h3 {
+    font-size: 1.8em;
+    color: #6C3400;
+}
+
+p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+/* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
+.hero-section {
+    background: url('images/floral-background.jpg') no-repeat center center/cover; /* รูปซุ้มดอกไม้ */
+    background-attachment: fixed; /* ทำให้เกิด Parallax Effect */
+    background-size: 120% 120%; /* ทำให้รูปใหญ่ขึ้นเล็กน้อยเพื่อการเคลื่อนไหว */
+    animation: floralPan 30s linear infinite alternate; /* เพิ่มแอนิเมชั่น */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* ซ่อนส่วนเกินของรูปพื้นหลังที่เคลื่อนไหว */
+    color: white; /* สีข้อความในส่วน Hero */
+}
+
+/* Keyframes สำหรับแอนิเมชั่นพื้นหลัง */
+@keyframes floralPan {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+.hero-content {
+    /* ไม่มีพื้นหลังทึบแล้ว */
+    padding: 0;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%; /* ให้ hero-content เต็มพื้นที่ของ hero-section */
+}
+
+.wedding-logo {
+    max-width: 70%; /* ขนาดโลโก้ */
+    height: auto;
+    display: block; /* ทำให้จัดกึ่งกลางได้ */
+    margin: auto; /* จัดกึ่งกลาง */
+    animation: fadeInScale 2s ease-out forwards; /* แอนิเมชั่นโลโก้ */
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* เพิ่มเงาให้โลโก้เด่นขึ้น */
+}
+
+.hero-slogan {
+    font-size: 1.5em;
+    font-style: italic;
+    margin-top: 15px;
+    animation: fadeIn 2.5s ease-out forwards;
+}
+
+/* Keyframes สำหรับแอนิเมชั่นโลโก้และข้อความ */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+.scroll-indicator i {
+    display: block;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-15px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-7px);
+    }
+}
+
+
+/* Main Sections (สไตล์ทั่วไปสำหรับทุก Section ที่เป็นเนื้อหา) */
+.section {
+    padding: 80px 20px; /* เพิ่ม padding ด้านบน/ล่าง */
+    max-width: 960px;
+    margin: 40px auto; /* เพิ่ม margin ระหว่าง section */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* เพิ่มเงาให้ดูมีมิติ */
+    opacity: 0; /* ซ่อนไว้ก่อนเพื่อทำ fade-in เมื่อ scroll */
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Invitation Section (ส่วนเชิญชวน) */
+.invitation-section {
+    padding-top: 80px;
+    text-align: center;
+}
+
+.invitation-section h2 {
+    font-size: 2.8em;
+    color: #A0522D;
+    margin-bottom: 40px;
+}
+
+.couple-main-photo img {
+    width: 250px; /* ขนาดรูปคู่ */
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+    border: 7px solid #D2B48C; /* ขอบรูป */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.couple-main-photo img:hover {
+    transform: scale(1.03);
+}
+
+.couple-names-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    color: #6C3400;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.date-location {
+    font-size: 1.3em;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.countdown {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #D2B48C; /* สีเดียวกับปุ่ม */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-scroll {
+    background-color: #A0522D; /* สีน้ำตาลอมส้ม */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-scroll:hover {
+    background-color: #CD853F; /* สีอ่อนลงเมื่อ hover */
+    transform: translateY(-3px);
+}
+
+/* Details Section (กำหนดการ) */
+.details-section .detail-item {
+    background-color: #fcf6ef;
+    padding: 25px; /* เพิ่ม padding */
+    border-radius: 8px; /* เพิ่มความมนของขอบ */
+    margin-bottom: 25px; /* เพิ่มระยะห่าง */
+    text-align: left;
+    border-left: 5px solid #D2B48C;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* เพิ่มเงาเล็กน้อย */
+}
+
+.details-section .detail-item h3 {
+    text-align: left;
+    margin-top: 0;
+    color: #A0522D;
+}
+
+.details-section .detail-item p {
+    text-align: left;
+}
+
+/* Map Section (สถานที่จัดงาน) */
+.map-section {
+    text-align: center;
+}
+.map-container {
+    margin-top: 40px;
+}
+.map-container iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.map-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #D2B48C;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.map-link:hover {
+    background-color: #B29B7F;
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* RSVP Section */
+.rsvp-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.rsvp-section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6C3400;
+}
+
+.rsvp-section input[type="text"],
+.rsvp-section input[type="number"],
+.rsvp-section textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box; /* สำคัญ */
+}
+
+.rsvp-section textarea {
+    resize: vertical; /* อนุญาตให้ปรับขนาดแนวตั้งได้ */
+}
+
+.btn-submit {
+    background-color: #A0522D;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #CD853F;
+}
+
+.status-message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #007bff; /* สีน้ำเงินสำหรับข้อความสถานะ */
+}
+
+/* Gift Section */
+.gift-section {
+    text-align: center;
+}
+
+.gift-options {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap; /* ให้ห่อเมื่อหน้าจอเล็ก */
+}
+
+.gift-options .qr-code,
+.gift-options .bank-info {
+    background-color: #fcf6ef;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 250px;
+    text-align: center;
+}
+
+.gift-options img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.gift-options .qr-code p {
+    text-align: center; /* ทำให้ข้อความใน QR Code จัดกึ่งกลาง */
+    padding-left: 0;   /* ลบ padding-left ที่เคยทำให้ชิดซ้าย */
+}
+
+.gift-options .bank-info p {
+    text-align: left; /* คงการจัดซ้ายสำหรับข้อมูลธนาคาร */
+    padding-left: 10px;
+}
+.gift-options p strong {
+    color: #A0522D;
+}
+
+/* Guestbook Section (New) */
+.guestbook-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.guestbook-section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6C3400;
+}
+
+.guestbook-section input[type="text"],
+.guestbook-section textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.guestbook-entries {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    max-height: 400px; /* จำกัดความสูงและทำให้มี scrollbar */
+    overflow-y: auto;
+}
+
+.guestbook-entry {
+    background-color: #fcf6ef;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.guestbook-entry .entry-name {
+    font-weight: bold;
+    color: #A0522D;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.guestbook-entry .entry-message {
+    font-style: italic;
+    color: #555;
+    text-align: left;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #D2B48C; /* สีเดียวกับปุ่ม/ลิงก์ */
+    color: white;
+    font-size: 0.9em;
+    margin-top: 50px;
+}
+
+/* Music Toggle Button */
+.music-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #A0522D;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000; /* ให้อยู่ด้านบนสุด */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.music-toggle-btn:hover {
+    background-color: #CD853F;
+    transform: scale(1.1);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    .hero-content {
+        /* padding-top: 20vh; */ /* ไม่จำเป็นต้องมี padding-top เมื่อเนื้อหาอยู่ตรงกลาง */
+    }
+    .wedding-logo {
+        max-width: 80%;
+    }
+    .hero-slogan {
+        font-size: 1.2em;
+    }
+    .invitation-section h2 {
+        font-size: 2.2em;
+    }
+    .couple-main-photo img {
+        width: 180px;
+        height: 180px;
+    }
+    .couple-names-text {
+        font-size: 2em;
+    }
+    .date-location {
+        font-size: 1.1em;
+    }
+    .countdown {
+        font-size: 1.8em;
+    }
+    .btn-scroll {
+        font-size: 1em;
+        padding: 12px 25px;
+    }
+    .section {
+        padding: 40px 15px;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .gift-options .qr-code,
+    .gift-options .bank-info {
+        width: 100%;
+        max-width: 300px; /* จำกัดความกว้างบนมือถือ */
+    }
+    .gift-options {
+        flex-direction: column; /* เรียงเป็นคอลัมน์บนมือถือ */
+        align-items: center;
+    }
+    .music-toggle-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+    .hero-content {
+        /* padding-top: 15vh; */
+    }
+    .wedding-logo {
+        max-width: 70%;
+    }
+    .hero-slogan {
+        font-size: 1em;
+    }
+    .invitation-section h2 {
+        font-size: 1.8em;
+    }
+    .couple-main-photo img {
+        width: 150px;
+        height: 150px;
+    }
+    .couple-names-text {
+        font-size: 1.8em;
+    }
+    .date-location {
+        font-size: 1em;
+    }
+    .countdown {
+        font-size: 1.5em;
+    }
+    .btn-scroll {
+        font-size: 0.9em;
+        padding: 10px 20px;
+    }
+    .section {
+        padding: 30px 10px;
+    }
+    .gallery-grid {
+        grid-template-columns: 1fr; /* 1 คอลัมน์บนมือถือเล็ก */
+    }
+    .music-toggle-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+        bottom: 15px;
+        right: 15px;
+    }
+}
