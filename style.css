@@ -4,14 +4,14 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f7f0e8; /* สีพื้นหลังอ่อนๆ */
+    background-color: #fcf6ef; /* สีพื้นหลังอ่อนๆ (คล้ายสีขาวนวล) */
     color: #333;
     line-height: 1.6;
-    scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
-    /* พื้นหลังหลักของ body */
-    background-image: url('images/main-bg-pattern.png'); /* รูปแบบแพทเทิร์นเล็กๆ หรือสีพื้นหลัง */
-    background-repeat: repeat;
-    background-attachment: scroll; /* ให้พื้นหลัง body เลื่อนตาม */
+    scroll-behavior: smooth;
+    /* พื้นหลังหลักของ body - ลบส่วน background-image, repeat, attachment ออก */
+    /* background-image: url('images/main-bg-pattern.png'); */
+    /* background-repeat: repeat; */
+    /* background-attachment: scroll; */
 }
 
 h1, h2, h3 {
@@ -28,9 +28,9 @@ h1 {
 }
 
 h2 {
-    font-size: 2.5em;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #dcdcdc;
+    font-size: 2.5em; /* ขนาดฟอนต์สำหรับหัวข้อทั่วไป */
+    padding-bottom: 0; /* ลบ padding-bottom ที่เคยมีเส้น */
+    /* border-bottom: 1px solid #dcdcdc; <--- ลบบรรทัดนี้หรือคอมเมนต์ไว้ */
 }
 
 h3 {
@@ -46,10 +46,11 @@ p {
 
 /* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
 .hero-section {
-    background: url('images/floral-background.jpg') no-repeat center center/cover; /* รูปซุ้มดอกไม้ */
-    background-attachment: fixed; /* ทำให้เกิด Parallax Effect */
-    background-size: 120% 120%; /* ทำให้รูปใหญ่ขึ้นเล็กน้อยเพื่อการเคลื่อนไหว */
-    animation: floralPan 30s linear infinite alternate; /* เพิ่มแอนิเมชั่น */
+    background: url('images/hero-floral-frame.jpg.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
+    background-size: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่ทั้งหมดของ Hero Section */
+    /* ลบ background-attachment: fixed; ออก เพื่อให้กรอบดอกไม้อยู่กับที่ ไม่เลื่อนแบบ parallax */
+    /* ลบ background-size: 120% 120%; ออก */
+    /* ลบ animation: floralPan ... ออก */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -57,19 +58,10 @@ p {
     flex-direction: column;
     text-align: center;
     position: relative;
-    overflow: hidden; /* ซ่อนส่วนเกินของรูปพื้นหลังที่เคลื่อนไหว */
-    color: white; /* สีข้อความในส่วน Hero */
+    overflow: hidden;
+    color: white; /* สีข้อความในส่วน Hero (อาจจะต้องปรับเปลี่ยนตามสีรูปดอกไม้ใหม่) */
 }
 
-/* Keyframes สำหรับแอนิเมชั่นพื้นหลัง */
-@keyframes floralPan {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
 
 .hero-content {
     /* ไม่มีพื้นหลังทึบแล้ว */
@@ -150,13 +142,14 @@ p {
 
 /* Main Sections (สไตล์ทั่วไปสำหรับทุก Section ที่เป็นเนื้อหา) */
 .section {
-    padding: 80px 20px; /* เพิ่ม padding ด้านบน/ล่าง */
+    padding: 40px 20px; /* ลด padding ลง */
     max-width: 960px;
-    margin: 40px auto; /* เพิ่ม margin ระหว่าง section */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* เพิ่มเงาให้ดูมีมิติ */
-    opacity: 0; /* ซ่อนไว้ก่อนเพื่อทำ fade-in เมื่อ scroll */
+    margin: 40px auto;
+    /* ลบ background-color, border-radius, box-shadow ออก */
+    /* background-color: #fff; */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 15px rgba(0,0,0,0.1); */
+    opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
@@ -179,15 +172,32 @@ p {
     margin-bottom: 40px;
 }
 
-.couple-main-photo img {
-    width: 250px; /* ขนาดรูปคู่ */
-    height: 250px;
-    object-fit: cover;
-    border-radius: 50%; /* ทำให้เป็นวงกลม */
-    border: 7px solid #D2B48C; /* ขอบรูป */
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
+/* สไตล์สำหรับข้อความ "LET'S CELEBRATE TOGETHER ON OUR SPECIAL DAY ON" */
+.invitation-slogan {
+    font-family: 'Sarabun', sans-serif; /* ใช้ฟอนต์ Sarabun */
+    font-size: 1.5em; /* ขนาดข้อความ */
+    color: #555; /* สีเทาเข้ม */
+    font-weight: 400; /* น้ำหนักฟอนต์ปกติ */
+    margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+    line-height: 1.4; /* ระยะห่างระหว่างบรรทัด */
+    text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
+}
+
+/* สไตล์สำหรับวันที่ (28 JULY 2568) */
+.wedding-date-text {
+    font-family: 'Playfair Display', serif; /* ใช้ฟอนต์ Playfair Display */
+    font-size: 4em; /* ขนาดวันที่ให้ใหญ่มากๆ */
+    color: #333; /* สีดำ */
+    font-weight: bold; /* ตัวหนา */
+    margin-bottom: 40px; /* ระยะห่างด้านล่าง */
+}
+
+/* Invitation Section (ส่วนเชิญชวน) */
+/* .invitation-section { ... } */
+/* .invitation-section h2 { ... } */
+/* .couple-main-photo img { ... } */
+/* .couple-main-photo img:hover { ... } */
+/* .couple-names-text { ... } */
 }
 
 .couple-main-photo img:hover {
@@ -209,32 +219,74 @@ p {
     margin-bottom: 30px;
 }
 
-.countdown {
-    font-size: 2.2em;
-    font-weight: bold;
+/* สไตล์สำหรับตัวนับถอยหลังแบบใหม่ (WEEKS DAYS HOURS MIN SEC) */
+.countdown-modern {
+    display: flex; /* จัดเรียงองค์ประกอบย่อยในแนวนอน */
+    justify-content: center; /* จัดกึ่งกลางในแนวนอน */
+    align-items: flex-end; /* จัดให้ข้อความ "WEEKS" "DAYS" อยู่ด้านล่างตัวเลข */
+    gap: 15px; /* ระยะห่างระหว่างตัวเลข */
     margin-top: 20px;
-    padding: 15px 30px;
-    background-color: #D2B48C; /* สีเดียวกับปุ่ม */
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-bottom: 40px; /* เพิ่มระยะห่างกับปุ่ม */
+}
+
+.countdown-modern > div {
+    text-align: center;
+    /* background-color: #D2B48C; */ /* ไม่ต้องมีพื้นหลังสี */
+    /* color: white; */ /* ไม่ต้องมีสีขาว */
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 10px rgba(0,0,0,0.2); */
+    padding: 0 5px; /* ลด padding */
+}
+
+.countdown-modern .value {
+    font-family: 'Playfair Display', serif; /* ฟอนต์สำหรับตัวเลข */
+    font-size: 3.5em; /* ขนาดตัวเลขให้ใหญ่ */
+    font-weight: bold;
+    color: #333; /* สีดำ */
+    line-height: 1; /* ชิดขอบด้านบน */
+}
+
+.countdown-modern .label {
+    font-family: 'Sarabun', sans-serif; /* ฟอนต์สำหรับข้อความ WEEKS/DAYS */
+    font-size: 0.9em; /* ขนาดข้อความ */
+    color: #777; /* สีเทา */
+    text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
+    margin-top: 5px;
 }
 
 .btn-scroll {
-    background-color: #A0522D; /* สีน้ำตาลอมส้ม */
+    background-color: #A0522D;
     color: white;
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 20px; /* เพิ่มระยะห่างด้านบนจากปุ่มก่อนหน้า */
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-scroll:hover {
     background-color: #CD853F; /* สีอ่อนลงเมื่อ hover */
     transform: translateY(-3px);
+}
+
+/* สไตล์สำหรับปุ่ม ADD TO CALENDAR */
+.btn-calendar {
+    background-color: transparent; /* พื้นหลังโปร่งใส */
+    color: #6C3400; /* สีข้อความน้ำตาลเข้ม */
+    border: 1px solid #6C3400; /* มีขอบสีน้ำตาลเข้ม */
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 20px; /* ระยะห่างด้านบน */
+}
+
+.btn-calendar:hover {
+    background-color: #6C3400; /* เปลี่ยนพื้นหลังเป็นสีน้ำตาลเมื่อ hover */
+    color: white; /* เปลี่ยนสีข้อความเป็นสีขาวเมื่อ hover */
 }
 
 /* Details Section (กำหนดการ) */
