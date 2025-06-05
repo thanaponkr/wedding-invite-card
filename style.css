@@ -46,7 +46,7 @@ p {
 
 /* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
 .hero-section {
-    background: url('images/hero-floral-frame.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
+    background: url('images/hero-floral-frame.jpg.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
     background-size: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่ทั้งหมดของ Hero Section */
     height: 100vh;
     display: flex;
@@ -74,7 +74,7 @@ p {
 }
 
 .wedding-logo {
-    max-width: 400px; /* กำหนดขนาดสูงสุดของโลโก้บน PC */
+    max-width: 500px; /* กำหนดขนาดสูงสุดของโลโก้บน PC */
     width: 80vw; /* ให้มันปรับขนาดตามความกว้างของหน้าจอ แต่ไม่เกิน max-width */
     height: auto;
     display: block;
@@ -157,6 +157,83 @@ p {
     transform: translateY(0);
 }
 
+/* ข้อความ "THE HONOUR OF YOUR PRESENCE IS REQUESTED..." */
+.honor-text {
+    font-family: 'Playfair Display', serif; /* หรือ Sarabun */
+    font-size: 2.4em; /* ขนาดฟอนต์ - ปรับเป็น 1.5em หรือตามต้องการ */
+    color: #6C3400; /* สีน้ำตาลเข้ม */
+    margin-top: -20px; /* เพิ่มบรรทัดนี้เพื่อขยับขึ้น */
+    margin-bottom: 40px; /* ระยะห่างด้านล่าง */
+    line-height: 1.5;
+    text-align: center;
+    max-width: 600px; /* จำกัดความกว้าง */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* การจัดวางรูป Portrait และชื่อ */
+.couple-portraits {
+    display: flex; /* จัดเรียงในแนวนอน */
+    justify-content: center; /* จัดกึ่งกลาง */
+    align-items: center; /* จัดให้อยู่แนวเดียวกัน */
+    gap: 30px; /* ระยะห่างระหว่างรูป */
+    margin-bottom: 40px; /* ระยะห่างด้านล่าง */
+    flex-wrap: wrap; /* ให้ขึ้นบรรทัดใหม่ในจอเล็ก */
+}
+
+.portrait-item {
+    text-align: center;
+}
+
+.portrait-img {
+    width: 400px; /* ขนาดรูปภาพบน PC - ปรับเป็น 500px */
+    height: 400px; /* ขนาดรูปภาพบน PC - ปรับเป็น 500px */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+    object-fit: cover; /* ครอบคลุมพื้นที่รูป */
+    border: 3px solid #D2B48C; /* ขอบรูป */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* เงารูป */
+    transition: transform 0.3s ease;
+}
+
+.portrait-img:hover {
+    transform: scale(1.05);
+}
+
+.portrait-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em; /* ขนาดชื่อ */
+    color: #A0522D; /* สีน้ำตาลอมส้ม */
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.portrait-fullname {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1.1em; /* ขนาดชื่อเต็ม */
+    color: #555;
+    margin-bottom: 0;
+}
+
+.and-symbol {
+    font-family: 'Playfair Display', serif;
+    font-size: 3em; /* ขนาดสัญลักษณ์ & */
+    color: #D2B48C; /* สีน้ำตาลอ่อน */
+    font-weight: bold;
+    margin: 0 10px; /* ระยะห่างด้านข้าง */
+    /* ซ่อนบนมือถือเล็ก */
+    display: block;
+}
+
+/* สไตล์สำหรับโลโก้งานแต่งงานที่อยู่เหนือข้อความ "LET'S CELEBRATE..." */
+.invitation-wedding-logo {
+    max-width: 250px; /* ขนาดโลโก้ */
+    height: auto;
+    display: block;
+    margin: 0 auto 40px auto; /* จัดกึ่งกลางและมีระยะห่างด้านล่าง */
+    filter: drop-shadow(0 0 8px rgba(0,0,0,0.1));
+}
+
 
 /* Invitation Section (ส่วนเชิญชวน) */
 .invitation-section {
@@ -177,7 +254,7 @@ p {
 
 /* สไตล์สำหรับวันที่ (28 JULY 2568) */
 .wedding-date-text {
-    font-family: 'Playfair Display', serif; /* ใช้ฟอนต์ Playfair Display */
+    font-family: 'Bodoni Moda', serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
     font-size: 4em; /* ขนาดวันที่ให้ใหญ่มากๆ */
     color: #333; /* สีดำ */
     font-weight: bold; /* ตัวหนา */
@@ -201,7 +278,7 @@ p {
 }
 
 .countdown-modern .value {
-    font-family: 'Playfair Display', serif; /* ฟอนต์สำหรับตัวเลข */
+    font-family: 'Bodoni Moda', serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
     font-size: 3.5em; /* ขนาดตัวเลขให้ใหญ่ */
     font-weight: bold;
     color: #333; /* สีดำ */
@@ -304,26 +381,101 @@ p {
     background-color: #B29B7F;
 }
 
-/* Gallery Section */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 20px;
+/* Gallery Section (New Slider Styling) */
+.gallery-section {
+    padding: 40px 20px; /* ปรับ padding ให้เหมาะสม */
+    max-width: 960px;
+    margin: 40px auto;
+    text-align: center; /* จัดกึ่งกลางหัวข้อ */
+    position: relative; /* สำหรับตำแหน่งของปุ่ม/จุด */
+    overflow: hidden; /* ซ่อนส่วนที่เกินขอบ */
 }
 
-.gallery-grid img {
+.slider-container {
+    position: relative;
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    max-width: 800px; /* จำกัดความกว้างสูงสุดของ slider */
+    margin: 30px auto;
+    overflow: hidden; /* ซ่อนรูปที่อยู่นอกพื้นที่แสดงผล */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.gallery-grid img:hover {
-    transform: scale(1.05);
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.8s ease-in-out; /* แอนิเมชั่นการเลื่อน */
 }
+
+.slide {
+    min-width: 100%; /* แต่ละสไลด์จะกินพื้นที่ 100% ของ slider-container */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* ทำให้รูปภาพมีความโค้งมน */
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 10px;
+    box-sizing: border-box;
+    pointer-events: none; /* เพื่อให้คลิกผ่านปุ่มได้ถ้าอยู่เหนือรูปภาพ */
+}
+
+.slider-nav button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.5em;
+    transition: background-color 0.3s ease;
+    pointer-events: all; /* ทำให้คลิกปุ่มได้ */
+    opacity: 0.7;
+}
+
+.slider-nav button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid #D2B48C; /* ขอบจุด */
+}
+
+.dot.active-dot {
+    background-color: #D2B48C; /* สีจุดที่ใช้งานอยู่ */
+    transform: scale(1.2);
+}
+
 
 /* RSVP Section */
 .rsvp-section form {
@@ -528,7 +680,7 @@ footer {
         /* padding-top: 20vh; */ /* ไม่จำเป็นต้องมี padding-top เมื่อเนื้อหาอยู่ตรงกลาง */
     }
     .wedding-logo {
-        max-width: 80%;
+        max-width: 60%;
     }
     .hero-slogan {
         font-size: 1.2em;
@@ -556,9 +708,45 @@ footer {
     .section {
         padding: 40px 15px;
     }
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+    /* Responsive adjustments for new portrait/logo in invitation section */
+    .honor-text {
+        font-size: 1em;
+        margin-bottom: 30px;
     }
+    .couple-portraits {
+        flex-direction: column; /* เรียงเป็นคอลัมน์บนมือถือ */
+        gap: 20px;
+    }
+    .and-symbol {
+        display: none; /* ซ่อนสัญลักษณ์ & บนมือถือ */
+    }
+    .portrait-img {
+        width: 200px; /* ปรับขนาดรูปบนมือถือเป็น 200px */
+        height: 200px;
+    }
+    .portrait-name {
+        font-size: 1.6em;
+    }
+    .portrait-fullname {
+        font-size: 1em;
+    }
+    .invitation-wedding-logo {
+        max-width: 180px; /* ลดขนาดโลโก้บนมือถือ */
+        margin-bottom: 30px;
+    }
+
+    /* Slider adjustments for mobile */
+    .slider-nav button {
+        padding: 10px 8px; /* ลดขนาดปุ่มลูกศร */
+        font-size: 1.2em;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+
     .gift-options .qr-code,
     .gift-options .bank-info {
         width: 100%;

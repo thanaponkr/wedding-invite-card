@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const guestbookEntries = document.getElementById('guestbookEntries');
 
     // *** สำคัญมาก! เปลี่ยน URL นี้เป็น Web App URL ที่คุณคัดลอกมาจาก Google Apps Script ในขั้นตอน 3.3.6 ***
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec'; // <<< แก้ไขตรงนี้เท่านั้น!
+    const GOOGLE_APPS_SCRIPT_URL = 'https://calm-sopapillas-690b48.netlify.app/'; // <<< แก้ไขตรงนี้เท่านั้น!
 
     // Function to handle form submission for both RSVP and Guestbook
     const handleFormSubmission = async (event, formType) => {
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let formData = {};
         let statusElement;
         let successMessage = '';
-        let errorMessage = ''; // กำหนด errorMessage ตรงนี้
+        let errorMessage = '';
 
         if (formType === 'rsvp') {
             formData = {
@@ -156,7 +156,94 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 5. Fade-in Section on Scroll ---
+    // --- 4. Gallery Slider ---
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev-slide');
+    const nextButton = document.querySelector('.next-slide');
+    const sliderDotsContainer = document.querySelector('.slider-dots');
+    let currentSlideIndex = 0;
+    let autoplayInterval; // Variable to hold the autoplay interval ID
+
+    // Create dots based on the number of slides
+    slides.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active-dot');
+        dot.addEventListener('click', () => goToSlide(index));
+        sliderDotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot'); // Get dots after creation
+
+    const showSlide = (index) => {
+        if (index >= slides.length) {
+            currentSlideIndex = 0;
+        } else if (index < 0) {
+            currentSlideIndex = slides.length - 1;
+        } else {
+            currentSlideIndex = index;
+        }
+        sliderWrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+        // Update active dot
+        dots.forEach(dot => dot.classList.remove('active-dot'));
+        if (dots[currentSlideIndex]) {
+            dots[currentSlideIndex].classList.add('active-dot');
+        }
+    };
+
+    const nextSlide = () => {
+        showSlide(currentSlideIndex + 1);
+    };
+
+    const prevSlide = () => {
+        showSlide(currentSlideIndex - 1);
+    };
+
+    // Autoplay functionality
+    const startAutoplay = () => {
+        autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    };
+
+    const stopAutoplay = () => {
+        clearInterval(autoplayInterval);
+    };
+
+    // Start autoplay when the page loads
+    startAutoplay();
+
+    // Pause autoplay on hover (optional)
+    sliderWrapper.addEventListener('mouseenter', stopAutoplay);
+    sliderWrapper.addEventListener('mouseleave', startAutoplay);
+    prevButton.addEventListener('mouseenter', stopAutoplay);
+    prevButton.addEventListener('mouseleave', startAutoplay);
+    nextButton.addEventListener('mouseenter', stopAutoplay);
+    nextButton.addEventListener('mouseleave', startAutoplay);
+    dots.forEach(dot => {
+        dot.addEventListener('mouseenter', stopAutoplay);
+        dot.addEventListener('mouseleave', startAutoplay);
+    });
+
+
+    // Add event listeners for navigation buttons
+    prevButton.addEventListener('click', () => {
+        stopAutoplay(); // Stop autoplay on manual interaction
+        prevSlide();
+        startAutoplay(); // Resume autoplay after a brief moment
+    });
+
+    nextButton.addEventListener('click', () => {
+        stopAutoplay(); // Stop autoplay on manual interaction
+        nextSlide();
+        startAutoplay(); // Resume autoplay after a brief moment
+    });
+
+    // Initial display
+    showSlide(currentSlideIndex);
+
+
+    // --- 5. Fade-in Section on Scroll --- (เปลี่ยนจาก 5 เป็น 6)
     const sections = document.querySelectorAll('.section');
 
     const fadeInOnScroll = () => {
@@ -176,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeInOnScroll();
 
 
-    // --- 6. Background Music Toggle ---
+    // --- 6. Background Music Toggle --- (เปลี่ยนจาก 6 เป็น 7)
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggleBtn = document.getElementById('musicToggle');
 
