@@ -1,3 +1,12 @@
 https://script.google.com/macros/s/AKfycbx9DDd4PyBVSvp7djgVyb5BO6j8GgNKv1EQBgVxAh9PZdGX66OruWX1l2hyf1UQ4Y5Y/exec
 
 https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec
+
+https://calm-sopapillas-690b48.netlify.app/
+
+
+คำสั่งบันทึกและpushในgithub cmd
+
+git add .
+git commit -m "Apply full HTML, CSS, and JS updates for modern countdown and styling fix"
+git push origin main

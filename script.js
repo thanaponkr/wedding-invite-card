@@ -9,16 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date().getTime();
         const distance = weddingDate - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
         if (distance < 0) {
             countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!";
             clearInterval(countdownInterval);
         } else {
-            countdownElement.innerHTML = `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
+            // คำนวณเป็นสัปดาห์ วัน ชั่วโมง นาที วินาที
+            const totalSeconds = Math.floor(distance / 1000);
+            const weeks = Math.floor(totalSeconds / (60 * 60 * 24 * 7));
+            const days = Math.floor((totalSeconds % (60 * 60 * 24 * 7)) / (60 * 60 * 24));
+            const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+            const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            const seconds = totalSeconds % 60;
+
+            // สร้าง HTML สำหรับการแสดงผลแบบใหม่
+            countdownElement.innerHTML = `
+                <div><div class="value">${weeks}</div><div class="label">WEEKS</div></div>
+                <div><div class="value">${days}</div><div class="label">DAYS</div></div>
+                <div><div class="value">${hours}</div><div class="label">HOURS</div></div>
+                <div><div class="value">${minutes}</div><div class="label">MIN</div></div>
+                <div><div class="value">${seconds}</div><div class="label">SEC</div></div>
+            `;
         }
     };
 
@@ -53,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let formData = {};
         let statusElement;
         let successMessage = '';
-        let errorMessage = '';
+        let errorMessage = ''; // กำหนด errorMessage ตรงนี้
 
         if (formType === 'rsvp') {
             formData = {

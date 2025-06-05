@@ -7,8 +7,8 @@ body {
     background-color: #fcf6ef; /* สีพื้นหลังอ่อนๆ (คล้ายสีขาวนวล) */
     color: #333;
     line-height: 1.6;
-    scroll-behavior: smooth;
-    /* พื้นหลังหลักของ body - ลบส่วน background-image, repeat, attachment ออก */
+    scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
+    /* ลบพื้นหลังหลักของ body ออก */
     /* background-image: url('images/main-bg-pattern.png'); */
     /* background-repeat: repeat; */
     /* background-attachment: scroll; */
@@ -46,11 +46,8 @@ p {
 
 /* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
 .hero-section {
-    background: url('images/hero-floral-frame.jpg.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
+    background: url('images/hero-floral-frame.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
     background-size: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่ทั้งหมดของ Hero Section */
-    /* ลบ background-attachment: fixed; ออก เพื่อให้กรอบดอกไม้อยู่กับที่ ไม่เลื่อนแบบ parallax */
-    /* ลบ background-size: 120% 120%; ออก */
-    /* ลบ animation: floralPan ... ออก */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -59,12 +56,13 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: white; /* สีข้อความในส่วน Hero (อาจจะต้องปรับเปลี่ยนตามสีรูปดอกไม้ใหม่) */
+    color: white; /* สีข้อความในส่วน Hero */
 }
 
+/* ลบ @keyframes floralPan ออกไป */
+/* @keyframes floralPan { ... } */
 
 .hero-content {
-    /* ไม่มีพื้นหลังทึบแล้ว */
     padding: 0;
     border-radius: 0;
     display: flex;
@@ -76,11 +74,11 @@ p {
 }
 
 .wedding-logo {
-    max-width: 400px; /* ขนาดโลโก้ */
+    max-width: 400px; /* กำหนดขนาดสูงสุดของโลโก้บน PC */
     width: 80vw; /* ให้มันปรับขนาดตามความกว้างของหน้าจอ แต่ไม่เกิน max-width */
     height: auto;
-    display: block; /* ทำให้จัดกึ่งกลางได้ */
-    margin: auto; /* จัดกึ่งกลาง */
+    display: block;
+    margin: auto;
     animation: fadeInScale 2s ease-out forwards; /* แอนิเมชั่นโลโก้ */
     filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* เพิ่มเงาให้โลโก้เด่นขึ้น */
 }
@@ -149,7 +147,7 @@ p {
     /* background-color: #fff; */
     /* border-radius: 8px; */
     /* box-shadow: 0 4px 15px rgba(0,0,0,0.1); */
-    opacity: 0;
+    opacity: 0; /* ซ่อนไว้ก่อนเพื่อทำ fade-in เมื่อ scroll */
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
@@ -164,12 +162,6 @@ p {
 .invitation-section {
     padding-top: 80px;
     text-align: center;
-}
-
-.invitation-section h2 {
-    font-size: 2.8em;
-    color: #A0522D;
-    margin-bottom: 40px;
 }
 
 /* สไตล์สำหรับข้อความ "LET'S CELEBRATE TOGETHER ON OUR SPECIAL DAY ON" */
@@ -192,32 +184,6 @@ p {
     margin-bottom: 40px; /* ระยะห่างด้านล่าง */
 }
 
-/* Invitation Section (ส่วนเชิญชวน) */
-/* .invitation-section { ... } */
-/* .invitation-section h2 { ... } */
-/* .couple-main-photo img { ... } */
-/* .couple-main-photo img:hover { ... } */
-/* .couple-names-text { ... } */
-}
-
-.couple-main-photo img:hover {
-    transform: scale(1.03);
-}
-
-.couple-names-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5em;
-    color: #6C3400;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
-.date-location {
-    font-size: 1.3em;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
 
 /* สไตล์สำหรับตัวนับถอยหลังแบบใหม่ (WEEKS DAYS HOURS MIN SEC) */
 .countdown-modern {
@@ -231,10 +197,6 @@ p {
 
 .countdown-modern > div {
     text-align: center;
-    /* background-color: #D2B48C; */ /* ไม่ต้องมีพื้นหลังสี */
-    /* color: white; */ /* ไม่ต้องมีสีขาว */
-    /* border-radius: 10px; */
-    /* box-shadow: 0 4px 10px rgba(0,0,0,0.2); */
     padding: 0 5px; /* ลด padding */
 }
 
@@ -254,22 +216,6 @@ p {
     margin-top: 5px;
 }
 
-.btn-scroll {
-    background-color: #A0522D;
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 20px; /* เพิ่มระยะห่างด้านบนจากปุ่มก่อนหน้า */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-scroll:hover {
-    background-color: #CD853F; /* สีอ่อนลงเมื่อ hover */
-    transform: translateY(-3px);
-}
 
 /* สไตล์สำหรับปุ่ม ADD TO CALENDAR */
 .btn-calendar {
@@ -288,6 +234,26 @@ p {
     background-color: #6C3400; /* เปลี่ยนพื้นหลังเป็นสีน้ำตาลเมื่อ hover */
     color: white; /* เปลี่ยนสีข้อความเป็นสีขาวเมื่อ hover */
 }
+
+
+/* สไตล์สำหรับปุ่ม "ดูรายละเอียดกำหนดการ" */
+.btn-scroll {
+    background-color: #A0522D;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px; /* เพิ่มระยะห่างด้านบนจากปุ่มก่อนหน้า */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-scroll:hover {
+    background-color: #CD853F;
+    transform: translateY(-3px);
+}
+
 
 /* Details Section (กำหนดการ) */
 .details-section .detail-item {

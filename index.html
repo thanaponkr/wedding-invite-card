@@ -25,19 +25,18 @@
     </header>
 
     <main>
-        
-<!-- 2. ส่วนเชิญชวน: ข้อความเชิญ, รูปคู่, ชื่อ, และนับถอยหลัง -->
-<section id="invitation-section" class="section invitation-section">
-    <h2 class="invitation-slogan">ขอเชิญร่วมงานมงคลสมรส<br>ระหว่าง เมย์ และ เต้ย</h2>
-    <p class="wedding-date-text">28 JULY 2568</p> <!-- เปลี่ยนวันที่เป็นรูปแบบที่คุณต้องการ -->
+        <!-- 2. ส่วนเชิญชวน: ข้อความเชิญ, รูปคู่, ชื่อ, และนับถอยหลัง -->
+        <section id="invitation-section" class="section invitation-section">
+            <h2 class="invitation-slogan">LET'S CELEBRATE TOGETHER ON<br>OUR SPECIAL DAY ON</h2>
+            <p class="wedding-date-text">28 JULY 2568</p> <!-- เปลี่ยนวันที่เป็นรูปแบบที่คุณต้องการ -->
 
-    <div id="countdown" class="countdown-modern">
-        <!-- ตัวเลขและข้อความ WEEKS/DAYS/HOURS/MIN/SEC จะถูกสร้างโดย JavaScript -->
-    </div>
+            <div id="countdown" class="countdown-modern">
+                <!-- ตัวเลขและข้อความ WEEKS/DAYS/HOURS/MIN/SEC จะถูกสร้างโดย JavaScript -->
+            </div>
 
-    <button id="addToCalendarBtn" class="btn-calendar">ADD TO CALENDAR</button>
-    <button id="scrollToSchedule" class="btn-scroll">ดูรายละเอียดกำหนดการ</button>
-</section>
+            <button id="addToCalendarBtn" class="btn-calendar">ADD TO CALENDAR</button>
+            <button id="scrollToSchedule" class="btn-scroll">ดูรายละเอียดกำหนดการ</button>
+        </section>
 
         <!-- 3. กำหนดการ: รายละเอียดพิธีการ -->
         <section id="schedule-section" class="section details-section">
@@ -48,6 +47,12 @@
                 <p>ณ: ห้องจัดเลี้ยงรุ่งอรุณ โรงแรมอาปาเก้การ์เด้น</p>
                 <p>พิธีหมั้น, พิธีหลั่งน้ำพระพุทธมนต์</p>
             </div>
+            <div class="detail-item">
+                <h3>งานเลี้ยงฉลองมงคลสมรส (ช่วงเย็น)</h3>
+                <p>เวลา: 18:00 - 22:00 น.</p>
+                <p>ณ: ห้องแกรนด์บอลรูม โรงแรมอาปาเก้การ์เด้น</p>
+                <p>ลงทะเบียน, ถ่ายภาพ, พิธีฉลองมงคลสมรส</p>
+            </div>
         </section>
 
         <!-- 4. สถานที่จัดงาน: แผนที่ -->
@@ -57,10 +62,9 @@
                 <h3>โรงแรมอาปาเก้การ์เด้น</h3>
                 <!-- แผนที่ Google Maps Embed API (เปลี่ยน URL เป็นแผนที่จริงของคุณ) -->
                 <!-- วิธีการคัดลอก: ไปที่ Google Maps > ค้นหาสถานที่ > คลิก "แชร์" > เลือก "ฝังแผนที่" > คัดลอกโค้ด iframe แล้วนำเฉพาะ src="..." มาวาง -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.4395649882194!2d100.626728!3d13.932412999999999!2m3
-                !1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d7d8c41fa35ff%3A0x9e00d26ce693dbc5!2sAgape%20Garden!5e0!3m2!1sen!2sth!4v1749062522212!5m2!1sen!2sth" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-               <p><a href="https://maps.app.goo.gl/awRS8yrkfKq5aboS7" target="_blank" class="map-link">เปิดใน Google Maps</a></p>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.0780038217732!2d100.470825028e1!3d13.74903872060715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2993872060715%3A0x28e1c17490387206!2sExample%20Hotel!5e0!3m2!1sen!2sth!4v1678901234567!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <p><a href="https://goo.gl/maps/YOUR_REAL_SHARE_LINK_HERE" target="_blank" class="map-link">เปิดใน Google Maps</a></p>
+                <small>(ลิงก์แผนที่นี้เป็นแค่ตัวอย่าง กรุณาเปลี่ยนเป็นลิงก์โรงแรมจริงของคุณ)</small>
             </div>
         </section>
 
@@ -68,11 +72,14 @@
         <section id="gallery-section" class="section gallery-section">
             <h2>แกลเลอรีความทรงจำ</h2>
             <div class="gallery-grid">
-                <img src="images/gallery-photo-1.jpg.jpg" alt="รูปพรีเวดดิ้ง 1">
-                <img src="images/gallery-photo-2.jpg.jpg" alt="รูปพรีเวดดิ้ง 2">
-                <img src="images/gallery-photo-3.jpg.jpg" alt="รูปพรีเวดดิ้ง 3">
-                <img src="images/gallery-photo-3.jpg.jpg" alt="รูปพรีเวดดิ้ง 4">
+                <img src="images/gallery-photo-1.jpg" alt="รูปพรีเวดดิ้ง 1">
+                <img src="images/gallery-photo-2.jpg" alt="รูปพรีเวดดิ้ง 2">
+                <img src="images="images/gallery-photo-3.jpg" alt="รูปพรีเวดดิ้ง 3">
+                <img src="images/gallery-photo-4.jpg" alt="รูปพรีเวดดิ้ง 4">
+                <img src="images/gallery-photo-5.jpg" alt="รูปพรีเวดดิ้ง 5">
+                <img src="images/gallery-photo-6.jpg" alt="รูปพรีเวดดิ้ง 6">
             </div>
+            <small>(เปลี่ยนชื่อไฟล์รูปภาพเป็นรูปของคุณที่อยู่ใน Folder images)</small>
         </section>
 
         <!-- 6. RSVP: ตอบรับการเข้าร่วมงาน -->
@@ -85,7 +92,7 @@
                 <label for="numGuests">จำนวนผู้เข้าร่วม (รวมตัวท่าน):</label>
                 <input type="number" id="numGuests" name="numGuests" min="1" value="1" required>
 
-                <label for="message">ข้อความอวยพร (ไม่บังคับ):</label>
+                <label for="message">ข้อความเพิ่มเติมถึงบ่าวสาว (ไม่บังคับ):</label>
                 <textarea id="message" name="message" rows="4"></textarea>
 
                 <button type="submit" class="btn-submit">ยืนยันการเข้าร่วม</button>
@@ -99,7 +106,7 @@
             <p>สำหรับแขกผู้มีเกียรติที่ต้องการร่วมแสดงความยินดีผ่านของขวัญ หรือช่องทางอิเล็กทรอนิกส์ เราได้เตรียมข้อมูลไว้ดังนี้ค่ะ</p>
             <div class="gift-options">
                 <div class="qr-code">
-                    <img src="images/qr-code.jpg.jpg" alt="QR Code">
+                    <img src="images/qr-code.jpg" alt="QR Code">
                     <p>สแกน QR Code เพื่อโอนเงิน</p>
                     <small>(แทนที่ด้วย QR Code จริงของคุณ)</small>
                 </div>
