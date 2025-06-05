@@ -84,7 +84,8 @@ p {
 }
 
 .wedding-logo {
-    max-width: 70%; /* ขนาดโลโก้ */
+    max-width: 400px; /* ขนาดโลโก้ */
+    width: 80vw; /* ให้มันปรับขนาดตามความกว้างของหน้าจอ แต่ไม่เกิน max-width */
     height: auto;
     display: block; /* ทำให้จัดกึ่งกลางได้ */
     margin: auto; /* จัดกึ่งกลาง */
