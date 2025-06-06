@@ -1,40 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Countdown Timer ---
-    const countdownElement = document.getElementById('countdown');
-    // ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
-    // ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
-    const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
+const countdownElement = document.getElementById('countdown');
+// ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
+// ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
+const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
 
-    const updateCountdown = () => {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
+const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
 
-        if (distance < 0) {
-            countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!";
-            clearInterval(countdownInterval);
-        } else {
-            // คำนวณเป็นสัปดาห์ วัน ชั่วโมง นาที วินาที
-            const totalSeconds = Math.floor(distance / 1000);
-            const weeks = Math.floor(totalSeconds / (60 * 60 * 24 * 7));
-            const days = Math.floor((totalSeconds % (60 * 60 * 24 * 7)) / (60 * 60 * 24));
-            const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
-            const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-            const seconds = totalSeconds % 60;
+    if (distance < 0) {
+        countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!";
+        clearInterval(countdownInterval);
+    } else {
+        // คำนวณเป็น วัน ชั่วโมง นาที วินาที โดยไม่รวม weeks
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // สร้าง HTML สำหรับการแสดงผลแบบใหม่
-            countdownElement.innerHTML = `
-                <div><div class="value">${weeks}</div><div class="label">WEEKS</div></div>
-                <div><div class="value">${days}</div><div class="label">DAYS</div></div>
-                <div><div class="value">${hours}</div><div class="label">HOURS</div></div>
-                <div><div class="value">${minutes}</div><div class="label">MIN</div></div>
-                <div><div class="value">${seconds}</div><div class="label">SEC</div></div>
-            `;
-        }
-    };
+        // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
+        countdownElement.innerHTML = `
+            <div><div class="value">${days}</div><div class="label">วัน</div></div>
+            <div><div class="value">${hours}</div><div class="label">ชั่วโมง</div></div>
+            <div><div class="value">${minutes}</div><div class="label">นาที</div></div>
+            <div><div class="value">${seconds}</div><div class="label">วินาที</div></div>
+        `;
+    }
+};
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown();
-
+const countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
 
     // --- 2. Scroll to Schedule Button ---
     const scrollToScheduleBtn = document.getElementById('scrollToSchedule');
@@ -203,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Autoplay functionality
     const startAutoplay = () => {
-        autoplayInterval = setInterval(nextSlide, 5000); // Change slide every 3 seconds
+        autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
     };
 
     const stopAutoplay = () => {
