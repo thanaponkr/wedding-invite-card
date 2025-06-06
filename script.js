@@ -1,36 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Countdown Timer ---
-const countdownElement = document.getElementById('countdown');
-// ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
-// ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
-const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
+    const countdownElement = document.getElementById('countdown');
+    // ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
+    // ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
+    const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
 
-const updateCountdown = () => {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
+    const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
 
-    if (distance < 0) {
-        countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!";
-        clearInterval(countdownInterval);
-    } else {
-        // คำนวณเป็น วัน ชั่วโมง นาที วินาที โดยไม่รวม weeks
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if (distance < 0) {
+            countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!";
+            clearInterval(countdownInterval);
+        } else {
+            // คำนวณเป็น วัน ชั่วโมง นาที วินาที โดยไม่รวม weeks
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
-        countdownElement.innerHTML = `
-            <div><div class="value">${days}</div><div class="label">วัน</div></div>
-            <div><div class="value">${hours}</div><div class="label">ชั่วโมง</div></div>
-            <div><div class="value">${minutes}</div><div class="label">นาที</div></div>
-            <div><div class="value">${seconds}</div><div class="label">วินาที</div></div>
-        `;
-    }
-};
+            // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
+            countdownElement.innerHTML = `
+                <div><div class="value">${days}</div><div class="label">วัน</div></div>
+                <div><div class="value">${hours}</div><div class="label">ชั่วโมง</div></div>
+                <div><div class="value">${minutes}</div><div class="label">นาที</div></div>
+                <div><div class="value">${seconds}</div><div class="label">วินาที</div></div>
+            `;
+        }
+    };
 
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
 
     // --- 2. Scroll to Schedule Button ---
     const scrollToScheduleBtn = document.getElementById('scrollToSchedule');
@@ -50,7 +50,7 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
     const guestbookEntries = document.getElementById('guestbookEntries');
 
     // *** สำคัญมาก! เปลี่ยน URL นี้เป็น Web App URL ที่คุณคัดลอกมาจาก Google Apps Script ในขั้นตอน 3.3.6 ***
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec'; // <<< แก้ไขตรงนี้เท่านั้น!
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwh4oIRNG3oGluhN-/exec'; // <<< แก้ไขตรงนี้เท่านั้น!
 
     // Function to handle form submission for both RSVP and Guestbook
     const handleFormSubmission = async (event, formType) => {
@@ -158,48 +158,65 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
     const prevButton = document.querySelector('.prev-slide');
     const nextButton = document.querySelector('.next-slide');
     const sliderDotsContainer = document.querySelector('.slider-dots');
-    let currentSlideIndex = 0;
-    let autoplayInterval; // Variable to hold the autoplay interval ID
+    
+    // ตั้งค่าจำนวนภาพที่แสดงต่อ Group
+    const slidesPerGroup = 3; 
+    const totalSlides = slides.length;
+    const totalGroups = Math.ceil(totalSlides / slidesPerGroup); // คำนวณจำนวนกลุ่มทั้งหมด
+    let currentGroupIndex = 0; // เปลี่ยนเป็น currentGroupIndex
+    let autoplayInterval; 
 
-    // Create dots based on the number of slides
-    slides.forEach((_, index) => {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active-dot');
-        dot.addEventListener('click', () => showSlide(index)); // Corrected to showSlide
-        sliderDotsContainer.appendChild(dot);
-    });
+    // Create dots based on the number of groups
+    if (sliderDotsContainer) {
+        sliderDotsContainer.innerHTML = ''; // Clear existing dots
+        for (let i = 0; i < totalGroups; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active-dot');
+            dot.addEventListener('click', () => showGroup(i)); // Call showGroup for group index
+            sliderDotsContainer.appendChild(dot);
+        }
+    }
 
     const dots = document.querySelectorAll('.dot'); // Get dots after creation
 
-    const showSlide = (index) => {
-        if (index >= slides.length) {
-            currentSlideIndex = 0;
-        } else if (index < 0) {
-            currentSlideIndex = slides.length - 1;
+    const showGroup = (groupIndex) => {
+        // Handle wrapping around for group index
+        if (groupIndex >= totalGroups) {
+            currentGroupIndex = 0;
+        } else if (groupIndex < 0) {
+            currentGroupIndex = totalGroups - 1;
         } else {
-            currentSlideIndex = index;
+            currentGroupIndex = groupIndex;
         }
-        sliderWrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+        // Calculate transform value: move by 100% of slider-container width per group
+        // If the slider-wrapper contains ALL slides in a flex row,
+        // it needs to move by the width of (slidesPerGroup slides)
+        // Since each .slide is calc(100% / 3) of slider-container,
+        // a group of 3 slides is 100% of slider-container.
+        const transformValue = -currentGroupIndex * 100; // Move by 100% (of its parent container which is slider-container)
+
+        sliderWrapper.style.transform = `translateX(${transformValue}%)`;
 
         // Update active dot
         dots.forEach(dot => dot.classList.remove('active-dot'));
-        if (dots[currentSlideIndex]) {
-            dots[currentSlideIndex].classList.add('active-dot');
+        if (dots[currentGroupIndex]) { // Ensure dot exists for the current group
+            dots[currentGroupIndex].classList.add('active-dot');
         }
     };
 
-    const nextSlide = () => {
-        showSlide(currentSlideIndex + 1);
+    const nextGroup = () => { // Changed to nextGroup
+        showGroup(currentGroupIndex + 1);
     };
 
-    const prevSlide = () => {
-        showSlide(currentSlideIndex - 1);
+    const prevGroup = () => { // Changed to prevGroup
+        showGroup(currentGroupIndex - 1);
     };
 
     // Autoplay functionality
     const startAutoplay = () => {
-        autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        autoplayInterval = setInterval(nextGroup, 3000); // Change group every 3 seconds
     };
 
     const stopAutoplay = () => {
@@ -209,34 +226,42 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
     // Start autoplay when the page loads
     startAutoplay();
 
-    // Pause autoplay on hover (optional)
+    // Pause autoplay on hover (optional) - update event listeners to use nextGroup/prevGroup
     sliderWrapper.addEventListener('mouseenter', stopAutoplay);
     sliderWrapper.addEventListener('mouseleave', startAutoplay);
-    prevButton.addEventListener('mouseenter', stopAutoplay);
-    prevButton.addEventListener('mouseleave', startAutoplay);
-    nextButton.addEventListener('mouseenter', stopAutoplay);
-    nextButton.addEventListener('mouseleave', startAutoplay);
+    // Make sure prevButton and nextButton are not hidden by CSS if you want hover to work
+    if (prevButton) { // Check if button exists before adding listener
+        prevButton.addEventListener('mouseenter', stopAutoplay);
+        prevButton.addEventListener('mouseleave', startAutoplay);
+    }
+    if (nextButton) { // Check if button exists before adding listener
+        nextButton.addEventListener('mouseenter', stopAutoplay);
+        nextButton.addEventListener('mouseleave', startAutoplay);
+    }
     dots.forEach(dot => {
         dot.addEventListener('mouseenter', stopAutoplay);
         dot.addEventListener('mouseleave', startAutoplay);
     });
 
-
     // Add event listeners for navigation buttons
-    prevButton.addEventListener('click', () => {
-        stopAutoplay(); // Stop autoplay on manual interaction
-        prevSlide();
-        startAutoplay(); // Resume autoplay after a brief moment
-    });
+    if (prevButton) { // Check if button exists before adding listener
+        prevButton.addEventListener('click', () => {
+            stopAutoplay(); // Stop autoplay on manual interaction
+            prevGroup(); // Call prevGroup
+            startAutoplay(); // Resume autoplay after a brief moment
+        });
+    }
 
-    nextButton.addEventListener('click', () => {
-        stopAutoplay(); // Stop autoplay on manual interaction
-        nextSlide();
-        startAutoplay(); // Resume autoplay after a brief moment
-    });
+    if (nextButton) { // Check if button exists before adding listener
+        nextButton.addEventListener('click', () => {
+            stopAutoplay(); // Stop autoplay on manual interaction
+            nextGroup(); // Call nextGroup
+            startAutoplay(); // Resume autoplay after a brief moment
+        });
+    }
 
-    // Initial display
-    showSlide(currentSlideIndex);
+    // Initial display of the first group
+    showGroup(currentGroupIndex);
 
 
     // --- 5. Fade-in Section on Scroll ---
