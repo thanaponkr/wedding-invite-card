@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Autoplay functionality
     const startAutoplay = () => {
-        autoplayInterval = setInterval(nextSlide, 2000); // Change slide every 3 seconds
+        autoplayInterval = setInterval(nextSlide, 5000); // Change slide every 3 seconds
     };
 
     const stopAutoplay = () => {
