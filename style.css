@@ -294,26 +294,8 @@ p {
 }
 
 
-/* สไตล์สำหรับปุ่ม ADD TO CALENDAR */
-.btn-calendar {
-    background-color: transparent; /* พื้นหลังโปร่งใส */
-    color: #6C3400; /* สีข้อความน้ำตาลเข้ม */
-    border: 1px solid #6C3400; /* มีขอบสีน้ำตาลเข้ม */
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-top: 20px; /* ระยะห่างด้านบน */
-}
-
-.btn-calendar:hover {
-    background-color: #6C3400; /* เปลี่ยนพื้นหลังเป็นสีน้ำตาลเมื่อ hover */
-    color: white; /* เปลี่ยนสีข้อความเป็นสีขาวเมื่อ hover */
-}
-
-
 /* สไตล์สำหรับปุ่ม "ดูรายละเอียดกำหนดการ" */
+/* เนื่องจากไม่มีปุ่ม Add to Calendar แล้ว จึงเหลือแค่ปุ่มนี้ */
 .btn-scroll {
     background-color: #A0522D;
     color: white;
@@ -322,7 +304,7 @@ p {
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
-    margin-top: 20px; /* เพิ่มระยะห่างด้านบนจากปุ่มก่อนหน้า */
+    margin-top: 20px; /* เพิ่มระยะห่างด้านบนจากเนื้อหา (countdown) */
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 

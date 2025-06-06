@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const guestbookEntries = document.getElementById('guestbookEntries');
 
     // *** สำคัญมาก! เปลี่ยน URL นี้เป็น Web App URL ที่คุณคัดลอกมาจาก Google Apps Script ในขั้นตอน 3.3.6 ***
-    const GOOGLE_APPS_SCRIPT_URL = 'https://calm-sopapillas-690b48.netlify.app/'; // <<< แก้ไขตรงนี้เท่านั้น!
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec'; // <<< แก้ไขตรงนี้เท่านั้น!
 
     // Function to handle form submission for both RSVP and Guestbook
     const handleFormSubmission = async (event, formType) => {
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dot = document.createElement('span');
         dot.classList.add('dot');
         if (index === 0) dot.classList.add('active-dot');
-        dot.addEventListener('click', () => goToSlide(index));
+        dot.addEventListener('click', () => showSlide(index)); // Corrected to showSlide
         sliderDotsContainer.appendChild(dot);
     });
 
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Autoplay functionality
     const startAutoplay = () => {
-        autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        autoplayInterval = setInterval(nextSlide, 2000); // Change slide every 3 seconds
     };
 
     const stopAutoplay = () => {
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(currentSlideIndex);
 
 
-    // --- 5. Fade-in Section on Scroll --- (เปลี่ยนจาก 5 เป็น 6)
+    // --- 5. Fade-in Section on Scroll ---
     const sections = document.querySelectorAll('.section');
 
     const fadeInOnScroll = () => {
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeInOnScroll();
 
 
-    // --- 6. Background Music Toggle --- (เปลี่ยนจาก 6 เป็น 7)
+    // --- 6. Background Music Toggle ---
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggleBtn = document.getElementById('musicToggle');
 
