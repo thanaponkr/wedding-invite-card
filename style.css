@@ -376,7 +376,7 @@ p {
 .slider-container {
     position: relative;
     width: 100%;
-    max-width: 800px; /* จำกัดความกว้างสูงสุดของ slider */
+    max-width: 500px; /* จำกัดความกว้างสูงสุดของ slider */
     margin: 30px auto;
     overflow: hidden; /* ซ่อนรูปที่อยู่นอกพื้นที่แสดงผล */
     border-radius: 10px;
