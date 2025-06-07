@@ -32,23 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // เลือกปุ่มทั้งหมดใน Mobile Nav Bar
     const navItems = document.querySelectorAll('.mobile-nav-bar .nav-item');
 
-    navItems.forEach(item => {
-        item.addEventListener('click', function(event) {
-            event.preventDefault(); // ป้องกันการกระทำ default ของลิงก์
+    // --- 2. Scroll to Section for Mobile Nav Bar ---
+const navItems = document.querySelectorAll('.mobile-nav-bar .nav-item');
 
-            const targetId = this.getAttribute('href'); // ได้ #home, #program ฯลฯ
-            const targetSection = document.querySelector(targetId);
+navItems.forEach(item => {
+    item.addEventListener('click', function(event) {
+        const targetHref = this.getAttribute('href'); // ได้ #home, gift.html ฯลฯ
 
+        // ตรวจสอบว่าลิงก์นั้นเป็นลิงก์ภายในหน้า (#...) หรือไม่
+        if (targetHref.startsWith('#')) {
+            event.preventDefault(); // ป้องกันการกระทำ default เฉพาะถ้าเป็นลิงก์ภายในหน้า
+
+            const targetSection = document.querySelector(targetHref);
             if (targetSection) {
                 // เลื่อนไปยังส่วนนั้นอย่างนุ่มนวล
                 targetSection.scrollIntoView({ behavior: 'smooth' });
-
-                // Option: เพิ่ม active class ให้ปุ่มที่ถูกเลือก (ถ้าต้องการ)
-                // navItems.forEach(nav => nav.classList.remove('active'));
-                // this.classList.add('active');
             }
-        });
+        }
+        // ถ้าไม่ใช่ลิงก์ภายในหน้า (เช่น 'gift.html') ก็ไม่ต้อง preventDefault
+        // เบราว์เซอร์จะทำงานตามปกติคือเปลี่ยนไปหน้าใหม่
     });
+});
 
     // Optional: เพิ่ม class 'active' ให้กับปุ่มที่อยู่บนหน้าจอ
     // (ซับซ้อนขึ้นเล็กน้อย ถ้าต้องการให้แถบนำทางรู้ว่าอยู่ส่วนไหนของหน้า)
