@@ -1,36 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Countdown Timer ---
     const countdownElement = document.getElementById('countdown');
-    // ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
-    // ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
-    const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
+    // ตรวจสอบว่ามี countdownElement ในหน้านี้หรือไม่
+    if (countdownElement) {
+        // ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
+        // ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
+        const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
 
-    const updateCountdown = () => {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-        if (distance < 0) {
-            countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!"; // Wedding has started!
-            clearInterval(countdownInterval); // Stop countdown
-        } else {
-            // คำนวณเป็น วัน ชั่วโมง นาที วินาที
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            if (distance < 0) {
+                countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!"; // Wedding has started!
+                clearInterval(countdownInterval); // Stop countdown
+            } else {
+                // คำนวณเป็น วัน ชั่วโมง นาที วินาที
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
-            countdownElement.innerHTML = `
-                <div><span class="value">${days}</span><span class="label">วัน</span></div>
-                <div><span class="value">${hours}</span><span class="label">ชั่วโมง</span></div>
-                <div><span class="value">${minutes}</span><span class="label">นาที</span></div>
-                <div><span class="value">${seconds}</span><span class="label">วินาที</span></div>
-            `;
-        }
-    };
+                // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
+                // โครงสร้างนี้รองรับการจัดวางแบบตัวเลขอยู่บน หน่วยอยู๋ล่างได้ด้วย CSS
+                countdownElement.innerHTML = `
+                    <div><span class="value">${days}</span><span class="label">วัน</span></div>
+                    <div><span class="value">${hours}</span><span class="label">ชั่วโมง</span></div>
+                    <div><span class="value">${minutes}</span><span class="label">นาที</span></div>
+                    <div><span class="value">${seconds}</span><span class="label">วินาที</span></div>
+                `;
+            }
+        };
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
+    }
+
 
     // --- 2. Scroll to Schedule Button ---
     const scrollToScheduleBtn = document.getElementById('scrollToSchedule');
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             statusElement = guestbookStatus;
             successMessage = 'ขอบคุณสำหรับคำอวยพรค่ะ! ข้อความของคุณถูกบันทึกแล้ว'; // Thank you for your well wishes! Your message has been saved.
-            errorMessage = 'เกิดข้อผิดพลาดในการส่งคำอวยพร โปรดลองอีกครั้ง'; // Error sending well wishes. Please try again.
+            errorMessage = 'เกิดข้อผิดพลาดในการส่งคำอวยพร โปรดลองอีกครั้ง'; // Error sending well wishes. Please trying again.
         } else {
             console.error('Unknown form type:', formType);
             return;
@@ -158,85 +163,169 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevButton = document.querySelector('.prev-slide');
     const nextButton = document.querySelector('.next-slide');
     const sliderDotsContainer = document.querySelector('.slider-dots');
-    let currentSlideIndex = 0;
+    let currentSlideIndex = 0; // Tracks the index of the first visible slide
     let autoplayInterval; // Variable to hold the autoplay interval ID
+    let startX = 0;
+    let endX = 0;
+    const swipeThreshold = 50; // Minimum distance for a swipe
 
-    // Create dots based on the number of slides
-    slides.forEach((_, index) => {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active-dot');
-        dot.addEventListener('click', () => showSlide(index)); // Corrected to showSlide
-        sliderDotsContainer.appendChild(dot);
-    });
+    // ตรวจสอบว่ามี sliderWrapper ในหน้านี้หรือไม่ ก่อนจะสร้าง dots และเพิ่ม event listeners ของ slider
+    if (sliderWrapper) {
 
-    const dots = document.querySelectorAll('.dot'); // Get dots after creation
+        // Function to determine how many slides are visible at once
+        const getSlidesPerView = () => {
+            // Adjust this breakpoint as needed for your design
+            return window.innerWidth <= 768 ? 1 : 3;
+        };
 
-    const showSlide = (index) => {
-        if (index >= slides.length) {
-            currentSlideIndex = 0;
-        } else if (index < 0) {
-            currentSlideIndex = slides.length - 1;
-        } else {
-            currentSlideIndex = index;
-        }
-        sliderWrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        let slidesPerView = getSlidesPerView();
+        let totalDots;
 
-        // Update active dot
-        dots.forEach(dot => dot.classList.remove('active-dot'));
-        if (dots[currentSlideIndex]) {
-            dots[currentSlideIndex].classList.add('active-dot');
-        }
-    };
+        // Function to update the slider and dots based on current view settings
+        const updateSliderDisplay = () => {
+            slidesPerView = getSlidesPerView(); // Re-evaluate slidesPerView on resize
+            
+            // Clear existing dots
+            sliderDotsContainer.innerHTML = '';
 
-    const nextSlide = () => {
-        showSlide(currentSlideIndex + 1);
-    };
+            // Re-calculate totalDots based on slidesPerView
+            if (slidesPerView === 1) {
+                totalDots = slides.length; // 1 dot per image on mobile
+            } else {
+                totalDots = Math.ceil(slides.length / slidesPerView); // 1 dot per group of images on desktop
+            }
 
-    const prevSlide = () => {
-        showSlide(currentSlideIndex - 1);
-    };
+            // Re-create dots
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.dataset.index = i; // Store the group/slide index
+                dot.addEventListener('click', () => {
+                    stopAutoplay();
+                    // If on desktop, click on dot 'i' moves to slide 'i * slidesPerView'
+                    // If on mobile, click on dot 'i' moves to slide 'i'
+                    showSlide(slidesPerView === 1 ? i : i * slidesPerView);
+                    startAutoplay();
+                });
+                sliderDotsContainer.appendChild(dot);
+            }
 
-    // Autoplay functionality
-    const startAutoplay = () => {
-        autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
-    };
+            // Ensure currentSlideIndex is valid for the new slidesPerView and slides length
+            const maxVisibleIndex = slides.length - slidesPerView;
+            if (currentSlideIndex > maxVisibleIndex) {
+                currentSlideIndex = maxVisibleIndex >= 0 ? maxVisibleIndex : 0;
+            }
+            if (currentSlideIndex % slidesPerView !== 0 && slidesPerView === 3) {
+                 // Snap to the start of the current group if it's desktop view
+                currentSlideIndex = Math.floor(currentSlideIndex / slidesPerView) * slidesPerView;
+            }
+            
+            showSlide(currentSlideIndex); // Update slider position
+        };
 
-    const stopAutoplay = () => {
-        clearInterval(autoplayInterval);
-    };
+        const showSlide = (newIndex) => {
+            const maxVisibleIndex = slides.length - slidesPerView;
 
-    // Start autoplay when the page loads
-    startAutoplay();
+            if (newIndex > maxVisibleIndex) {
+                currentSlideIndex = 0; // Loop back to start
+            } else if (newIndex < 0) {
+                currentSlideIndex = maxVisibleIndex; // Loop back to end
+            } else {
+                currentSlideIndex = newIndex;
+            }
+            
+            // Calculate translateX based on currentSlideIndex and current slidesPerView
+            sliderWrapper.style.transform = `translateX(-${currentSlideIndex * (100 / slidesPerView)}%)`;
 
-    // Pause autoplay on hover (optional)
-    sliderWrapper.addEventListener('mouseenter', stopAutoplay);
-    sliderWrapper.addEventListener('mouseleave', startAutoplay);
-    prevButton.addEventListener('mouseenter', stopAutoplay);
-    prevButton.addEventListener('mouseleave', startAutoplay);
-    nextButton.addEventListener('mouseenter', stopAutoplay);
-    nextButton.addEventListener('mouseleave', startAutoplay);
-    dots.forEach(dot => {
-        dot.addEventListener('mouseenter', stopAutoplay);
-        dot.addEventListener('mouseleave', startAutoplay);
-    });
+            // Update active dot
+            const dots = document.querySelectorAll('.slider-dots .dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.remove('active-dot');
+                if (slidesPerView === 1) {
+                    if (idx === currentSlideIndex) {
+                        dot.classList.add('active-dot');
+                    }
+                } else { // Desktop view (slidesPerView === 3)
+                    // Activate dot if its group start index matches currentSlideIndex
+                    if (idx * slidesPerView === currentSlideIndex) {
+                        dot.classList.add('active-dot');
+                    }
+                }
+            });
+        };
+
+        const nextSlide = () => {
+            const nextIndex = currentSlideIndex + slidesPerView;
+            showSlide(nextIndex);
+        };
+
+        const prevSlide = () => {
+            const prevIndex = currentSlideIndex - slidesPerView;
+            showSlide(prevIndex);
+        };
+
+        // Autoplay functionality
+        const startAutoplay = () => {
+            stopAutoplay(); // Clear any existing interval
+            autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        };
+
+        const stopAutoplay = () => {
+            clearInterval(autoplayInterval);
+        };
+
+        // Handle touch events for swipe
+        sliderWrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            stopAutoplay(); // Pause autoplay during manual swipe
+        });
+
+        sliderWrapper.addEventListener('touchmove', (e) => {
+            endX = e.touches[0].clientX;
+        });
+
+        sliderWrapper.addEventListener('touchend', () => {
+            if (startX - endX > swipeThreshold) { // Swiped left
+                nextSlide();
+            } else if (endX - startX > swipeThreshold) { // Swiped right
+                prevSlide();
+            }
+            startAutoplay(); // Resume autoplay after swipe
+            startX = 0; // Reset
+            endX = 0;   // Reset
+        });
 
 
-    // Add event listeners for navigation buttons
-    prevButton.addEventListener('click', () => {
-        stopAutoplay(); // Stop autoplay on manual interaction
-        prevSlide();
-        startAutoplay(); // Resume autoplay after a brief moment
-    });
+        // Start autoplay when the page loads
+        startAutoplay();
 
-    nextButton.addEventListener('click', () => {
-        stopAutoplay(); // Stop autoplay on manual interaction
-        nextSlide();
-        startAutoplay(); // Resume autoplay after a brief moment
-    });
+        // Pause autoplay on hover (desktop)
+        sliderWrapper.addEventListener('mouseenter', stopAutoplay);
+        sliderWrapper.addEventListener('mouseleave', startAutoplay);
+        prevButton.addEventListener('mouseenter', stopAutoplay);
+        prevButton.addEventListener('mouseleave', startAutoplay);
+        nextButton.addEventListener('mouseenter', stopAutoplay);
+        nextButton.addEventListener('mouseleave', startAutoplay);
+        // Dots hover listener is handled by the dot creation loop now
 
-    // Initial display
-    showSlide(currentSlideIndex);
+
+        // Add event listeners for navigation buttons
+        prevButton.addEventListener('click', () => {
+            stopAutoplay(); // Stop autoplay on manual interaction
+            prevSlide();
+            startAutoplay(); // Resume autoplay after a brief moment
+        });
+
+        nextButton.addEventListener('click', () => {
+            stopAutoplay(); // Stop autoplay on manual interaction
+            nextSlide();
+            startAutoplay(); // Resume autoplay after a brief moment
+        });
+        
+        // Initial setup and update on window resize
+        window.addEventListener('resize', updateSliderDisplay);
+        updateSliderDisplay(); // Initial display setup
+    }
 
 
     // --- 5. Fade-in Section on Scroll ---
@@ -244,17 +333,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fadeInOnScroll = () => {
         sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-
-            if (sectionTop < windowHeight * 0.85) {
-                section.classList.add('fade-in');
+            // ตรวจสอบว่า section มีค่า opacity และ transform ที่จะ fade-in ได้
+            // หรือถ้า section คือ guestbook-section ใน guestbook.html ให้มี opacity 1 ทันที
+            if (section.id === 'guestbook-section' && window.location.pathname.endsWith('guestbook.html')) {
+                section.classList.add('fade-in'); // เพิ่มคลาสเพื่อให้ display ได้ทันที
+                // ไม่ต้องทำการคำนวณ sectionTop สำหรับหน้านี้ เพราะต้องการให้แสดงทันที
             } else {
-                // section.classList.remove('fade-in'); // Optional: uncomment if you want fade-out when scrolling back up
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (sectionTop < windowHeight * 0.85) {
+                    section.classList.add('fade-in');
+                } else {
+                    // section.classList.remove('fade-in'); // Optional: uncomment if you want fade-out when scrolling back up
+                }
             }
         });
     };
 
+    // เรียกใช้ fadeInOnScroll ทันทีเมื่อโหลดหน้า เพื่อให้ส่วนแรกๆ ที่ควรจะแสดงผลปรากฏ
+    // และเพิ่ม listener สำหรับการ scroll
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll();
 
@@ -263,72 +361,131 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggleBtn = document.getElementById('musicToggle');
 
-    backgroundMusic.muted = true; // Start muted to comply with autoplay policies
-    backgroundMusic.play()
-        .then(() => {
-            musicToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'; // Show muted icon if autoplayed
-            console.log("Autoplayed muted successfully.");
-        })
-        .catch(e => {
-            console.log("Autoplay blocked:", e);
-            musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>'; // Show music icon if autoplay failed
+    if (backgroundMusic && musicToggleBtn) { // ตรวจสอบว่ามี element เหล่านี้ในหน้า
+        backgroundMusic.muted = true; // Start muted to comply with autoplay policies
+        backgroundMusic.play()
+            .then(() => {
+                musicToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'; // Show muted icon if autoplayed
+                console.log("Autoplayed muted successfully.");
+            })
+            .catch(e => {
+                console.log("Autoplay blocked:", e);
+                musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>'; // Show music icon if autoplay failed
+            });
+
+        musicToggleBtn.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                backgroundMusic.muted = false; // Unmute before playing
+                backgroundMusic.play().catch(e => console.log("Play failed on click:", e));
+            } else {
+                if (backgroundMusic.muted) {
+                    backgroundMusic.muted = false; // Unmute
+                } else {
+                    backgroundMusic.pause(); // Pause
+                }
+            }
         });
 
-    musicToggleBtn.addEventListener('click', () => {
-        if (backgroundMusic.paused) {
-            backgroundMusic.muted = false; // Unmute before playing
-            backgroundMusic.play().catch(e => console.log("Play failed on click:", e));
-        } else {
+        backgroundMusic.onplay = () => {
             if (backgroundMusic.muted) {
-                backgroundMusic.muted = false; // Unmute
+                musicToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
             } else {
-                backgroundMusic.pause(); // Pause
+                musicToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
             }
-        }
-    });
-
-    backgroundMusic.onplay = () => {
-        if (backgroundMusic.muted) {
-            musicToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        } else {
-            musicToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }
-    };
-    backgroundMusic.onpause = () => {
-        musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>';
-    };
-    backgroundMusic.onvolumechange = () => {
-        if (backgroundMusic.muted) {
-            musicToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        } else if (!backgroundMusic.paused) {
-            musicToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        } else {
+        };
+        backgroundMusic.onpause = () => {
             musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>';
-        }
-    };
+        };
+        backgroundMusic.onvolumechange = () => {
+            if (backgroundMusic.muted) {
+                musicToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else if (!backgroundMusic.paused) {
+                musicToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>';
+            }
+        };
+    }
+
 
     // --- Mobile Navigation Smooth Scroll ---
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
+            const targetHref = this.getAttribute('href');
+            const currentPath = window.location.pathname.split('/').pop();
 
-            // ถ้าเป็นลิงก์ Home (ซึ่งชี้ไปที่ #hero-section) ให้เลื่อนไปบนสุดของหน้า
-            if (targetId === 'hero-section') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            } else {
-                // สำหรับลิงก์อื่นๆ ให้เลื่อนไปยังส่วนที่เกี่ยวข้อง
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
+            // Check if the link is to a different page or to a section on the same page
+            if (targetHref.includes('.html') && !targetHref.startsWith('#')) {
+                // If it's a link to a different HTML page, allow default navigation
+                // We don't preventDefault here, so the browser handles the page load
+            } else if (targetHref.startsWith('#')) {
+                // If it's an anchor link on the current page or from another page back to index.html with an anchor
+                e.preventDefault(); // Prevent default hash scroll behavior
+
+                const targetId = targetHref.substring(1);
+                // If linking to a section on index.html from guestbook.html, navigate first
+                if (currentPath === 'guestbook.html' && !targetHref.startsWith('guestbook.html') && targetHref !== '#hero-section') {
+                    window.location.href = `index.html${targetHref}`;
+                } else {
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    } else if (targetId === 'hero-section' && (currentPath === 'index.html' || currentPath === '')) {
+                        // Special case for Home link on index.html to go to top
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             }
         });
     });
+
+    // Handle active state for mobile nav links
+    const updateMobileNavActiveState = () => {
+        const currentPath = window.location.pathname.split('/').pop();
+        mobileNavLinks.forEach(link => {
+            link.classList.remove('active-nav');
+            const href = link.getAttribute('href');
+
+            // Handle direct page links (e.g., guestbook.html)
+            if (href === currentPath) {
+                link.classList.add('active-nav');
+                return; // Skip further checks for this link
+            }
+
+            // Handle anchor links (e.g., #hero-section)
+            if (href.startsWith('#')) {
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                // If on index.html and the section is visible, activate the link
+                if (currentPath === 'index.html' || currentPath === '') {
+                    if (targetSection) {
+                        const rect = targetSection.getBoundingClientRect();
+                        const headerHeight = 0; // Adjust if you have a fixed header
+                        if (rect.top <= headerHeight + 10 && rect.bottom >= headerHeight + 10) {
+                            // Check if the top of the section is near the viewport top
+                            link.classList.add('active-nav');
+                        }
+                    } else if (targetId === 'hero-section' && window.scrollY < 100) { // For hero section, check if scrolled to top
+                        link.classList.add('active-nav');
+                    }
+                }
+            }
+        });
+    };
+
+    // Initial call and on scroll/load for active state
+    window.addEventListener('scroll', updateMobileNavActiveState);
+    window.addEventListener('load', updateMobileNavActiveState);
+    updateMobileNavActiveState(); // Initial check
+
 
     // Scroll indicator functionality (for the hero section's scroll down arrow)
     const scrollIndicator = document.querySelector('.scroll-indicator');

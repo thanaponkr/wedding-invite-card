@@ -11,7 +11,7 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair+Display', serif;
     color: #8B4513; /* สีน้ำตาลเข้ม */
     text-align: center;
     margin-bottom: 20px;
@@ -147,7 +147,7 @@ p {
 
 /* ข้อความ "THE HONOUR OF YOUR PRESENCE IS REQUESTED..." */
 .honor-text {
-    font-family: 'Playfair Display', serif; /* หรือ Sarabun */
+    font-family: 'Playfair+Display', serif; /* หรือ Sarabun */
     font-size: 2.4em; /* ขนาดฟอนต์ - ปรับเป็น 1.5em หรือตามต้องการ */
     color: #6C3400; /* สีน้ำตาลเข้ม */
     margin-top: -20px; /* เพิ่มบรรทัดนี้เพื่อขยับขึ้น */
@@ -188,7 +188,7 @@ p {
 }
 
 .portrait-name {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair+Display', serif;
     font-size: 1.8em; /* ขนาดชื่อ */
     color: #A0522D; /* สีน้ำตาลอมส้ม */
     margin-top: 15px;
@@ -204,7 +204,7 @@ p {
 }
 
 .and-symbol {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair+Display', serif;
     font-size: 3em; /* ขนาดสัญลักษณ์ & */
     color: #D2B48C; /* สีน้ำตาลอ่อน */
     font-weight: bold;
@@ -444,7 +444,7 @@ p {
 
 .slide {
     flex-shrink: 0; /* สำคัญมาก! ป้องกันไม่ให้แต่ละ slide หดตัว */
-    width: calc(100% / 3); /* สำคัญมาก! ทำให้แต่ละ slide กว้าง 1/3 ของ container */
+    width: calc(100% / 3); /* Default for desktop: 3 images per view */
     box-sizing: border-box; /* สำคัญ! เพื่อให้ padding/border ไม่เกินความกว้าง */
     padding: 10px; /* เพิ่ม padding ระหว่างรูปภาพ (ปรับได้) */
     display: flex; /* จัดกลางรูปภาพภายใน slide */
@@ -472,7 +472,7 @@ p {
 }
 
 .slider-nav button {
-    display: none; /* ซ่อนปุ่มลูกศรซ้าย-ขวา */
+    display: none; /* ซ่อนปุ่มลูกศรโดยค่าเริ่มต้น (สำหรับ Desktop ที่ไม่แสดงปุ่ม) */
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
@@ -771,6 +771,17 @@ footer {
     transform: scale(1.1);
 }
 
+/* Active navigation link styling */
+.mobile-nav-link.active-nav {
+    color: #D2B48C; /* สีที่แตกต่างสำหรับลิงก์ที่ถูกเลือก */
+}
+
+.mobile-nav-link.active-nav i {
+    transform: scale(1.1);
+    color: #D2B48C; /* ทำให้ไอคอนเปลี่ยนสีด้วย */
+}
+
+
 /* Specific styling for the main (RSVP) button */
 .main-nav-button {
     flex: 0 0 auto; /* ไม่อนุญาตให้เติบโต/หดตัว, คงขนาดที่กำหนด */
@@ -836,6 +847,38 @@ footer {
     /* Adjust countdown spacing for tablets */
     #countdown > div:not(:last-child) {
         margin-right: 40px; /* Reduce gap for tablets */
+    }
+
+    /* Gallery adjustments for mobile/tablet (<= 768px) */
+    .slide {
+        width: 100%; /* Show 1 image per view on mobile */
+        padding: 0; /* No padding between images when only one is shown */
+    }
+    .slider-nav button {
+        display: flex; /* Show buttons on mobile */
+        justify-content: center;
+        align-items: center;
+        width: 40px; /* smaller arrows */
+        height: 40px;
+        font-size: 1.2em;
+        padding: 0;
+        border-radius: 50%; /* make them round */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .slider-nav .prev-slide {
+        left: 10px;
+    }
+    .slider-nav .next-slide {
+        right: 10px;
+    }
+
+    /* Hide gallery dots when on mobile to achieve "1 dot per image" via JS creation */
+    .slider-dots {
+        /* JS will handle creation of dots for each image, so no specific CSS hide needed here */
     }
 }
 
@@ -904,26 +947,37 @@ footer {
 
     /* Adjust wedding date text for phones */
     .wedding-date-text {
-        font-size: 3em; /* Smaller for phones */
-        line-height: 1.2; /* To avoid too much vertical space if it wraps */
-        letter-spacing: 1px;
-        word-break: break-word; /* Allow long words to break */
+        font-size: 2.2em; /* ลดขนาดฟอนต์ของวันที่ลงอีก เพื่อให้มีที่ว่างสำหรับนับถอยหลัง */
+        line-height: 1.2;
+        letter-spacing: 0.2px; /* ลดระยะห่างระหว่างตัวอักษรลงอีก */
+        word-break: break-word;
     }
 
     /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 2.5em; /* Smaller for phones */
+        font-size: 1.3em; /* ลดขนาดตัวเลขลงอีกนิด */
+        line-height: 1; /* ทำให้ชิดด้านบน */
+        display: block; /* ทำให้ตัวเลขเป็นบล็อก เพื่อให้หน่วยไปอยู่ใต้ */
+        margin-bottom: 2px; /* ระยะห่างเล็กน้อยระหว่างตัวเลขกับหน่วย */
     }
     .countdown-modern .label {
-        font-size: 1em; /* Smaller for phones */
+        font-size: 0.6em; /* ลดขนาดข้อความหน่วย (วัน, ชั่วโมง) ลงอีก */
+        margin-top: 0px; /* ลบระยะห่างด้านบน */
+        display: block; /* ทำให้หน่วยเป็นบล็อก */
+        text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ตามตัวอย่าง */
     }
 
     /* Adjust countdown spacing for phones */
-    #countdown > div {
-        margin-right: 10px; /* Smaller gap for phones */
-        margin-left: 10px;
+    #countdown {
+        padding: 0 2px; /* ลด padding ของ container ลงอีก (จาก 5px) */
+        justify-content: center; /* จัดกึ่งกลางกลุ่มหน่วยนับถอยหลัง */
+        flex-wrap: nowrap; /* บังคับไม่ให้ขึ้นบรรทัดใหม่ */
     }
-    #countdown > div:not(:last-child) {
-        margin-right: 20px; /* Even smaller gap between units */
+    #countdown > div {
+        margin: 0 3px; /* ลด margin รอบแต่ละ item ให้ชิดกันมากขึ้น */
+        flex: 0 0 auto; /* ป้องกันไม่ให้ขยาย/หดตัวมากเกินไป */
+        width: 22%; /* กำหนดความกว้างเป็นเปอร์เซ็นต์ เพื่อให้ 4 หน่วยพอดีในแถว */
+        box-sizing: border-box; /* สำคัญ: รวม padding/border ใน width */
+        text-align: center; /* จัดกึ่งกลางข้อความภายในแต่ละหน่วย */
     }
 }
