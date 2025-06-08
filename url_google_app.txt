@@ -8,3 +8,14 @@ https://calm-sopapillas-690b48.netlify.app/
 git add .
 git commit -m "Apply full HTML, CSS, and JS updates for modern countdown and styling fix"
 git push origin main
+
+
+
+git add .
+git commit -m "Adjust vertical alignment of mobile navigation icons"
+git push origin main
+
+
+git add .
+git commit -m "Improve responsive layout for wedding date and countdown"
+git push origin main

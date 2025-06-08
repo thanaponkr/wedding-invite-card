@@ -724,8 +724,8 @@ footer {
 
 .mobile-nav-list {
     display: flex;
-    justify-content: space-around; /* กระจายรายการให้เท่ากันในพื้นที่ที่มี */
-    align-items: center; /* จัดตำแหน่งรายการให้อยู่ด้านล่างสุด, มีประโยชน์สำหรับปุ่มที่ยื่นออกมา */
+    justify-content: space-around;
+    align-items: center; /* เปลี่ยนจาก flex-end เป็น center เพื่อขยับไอคอนและข้อความขึ้น */
     list-style: none;
     margin: 0;
     padding: 0;
@@ -821,10 +821,21 @@ footer {
     .main-nav-button {
         width: 65px;
         height: 65px;
-        top: -10px; /* ปรับให้ลงมาอีกนิด */
+        top: -10px; /* ปรับให้ลงมาอีกนิด (จากเดิม -15px) */
     }
     .main-nav-button .mobile-nav-link i {
         font-size: 2em;
+    }
+
+    /* Adjust wedding date text for tablets/smaller screens */
+    .wedding-date-text {
+        font-size: 4em; /* Smaller for tablets */
+        letter-spacing: 2px;
+    }
+
+    /* Adjust countdown spacing for tablets */
+    #countdown > div:not(:last-child) {
+        margin-right: 40px; /* Reduce gap for tablets */
     }
 }
 
@@ -885,9 +896,34 @@ footer {
     .main-nav-button {
         width: 60px;
         height: 60px;
-        top: -10px; /* ปรับให้ลงมาอีกนิด */
+        top: -5px; /* ปรับให้ลงมาอีกนิด (จากเดิม -10px) */
     }
     .main-nav-button .mobile-nav-link i {
         font-size: 1.8em;
+    }
+
+    /* Adjust wedding date text for phones */
+    .wedding-date-text {
+        font-size: 3em; /* Smaller for phones */
+        line-height: 1.2; /* To avoid too much vertical space if it wraps */
+        letter-spacing: 1px;
+        word-break: break-word; /* Allow long words to break */
+    }
+
+    /* Adjust countdown value and label sizes for phones */
+    .countdown-modern .value {
+        font-size: 2.5em; /* Smaller for phones */
+    }
+    .countdown-modern .label {
+        font-size: 1em; /* Smaller for phones */
+    }
+
+    /* Adjust countdown spacing for phones */
+    #countdown > div {
+        margin-right: 10px; /* Smaller gap for phones */
+        margin-left: 10px;
+    }
+    #countdown > div:not(:last-child) {
+        margin-right: 20px; /* Even smaller gap between units */
     }
 }
