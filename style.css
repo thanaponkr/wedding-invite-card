@@ -8,13 +8,21 @@ body {
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    /* เพิ่ม padding-bottom เพื่อไม่ให้เนื้อหาถูก Mobile Nav Bar บัง */
+    padding-bottom: 70px; /* ควรมากกว่าความสูงของ mobile-nav-bar เล็กน้อย */
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
 }
 
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
     color: #8B4513; /* สีน้ำตาลเข้ม */
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 h1 {
@@ -25,78 +33,73 @@ h1 {
 
 h2 {
     font-size: 2.5em; /* ขนาดฟอนต์สำหรับหัวข้อทั่วไป */
+<<<<<<< HEAD
     padding-bottom: 0;
+=======
+<<<<<<< HEAD
+    padding-bottom: 0;
+=======
+    padding-bottom: 0; /* ลบ padding-bottom ที่เคยมีเส้น */
+    position: relative;
+    display: inline-block; /* เพื่อให้สามารถจัดตำแหน่งเส้นใต้ได้ */
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
 }
 
-h3 {
-    font-size: 1.8em;
-    color: #6C3400;
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #D2B48C; /* สีน้ำตาลอ่อน */
+    margin: 10px auto 0; /* จัดให้อยู่กึ่งกลางใต้ข้อความ */
+    border-radius: 5px;
 }
 
-p {
+section {
+    padding: 60px 20px;
+    margin-bottom: 0; /* ลบ margin-bottom ออกเพราะมีการใช้ padding-bottom ที่ body แล้ว */
     text-align: center;
-    font-size: 1.1em;
-    margin-bottom: 10px;
 }
 
-/* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
+/* ส่วนหัว (Hero Section) */
 .hero-section {
-    background: url('images/hero-floral-frame.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
-    background-size: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่ทั้งหมดของ Hero Section */
-    height: 100vh;
+    position: relative;
+    height: 100vh; /* เต็มหน้าจอ */
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    color: white; /* สีข้อความในส่วน Hero */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    overflow: hidden; /* ซ่อนส่วนเกินของรูปภาพ */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-bg.jpg') no-repeat center center/cover;
+    background-attachment: fixed; /* ทำให้พื้นหลังอยู่กับที่เมื่อเลื่อน */
+    animation: fadeIn 2s ease-in-out; /* เพิ่ม animation */
 }
 
 .hero-content {
-    padding: 0;
-    border-radius: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%; /* ให้ hero-content เต็มพื้นที่ของ hero-section */
+    z-index: 2; /* ให้อยู่เหนือพื้นหลัง */
+    text-align: center;
 }
 
 .wedding-logo {
-    max-width: 500px; /* กำหนดขนาดสูงสุดของโลโก้บน PC */
-    width: 80vw; /* ให้มันปรับขนาดตามความกว้างของหน้าจอ แต่ไม่เกิน max-width */
+    max-width: 80%;
     height: auto;
-    display: block;
-    margin: auto;
-    animation: fadeInScale 2s ease-out forwards; /* แอนิเมชั่นโลโก้ */
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* เพิ่มเงาให้โลโก้เด่นขึ้น */
+    margin-bottom: 20px;
+    animation: zoomIn 1s ease-out; /* เพิ่ม animation */
 }
 
-.hero-slogan {
-    font-size: 1.5em;
-    font-style: italic;
-    margin-top: 15px;
-    animation: fadeIn 2.5s ease-out forwards;
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4em;
+    color: white;
+    margin-bottom: 10px;
+    animation: slideInUp 1.2s ease-out; /* เพิ่ม animation */
 }
 
-/* Keyframes สำหรับแอนิเมชั่นโลโก้และข้อความ */
-@keyframes fadeInScale {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+.hero-slogan, .wedding-date {
+    font-size: 1.2em;
+    animation: slideInUp 1.4s ease-out; /* เพิ่ม animation */
 }
 
 .scroll-indicator {
@@ -105,12 +108,13 @@ p {
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: 1.2em;
-    text-align: center;
-    animation: bounce 2s infinite;
+    font-size: 1.5em;
+    animation: bounce 2s infinite; /* แอนิเมชั่นเด้งขึ้นลง */
     cursor: pointer;
+    z-index: 3; /* ให้อยู่เหนือพื้นหลัง */
 }
 
+<<<<<<< HEAD
 .scroll-indicator i {
     display: block;
     font-size: 2em;
@@ -209,9 +213,9 @@ p {
     color: #D2B48C; /* สีน้ำตาลอ่อน */
     font-weight: bold;
     margin: 0 10px; /* ระยะห่างด้านข้าง */
-    /* ซ่อนบนมือถือเล็ก */
     display: block;
 }
+
 
 /* สไตล์สำหรับโลโก้งานแต่งงานที่อยู่เหนือข้อความ "LET'S CELEBRATE..." */
 .invitation-wedding-logo {
@@ -247,7 +251,7 @@ p {
     color: #333; /* สีดำ */
     font-weight: normal; /* ตัวบาง */
     margin-bottom: 50px; /* ระยะห่างด้านล่าง */
-    letter-spacing: 5px; /* <--- เพิ่มบรรทัดนี้เข้ามา */
+    letter-spacing: 5px; /* เพิ่มระยะห่างระหว่างตัวอักษร */
 }
 
 
@@ -258,15 +262,12 @@ p {
     align-items: flex-end;
     margin-top: 20px;
     flex-wrap: wrap;
-    /* คุณอาจมีสไตล์อื่น ๆ อยู่แล้วใน #countdown */
 }
 
 #countdown > div {
     text-align: center; /* ให้ข้อความและตัวเลขอยู่ตรงกลางบล็อก */
-    /* เพิ่มระยะห่างระหว่างแต่ละบล็อก */
     margin-right: 15px; /* ช่องว่างด้านขวา */
     margin-left: 15px;  /* ช่องว่างด้านซ้าย */
-    /* หรือใช้แค่ margin-right: 30px; กับ :not(:last-child) เพื่อประหยัด */
 }
 
 /* ถ้าต้องการระยะห่างที่แม่นยำยิ่งขึ้น: */
@@ -297,7 +298,6 @@ p {
 
 
 /* สไตล์สำหรับปุ่ม "ดูรายละเอียดกำหนดการ" */
-/* เนื่องจากไม่มีปุ่ม Add to Calendar แล้ว จึงเหลือแค่ปุ่มนี้ */
 .btn-scroll {
     background-color: #A0522D;
     color: white;
@@ -308,26 +308,51 @@ p {
     cursor: pointer;
     margin-top: 50px; /* เพิ่มระยะห่างด้านบนจากเนื้อหา (countdown) */
     transition: background-color 0.3s ease, transform 0.2s ease;
+=======
+.scroll-indicator p {
+    font-size: 0.7em;
+    margin-top: 5px;
 }
 
-.btn-scroll:hover {
-    background-color: #CD853F;
-    transform: translateY(-3px);
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+    40% { transform: translateY(-10px) translateX(-50%); }
+    60% { transform: translateY(-5px) translateX(-50%); }
 }
 
 
-/* Details Section (กำหนดการ) */
-.details-section .detail-item {
-    background-color: #fcf6ef;
-    padding: 25px; /* เพิ่ม padding */
-    border-radius: 8px; /* เพิ่มความมนของขอบ */
-    margin-bottom: 25px; /* เพิ่มระยะห่าง */
-    text-align: left;
+/* ส่วนคำเชิญ (Invitation Section) */
+.invitation-section {
+    background-color: #fff;
+    padding: 80px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: -50px auto 40px; /* ดึงขึ้นมาทับ hero section เล็กน้อย */
+    max-width: 900px;
+    z-index: 1;
+    position: relative;
 }
 
+<<<<<<< HEAD
 .details-section .detail-item h3 {
     font-size: 3em; /* เพิ่มขนาดฟอนต์ของรายละเอียดกำหนดการ */
-    text-align: left;
     text-align: left;
     margin-top: 0;
     color: #A0522D;
@@ -349,10 +374,15 @@ p {
 }
 
 .map-section .location-header {
+=======
+.invitation-text {
+    font-size: 1.1em;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
     margin-bottom: 20px;
-    padding: 0 20px; /* เพิ่ม padding ซ้ายขวา เพื่อไม่ให้ชิดขอบจอเกินไป */
+    line-height: 1.8;
 }
 
+<<<<<<< HEAD
 .map-section .location-icon {
     font-size: 2.5em;
     color: #8B4513; /* สีไอคอน */
@@ -363,37 +393,147 @@ p {
 .map-section .venue-title {
     font-family: 'Roboto', serif; /* ใช้ฟอนต์ Playfair Display */
     font-size: 2.5em; /* ขนาดหัวข้อ The Venue */
-    color: #8B4513;
-    margin-top: 0;
-    margin-bottom: 5px; /* ระยะห่างจากชื่อสถานที่ */
+=======
+.invitation-text.bottom {
+    margin-top: 30px;
 }
 
-.map-section .venue-name {
-    font-family: 'Sarabun', sans-serif; /* ใช้ฟอนต์ Sarabun หรือฟอนต์ไทยอื่นๆ ที่คุณเลือก */
+.couple-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #8B4513;
     font-size: 1.2em;
-    color: #555;
+}
+
+.couple-photo {
+    margin: 40px auto;
+    max-width: 400px;
+    border-radius: 50%; /* ทำให้รูปเป็นวงกลม */
+    overflow: hidden; /* ซ่อนส่วนเกินเมื่อรูปเป็นวงกลม */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border: 5px solid #D2B48C; /* ขอบรูป */
+}
+
+.couple-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.countdown-container {
+    background-color: #F5DEB3; /* Wheat color */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #8B4513;
+}
+
+.countdown-item {
+    text-align: center;
+}
+
+.countdown-item span {
+    display: block;
+    font-size: 2.2em;
+    font-family: 'Playfair Display', serif;
+    color: #A0522D; /* Sienna */
+}
+
+/* กำหนดการ (Schedule Section) */
+.schedule-section {
+    background-color: #fcf6ef;
+    padding: 60px 20px;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.schedule-item {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.schedule-item:hover {
+    transform: translateY(-5px);
+}
+
+.schedule-item h3 {
+    font-family: 'Playfair Display', serif;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+    color: #8B4513;
     margin-top: 0;
-    margin-bottom: 0;
+    font-size: 1.5em;
+}
+
+.schedule-item h3 i {
+    margin-right: 10px;
+    color: #D2B48C;
+}
+
+.schedule-item .time {
+    font-weight: 600;
+    color: #A0522D;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.schedule-item .description {
+    color: #555;
+}
+
+/* สถานที่จัดงาน (Location Section) */
+.location-section {
+    background-color: #F5DEB3; /* Wheat color */
+    padding: 60px 20px;
+}
+
+.location-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    color: #8B4513;
+    margin-bottom: 10px;
+}
+
+.location-address {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
 }
 
 .map-container {
-    margin-top: 30px; /* ระยะห่างจากหัวข้อ */
     width: 100%;
-    max-width: 800px; /* หรือขนาดที่ต้องการ */
-    height: 400px; /* ความสูงของแผนที่ */
-    margin-left: auto; /* จัดกลางแผนที่ */
-    margin-right: auto; /* จัดกลางแผนที่ */
-    border-radius: 8px; /* ความโค้งมนของกรอบแผนที่ */
-    overflow: hidden; /* เพื่อให้ border-radius แสดงผลบน iframe */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* เงาสำหรับแผนที่ */
+    max-width: 800px;
+    margin: 0 auto 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .map-container iframe {
     width: 100%;
-    height: 100%;
-    border: 0; /* ลบ border เดิมของ iframe */
+    height: 400px;
+    border: 0;
 }
 
+<<<<<<< HEAD
 .address-details {
     text-align: left; /* จัดชิดซ้ายตามตัวอย่าง */
     font-family: 'Sarabun', sans-serif; /* ฟอนต์สำหรับที่อยู่ */
@@ -412,66 +552,131 @@ p {
 }
 
 .direction-button {
-    display: block; /* <--- เปลี่ยนจาก inline-block เป็น block */
-    width: fit-content; /* <--- เพิ่มบรรทัดนี้ เพื่อให้ปุ่มมีขนาดพอดีกับเนื้อหา */
-    margin-left: auto; /* <--- เพิ่มบรรทัดนี้ เพื่อจัดกลาง */
-    margin-right: auto; /* <--- เพิ่มบรรทัดนี้ เพื่อจัดกลาง */
+    display: block; /* เปลี่ยนจาก inline-block เป็น block */
+    width: fit-content; /* เพื่อให้ปุ่มมีขนาดพอดีกับเนื้อหา */
+    margin-left: auto; /* เพื่อจัดกลาง */
+    margin-right: auto; /* เพื่อจัดกลาง */
     background-color: #8B4513; /* สีปุ่ม */
     color: #fff;
     padding: 12px 30px;
     margin-top: 30px; /* ระยะห่างจากที่อยู่ */
+=======
+.btn-navigate {
+    display: inline-block;
+    background-color: #8B4513; /* SaddleBrown */
+    color: white;
+    padding: 12px 25px;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
     border-radius: 5px;
     text-decoration: none;
-    font-family: 'Sarabun', sans-serif; /* หรือฟอนต์ไทยที่คุณเลือก */
-    font-size: 1.1em;
-    font-weight: bold;
+    font-weight: 600;
+    margin-top: 20px;
     transition: background-color 0.3s ease;
 }
 
-.direction-button:hover {
-    background-color: #A0522D; /* สีปุ่มเมื่อเมาส์ชี้ */
+.btn-navigate:hover {
+    background-color: #A0522D; /* Sienna */
 }
 
-/* Gallery Section (New Slider Styling) */
-.gallery-section {
+<<<<<<< HEAD
+/* Gallery Section (Slider Styling) */
+.slider-container {
     padding: 40px 20px; /* ปรับ padding ให้เหมาะสม */
+<<<<<<< HEAD
     max-width: 420px;
+=======
+    max-width: 960px; /* <--- ใช้ 960px เพื่อให้มีพื้นที่สำหรับ 3 รูปภาพ */
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
     margin: 40px auto;
     text-align: center; /* จัดกึ่งกลางหัวข้อ */
     position: relative; /* สำหรับตำแหน่งของปุ่ม/จุด */
     overflow: hidden; /* ซ่อนส่วนที่เกินขอบ */
 }
 
+=======
+.btn-navigate i {
+    margin-right: 8px;
+}
+
+.parking-info {
+    margin-top: 30px;
+    color: #555;
+    font-size: 1em;
+}
+
+.parking-info i {
+    margin-right: 8px;
+    color: #8B4513;
+}
+
+
+/* แกลอรี่รูปภาพ (Gallery Section) */
+.gallery-section {
+    background-color: #fff;
+    padding: 60px 20px;
+}
+
 .slider-container {
     position: relative;
+<<<<<<< HEAD
     width: 100%;
     max-width: 960px; /* <--- ลองเพิ่มความกว้างสูงสุดให้รองรับ 3 รูป หรือปรับตามต้องการ */
     margin: 30px auto;
     overflow: hidden; /* <--- เก็บไว้ เพื่อซ่อนรูปที่เกิน */
     border-radius: 10px;
     /* box-shadow: 0 4px 15px rgba(0,0,0,0.1); ถ้ายังไม่ลบ ก็ลบ/คอมเมนต์ออก */
+=======
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
 }
 
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
 .slider-wrapper {
     display: flex;
-    transition: transform 0.8s ease-in-out; /* แอนิเมชั่นการเลื่อน */
+    transition: transform 0.5s ease-in-out;
 }
 
+<<<<<<< HEAD
 .slide {
+<<<<<<< HEAD
     flex-shrink: 0; /* <--- สำคัญมาก! ป้องกันไม่ให้แต่ละ slide หดตัว */
     width: calc(100% / 3); /* <--- สำคัญมาก! ทำให้แต่ละ slide กว้าง 1/3 ของ container */
     box-sizing: border-box; /* <--- สำคัญ! เพื่อให้ padding/border ไม่เกินความกว้าง */
     padding: 10px; /* <--- เพิ่ม padding ระหว่างรูปภาพ (ปรับได้) */
+=======
+    flex-shrink: 0; /* สำคัญมาก! ป้องกันไม่ให้แต่ละ slide หดตัว */
+    width: calc(100% / 3); /* สำคัญมาก! ทำให้แต่ละ slide กว้าง 1/3 ของ container */
+    box-sizing: border-box; /* สำคัญ! เพื่อให้ padding/border ไม่เกินความกว้าง */
+    padding: 10px; /* เพิ่ม padding ระหว่างรูปภาพ (ปรับได้) */
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
     display: flex; /* จัดกลางรูปภาพภายใน slide */
     justify-content: center;
     align-items: center;
 }
 
 .slide img {
+<<<<<<< HEAD
     width: 100%; /* <--- ให้รูปภาพเต็มความกว้างของ slide */
     height: 250px; /* <--- กำหนดความสูงคงที่ (ปรับได้ตามต้องการ) */
     object-fit: cover; /* <--- ทำให้รูปภาพครอบคลุมพื้นที่โดยไม่บิดเบี้ยว */
     border-radius: 8px; /* <--- ความโค้งมนของรูปภาพ */
+=======
+    width: 100%; /* ให้รูปภาพเต็มความกว้างของ slide */
+    height: 250px; /* กำหนดความสูงคงที่ (ปรับได้ตามต้องการ) */
+    object-fit: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่โดยไม่บิดเบี้ยว */
+    border-radius: 8px; /* ความโค้งมนของรูปภาพ */
+=======
+.slider-img {
+    width: 100%;
+    flex-shrink: 0; /* ป้องกันไม่ให้รูปหด */
+    display: block;
+    border-radius: 10px;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
 }
 
 .slider-nav {
@@ -482,30 +687,35 @@ p {
     justify-content: space-between;
     transform: translateY(-50%);
     padding: 0 10px;
-    box-sizing: border-box;
-    pointer-events: none; /* เพื่อให้คลิกผ่านปุ่มได้ถ้าอยู่เหนือรูปภาพ */
 }
 
 .slider-nav button {
+<<<<<<< HEAD
     display: none; /* <--- เพิ่มบรรทัดนี้เพื่อซ่อนปุ่มลูกศรซ้าย-ขวา */
+=======
+<<<<<<< HEAD
+    display: none; /* ซ่อนปุ่มลูกศรซ้าย-ขวา */
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
     background-color: rgba(0, 0, 0, 0.5);
+=======
+    background-color: rgba(0,0,0,0.5);
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
     color: white;
     border: none;
-    padding: 15px 10px;
+    padding: 15px 12px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50%;
     font-size: 1.5em;
     transition: background-color 0.3s ease;
-    pointer-events: all; /* ทำให้คลิกปุ่มได้ */
-    opacity: 0.7;
 }
 
 .slider-nav button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    opacity: 1;
+    background-color: rgba(0,0,0,0.8);
 }
 
+<<<<<<< HEAD
 .slider-dots {
+<<<<<<< HEAD
     /* ลบ position: absolute; หรือ static; หรือสไตล์อื่นๆ ที่เคยมีสำหรับการจัดตำแหน่งแบบเก่า */
     /* bottom: auto; left: auto; transform: none; z-index: auto; (ลบพวกนี้ออก) */
 
@@ -515,212 +725,418 @@ p {
     margin-top: 20px; /* <--- เพิ่มระยะห่างจากด้านล่างของ slider-container */
     padding-bottom: 20px; /* <--- เพิ่ม padding ด้านล่างถ้าต้องการ */
     /* ... สไตล์อื่นๆ เช่น สีของจุด หรือขนาดของจุดแต่ละจุด ... */
+=======
+    display: flex; /* ใช้ Flexbox เพื่อเรียงจุด */
+    justify-content: center; /* จัดกลางจุดวงกลม */
+    gap: 8px; /* ระยะห่างระหว่างจุด (คงไว้) */
+    margin-top: 20px; /* เพิ่มระยะห่างจากด้านล่างของ slider-container */
+    padding-bottom: 20px; /* เพิ่ม padding ด้านล่างถ้าต้องการ */
+=======
+.dots-container {
+    text-align: center;
+    padding: 20px 0 0;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
 }
 
 .dot {
-    width: 12px;
     height: 12px;
-    background-color: rgba(255, 255, 255, 0.6);
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
     border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: 1px solid #D2B48C; /* ขอบจุด */
 }
 
-.dot.active-dot {
-    background-color: #D2B48C; /* สีจุดที่ใช้งานอยู่ */
-    transform: scale(1.2);
+.dot.active {
+    background-color: #8B4513; /* SaddleBrown */
 }
 
 
-/* RSVP Section */
-.rsvp-section form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
+/* ยืนยันการเข้าร่วม (RSVP Section) */
+.rsvp-section {
+    background-color: #fcf6ef;
+    padding: 60px 20px;
+}
+
+.rsvp-intro {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.rsvp-form, .guestbook-form {
+    max-width: 600px;
     margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: left;
 }
 
+<<<<<<< HEAD
 .rsvp-section label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #6C3400;
+    text-align: center; /* จัดกลาง label */
+=======
+.rsvp-form label, .guestbook-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
 }
 
-.rsvp-section input[type="text"],
-.rsvp-section input[type="number"],
-.rsvp-section textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
+.rsvp-form input[type="text"],
+.rsvp-form input[type="number"],
+.rsvp-form select,
+.rsvp-form textarea,
+.guestbook-form input[type="text"],
+.guestbook-form textarea {
     width: 100%;
-    box-sizing: border-box; /* สำคัญ */
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* ทำให้ padding ไม่เพิ่มขนาดความกว้าง */
+    font-size: 1em;
+    font-family: 'Sarabun', sans-serif;
 }
 
-.rsvp-section textarea {
+.rsvp-form textarea, .guestbook-form textarea {
     resize: vertical; /* อนุญาตให้ปรับขนาดแนวตั้งได้ */
 }
 
 .btn-submit {
-    background-color: #A0522D;
+    background-color: #8B4513; /* SaddleBrown */
     color: white;
-    padding: 15px 25px;
+    padding: 12px 25px;
     border: none;
     border-radius: 5px;
-    font-size: 1.1em;
     cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
+    width: 100%; /* ให้ปุ่มเต็มความกว้าง */
 }
 
 .btn-submit:hover {
-    background-color: #CD853F;
+    background-color: #A0522D; /* Sienna */
 }
 
 .status-message {
-    text-align: center;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #007bff; /* สีน้ำเงินสำหรับข้อความสถานะ */
+    margin-top: 20px;
+    font-weight: 600;
 }
 
-/* Gift Section */
+/* ของขวัญ (Gift Section) */
 .gift-section {
-    text-align: center;
+    background-color: #F5DEB3; /* Wheat color */
+    padding: 60px 20px;
+}
+
+.gift-intro {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    color: #555;
+    line-height: 1.6;
 }
 
 .gift-options {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
     gap: 40px;
-    margin-top: 30px;
-    flex-wrap: wrap; /* ให้ห่อเมื่อหน้าจอเล็ก */
+    flex-wrap: wrap; /* ให้ห่อลงบรรทัดใหม่เมื่อหน้าจอเล็ก */
 }
 
-.gift-options .qr-code,
-.gift-options .bank-info {
-    background-color: #fcf6ef;
-    padding: 25px;
+.qr-code, .bank-info {
+    background-color: #fff;
+    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    width: 250px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
+    flex: 1; /* ให้แต่ละส่วนขยายได้ */
+    min-width: 280px; /* ความกว้างขั้นต่ำ */
+    max-width: 400px; /* ความกว้างสูงสุด */
 }
 
-.gift-options img {
-    max-width: 150px;
+.qr-code h3, .bank-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: #8B4513;
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.qr-code img {
+    max-width: 200px;
     height: auto;
-    margin-bottom: 15px;
+    margin: 15px auto;
     border: 1px solid #eee;
+    padding: 5px;
     border-radius: 5px;
 }
 
-.gift-options .qr-code p {
-    text-align: center; /* ทำให้ข้อความใน QR Code จัดกึ่งกลาง */
-    padding-left: 0;   /* ลบ padding-left ที่เคยทำให้ชิดซ้าย */
+.bank-info p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-.gift-options .bank-info p {
-    text-align: left; /* คงการจัดซ้ายสำหรับข้อมูลธนาคาร */
-    padding-left: 10px;
-}
-.gift-options p strong {
+.bank-info strong {
     color: #A0522D;
 }
 
-/* Guestbook Section (New) */
-.guestbook-section form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto;
+.gift-note {
+    margin-top: 40px;
+    font-style: italic;
+    color: #777;
+    font-size: 0.9em;
 }
 
+<<<<<<< HEAD
 .guestbook-section label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #6C3400;
+    text-align: center; /* จัดกลาง label */
+=======
+.gift-note i {
+    font-size: 1.5em;
+    color: #8B4513;
+    margin-bottom: 10px;
+    display: block;
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
 }
 
-.guestbook-section input[type="text"],
-.guestbook-section textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-    resize: vertical;
+
+/* สมุดอวยพร (Guestbook Section) */
+.guestbook-section {
+    background-color: #fff;
+    padding: 60px 20px;
+}
+
+.guestbook-intro {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
 }
 
 .guestbook-entries {
     margin-top: 40px;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-    max-height: 400px; /* จำกัดความสูงและทำให้มี scrollbar */
-    overflow-y: auto;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fcf6ef;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* เงาด้านใน */
+    max-height: 400px; /* จำกัดความสูง */
+    overflow-y: auto; /* ทำให้เลื่อนได้ถ้าเนื้อหาเกิน */
 }
 
 .guestbook-entry {
-    background-color: #fcf6ef;
+    background-color: #fff;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 5px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    text-align: left;
 }
 
-.guestbook-entry .entry-name {
-    font-weight: bold;
-    color: #A0522D;
+.guestbook-entry:last-child {
+    margin-bottom: 0;
+}
+
+.entry-name {
+    font-weight: 600;
+    color: #8B4513;
     margin-bottom: 5px;
-    text-align: left;
+    font-size: 1.1em;
 }
 
-.guestbook-entry .entry-message {
-    font-style: italic;
+.entry-message {
     color: #555;
-    text-align: left;
+    line-height: 1.6;
 }
 
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 30px;
-    background-color: #D2B48C; /* สีเดียวกับปุ่ม/ลิงก์ */
+    background-color: #8B4513; /* SaddleBrown */
     color: white;
+    text-align: center;
+    padding: 20px;
     font-size: 0.9em;
-    margin-top: 50px;
 }
 
-/* Music Toggle Button */
+/* Music Toggle Button (Fixed Position) */
 .music-toggle-btn {
     position: fixed;
-    bottom: 20px;
+    bottom: 90px; /* สูงกว่า mobile nav bar เล็กน้อย */
     right: 20px;
-    background-color: #A0522D;
+    background-color: #D2B48C; /* Tan */
     color: white;
     border: none;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    font-size: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.5em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     z-index: 1000; /* ให้อยู่ด้านบนสุด */
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 .music-toggle-btn:hover {
-    background-color: #CD853F;
+    background-color: #A0522D; /* Sienna */
+}
+
+/* Mobile Fixed Navigation Bar */
+.mobile-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* หรือสีที่คุณต้องการ */
+    display: flex; /* ทำให้ปุ่มจัดเรียงเป็นแถว */
+    justify-content: space-around; /* กระจายปุ่มให้มีช่องว่างเท่าๆ กัน */
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.mobile-nav-bar .nav-item {
+    flex: 1; /* สำคัญ: ทำให้แต่ละปุ่มใช้พื้นที่เท่าๆ กัน */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #8B4513; /* สีไอคอน/ข้อความ */
+    text-decoration: none;
+    font-size: 0.8em; /* ขนาดฟอนต์สำหรับข้อความใต้ไอคอน */
+    transition: color 0.3s ease;
+    padding: 5px 0; /* เพิ่ม padding ด้านบนและล่าง */
+}
+
+.mobile-nav-bar .nav-item i {
+    font-size: 1.5em; /* ขนาดไอคอน */
+    margin-bottom: 5px;
+}
+
+.mobile-nav-bar .nav-item:hover,
+.mobile-nav-bar .nav-item.active { /* หากมีการใช้ active class */
+    color: #FF7F50; /* สีเมื่อ hover หรือ active */
+}
+
+
+<<<<<<< HEAD
+/* Mobile Navigation Bar */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%; /* จัดกึ่งกลางแนวนอน */
+    transform: translateX(-50%); /* ปรับตำแหน่งเพื่อให้กึ่งกลางสมบูรณ์ */
+    max-width: 500px; /* กำหนดความกว้างสูงสุดสำหรับแถบนำทางทั้งหมดบนมือถือ/แท็บเล็ตขนาดใหญ่ */
+    width: 95%; /* ความกว้างที่ตอบสนองสำหรับหน้าจอขนาดเล็ก */
+    background-color: #fff;
+    border-top: 1px solid #D2B48C;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    border-radius: 20px 20px 0 0; /* ทำให้มุมบนโค้งมน, มุมล่างคม */
+    z-index: 999;
+    display: none; /* ซ่อนบนเดสก์ท็อปโดยค่าเริ่มต้น */
+    padding-bottom: env(safe-area-inset-bottom, 0); /* สำหรับโทรศัพท์ที่มีรอยบาก (notch) */
+}
+
+.mobile-nav-list {
+    display: flex;
+    justify-content: space-around; /* กระจายรายการให้เท่ากันในพื้นที่ที่มี */
+    align-items: flex-end; /* จัดตำแหน่งรายการให้อยู่ด้านล่างสุด, มีประโยชน์สำหรับปุ่มที่ยื่นออกมา */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 70px; /* ความสูงของคอนเทนเนอร์แถบนำทาง */
+    width: 100%; /* ให้เต็มความกว้างของพาเรนต์ .mobile-nav */
+}
+
+.mobile-nav-item {
+    flex: 1; /* อนุญาตให้รายการเติบโต/หดตัวเท่าๆ กันเพื่อเติมพื้นที่ */
+    text-align: center;
+    position: relative; /* สำหรับการจัดตำแหน่งสัมพัทธ์ของปุ่มหลัก */
+    display: flex; /* ใช้ flex เพื่อจัดกลางไอคอน/ข้อความในปุ่มขนาดเล็ก */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* ทำให้ลิงก์เติมพื้นที่รายการ */
+    height: 100%;
+    text-decoration: none;
+    color: #A0522D; /* สีไอคอน/ข้อความสำหรับปุ่มขนาดเล็ก */
+    font-size: 0.8em;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-link i {
+    font-size: 1.6em;
+    margin-bottom: 4px;
+    transition: transform 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+    color: #CD853F;
+}
+
+.mobile-nav-link:hover i {
     transform: scale(1.1);
+}
+
+/* Specific styling for the main (RSVP) button */
+.main-nav-button {
+    flex: 0 0 auto; /* ไม่อนุญาตให้เติบโต/หดตัว, คงขนาดที่กำหนด */
+    position: relative; /* เพื่อให้สามารถใช้คุณสมบัติ 'top' ได้ */
+    top: -25px; /* ปรับค่านี้เพื่อควบคุมว่าปุ่มจะยื่นออกมามากแค่ไหน */
+    background-color: #A0522D;
+    border-radius: 50%;
+    width: 70px; /* ความกว้างคงที่ */
+    height: 70px; /* ความสูงคงที่ */
+    min-width: 70px; /* ตรวจสอบให้แน่ใจว่าไม่หดตัว */
+    min-height: 70px;
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.3); /* เงาที่เข้มขึ้น */
+    z-index: 1001; /* ตรวจสอบให้แน่ใจว่าอยู่เหนือองค์ประกอบนำทางอื่นๆ */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.main-nav-button .mobile-nav-link {
+    color: white; /* สีไอคอน/ข้อความสำหรับปุ่มหลัก */
+    font-size: 0.75em; /* ขนาดข้อความที่เล็กลงเล็กน้อยเพื่อให้พอดี */
+    height: auto; /* ปรับความสูงตามเนื้อหา */
+}
+
+.main-nav-button .mobile-nav-link i {
+    font-size: 2.2em; /* ขนาดไอคอนที่ใหญ่ขึ้นสำหรับปุ่มหลัก */
+    margin-bottom: 0; /* ลบ margin-bottom ถ้าจัดกลางอยู่แล้ว */
+}
+
+.main-nav-button:hover {
+    background-color: #CD853F; /* สี hover สำหรับปุ่มหลัก */
+    transform: translateY(-28px) scale(1.05); /* ยกขึ้นเล็กน้อยและปรับขนาดเมื่อ hover */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
 }
 
 
@@ -828,6 +1244,7 @@ footer {
 @media (max-width: 768px) {
     body {
         padding-bottom: 90px; /* ความสูงของแถบนำทาง (70px) + ส่วนที่ยื่นออกมา (25px) + ระยะห่างเล็กน้อย */
+<<<<<<< HEAD
     }
     .music-toggle-btn {
         bottom: 100px; /* เลื่อนปุ่มเพลงขึ้นไปเหนือปุ่มนำทางที่ยื่นออกมา */
@@ -844,16 +1261,117 @@ footer {
     }
     .main-nav-button .mobile-nav-link i {
         font-size: 2em;
+=======
+    }
+    .music-toggle-btn {
+        bottom: 100px; /* เลื่อนปุ่มเพลงขึ้นไปเหนือปุ่มนำทางที่ยื่นออกมา */
+    }
+    .mobile-nav {
+        display: flex; /* แสดงเป็น flex เพื่อจัดกึ่งกลาง */
+        height: 70px; /* ความสูงพื้นฐาน */
+    }
+    /* ปรับขนาดปุ่มหลักสำหรับหน้าจอมือถือทั่วไป */
+    .main-nav-button {
+        width: 65px;
+        height: 65px;
+        top: -20px;
+    }
+    .main-nav-button .mobile-nav-link i {
+        font-size: 2em;
+=======
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* แสดง Mobile Navigation Bar บนหน้าจอขนาดเล็ก */
+    .mobile-nav-bar {
+        display: flex;
+    }
+
+    /* ซ่อน Navigation Bar บน Desktop */
+    .main-nav { /* หากมี nav bar บน desktop อาจจะต้องซ่อนตรงนี้ */
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 3em;
+    }
+    .hero-slogan, .wedding-date {
+        font-size: 1em;
+    }
+
+    .invitation-section {
+        margin: -30px auto 30px;
+        padding: 50px 15px;
+    }
+
+    .countdown-timer {
+        font-size: 1.5em;
+        gap: 10px;
+    }
+    .countdown-item span {
+        font-size: 1.8em;
+    }
+
+    .schedule-item {
+        padding: 20px;
+    }
+
+    .map-container iframe {
+        height: 300px;
+    }
+
+    .slider-nav button {
+        padding: 10px 8px; /* ลดขนาดปุ่มลูกศร */
+        font-size: 1.2em;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+
+    .gift-options .qr-code,
+    .gift-options .bank-info {
+        width: 100%;
+        max-width: 300px; /* จำกัดความกว้างบนมือถือ */
+    }
+    .gift-options {
+        flex-direction: column; /* เรียงเป็นคอลัมน์บนมือถือ */
+        align-items: center;
+    }
+    .music-toggle-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3em;
+        bottom: 90px; /* ปรับตำแหน่งให้สูงขึ้นเล็กน้อยจาก nav bar */
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
     }
 }
 
 @media (max-width: 480px) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
     body {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
         bottom: 95px;
     }
+<<<<<<< HEAD
+=======
+    .main-nav-button {
+        width: 60px;
+        height: 60px;
+        top: -18px;
+    }
+    .main-nav-button .mobile-nav-link i {
+        font-size: 1.8em;
+    }
+}
+=======
+>>>>>>> 3c0aded4b0a07023a20d0fbacb87c32b0758cf50
     h1 {
         font-size: 2em;
     }
@@ -870,35 +1388,18 @@ footer {
     .invitation-section h2 {
         font-size: 1.8em;
     }
-    .couple-main-photo img {
-        width: 150px;
-        height: 150px;
+    .invitation-text {
+        font-size: 0.95em;
     }
-    .couple-names-text {
-        font-size: 1.8em;
-    }
-    .date-location {
+    .btn-submit {
+        padding: 10px 20px;
         font-size: 1em;
     }
-    .countdown {
-        font-size: 1.5em;
+    .rsvp-form, .guestbook-form {
+        padding: 25px;
     }
-    .btn-scroll {
-        font-size: 0.9em;
-        padding: 10px 20px;
-    }
-    .section {
-        padding: 30px 10px;
-    }
-    .gallery-grid {
-        grid-template-columns: 1fr; /* 1 คอลัมน์บนมือถือเล็ก */
-    }
-    .music-toggle-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-        bottom: 15px;
-        right: 15px;
+    .gift-intro {
+        font-size: 1em;
     }
     /* Mobile nav button size adjustment for smallest screens */
     .main-nav-button {
@@ -910,3 +1411,4 @@ footer {
         font-size: 1.8em;
     }
 }
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
