@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>การ์ดเชิญงานแต่งงาน - เมย์ & เต้ย</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font จาก Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome สำหรับไอคอน (เช่น ไอคอนเลื่อนลง) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <!-- 1. ส่วนหัว (Hero Section): โลโก้/ชื่อเจ้าบ่าวเจ้าสาว พร้อมแอนิเมชั่นและพื้นหลังซุ้มดอกไม้ -->
-    <header class="hero-section">
-        <div class="hero-content">
-            <!-- ตำแหน่งสำหรับโลโก้/ชื่อเจ้าบ่าวเจ้าสาว (เป็นรูปภาพ) -->
+    <header class="hero-section" id="home"> <div class="hero-content">
             <img src="images/wedding-logo.png" alt="May & Toey Wedding Logo" class="wedding-logo">
+            <h1 class="hero-title">เมย์ & เต้ย</h1>
+            <p class="hero-slogan">ขอเรียนเชิญร่วมเป็นเกียรติในงานฉลองมงคลสมรส</p>
+            <p class="wedding-date">วันจันทร์ที่ 28 กรกฎาคม 2568</p>
         </div>
         <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
@@ -25,49 +23,62 @@
     </header>
 
     <main>
-        <!-- 2. ส่วนเชิญชวน: ข้อความเชิญ, รูปคู่, ชื่อ, และนับถอยหลัง -->
-        <section id="invitation-section" class="section invitation-section">
-            <p class="honor-text">เรียนเชิญท่านผู้มีเกียรติร่วมเป็นเกียรติในพิธีฉลองมงคลสมรสระหว่าง</p>
-
-            <div class="couple-portraits">
-                <div class="portrait-item">
-                    <img src="images/may-portrait.png" alt="รูปเจ้าสาวเมย์" class="portrait-img">
-                    <p class="portrait-name">เมย์</p>
-                    <p class="portrait-fullname">นางสาวกัลยานี ดีต่อใจ</p>
-                </div>
-                <div class="and-symbol">&</div> <!-- สัญลักษณ์ & หรือข้อความ "และ" -->
-                <div class="portrait-item">
-                    <img src="images/toey-portrait.png" alt="รูปเจ้าบ่าวเต้ย" class="portrait-img">
-                    <p class="portrait-name">เต้ย</p>
-                    <p class="portrait-fullname">นายรัชพล แก้วกอ</p>
+        <section class="invitation-section" id="invitation"> <h2>เรียนเชิญร่วมฉลอง</h2>
+            <p class="invitation-text">
+                ด้วยความยินดีอย่างยิ่ง<br>
+                ขอเรียนเชิญท่านผู้มีเกียรติทุกท่าน<br>
+                ร่วมเป็นเกียรติในงานฉลองมงคลสมรสระหว่าง<br>
+                บุตรี/บุตรชาย <span class="couple-name">นางสาวเมย์</span> และ <span class="couple-name">นายเต้ย</span><br>
+            </p>
+            <div class="couple-photo">
+                <img src="images/may-toey.jpg" alt="May & Toey" class="img-fluid">
+            </div>
+            <p class="invitation-text bottom">
+                ณ <span class="venue-name">โรงแรม</span><br>
+                <span class="venue-location">สถานที่จัดงาน</span><br>
+                ในวันจันทร์ที่ 28 กรกฎาคม พ.ศ. 2568<br>
+                เวลา <span class="event-time">07:30 น. (พิธีสงฆ์) | 10:30 น. (พิธีฉลอง)</span>
+            </p>
+            <div class="countdown-container">
+                <h3>เหลือเวลาอีก</h3>
+                <div id="countdown" class="countdown-timer">
+                    <span class="countdown-item"><span id="days">00</span><br>วัน</span>
+                    <span class="countdown-item"><span id="hours">00</span><br>ชั่วโมง</span>
+                    <span class="countdown-item"><span id="minutes">00</span><br>นาที</span>
+                    <span class="countdown-item"><span id="seconds">00</span><br>วินาที</span>
                 </div>
             </div>
-
-            <img src="images/wedding-logo2.png" alt="Wedding Couple Logo" class="invitation-wedding-logo">
-
-            <h2 class="invitation-slogan">LET'S CELEBRATE TOGETHER ON<br>OUR SPECIAL DAY ON</h2>
-            <p class="wedding-date-text">28 JULY 2568</p> <!-- เปลี่ยนวันที่เป็นรูปแบบที่คุณต้องการ -->
-            
-            <div id="countdown" class="countdown-modern">
-                <!-- ตัวเลขและข้อความ WEEKS/DAYS/HOURS/MIN/SEC จะถูกสร้างโดย JavaScript -->
-            </div>
-
-            <!-- ปุ่ม "ADD TO CALENDAR" ถูกลบออกแล้ว -->
-            <button id="scrollToSchedule" class="btn-scroll">ดูรายละเอียดกำหนดการ</button>
+            <p class="invitation-text">
+                การมาของท่านคือเกียรติอันสูงสุดของเรา
+            </p>
         </section>
 
-        <!-- 3. กำหนดการ: รายละเอียดพิธีการ -->
-        <section id="schedule-section" class="section details-section">
-            <h2>กำหนดการ</h2>
-            <div class="detail-item">
-                <h3>พิธีมงคลสมรส (ช่วงเช้า)</h3>
-                <p>เวลา 06.30 น. พิธีสงฆ์</p>
-                <p>เวลา 07.30 น. พิธีแห่ขันหมาก</p>
-                <p>เวลา 09.30 น. พิธีหลั่งน้ำพระพุทธมนต์ และประสาทพร</p>
-                <p>เวลา 12.00 น. เชิญร่วมรับประทานอาหาร (โต๊ะจีน)</p>
+        <section class="schedule-section" id="program"> <h2>กำหนดการ</h2>
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <h3><i class="fas fa-church"></i> พิธีสงฆ์</h3>
+                    <p class="time">07:30 น.</p>
+                    <p class="description">แขกผู้มีเกียรติพร้อมกัน ณ สถานที่จัดงาน</p>
+                </div>
+                <div class="schedule-item">
+                    <h3><i class="fas fa-ring"></i> พิธีหมั้น</h3>
+                    <p class="time">08:30 น.</p>
+                    <p class="description">แห่ขันหมากและพิธีสวมแหวน</p>
+                </div>
+                <div class="schedule-item">
+                    <h3><i class="fas fa-handshake"></i> พิธีหลั่งน้ำพระพพุทธมนต์</h3>
+                    <p class="time">09:30 น.</p>
+                    <p class="description">พิธีรดน้ำสังข์และรับพรจากผู้ใหญ่</p>
+                </div>
+                <div class="schedule-item">
+                    <h3><i class="fas fa-champagne-glasses"></i> พิธีฉลองมงคลสมรส</h3>
+                    <p class="time">10:30 น.</p>
+                    <p class="description">ร่วมรับประทานอาหารและถ่ายภาพ</p>
+                </div>
             </div>
         </section>
 
+<<<<<<< HEAD
         <!-- 4. สถานที่จัดงาน: แผนที่ -->
         <section id="location-section" class="section map-section">
             <div class="location-header">
@@ -143,8 +154,58 @@
 
         <!-- 7. สมุดอวยพร (Guestbook) -->
         <section id="guestbook-section" class="section guestbook-section">
+=======
+        <section class="location-section" id="location">
+            <h2>สถานที่จัดงาน</h2>
+            <p class="location-name">โรงแรม (ชื่อโรงแรม)</p>
+            <p class="location-address">ที่อยู่ของโรงแรม หรือสถานที่จัดงาน</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15386.74567890123!2d100.56950795!3d13.7462085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ed1667b34e5%3A0x6b4a3c10a3e87870!2z4Lih4Lir4Liy4Lio4LmE4Lit4LiH4LmA4LiK4Liy4LiU4LiV4Liy4LmM4LiB4LmC4Lit4LiH4LmA4Lij4Lix4LiZ4Lij4Lix4LmMIQ!5e0!3m2!1sth!2sth!4v1700000000000!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <a href="https://maps.app.goo.gl/YOUR_Maps_LINK" target="_blank" class="btn-navigate">
+                <i class="fas fa-map-marker-alt"></i> เปิดใน Google Maps
+            </a>
+            <div class="parking-info">
+                <p><i class="fas fa-parking"></i> มีที่จอดรถรองรับ</p>
+                <p><i class="fas fa-bus"></i> เดินทางด้วยรถสาธารณะ: [ข้อมูลรถประจำทาง/BTS/MRT]</p>
+            </div>
+        </section>
+
+        <section class="gallery-section" id="gallery">
+            <h2>แกลอรี่ความทรงจำ</h2>
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <img src="images/gallery-1.jpg" alt="Gallery Image 1" class="slider-img">
+                    <img src="images/gallery-2.jpg" alt="Gallery Image 2" class="slider-img">
+                    <img src="images/gallery-3.jpg" alt="Gallery Image 3" class="slider-img">
+                    <img src="images/gallery-4.jpg" alt="Gallery Image 4" class="slider-img">
+                    <img src="images/gallery-5.jpg" alt="Gallery Image 5" class="slider-img">
+                </div>
+                <div class="slider-nav">
+                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container">
+                    </div>
+            </div>
+        </section>
+
+<section id="gallery" class="gallery-section">
+            </section>
+
+        <section id="guestbook" class="guestbook-section">
+            </section>
+
+
+
+        <section id="rsvp" class="rsvp-section">
+            </section>
+
+        <section class="guestbook-section" id="guestbook">
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
             <h2>สมุดอวยพร</h2>
-            <form id="guestbookForm">
+            <p class="guestbook-intro">ร่วมเขียนคำอวยพรและความทรงจำดีๆ ให้กับคู่บ่าวสาว</p>
+            <form id="guestbookForm" class="guestbook-form">
                 <label for="guestbookName">ชื่อ-นามสกุล:</label>
                 <input type="text" id="guestbookName" name="guestbookName" required>
 
@@ -155,7 +216,6 @@
                 <p id="guestbookStatus" class="status-message"></p>
             </form>
             <div class="guestbook-entries" id="guestbookEntries">
-                <!-- คำอวยพรจะแสดงที่นี่ -->
                 <div class="guestbook-entry">
                     <p class="entry-name">คุณพ่อคุณแม่</p>
                     <p class="entry-message">ขอให้ลูกทั้งสองมีความสุขมากๆ รักกันตลอดไปนะจ๊ะ</p>
@@ -167,6 +227,7 @@
             </div>
         </section>
 
+<<<<<<< HEAD
         <!-- 8. ตอบรับการเข้าร่วมงาน (RSVP) -->
         <section id="rsvp-section" class="section rsvp-section">
             <h2>ตอบรับการเข้าร่วมงาน (RSVP)</h2>
@@ -184,19 +245,71 @@
                 <p id="rsvpStatus" class="status-message"></p>
             </form>
         </section>
+=======
+<section class="rsvp-section" id="rsvp">
+            <h2>ยืนยันการเข้าร่วม</h2>
+            <p class="rsvp-intro">กรุณายืนยันการเข้าร่วมงาน เพื่อการจัดเตรียมที่นั่งและอาหารได้อย่างเหมาะสม</p>
+            <form id="rsvpForm" class="rsvp-form">
+                <label for="guestName">ชื่อ-นามสกุล:</label>
+                <input type="text" id="guestName" name="guestName" required>
+
+                <label for="attendingStatus">สถานะการเข้าร่วม:</label>
+                <select id="attendingStatus" name="attendingStatus" required>
+                    <option value="">เลือกสถานะ</option>
+                    <option value="yes">ยืนยันการเข้าร่วม</option>
+                    <option value="no">ไม่สามารถเข้าร่วมได้</option>
+                </select>
+
+                <div id="numGuestsField" style="display: none;">
+                    <label for="numGuests">จำนวนผู้เข้าร่วม (รวมตัวท่านเอง):</label>
+                    <input type="number" id="numGuests" name="numGuests" min="1" value="1">
+                </div>
+
+                <label for="rsvpMessage">ข้อความถึงคู่บ่าวสาว (ถ้ามี):</label>
+                <textarea id="rsvpMessage" name="rsvpMessage" rows="3"></textarea>
+
+                <button type="submit" class="btn-submit">ยืนยัน</button>
+                <p id="rsvpStatus" class="status-message"></p>
+            </form>
+        </section>
+
+>>>>>>> 46ab40849f731955a2cf3c4669969e31f58685b2
     </main>
 
     <footer>
         <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
     </footer>
 
-    <!-- Audio Player (ซ่อนไว้และควบคุมด้วย JS) -->
+    <nav class="mobile-nav-bar">
+        <a href="#home" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>หน้าหลัก</span>
+        </a>
+        <a href="#program" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>กำหนดการ</span>
+        </a>
+        <a href="#gallery" class="nav-item">
+            <i class="fas fa-images"></i>
+            <span>อัลบั้มรูปภาพ</span>
+        </a>
+        <a href="gift.html" class="nav-item"> <i class="fas fa-gift"></i>
+            <span>ผูกข้อไม้ข้อมือ</span>
+         </a>
+        <a href="#rsvp" class="nav-item">
+            <i class="fas fa-paper-plane"></i>
+            <span>ตอบรับคำเชิญ</span>
+        </a>
+    </nav>
+
     <audio id="backgroundMusic" loop>
         <source src="audio/wedding-song.mp3" type="audio/mpeg">
-        <!-- คุณสามารถเพิ่ม <source> สำหรับไฟล์ .ogg ได้ด้วย -->
         Your browser does not support the audio element.
     </audio>
-    <button id="musicToggle" class="music-toggle-btn"><i class="fas fa-music"></i></button>
+
+    <button id="musicToggleBtn" class="music-toggle-btn">
+        <i class="fas fa-volume-up"></i>
+    </button>
 
     <!-- Mobile Navigation Bar -->
     <nav class="mobile-nav">
