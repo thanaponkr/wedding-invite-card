@@ -1,36 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Countdown Timer ---
-const countdownElement = document.getElementById('countdown');
-// ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
-// ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
-const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
+    const countdownElement = document.getElementById('countdown');
+    // ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
+    // ตัวอย่าง: วันจันทร์ที่ 28 กรกฏาคม 2568 เวลา 07:30:00 (งานเช้า)
+    const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
 
-const updateCountdown = () => {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
+    const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
 
-    if (distance < 0) {
-        countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!";
-        clearInterval(countdownInterval);
-    } else {
-        // คำนวณเป็น วัน ชั่วโมง นาที วินาที โดยไม่รวม weeks
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if (distance < 0) {
+            countdownElement.innerHTML = "งานแต่งงานได้เริ่มต้นขึ้นแล้ว!"; // Wedding has started!
+            clearInterval(countdownInterval); // Stop countdown
+        } else {
+            // คำนวณเป็น วัน ชั่วโมง นาที วินาที โดยไม่รวม weeks
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // คำนวณจำนวนวันทั้งหมด
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
-        countdownElement.innerHTML = `
-            <div><div class="value">${days}</div><div class="label">วัน</div></div>
-            <div><div class="value">${hours}</div><div class="label">ชั่วโมง</div></div>
-            <div><div class="value">${minutes}</div><div class="label">นาที</div></div>
-            <div><div class="value">${seconds}</div><div class="label">วินาที</div></div>
-        `;
-    }
-};
+            // สร้าง HTML สำหรับการแสดงผลแบบใหม่ ให้เป็นภาษาไทย
+            countdownElement.innerHTML = `
+                <div><span class="value">${days}</span><span class="label">วัน</span></div>
+                <div><span class="value">${hours}</span><span class="label">ชั่วโมง</span></div>
+                <div><span class="value">${minutes}</span><span class="label">นาที</span></div>
+                <div><span class="value">${seconds}</span><span class="label">วินาที</span></div>
+            `;
+        }
+    };
 
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // เรียกใช้ครั้งแรกทันทีเพื่อให้แสดงผลเลย
 
     // --- 2. Scroll to Schedule Button ---
     const scrollToScheduleBtn = document.getElementById('scrollToSchedule');
@@ -69,8 +69,8 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
                 message: document.getElementById('message').value
             };
             statusElement = rsvpStatus;
-            successMessage = 'ขอบคุณสำหรับการตอบรับ เราได้รับข้อมูลของคุณแล้ว!';
-            errorMessage = 'เกิดข้อผิดพลาดในการส่งข้อมูล RSVP โปรดลองอีกครั้ง';
+            successMessage = 'ขอบคุณสำหรับการตอบรับ เราได้รับข้อมูลของคุณแล้ว!'; // Thank you for your RSVP. We have received your information!
+            errorMessage = 'เกิดข้อผิดพลาดในการส่งข้อมูล RSVP โปรดลองอีกครั้ง'; // Error sending RSVP data. Please try again.
         } else if (formType === 'guestbook') {
             formData = {
                 type: 'guestbook', // This 'type' field tells Apps Script which sheet to use
@@ -78,8 +78,8 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
                 message: document.getElementById('guestbookMessage').value
             };
             statusElement = guestbookStatus;
-            successMessage = 'ขอบคุณสำหรับคำอวยพรค่ะ! ข้อความของคุณถูกบันทึกแล้ว';
-            errorMessage = 'เกิดข้อผิดพลาดในการส่งคำอวยพร โปรดลองอีกครั้ง';
+            successMessage = 'ขอบคุณสำหรับคำอวยพรค่ะ! ข้อความของคุณถูกบันทึกแล้ว'; // Thank you for your well wishes! Your message has been saved.
+            errorMessage = 'เกิดข้อผิดพลาดในการส่งคำอวยพร โปรดลองอีกครั้ง'; // Error sending well wishes. Please try again.
         } else {
             console.error('Unknown form type:', formType);
             return;
@@ -87,13 +87,13 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
 
         // Check if Apps Script URL is set
         if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_WEB_APP_URL_GOES_HERE' || !GOOGLE_APPS_SCRIPT_URL) {
-            statusElement.textContent = 'โปรดตั้งค่า GOOGLE_APPS_SCRIPT_URL ใน script.js ก่อน!';
+            statusElement.textContent = 'โปรดตั้งค่า GOOGLE_APPS_SCRIPT_URL ใน script.js ก่อน!'; // Please set GOOGLE_APPS_SCRIPT_URL in script.js first!
             statusElement.style.color = 'red';
             console.error('GOOGLE_APPS_SCRIPT_URL is not set or is still the placeholder.');
             return;
         }
 
-        statusElement.textContent = 'กำลังส่งข้อมูล...';
+        statusElement.textContent = 'กำลังส่งข้อมูล...'; // Sending data...
         statusElement.style.color = '#007bff';
         console.log(`Sending ${formType} data to:`, GOOGLE_APPS_SCRIPT_URL, formData);
 
@@ -306,4 +306,17 @@ updateCountdown(); // เรียกใช้ครั้งแรกทัน�
             musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>';
         }
     };
+
+    // --- Mobile Navigation Smooth Scroll ---
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
 });
