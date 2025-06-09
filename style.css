@@ -454,10 +454,12 @@ p {
 
 .slide img {
     width: 100%; /* ให้รูปภาพเต็มความกว้างของ slide */
-    height: 300px; /* กำหนดความสูงเริ่มต้นที่ยืดหยุ่นขึ้น */
-    object-fit: contain; /* ทำให้รูปภาพปรับขนาดเพื่อให้พอดีกับกรอบ โดยไม่บิดเบี้ยวหรือถูก Crop */
+    height: auto; /* ***สำคัญ: ปรับความสูงตามสัดส่วนของภาพจริง*** */
+    max-height: 600px; /* ***สำคัญ: กำหนดความสูงสูงสุดสำหรับ Desktop*** */
+    object-fit: contain; /* ***สำคัญ: ทำให้รูปภาพปรับขนาดให้พอดี ไม่ถูก Crop*** */
     border-radius: 8px; /* ความโค้งมนของรูปภาพ */
     background-color: #f0f0f0; /* เพิ่มพื้นหลังสีอ่อนๆ เพื่อให้เห็นพื้นที่ว่างรอบรูปได้ชัดเจน */
+    display: block; /* ลบช่องว่างด้านล่างรูปภาพที่เกิดจาก display: inline-block */
 }
 
 .slider-nav {
@@ -768,11 +770,6 @@ footer {
     color: #CD853F;
 }
 
-.mobile-nav-link:hover i {
-    transform: scale(1.1);
-}
-
-/* Active navigation link styling */
 .mobile-nav-link.active-nav {
     color: #D2B48C; /* สีที่แตกต่างสำหรับลิงก์ที่ถูกเลือก */
 }
@@ -854,6 +851,11 @@ footer {
     .slide {
         width: 100%; /* Show 1 image per view on mobile */
         padding: 0; /* No padding between images when only one is shown */
+    }
+    .slide img {
+        height: auto; /* ***สำคัญ: ปรับความสูงตามสัดส่วนของภาพจริง*** */
+        max-height: none; /* ***สำคัญ: ลบข้อจำกัด max-height ออกเพื่อให้ภาพแสดงเต็มความสูง*** */
+        width: 100%; /* Ensure image fills slide width */
     }
     .slider-nav button {
         display: flex; /* Show buttons on mobile */
