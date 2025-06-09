@@ -458,7 +458,7 @@ p {
     max-height: 600px; /* ***สำคัญ: กำหนดความสูงสูงสุดสำหรับ Desktop*** */
     object-fit: contain; /* ***สำคัญ: ทำให้รูปภาพปรับขนาดให้พอดี ไม่ถูก Crop*** */
     border-radius: 8px; /* ความโค้งมนของรูปภาพ */
-    background-color: #f0f0f0; /* เพิ่มพื้นหลังสีอ่อนๆ เพื่อให้เห็นพื้นที่ว่างรอบรูปได้ชัดเจน */
+    background-color: #fcf6ef; /* เพิ่มพื้นหลังสีอ่อนๆ เพื่อให้เห็นพื้นที่ว่างรอบรูปได้ชัดเจน */
     display: block; /* ลบช่องว่างด้านล่างรูปภาพที่เกิดจาก display: inline-block */
 }
 
@@ -848,13 +848,18 @@ footer {
     }
 
     /* Gallery adjustments for mobile/tablet (<= 768px) */
+    .slider-container {
+        padding: 40px 15px; /* เพิ่ม padding 15px ซ้าย-ขวา เพื่อสร้างขอบสีขาว */
+        max-width: 100%; /* ให้คอนเทนเนอร์เต็มความกว้าง (หัก padding ออก) */
+        box-sizing: border-box; /* ทำให้ padding ถูกรวมในการคำนวณความกว้าง */
+    }
     .slide {
         width: 100%; /* Show 1 image per view on mobile */
-        padding: 0; /* No padding between images when only one is shown */
+        padding: 0; /* No padding inside each slide on mobile */
     }
     .slide img {
-        height: auto; /* ***สำคัญ: ปรับความสูงตามสัดส่วนของภาพจริง*** */
-        max-height: none; /* ***สำคัญ: ลบข้อจำกัด max-height ออกเพื่อให้ภาพแสดงเต็มความสูง*** */
+        height: auto; /* Allow height to adjust proportionally on mobile */
+        max-height: 80vh; /* กำหนด max-height เป็น % ของ viewport height เพื่อให้ภาพไม่ล้นจอ */
         width: 100%; /* Ensure image fills slide width */
     }
     .slider-nav button {
@@ -873,10 +878,10 @@ footer {
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .slider-nav .prev-slide {
-        left: 10px;
+        left: 20px; /* ขยับปุ่มเข้าด้านในเล็กน้อย */
     }
     .slider-nav .next-slide {
-        right: 10px;
+        right: 20px; /* ขยับปุ่มเข้าด้านในเล็กน้อย */
     }
 }
 
