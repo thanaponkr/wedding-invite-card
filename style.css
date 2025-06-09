@@ -978,13 +978,13 @@ footer {
 
     /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 1.6em; /* ***เพิ่มขนาดตัวเลข (จาก 1.3em)*** */
+        font-size: 1.6em;
         line-height: 1;
         display: block;
         margin-bottom: 2px;
     }
     .countdown-modern .label {
-        font-size: 0.8em; /* ***เพิ่มขนาดข้อความหน่วย (จาก 0.6em)*** */
+        font-size: 0.8em;
         margin-top: 0px;
         display: block;
         text-transform: uppercase;
@@ -992,15 +992,19 @@ footer {
 
     /* Adjust countdown spacing for phones */
     #countdown {
-        padding: 0; /* ลบ padding ออกจาก container */
+        padding: 0;
         justify-content: center;
         flex-wrap: nowrap;
     }
     #countdown > div {
-        margin: 0 1px; /* ***ลด margin รอบแต่ละ item ให้ชิดกันมากขึ้น (จาก 3px)*** */
+        margin: 0 1px;
         flex: 0 0 auto;
-        /* ลบ width: 22%; ออก เพื่อให้ flex จัดการความกว้างเองตามเนื้อหาและ margin */
         box-sizing: border-box;
         text-align: center;
+    }
+
+    /* Reduce font size for details section paragraphs on phones */
+    .details-section .detail-item p {
+        font-size: 1.6em; /* เดิม 2em, ลดลง 20% (2 * 0.8 = 1.6) */
     }
 }
