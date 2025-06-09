@@ -344,7 +344,7 @@ p {
     text-align: center;
     margin-top: 40px; /* ระยะห่างจากส่วนบน */
     padding: 0; /* ลบ padding ของ section หลักออก */
-    max-width: none; /* ***สำคัญมาก: ลบการจำกัดความกว้างสูงสุดสำหรับ PC ออก*** */
+    max-width: none; /* ลบการจำกัดความกว้างสูงสุดสำหรับ PC ออก */
     width: 100%; /* ทำให้เต็มความกว้างของ parent container */
     margin: 40px auto; /* จัดกึ่งกลาง section */
     box-sizing: border-box; /* สำคัญ */
@@ -381,7 +381,7 @@ p {
 .map-container {
     margin-top: 30px; /* ระยะห่างจากหัวข้อ */
     width: 100%; /* ทำให้ map-container เต็มความกว้างของ map-section */
-    max-width: none; /* ***สำคัญมาก: ลบการจำกัดความกว้างสูงสุดของ map-container สำหรับ PC ออก*** */
+    max-width: none; /* ลบการจำกัดความกว้างสูงสุดของ map-container สำหรับ PC ออก */
     height: 400px; /* ความสูงของแผนที่ */
     margin-left: auto; /* จัดกลางแผนที่ */
     margin-right: auto; /* จัดกลางแผนที่ */
@@ -890,15 +890,16 @@ footer {
     /* Map Section adjustments for mobile/tablet (<= 768px) */
     .map-section {
         padding: 0;
-        width: calc(100% - 30px); /* ขอบขาวซ้าย-ขวาจะเหลือ 15px */
-        margin: 40px auto;
+        /* ลบบรรทัด width: calc(100% - 30px); ออกจากตรงนี้ เพื่อให้แผนที่เต็มขอบบนมือถือ */
+        width: 100%; /* ทำให้แผนที่เต็มความกว้าง 100% บนมือถือ */
+        margin: 40px auto; /* ให้มันยังคงจัดกึ่งกลางและมี margin บนล่าง */
         box-sizing: border-box;
     }
     .map-section .location-header {
-        padding: 0;
+        padding: 0 20px; /* เพิ่ม padding ซ้ายขวา เพื่อให้ข้อความไม่ติดขอบจอ */
     }
     .address-details {
-        padding: 0;
+        padding: 0 20px; /* เพิ่ม padding ซ้ายขวา เพื่อให้ข้อความไม่ติดขอบจอ */
     }
 }
 
