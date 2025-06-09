@@ -892,7 +892,7 @@ footer {
     /* Map Section adjustments for mobile/tablet (<= 768px) */
     .map-section {
         padding: 0;
-        width: calc(100% - 30px); /* ***ปรับจาก 40px เป็น 30px (ขอบขาวซ้าย-ขวาจะเหลือ 15px)*** */
+        width: calc(100% - 20px); /* ***ปรับจาก 40px เป็น 30px (ขอบขาวซ้าย-ขวาจะเหลือ 15px)*** */
         margin: 40px auto;
         box-sizing: border-box;
     }
