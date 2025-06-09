@@ -454,9 +454,10 @@ p {
 
 .slide img {
     width: 100%; /* ให้รูปภาพเต็มความกว้างของ slide */
-    height: 250px; /* กำหนดความสูงคงที่ (ปรับได้ตามต้องการ) */
-    object-fit: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่โดยไม่บิดเบี้ยว */
+    height: 300px; /* กำหนดความสูงเริ่มต้นที่ยืดหยุ่นขึ้น */
+    object-fit: contain; /* ทำให้รูปภาพปรับขนาดเพื่อให้พอดีกับกรอบ โดยไม่บิดเบี้ยวหรือถูก Crop */
     border-radius: 8px; /* ความโค้งมนของรูปภาพ */
+    background-color: #f0f0f0; /* เพิ่มพื้นหลังสีอ่อนๆ เพื่อให้เห็นพื้นที่ว่างรอบรูปได้ชัดเจน */
 }
 
 .slider-nav {
@@ -874,11 +875,6 @@ footer {
     }
     .slider-nav .next-slide {
         right: 10px;
-    }
-
-    /* Hide gallery dots when on mobile to achieve "1 dot per image" via JS creation */
-    .slider-dots {
-        /* JS will handle creation of dots for each image, so no specific CSS hide needed here */
     }
 }
 
