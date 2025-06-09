@@ -262,6 +262,7 @@ p {
     align-items: flex-end;
     margin-top: 20px;
     flex-wrap: wrap;
+    /* Remove padding: 0 2px; from here, it's defined in mobile media query */
 }
 
 #countdown > div {
@@ -272,7 +273,7 @@ p {
 
 /* ถ้าต้องการระยะห่างที่แม่นยำยิ่งขึ้น: */
 #countdown > div:not(:last-child) {
-    margin-right: 80px; /* เพิ่มช่องว่าง 30px ระหว่างแต่ละหน่วย ยกเว้นตัวสุดท้าย */
+    margin-right: 20px; /* ลดช่องว่าง 30px ระหว่างแต่ละหน่วยเหลือ 20px */
 }
 
 #countdown > div:first-child {
@@ -847,7 +848,7 @@ footer {
 
     /* Adjust countdown spacing for tablets */
     #countdown > div:not(:last-child) {
-        margin-right: 40px; /* Reduce gap for tablets */
+        margin-right: 20px; /* ลดช่องว่างระหว่างหน่วยนับถอยหลังเหลือ 20px */
     }
 
     /* Gallery adjustments for mobile/tablet (<= 768px) */
@@ -884,10 +885,10 @@ footer {
         z-index: 20; /* เพิ่ม z-index ให้ปุ่มอยู่เหนือภาพสไลด์ */
     }
     .slider-nav .prev-slide {
-        left: 20px; /* ***ปรับตำแหน่งปุ่มซ้ายให้มีระยะห่าง 20px จากขอบจอ*** */
+        left: 20px; /* ปรับตำแหน่งปุ่มซ้ายให้มีระยะห่าง 20px จากขอบจอ */
     }
     .slider-nav .next-slide {
-        right: 20px; /* ***ปรับตำแหน่งปุ่มขวาให้มีระยะห่าง 20px จากขอบจอ*** */
+        right: 20px; /* ปรับตำแหน่งปุ่มขวาให้มีระยะห่าง 20px จากขอบจอ */
     }
 
     /* Map Section adjustments for mobile/tablet (<= 768px) */
