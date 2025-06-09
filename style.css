@@ -1,4 +1,8 @@
 /* Import Fonts */
+html, body {
+    overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอนที่ไม่ต้องการ */
+}
+
 body {
     font-family: 'Sarabun', sans-serif;
     margin: 0;
