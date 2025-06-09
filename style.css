@@ -853,29 +853,29 @@ footer {
 
     /* Gallery adjustments for mobile/tablet (<= 768px) */
     .slider-container {
-        padding: 40px 0; /* กำหนด padding แนวตั้ง, ลบ padding แนวนอน (0px) เพื่อไม่ให้ขอบซ้อนทับกับ margin */
-        width: calc(100% - 40px); /* ทำให้คอนเทนเนอร์แคบลง 40px (เหลือขอบ 20px ซ้าย-ขวา) */
-        margin: 40px auto; /* จัดกึ่งกลางคอนเทนเนอร์ในแนวนอน */
-        box-sizing: border-box; /* ทำให้ padding และ border ถูกรวมในการคำนวณความกว้าง */
+        padding: 40px 0;
+        width: calc(100% - 30px); /* ***ปรับจาก 40px เป็น 30px (ขอบขาวซ้าย-ขวาจะเหลือ 15px)*** */
+        margin: 40px auto;
+        box-sizing: border-box;
     }
     .slide {
-        width: 100%; /* Show 1 image per view on mobile */
-        padding: 0; /* No padding inside each slide on mobile */
+        width: 100%;
+        padding: 0;
     }
     .slide img {
-        height: auto; /* Allow height to adjust proportionally on mobile */
-        max-height: 80vh; /* กำหนด max-height เป็น % ของ viewport height เพื่อให้ภาพไม่ล้นจอ */
-        width: 100%; /* Ensure image fills slide width */
+        height: auto;
+        max-height: 80vh;
+        width: 100%;
     }
     .slider-nav button {
-        display: flex; /* Show buttons on mobile */
+        display: flex;
         justify-content: center;
         align-items: center;
-        width: 40px; /* smaller arrows */
+        width: 40px;
         height: 40px;
         font-size: 1.2em;
         padding: 0;
-        border-radius: 50%; /* make them round */
+        border-radius: 50%;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -883,24 +883,24 @@ footer {
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .slider-nav .prev-slide {
-        left: 20px; /* ขยับปุ่มเข้าด้านในเล็กน้อย เพื่อให้อยู่ในขอบขาว */
+        left: 15px; /* ***ปรับจาก 20px เป็น 15px เพื่อให้อยู่ในขอบขาวที่เล็กลง*** */
     }
     .slider-nav .next-slide {
-        right: 20px; /* ขยับปุ่มเข้าด้านในเล็กน้อย เพื่อให้อยู่ในขอบขาว */
+        right: 15px; /* ***ปรับจาก 20px เป็น 15px เพื่อให้อยู่ในขอบขาวที่เล็กลง*** */
     }
 
     /* Map Section adjustments for mobile/tablet (<= 768px) */
     .map-section {
-        padding: 0; /* ลบ padding เดิม (ถ้ามี) */
-        width: calc(100% - 40px); /* ทำให้ section แผนที่แคบลง 40px (เหลือขอบ 20px ซ้าย-ขวา) */
-        margin: 40px auto; /* จัดกึ่งกลาง section ในแนวนอน */
-        box-sizing: border-box; /* ทำให้ padding และ border ถูกรวมในการคำนวณความกว้าง */
+        padding: 0;
+        width: calc(100% - 30px); /* ***ปรับจาก 40px เป็น 30px (ขอบขาวซ้าย-ขวาจะเหลือ 15px)*** */
+        margin: 40px auto;
+        box-sizing: border-box;
     }
     .map-section .location-header {
-        padding: 0; /* ลบ padding ที่เคยมี (ถ้ามี) */
+        padding: 0;
     }
     .address-details {
-        padding: 0; /* ลบ padding ที่เคยมี (ถ้ามี) */
+        padding: 0;
     }
 }
 
@@ -909,7 +909,7 @@ footer {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
-        bottom: 95px; /* ปรับตำแหน่งตาม padding-bottom ใหม่ */
+        bottom: 95px;
     }
     h1 {
         font-size: 2em;
@@ -948,7 +948,7 @@ footer {
         padding: 30px 10px;
     }
     .gallery-grid {
-        grid-template-columns: 1fr; /* 1 คอลัมน์บนมือถือเล็ก */
+        grid-template-columns: 1fr;
     }
     .music-toggle-btn {
         width: 40px;
@@ -961,7 +961,7 @@ footer {
     .main-nav-button {
         width: 60px;
         height: 60px;
-        top: -5px; /* ปรับให้ลงมาอีกนิด (จากเดิม -10px) */
+        top: -5px;
     }
     .main-nav-button .mobile-nav-link i {
         font-size: 1.8em;
@@ -969,37 +969,37 @@ footer {
 
     /* Adjust wedding date text for phones */
     .wedding-date-text {
-        font-size: 2.2em; /* ลดขนาดฟอนต์ของวันที่ลงอีก เพื่อให้มีที่ว่างสำหรับนับถอยหลัง */
+        font-size: 2.2em;
         line-height: 1.2;
-        letter-spacing: 0.2px; /* ลดระยะห่างระหว่างตัวอักษรลงอีก */
+        letter-spacing: 0.2px;
         word-break: break-word;
     }
 
     /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 1.3em; /* ลดขนาดตัวเลขลงอีกนิด */
-        line-height: 1; /* ทำให้ชิดด้านบน */
-        display: block; /* ทำให้ตัวเลขเป็นบล็อก เพื่อให้หน่วยไปอยู่ใต้ */
-        margin-bottom: 2px; /* ระยะห่างเล็กน้อยระหว่างตัวเลขกับหน่วย */
+        font-size: 1.3em;
+        line-height: 1;
+        display: block;
+        margin-bottom: 2px;
     }
     .countdown-modern .label {
-        font-size: 0.6em; /* ลดขนาดข้อความหน่วย (วัน, ชั่วโมง) ลงอีก */
-        margin-top: 0px; /* ลบระยะห่างด้านบน */
-        display: block; /* ทำให้หน่วยเป็นบล็อก */
-        text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ตามตัวอย่าง */
+        font-size: 0.6em;
+        margin-top: 0px;
+        display: block;
+        text-transform: uppercase;
     }
 
     /* Adjust countdown spacing for phones */
     #countdown {
-        padding: 0 2px; /* ลด padding ของ container ลงอีก (จาก 5px) */
-        justify-content: center; /* จัดกึ่งกลางกลุ่มหน่วยนับถอยหลัง */
-        flex-wrap: nowrap; /* บังคับไม่ให้ขึ้นบรรทัดใหม่ */
+        padding: 0 2px;
+        justify-content: center;
+        flex-wrap: nowrap;
     }
     #countdown > div {
-        margin: 0 3px; /* ลด margin รอบแต่ละ item ให้ชิดกันมากขึ้น */
-        flex: 0 0 auto; /* ป้องกันไม่ให้ขยาย/หดตัวมากเกินไป */
-        width: 22%; /* กำหนดความกว้างเป็นเปอร์เซ็นต์ เพื่อให้ 4 หน่วยพอดีในแถว */
-        box-sizing: border-box; /* สำคัญ: รวม padding/border ใน width */
-        text-align: center; /* จัดกึ่งกลางข้อความภายในแต่ละหน่วย */
+        margin: 0 3px;
+        flex: 0 0 auto;
+        width: 22%;
+        box-sizing: border-box;
+        text-align: center;
     }
 }
