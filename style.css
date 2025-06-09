@@ -488,6 +488,7 @@ p {
     transition: background-color 0.3s ease;
     pointer-events: all; /* ทำให้คลิกปุ่มได้ */
     opacity: 0.7;
+    z-index: 20; /* เพิ่ม z-index ให้ปุ่มอยู่เหนือภาพสไลด์ */
 }
 
 .slider-nav button:hover {
@@ -851,8 +852,8 @@ footer {
 
     /* Gallery adjustments for mobile/tablet (<= 768px) */
     .slider-container {
-        padding: 40px 0; /* คง padding แนวตั้ง, ลบ padding แนวนอน (0px) */
-        width: 100%; /* ***สำคัญ: ทำให้แกลเลอรี่เต็มความกว้าง 100% บนมือถือ*** */
+        padding: 40px 0;
+        width: 100%; /* ทำให้แกลเลอรี่เต็มความกว้าง 100% บนมือถือ */
         margin: 40px auto;
         box-sizing: border-box;
     }
@@ -866,7 +867,7 @@ footer {
         width: 100%;
     }
     .slider-nav {
-        padding: 0 20px; /* ***สำคัญ: เพิ่ม padding ซ้ายขวาให้ปุ่มลูกศร เพื่อไม่ให้ติดขอบจอ*** */
+        /* ลบ padding: 0 20px; ออกจากตรงนี้ เพราะเราจะกำหนดตำแหน่งปุ่มโดยตรง */
     }
     .slider-nav button {
         display: flex;
@@ -880,14 +881,13 @@ footer {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 10;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 20; /* เพิ่ม z-index ให้ปุ่มอยู่เหนือภาพสไลด์ */
     }
     .slider-nav .prev-slide {
-        left: 0; /* กำหนดให้ชิดซ้าย (จะถูกชดเชยด้วย padding ของ slider-nav) */
+        left: 20px; /* ***ปรับตำแหน่งปุ่มซ้ายให้มีระยะห่าง 20px จากขอบจอ*** */
     }
     .slider-nav .next-slide {
-        right: 0; /* กำหนดให้ชิดขวา (จะถูกชดเชยด้วย padding ของ slider-nav) */
+        right: 20px; /* ***ปรับตำแหน่งปุ่มขวาให้มีระยะห่าง 20px จากขอบจอ*** */
     }
 
     /* Map Section adjustments for mobile/tablet (<= 768px) */
