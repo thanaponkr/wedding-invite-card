@@ -262,7 +262,6 @@ p {
     align-items: flex-end;
     margin-top: 20px;
     flex-wrap: wrap;
-    /* Remove padding: 0 2px; from here, it's defined in mobile media query */
 }
 
 #countdown > div {
@@ -273,7 +272,7 @@ p {
 
 /* ถ้าต้องการระยะห่างที่แม่นยำยิ่งขึ้น: */
 #countdown > div:not(:last-child) {
-    margin-right: 20px; /* ลดช่องว่าง 30px ระหว่างแต่ละหน่วยเหลือ 20px */
+    margin-right: 20px; /* ลดช่องว่างระหว่างหน่วยนับถอยหลังเหลือ 20px */
 }
 
 #countdown > div:first-child {
@@ -979,13 +978,13 @@ footer {
 
     /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 1.3em;
+        font-size: 1.6em; /* ***เพิ่มขนาดตัวเลข (จาก 1.3em)*** */
         line-height: 1;
         display: block;
         margin-bottom: 2px;
     }
     .countdown-modern .label {
-        font-size: 0.6em;
+        font-size: 0.8em; /* ***เพิ่มขนาดข้อความหน่วย (จาก 0.6em)*** */
         margin-top: 0px;
         display: block;
         text-transform: uppercase;
@@ -993,14 +992,14 @@ footer {
 
     /* Adjust countdown spacing for phones */
     #countdown {
-        padding: 0 2px;
+        padding: 0; /* ลบ padding ออกจาก container */
         justify-content: center;
         flex-wrap: nowrap;
     }
     #countdown > div {
-        margin: 0 3px;
+        margin: 0 1px; /* ***ลด margin รอบแต่ละ item ให้ชิดกันมากขึ้น (จาก 3px)*** */
         flex: 0 0 auto;
-        width: 22%;
+        /* ลบ width: 22%; ออก เพื่อให้ flex จัดการความกว้างเองตามเนื้อหาและ margin */
         box-sizing: border-box;
         text-align: center;
     }
