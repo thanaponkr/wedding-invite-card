@@ -338,13 +338,16 @@ p {
 }
 
 /* 4. Map Section (สถานที่จัดงาน) - สไตล์ใหม่ */
+/* IMPORTANT: For PC, map-section should span full width.
+   The .section class imposes a max-width, so we need to override it here. */
 .map-section {
     text-align: center;
     margin-top: 40px; /* ระยะห่างจากส่วนบน */
     padding: 0; /* ลบ padding ของ section หลักออก */
-    max-width: 960px; /* หรือขนาดที่ต้องการ */
-    margin-left: auto; /* จัดกลาง section */
-    margin-right: auto; /* จัดกลาง section */
+    max-width: none; /* ***สำคัญมาก: ลบการจำกัดความกว้างสูงสุดสำหรับ PC ออก*** */
+    width: 100%; /* ทำให้เต็มความกว้างของ parent container */
+    margin: 40px auto; /* จัดกึ่งกลาง section */
+    box-sizing: border-box; /* สำคัญ */
 }
 
 .map-section .location-header {
@@ -377,8 +380,8 @@ p {
 
 .map-container {
     margin-top: 30px; /* ระยะห่างจากหัวข้อ */
-    width: 100%;
-    max-width: 800px; /* หรือขนาดที่ต้องการ */
+    width: 100%; /* ทำให้ map-container เต็มความกว้างของ map-section */
+    max-width: none; /* ***สำคัญมาก: ลบการจำกัดความกว้างสูงสุดของ map-container สำหรับ PC ออก*** */
     height: 400px; /* ความสูงของแผนที่ */
     margin-left: auto; /* จัดกลางแผนที่ */
     margin-right: auto; /* จัดกลางแผนที่ */
@@ -403,11 +406,6 @@ p {
     margin-left: auto;
     margin-right: auto;
     padding: 0 20px; /* เพิ่ม padding ซ้ายขวา */
-}
-
-.address-details p {
-    margin: 0; /* ลบ margin เริ่มต้นของ p */
-    line-height: 1.5;
 }
 
 .direction-button {
@@ -854,7 +852,7 @@ footer {
     /* Gallery adjustments for mobile/tablet (<= 768px) */
     .slider-container {
         padding: 40px 0;
-        width: calc(100% - 20px); /* ***ปรับจาก 40px เป็น 30px (ขอบขาวซ้าย-ขวาจะเหลือ 15px)*** */
+        width: calc(100% - 30px); /* ขอบขาวซ้าย-ขวาจะเหลือ 15px */
         margin: 40px auto;
         box-sizing: border-box;
     }
@@ -883,16 +881,16 @@ footer {
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .slider-nav .prev-slide {
-        left: 15px; /* ***ปรับจาก 20px เป็น 15px เพื่อให้อยู่ในขอบขาวที่เล็กลง*** */
+        left: 15px; /* ปรับเพื่อให้อยู่ในขอบขาวที่เล็กลง */
     }
     .slider-nav .next-slide {
-        right: 15px; /* ***ปรับจาก 20px เป็น 15px เพื่อให้อยู่ในขอบขาวที่เล็กลง*** */
+        right: 15px; /* ปรับเพื่อให้อยู่ในขอบขาวที่เล็กลง */
     }
 
     /* Map Section adjustments for mobile/tablet (<= 768px) */
     .map-section {
         padding: 0;
-        width: calc(100% - 20px); /* ***ปรับจาก 40px เป็น 30px (ขอบขาวซ้าย-ขวาจะเหลือ 15px)*** */
+        width: calc(100% - 30px); /* ขอบขาวซ้าย-ขวาจะเหลือ 15px */
         margin: 40px auto;
         box-sizing: border-box;
     }
