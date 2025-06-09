@@ -432,7 +432,7 @@ p {
 /* Gallery Section (Slider Styling) */
 .slider-container {
     padding: 40px 20px; /* ปรับ padding ให้เหมาะสม */
-    max-width: 960px; /* <--- ใช้ 960px เพื่อให้มีพื้นที่สำหรับ 3 รูปภาพ */
+    max-width: 960px; /* <--- ใช้ 960px เพื่อให้มีพื้นที่สำหรับ 3 รูปภาพ (สำหรับ PC) */
     margin: 40px auto;
     text-align: center; /* จัดกึ่งกลางหัวข้อ */
     position: relative; /* สำหรับตำแหน่งของปุ่ม/จุด */
@@ -851,19 +851,22 @@ footer {
 
     /* Gallery adjustments for mobile/tablet (<= 768px) */
     .slider-container {
-        padding: 40px 0;
-        width: calc(100% - 30px); /* ขอบขาวซ้าย-ขวาจะเหลือ 15px */
+        padding: 40px 0; /* คง padding แนวตั้ง, ลบ padding แนวนอน (0px) */
+        width: 100%; /* ***สำคัญ: ทำให้แกลเลอรี่เต็มความกว้าง 100% บนมือถือ*** */
         margin: 40px auto;
         box-sizing: border-box;
     }
     .slide {
-        width: 100%;
-        padding: 0;
+        width: 100%; /* แสดง 1 รูปต่อครั้งบนมือถือ */
+        padding: 0; /* ลบ padding ภายในแต่ละ slide บนมือถือ */
     }
     .slide img {
         height: auto;
         max-height: 80vh;
         width: 100%;
+    }
+    .slider-nav {
+        padding: 0 20px; /* ***สำคัญ: เพิ่ม padding ซ้ายขวาให้ปุ่มลูกศร เพื่อไม่ให้ติดขอบจอ*** */
     }
     .slider-nav button {
         display: flex;
@@ -881,18 +884,17 @@ footer {
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .slider-nav .prev-slide {
-        left: 15px; /* ปรับเพื่อให้อยู่ในขอบขาวที่เล็กลง */
+        left: 0; /* กำหนดให้ชิดซ้าย (จะถูกชดเชยด้วย padding ของ slider-nav) */
     }
     .slider-nav .next-slide {
-        right: 15px; /* ปรับเพื่อให้อยู่ในขอบขาวที่เล็กลง */
+        right: 0; /* กำหนดให้ชิดขวา (จะถูกชดเชยด้วย padding ของ slider-nav) */
     }
 
     /* Map Section adjustments for mobile/tablet (<= 768px) */
     .map-section {
         padding: 0;
-        /* ลบบรรทัด width: calc(100% - 30px); ออกจากตรงนี้ เพื่อให้แผนที่เต็มขอบบนมือถือ */
         width: 100%; /* ทำให้แผนที่เต็มความกว้าง 100% บนมือถือ */
-        margin: 40px auto; /* ให้มันยังคงจัดกึ่งกลางและมี margin บนล่าง */
+        margin: 40px auto;
         box-sizing: border-box;
     }
     .map-section .location-header {
