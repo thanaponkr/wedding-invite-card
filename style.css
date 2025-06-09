@@ -852,7 +852,7 @@ footer {
         padding: 40px 0; /* กำหนด padding แนวตั้ง, ลบ padding แนวนอน (0px) เพื่อไม่ให้ขอบซ้อนทับกับ margin */
         width: calc(100% - 40px); /* ทำให้คอนเทนเนอร์แคบลง 40px (เหลือขอบ 20px ซ้าย-ขวา) */
         margin: 40px auto; /* จัดกึ่งกลางคอนเทนเนอร์ในแนวนอน */
-        box-sizing: border-box; /* ทำให้ padding และ border ถูกรวมในการคำนวณ width/height */
+        box-sizing: border-box; /* ทำให้ padding และ border ถูกรวมในการคำนวณความกว้าง */
     }
     .slide {
         width: 100%; /* Show 1 image per view on mobile */
@@ -883,6 +883,20 @@ footer {
     }
     .slider-nav .next-slide {
         right: 20px; /* ขยับปุ่มเข้าด้านในเล็กน้อย เพื่อให้อยู่ในขอบขาว */
+    }
+
+    /* Map Section adjustments for mobile/tablet (<= 768px) */
+    .map-section {
+        padding: 0; /* ลบ padding เดิม (ถ้ามี) */
+        width: calc(100% - 40px); /* ทำให้ section แผนที่แคบลง 40px (เหลือขอบ 20px ซ้าย-ขวา) */
+        margin: 40px auto; /* จัดกึ่งกลาง section ในแนวนอน */
+        box-sizing: border-box; /* ทำให้ padding และ border ถูกรวมในการคำนวณความกว้าง */
+    }
+    .map-section .location-header {
+        padding: 0; /* ลบ padding ที่เคยมี (ถ้ามี) */
+    }
+    .address-details {
+        padding: 0; /* ลบ padding ที่เคยมี (ถ้ามี) */
     }
 }
 
