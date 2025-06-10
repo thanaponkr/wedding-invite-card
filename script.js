@@ -373,12 +373,18 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSlider();
     }
 
-    // Handle "โอนเงินแล้ว" button click: NOW LINKS TO GUESTBOOK.HTML
+    // Handle "โอนเงินแล้ว" button click: NOW SHOWS ALERT THEN LINKS TO GUESTBOOK.HTML
     const transferButton = document.querySelector('.transfer-button');
     if (transferButton) {
         transferButton.addEventListener('click', () => {
-            // Navigate to guestbook.html
-            window.location.href = 'guestbook.html';
+            // 1. Show the pop-up message first
+            showAlert("ขอบคุณนะคะ/ครับ พวกเราซาบซึ้งใจมากจริงๆ รอรับของขวัญจากเมย์และเต้ยนะคะ/ครับ");
+
+            // 2. After a short delay, navigate to guestbook.html
+            // This delay allows the user to read the pop-up message before the page changes.
+            setTimeout(() => {
+                window.location.href = 'guestbook.html';
+            }, 2000); // Navigate after 2 seconds (adjust as needed)
         });
     }
 
