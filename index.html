@@ -12,6 +12,17 @@
 </head>
 <body>
 
+    <!-- Audio for background music -->
+    <audio id="backgroundMusic" loop>
+        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button id="musicToggle" class="music-toggle-btn">
+        <i class="fas fa-music"></i>
+    </button>
+
     <!-- 1. ส่วนหัว (Hero Section): โลโก้/ชื่อเจ้าบ่าวเจ้าสาว พร้อมแอนิเมชั่นและพื้นหลังซุ้มดอกไม้ -->
     <header class="hero-section" id="hero-section">
         <div class="hero-content">
@@ -140,7 +151,7 @@
                     <p><strong>บัญชีธนาคาร:</strong> ธนาคาร SCB</p>
                     <p><strong>ชื่อบัญชี:</strong> นางสาวกัลยานี และ นายรัชพล</p>
                     <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
-                    <!-- ปุ่ม "โอนเงินแล้ว" ที่ถูกเพิ่มเข้ามาใหม่ -->
+                    <!-- ปุ่ม "โอนเงินแล้ว" ที่ถูกเพิ่มเข้ามา -->
                     <button class="transfer-button">โอนเงินแล้ว</button>
                 </div>
             </div>
@@ -161,13 +172,13 @@
                 <textarea id="message" name="message" rows="4"></textarea>
 
                 <button type="submit" class="btn-submit">ยืนยันการเข้าร่วม</button>
-                <p id="rsvpStatus" class="status-message"></p>
+                <p id="rsvpStatus" class="status-message"></p> <!-- Keep this for loading message, but success will be pop-up -->
             </form>
         </section>
     </main>
 
     <footer>
-        <p>© 2025 May & Toey Wedding Card.</p>
+        <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
     </footer>
 
     <!-- Audio Player (ซ่อนไว้และควบคุมด้วย JS) -->
@@ -201,7 +212,7 @@
             <li class="mobile-nav-item">
                 <a href="guestbook.html" class="mobile-nav-link">
                     <i class="fas fa-book-open"></i> <!-- ไอคอนสมุดสำหรับ Guestbook -->
-                    <span>QR CODE</span>
+                    <span>Guestbook</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
@@ -212,6 +223,22 @@
             </li>
         </ul>
     </nav>
+
+    <!-- Custom Alert/Modal Structure -->
+    <!-- ส่วนนี้เป็นส่วนที่คุณแจ้งว่าหายไป และฉันได้เพิ่มเข้าไปให้แล้วค่ะ -->
+    <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
+        <div class="custom-alert-box">
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-close-btn" class="btn-submit">ปิด</button>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <!-- ส่วนนี้เป็นส่วนที่คุณแจ้งว่าหายไป และฉันได้เพิ่มเข้าไปให้แล้วค่ะ -->
+    <div id="loading-spinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>กำลังประมวลผล...</p>
+    </div>
 
     <script src="script.js"></script>
 </body>
