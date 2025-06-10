@@ -247,7 +247,7 @@ p {
 /* สไตล์สำหรับวันที่ (28 JULY 2568) */
 .wedding-date-text {
     font-family: 'Roboto', serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
-    font-size: 6em; /* ขนาดวันที่ให้ใหญ่มากๆ */
+    font-size: 8.4em; /* คงขนาดนี้ไว้สำหรับ PC */
     color: #333; /* สีดำ */
     font-weight: normal; /* ตัวบาง */
     margin-bottom: 50px; /* ระยะห่างด้านล่าง */
@@ -271,7 +271,7 @@ p {
 
 /* ถ้าต้องการระยะห่างที่แม่นยำยิ่งขึ้น: */
 #countdown > div:not(:last-child) {
-    margin-right: 47px; /* ***ปรับจาก 26px เป็น 47px (26 * 1.80 = 46.8, ปัดขึ้น)*** */
+    margin-right: 47px; /* คงค่านี้ไว้ตามที่คุณปรับ */
 }
 
 #countdown > div:first-child {
@@ -840,13 +840,13 @@ footer {
 
     /* Adjust wedding date text for tablets/smaller screens */
     .wedding-date-text {
-        font-size: 4em; /* Smaller for tablets */
+        font-size: 7.2em; /* ***ปรับจาก 6em เป็น 7.2em (6 * 1.20 = 7.2) - สำหรับหน้าจอ tablet/เล็กกว่า*** */
         letter-spacing: 2px;
     }
 
     /* Adjust countdown spacing for tablets */
     #countdown > div:not(:last-child) {
-        margin-right: 47px; /* ***ปรับจาก 26px เป็น 47px (26 * 1.80 = 46.8, ปัดขึ้น)*** */
+        margin-right: 47px; /* คงค่านี้ไว้ตามที่คุณปรับ */
     }
 
     /* Gallery adjustments for mobile/tablet (<= 768px) */
@@ -968,7 +968,7 @@ footer {
 
     /* Adjust wedding date text for phones */
     .wedding-date-text {
-        font-size: 2.2em;
+        font-size: 3.6em; /* ***ปรับจาก 3em เป็น 3.6em (3 * 1.20 = 3.6) - สำหรับหน้าจอโทรศัพท์*** */
         line-height: 1.2;
         letter-spacing: 0.2px;
         word-break: break-word;
