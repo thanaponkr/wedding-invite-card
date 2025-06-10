@@ -729,11 +729,11 @@ p {
 /* Footer */
 footer {
     text-align: center;
-    padding: 30px;
+    padding: -0px 30px;
     background-color: #fcf6ef; /* สีเดียวกับปุ่ม/ลิงก์ */
     color: rgba(196, 110, 60, 0.83);
     font-size: 0.9em;
-    margin-top: -50px;
+    margin-top: -100px;
 }
 
 /* Music Toggle Button */
