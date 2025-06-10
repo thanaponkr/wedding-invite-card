@@ -687,7 +687,7 @@ footer {
 /* Music Toggle Button */
 .music-toggle-btn {
     position: fixed;
-    top: 83vh; /* ***เปลี่ยนจาก 85vh เป็น 83vh เพื่อเลื่อนขึ้นอีก 2%*** */
+    top: 82vh; /* ***เปลี่ยนจาก 83vh เป็น 82vh เพื่อเลื่อนขึ้นอีก 1%*** */
     right: 20px;
     background-color: #A0522D;
     color: white;
@@ -823,7 +823,7 @@ footer {
         padding-bottom: 90px; /* ความสูงของแถบนำทาง (70px) + ส่วนที่ยื่นออกมา (15px) + ระยะห่างเล็กน้อย */
     }
     .music-toggle-btn {
-        top: 83vh; /* ปรับค่าให้สอดคล้องกัน */
+        top: 82vh; /* ปรับค่าให้สอดคล้องกัน */
     }
     .mobile-nav {
         display: flex; /* แสดงเป็น flex เพื่อจัดกึ่งกลาง */
@@ -910,7 +910,7 @@ footer {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
-        top: 83vh; /* ปรับค่าให้สอดคล้องกัน */
+        top: 82vh; /* ปรับค่าให้สอดคล้องกัน */
     }
     h1 {
         font-size: 2em;
