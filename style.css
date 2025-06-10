@@ -56,6 +56,13 @@ p {
     position: relative;
     overflow: hidden;
     color: white; /* สีข้อความในส่วน Hero */
+    animation: heroBackgroundFadeIn 1.5s ease-out forwards; /* เพิ่ม animation ให้พื้นหลัง hero */
+}
+
+/* Animation for hero section background */
+@keyframes heroBackgroundFadeIn {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .hero-content {
@@ -77,6 +84,7 @@ p {
     margin: auto;
     animation: fadeInScale 2s ease-out forwards; /* แอนิเมชั่นโลโก้ */
     filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* เพิ่มเงาให้โลโก้เด่นขึ้น */
+    /* Animate on first load with hero section */
 }
 
 .hero-slogan {
@@ -84,6 +92,7 @@ p {
     font-style: italic;
     margin-top: 15px;
     animation: fadeIn 2.5s ease-out forwards;
+    /* Animate on first load with hero section */
 }
 
 /* Keyframes สำหรับแอนิเมชั่นโลโก้และข้อความ */
@@ -111,7 +120,7 @@ p {
     color: white;
     font-size: 1.2em;
     text-align: center;
-    animation: bounce 2s infinite;
+    animation: bounce 2s infinite, fadeIn 1.5s ease-out forwards; /* เพิ่ม fadeIn */
     cursor: pointer;
 }
 
@@ -140,8 +149,9 @@ p {
     max-width: 960px;
     margin: 40px auto;
     opacity: 0; /* ซ่อนไว้ก่อนเพื่อทำ fade-in เมื่อ scroll */
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px); /* เริ่มต้นที่ต่ำกว่าเล็กน้อย */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* ปรับ transition */
+    will-change: opacity, transform; /* ช่วยเบราว์เซอร์ในการ render animation */
 }
 
 .section.fade-in {
@@ -149,41 +159,60 @@ p {
     transform: translateY(0);
 }
 
+/* Animation for individual elements within sections */
+@keyframes slideUpFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleInFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
 /* ข้อความ "THE HONOUR OF YOUR PRESENCE IS REQUESTED..." */
 .honor-text {
-    font-family: 'Playfair+Display', serif; /* หรือ Sarabun */
-    font-size: 2.4em; /* ขนาดฟอนต์ - ปรับเป็น 1.5em หรือตามต้องการ */
-    color: #6C3400; /* สีน้ำตาลเข้ม */
-    margin-top: -20px; /* เพิ่มบรรทัดนี้เพื่อขยับขึ้น */
-    margin-bottom: 40px; /* ระยะห่างด้านล่าง */
+    font-family: 'Playfair+Display', serif;
+    font-size: 2.4em;
+    color: #6C3400;
+    margin-top: -20px;
+    margin-bottom: 40px;
     line-height: 1.5;
     text-align: center;
-    max-width: 600px; /* จำกัดความกว้าง */
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    /* Animation applied when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s; /* หน่วงเวลาเล็กน้อย */
+    will-change: opacity, transform;
 }
 
 /* การจัดวางรูป Portrait และชื่อ */
 .couple-portraits {
-    display: flex; /* จัดเรียงในแนวนอน */
-    justify-content: center; /* จัดกึ่งกลาง */
-    align-items: center; /* จัดให้อยู่แนวเดียวกัน */
-    gap: 30px; /* ระยะห่างระหว่างรูป */
-    margin-bottom: 40px; /* ระยะห่างด้านล่าง */
-    flex-wrap: wrap; /* ให้ขึ้นบรรทัดใหม่ในจอเล็ก */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
 }
 
 .portrait-item {
     text-align: center;
+    /* Animation applied when .section.fade-in is present */
+    animation: scaleInFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.3s; /* หน่วงเวลาเล็กน้อย */
+    will-change: opacity, transform;
 }
 
 .portrait-img {
-    width: 400px; /* ขนาดรูปภาพบน PC - ปรับเป็น 500px */
-    height: 400px; /* ขนาดรูปภาพบน PC - ปรับเป็น 500px */
-    border-radius: 50%; /* ทำให้เป็นวงกลม */
-    object-fit: cover; /* ครอบคลุมพื้นที่รูป */
-    border: 3px solid #D2B48C; /* ขอบรูป */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* เงารูป */
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #D2B48C;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
 }
 
@@ -193,8 +222,8 @@ p {
 
 .portrait-name {
     font-family: 'Playfair+Display', serif;
-    font-size: 1.8em; /* ขนาดชื่อ */
-    color: #A0522D; /* สีน้ำตาลอมส้ม */
+    font-size: 1.8em;
+    color: #A0522D;
     margin-top: 15px;
     margin-bottom: 5px;
     font-weight: bold;
@@ -202,28 +231,36 @@ p {
 
 .portrait-fullname {
     font-family: 'Sarabun', sans-serif;
-    font-size: 1.1em; /* ขนาดชื่อเต็ม */
+    font-size: 1.1em;
     color: #555;
     margin-bottom: 0;
 }
 
 .and-symbol {
     font-family: 'Playfair+Display', serif;
-    font-size: 3em; /* ขนาดสัญลักษณ์ & */
-    color: #D2B48C; /* สีน้ำตาลอ่อน */
+    font-size: 3em;
+    color: #D2B48C;
     font-weight: bold;
-    margin: 0 10px; /* ระยะห่างด้านข้าง */
+    margin: 0 10px;
     display: block;
+    /* Animation applied when .section.fade-in is present */
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 0.5s; /* หน่วงเวลาเล็กน้อย */
+    will-change: opacity;
 }
 
 
 /* สไตล์สำหรับโลโก้งานแต่งงานที่อยู่เหนือข้อความ "LET'S CELEBRATE..." */
 .invitation-wedding-logo {
-    max-width: 250px; /* ขนาดโลโก้ */
+    max-width: 250px;
     height: auto;
     display: block;
-    margin: 0 auto 40px auto; /* จัดกึ่งกลางและมีระยะห่างด้านล่าง */
+    margin: 0 auto 40px auto;
     filter: drop-shadow(0 0 8px rgba(0,0,0,0.1));
+    /* Animation applied when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.7s; /* หน่วงเวลาเล็กน้อย */
+    will-change: opacity, transform;
 }
 
 
@@ -235,23 +272,31 @@ p {
 
 /* สไตล์สำหรับข้อความ "LET'S CELEBRATE TOGETHER ON OUR SPECIAL DAY ON" */
 .invitation-slogan {
-    font-family: 'Roboto', sans-serif; /* ใช้ฟอนต์ Sarabun */
-    font-size: 1.5em; /* ขนาดข้อความ */
-    color: #555; /* สีเทาเข้ม */
-    font-weight: thin; /* ตัวบาง */
-    margin-bottom: 20px; /* ระยะห่างด้านล่าง */
-    line-height: 1.4; /* ระยะห่างระหว่างบรรทัด */
-    text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    color: #555;
+    font-weight: thin;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    /* Animation applied when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.9s; /* หน่วงเวลาเล็กน้อย */
+    will-change: opacity, transform;
 }
 
 /* สไตล์สำหรับวันที่ (28 JULY 2568) */
 .wedding-date-text {
-    font-family: 'Roboto', serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
-    font-size: 8.4em; /* คงขนาดนี้ไว้สำหรับ PC */
-    color: #333; /* สีดำ */
-    font-weight: normal; /* ตัวบาง */
-    margin-bottom: 50px; /* ระยะห่างด้านล่าง */
-    letter-spacing: 5px; /* เพิ่มระยะห่างระหว่างตัวอักษร */
+    font-family: 'Roboto', serif;
+    font-size: 8.4em;
+    color: #333;
+    font-weight: normal;
+    margin-bottom: 50px;
+    letter-spacing: 5px;
+    /* Animation applied when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 1.1s; /* หน่วงเวลาเล็กน้อย */
+    will-change: opacity, transform;
 }
 
 
@@ -265,34 +310,43 @@ p {
 }
 
 #countdown > div {
-    text-align: center; /* ให้ข้อความและตัวเลขอยู่ตรงกลางบล็อก */
-    /* ไม่ต้องใส่ margin-right/left ตรงนี้ เพราะจะไปซ้ำกับ :not(:last-child) และทำให้คำนวณยาก */
+    text-align: center;
+    /* Animation for each countdown unit when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    /* Animation delay for each unit could be set with JavaScript if desired */
+    will-change: opacity, transform;
 }
 
-/* ถ้าต้องการระยะห่างที่แม่นยำยิ่งขึ้น: */
+/* Example of staggered animation delay for countdown units - can be refined with JS */
+#countdown > div:nth-child(1) { animation-delay: 1.3s; }
+#countdown > div:nth-child(2) { animation-delay: 1.4s; }
+#countdown > div:nth-child(3) { animation-delay: 1.5s; }
+#countdown > div:nth-child(4) { animation-delay: 1.6s; }
+
+
 #countdown > div:not(:last-child) {
-    margin-right: 47px; /* คงค่านี้ไว้ตามที่คุณปรับ */
+    margin-right: 47px;
 }
 
 #countdown > div:first-child {
-    margin-left: 0; /* ถ้าใช้ margin-left กับทุกตัว ให้ลบ margin-left ของตัวแรกออก */
+    margin-left: 0;
 }
 
 .countdown-modern .value {
-    font-family: 'Roboto', sans-serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
-    font-size: 5.8em; /* คงขนาดนี้ไว้ */
+    font-family: 'Roboto', sans-serif;
+    font-size: 5.8em;
     font-weight:normal;
-    color: #333; /* สีดำ */
-    line-height: 1; /* ชิดขอบด้านบน */
-    margin-bottom: 12px; /* คงค่านี้ไว้ตามที่คุณปรับ */
+    color: #333;
+    line-height: 1;
+    margin-bottom: 12px;
 }
 
 .countdown-modern .label {
-    font-family: 'Sarabun', sans-serif; /* ฟอนต์สำหรับข้อความ WEEKS/DAYS */
-    font-size: 2.2em; /* คงขนาดนี้ไว้ */
-    color: #777; /* สีเทา */
-    text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
-    margin-top: 6px; /* คงค่านี้ไว้ตามที่คุณปรับ */
+    font-family: 'Sarabun', sans-serif;
+    font-size: 2.2em;
+    color: #777;
+    text-transform: uppercase;
+    margin-top: 6px;
 }
 
 
@@ -305,8 +359,9 @@ p {
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
-    margin-top: 50px; /* เพิ่มระยะห่างด้านบนจากเนื้อหา (countdown) */
+    margin-top: 50px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    will-change: transform;
 }
 
 .btn-scroll:hover {
@@ -318,59 +373,69 @@ p {
 /* Details Section (กำหนดการ) */
 .details-section .detail-item {
     background-color: #fcf6ef;
-    padding: 25px; /* เพิ่ม padding */
-    border-radius: 8px; /* เพิ่มความมนของขอบ */
-    margin-bottom: 25px; /* เพิ่มระยะห่าง */
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
     text-align: left;
+    /* Animation for each detail item when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    will-change: opacity, transform;
 }
+/* Staggered delay for multiple detail items if they exist */
+.details-section .detail-item:nth-child(1) { animation-delay: 0.1s; }
+.details-section .detail-item:nth-child(2) { animation-delay: 0.2s; }
+.details-section .detail-item:nth-child(3) { animation-delay: 0.3s; }
+
 
 .details-section .detail-item h3 {
-    font-size: 3em; /* เพิ่มขนาดฟอนต์ของรายละเอียดกำหนดการ */
+    font-size: 3em;
     text-align: left;
     margin-top: 0;
     color: #A0522D;
 }
 
 .details-section .detail-item p {
-    font-size: 2em; /* เพิ่มขนาดฟอนต์ของรายละเอียดกำหนดการ */
+    font-size: 2em;
     text-align: left;
 }
 
 /* 4. Map Section (สถานที่จัดงาน) - สไตล์ใหม่ */
-/* IMPORTANT: For PC, map-section should span full width.
-   The .section class imposes a max-width, so we need to override it here. */
 .map-section {
     text-align: center;
-    margin-top: 40px; /* ระยะห่างจากส่วนบน */
-    padding: 0; /* ลบ padding ของ section หลักออก */
-    max-width: none; /* ลบการจำกัดความกว้างสูงสุดสำหรับ PC ออก */
-    width: 100%; /* ทำให้เต็มความกว้างของ parent container */
-    margin: 40px auto; /* จัดกึ่งกลาง section */
-    box-sizing: border-box; /* สำคัญ */
+    margin-top: 40px;
+    padding: 0;
+    max-width: none;
+    width: 100%;
+    margin: 40px auto;
+    box-sizing: border-box;
 }
 
 .map-section .location-header {
     margin-bottom: 20px;
-    padding: 0 20px; /* เพิ่ม padding ซ้ายขวา เพื่อไม่ให้ชิดขอบจอเกินไป */
+    padding: 0 20px;
+    /* Animation for location header when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: opacity, transform;
 }
 
 .map-section .location-icon {
     font-size: 2.5em;
-    color: #8B4513; /* สีไอคอน */
+    color: #8B4513;
     margin-bottom: 10px;
-    display: block; /* ทำให้ไอคอนอยู่บรรทัดของตัวเอง */
+    display: block;
 }
 
 .map-section .venue-title {
-    font-family: 'Roboto', serif; /* ใช้ฟอนต์ Playfair Display */
-    font-size: 2.5em; /* ขนาดหัวข้อ The Venue */
+    font-family: 'Roboto', serif;
+    font-size: 2.5em;
     color: #8B4513;
     margin-top: 0;
-    margin-bottom: 5px; /* ระยะห่างจากชื่อสถานที่ */
+    margin-bottom: 5px;
 }
 
 .map-section .venue-name {
-    font-family: 'Sarabun', sans-serif; /* ใช้ฟอนต์ Sarabun หรือฟอนต์ไทยอื่นๆ ที่คุณเลือก */
+    font-family: 'Sarabun', sans-serif;
     font-size: 1.2em;
     color: #555;
     margin-top: 0;
@@ -378,61 +443,70 @@ p {
 }
 
 .map-container {
-    margin-top: 30px; /* ระยะห่างจากหัวข้อ */
-    width: 100%; /* ทำให้ map-container เต็มความกว้างของ map-section */
-    max-width: none; /* ลบการจำกัดความกว้างสูงสุดของ map-container สำหรับ PC ออก */
-    height: 400px; /* ความสูงของแผนที่ */
-    margin-left: auto; /* จัดกลางแผนที่ */
-    margin-right: auto; /* จัดกลางแผนที่ */
-    border-radius: 8px; /* ความโค้งมนของกรอบแผนที่ */
-    overflow: hidden; /* เพื่อให้ border-radius แสดงผลบน iframe */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* เงาสำหรับแผนที่ */
+    margin-top: 30px;
+    width: 100%;
+    max-width: none;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* Animation for map container when .section.fade-in is present */
+    animation: scaleInFadeIn 1s ease-out forwards;
+    animation-delay: 0.3s;
+    will-change: opacity, transform;
 }
 
 .map-container iframe {
     width: 100%;
     height: 100%;
-    border: 0; /* ลบ border เดิมของ iframe */
+    border: 0;
 }
 
 .address-details {
-    text-align: left; /* จัดชิดซ้ายตามตัวอย่าง */
-    font-family: 'Sarabun', sans-serif; /* ฟอนต์สำหรับที่อยู่ */
+    text-align: left;
+    font-family: 'Sarabun', sans-serif;
     font-size: 1em;
     color: #555;
-    margin-top: 20px; /* ระยะห่างจากแผนที่ */
-    max-width: 800px; /* ทำให้กว้างเท่าแผนที่ */
+    margin-top: 20px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px; /* เพิ่ม padding ซ้ายขวา */
+    padding: 0 20px;
+    /* Animation for address details when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.5s;
+    will-change: opacity, transform;
 }
 
 .direction-button {
-    display: block; /* เปลี่ยนจาก inline-block เป็น block */
-    width: fit-content; /* เพื่อให้ปุ่มมีขนาดพอดีกับเนื้อหา */
-    margin-left: auto; /* เพื่อจัดกลาง */
-    margin-right: auto; /* เพื่อจัดกลาง */
-    background-color: #8B4513; /* สีปุ่ม */
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #8B4513;
     color: #fff;
     padding: 12px 30px;
-    margin-top: 30px; /* ระยะห่างจากที่อยู่ */
+    margin-top: 30px;
     border-radius: 5px;
     text-decoration: none;
-    font-family: 'Sarabun', sans-serif; /* หรือฟอนต์ไทยที่คุณเลือก */
+    font-family: 'Sarabun', sans-serif;
     font-size: 1.1em;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    will-change: transform;
 }
 
 .direction-button:hover {
-    background-color: #A0522D; /* สีปุ่มเมื่อเมาส์ชี้ */
+    background-color: #A0522D;
 }
 
 /* New button for "โอนเงินแล้ว" - same style as direction-button */
 .transfer-button {
     display: block;
     width: fit-content;
-    margin: 20px auto 0 auto; /* ปรับ margin ให้กึ่งกลางและมีระยะห่างด้านบน */
+    margin: 20px auto 0 auto;
     background-color: #8B4513;
     color: #fff;
     padding: 12px 30px;
@@ -444,6 +518,7 @@ p {
     transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
+    will-change: transform;
 }
 
 .transfer-button:hover {
@@ -460,8 +535,9 @@ p {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* เพิ่มระยะห่างจาก textarea */
-    margin-bottom: 10px; /* ระยะห่างก่อนปุ่มส่ง */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    will-change: transform;
 }
 
 .gemini-btn:hover {
@@ -470,37 +546,41 @@ p {
 
 /* Gallery Section (Slider Styling) */
 .slider-container {
-    padding: 40px 20px; /* ปรับ padding ให้เหมาะสม */
-    max-width: 960px; /* <--- ใช้ 960px เพื่อให้มีพื้นที่สำหรับ 3 รูปภาพ (สำหรับ PC) */
+    padding: 40px 20px;
+    max-width: 960px;
     margin: 40px auto;
-    text-align: center; /* จัดกึ่งกลางหัวข้อ */
-    position: relative; /* สำหรับตำแหน่งของปุ่ม/จุด */
-    overflow: hidden; /* ซ่อนส่วนที่เกินขอบ */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Animation for slider container when .section.fade-in is present */
+    animation: scaleInFadeIn 1s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: opacity, transform;
 }
 
 .slider-wrapper {
     display: flex;
-    transition: transform 0.8s ease-in-out; /* แอนิเมชั่นการเลื่อน */
+    transition: transform 0.8s ease-in-out;
 }
 
 .slide {
-    flex-shrink: 0; /* สำคัญมาก! ป้องกันไม่ให้แต่ละ slide หดตัว */
-    width: calc(100% / 3); /* Default for desktop: 3 images per view */
-    box-sizing: border-box; /* สำคัญ! เพื่อให้ padding/border ไม่เกินความกว้าง */
-    padding: 10px; /* เพิ่ม padding ระหว่างรูปภาพ (ปรับได้) */
-    display: flex; /* จัดกลางรูปภาพภายใน slide */
+    flex-shrink: 0;
+    width: calc(100% / 3);
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .slide img {
-    width: 100%; /* ให้รูปภาพเต็มความกว้างของ slide */
-    height: auto; /* ***สำคัญ: ปรับความสูงตามสัดส่วนของภาพจริง*** */
-    max-height: 600px; /* ***สำคัญ: กำหนดความสูงสูงสุดสำหรับ Desktop*** */
-    object-fit: contain; /* ***สำคัญ: ทำให้รูปภาพปรับขนาดให้พอดี ไม่ถูก Crop*** */
-    border-radius: 8px; /* ความโค้งมนของรูปภาพ */
-    background-color: #fcf6ef; /* เพิ่มพื้นหลังสีอ่อนๆ เพื่อให้เห็นพื้นที่ว่างรอบรูปได้ชัดเจน */
-    display: block; /* ลบช่องว่างด้านล่างรูปภาพที่เกิดจาก display: inline-block */
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: #fcf6ef;
+    display: block;
 }
 
 .slider-nav {
@@ -512,11 +592,11 @@ p {
     transform: translateY(-50%);
     padding: 0 10px;
     box-sizing: border-box;
-    pointer-events: none; /* เพื่อให้คลิกผ่านปุ่มได้ถ้าอยู่เหนือรูปภาพ */
+    pointer-events: none;
 }
 
 .slider-nav button {
-    display: none; /* ซ่อนปุ่มลูกศรโดยค่าเริ่มต้น (สำหรับ Desktop ที่ไม่แสดงปุ่ม) */
+    display: none;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
@@ -525,9 +605,10 @@ p {
     border-radius: 5px;
     font-size: 1.5em;
     transition: background-color 0.3s ease;
-    pointer-events: all; /* ทำให้คลิกปุ่มได้ */
+    pointer-events: all;
     opacity: 0.7;
-    z-index: 20; /* เพิ่ม z-index ให้ปุ่มอยู่เหนือภาพสไลด์ */
+    z-index: 20;
+    will-change: transform;
 }
 
 .slider-nav button:hover {
@@ -536,11 +617,15 @@ p {
 }
 
 .slider-dots {
-    display: flex; /* ใช้ Flexbox เพื่อเรียงจุด */
-    justify-content: center; /* จัดกลางจุดวงกลม */
-    gap: 8px; /* ระยะห่างระหว่างจุด (คงไว้) */
-    margin-top: 20px; /* เพิ่มระยะห่างจากด้านล่างของ slider-container */
-    padding-bottom: 20px; /* เพิ่ม padding ด้านล่างถ้าต้องการ */
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    /* Animation for dots when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+    will-change: opacity, transform;
 }
 
 .dot {
@@ -550,11 +635,10 @@ p {
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    border: 1px solid #D2B48C; /* ขอบจุด */
 }
 
 .dot.active-dot {
-    background-color: #D2B48C; /* สีจุดที่ใช้งานอยู่ */
+    background-color: #D2B48C;
     transform: scale(1.2);
 }
 
@@ -566,6 +650,10 @@ p {
     gap: 15px;
     max-width: 500px;
     margin: 0 auto;
+    /* Animation for form elements when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s; /* Start with form elements */
+    will-change: opacity, transform;
 }
 
 .rsvp-section label {
@@ -582,11 +670,12 @@ p {
     border-radius: 5px;
     font-size: 1em;
     width: 100%;
-    box-sizing: border-box; /* สำคัญ */
+    box-sizing: border-box;
+    resize: vertical;
 }
 
 .rsvp-section textarea {
-    resize: vertical; /* อนุญาตให้ปรับขนาดแนวตั้งได้ */
+    resize: vertical;
 }
 
 .btn-submit {
@@ -599,6 +688,7 @@ p {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+    will-change: transform;
 }
 
 .btn-submit:hover {
@@ -609,7 +699,7 @@ p {
     text-align: center;
     margin-top: 15px;
     font-weight: bold;
-    color: #007bff; /* สีน้ำเงินสำหรับข้อความสถานะ */
+    color: #007bff;
 }
 
 /* Gift Section */
@@ -617,31 +707,33 @@ p {
     text-align: center;
 }
 
-/* ปรับ .gift-options ให้จัดกลางรายการ (ถ้ามีหลายกล่องในอนาคต) */
 .gift-options {
     display: flex;
-    justify-content: center; /* จัดกลางกล่องเดียว */
+    justify-content: center;
     align-items: flex-start;
-    gap: 40px; /* ยังคงเผื่อไว้ในกรณีที่กลับไปมีหลายกล่อง */
+    gap: 40px;
     margin-top: 30px;
     flex-wrap: wrap;
 }
 
-/* สไตล์สำหรับกล่องรวม QR และ Bank Info */
 .single-gift-box {
     background-color: #fcf6ef;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    width: 280px; /* กำหนดความกว้างที่เหมาะสมสำหรับกล่องเดียว */
+    width: 280px;
     text-align: center;
     display: flex;
-    flex-direction: column; /* จัดเรียงเนื้อหาภายในในแนวตั้ง */
-    align-items: center; /* จัดกึ่งกลางเนื้อหาในแนวนอน */
+    flex-direction: column;
+    align-items: center;
+    /* Animation for the single gift box when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: opacity, transform;
 }
 
 .single-gift-box img {
-    max-width: 195px; /* <<< ปรับขนาด QR Code ตรงนี้ (150 * 1.30 = 195px) */
+    max-width: 195px;
     height: auto;
     margin-bottom: 15px;
     border: 1px solid #eee;
@@ -649,24 +741,24 @@ p {
 }
 
 .single-gift-box .qr-instruction {
-    font-size: 1em; /* ปรับขนาดข้อความคำแนะนำ QR */
-    margin-bottom: 15px; /* ระยะห่างจาก QR ไปยังข้อมูลธนาคาร */
+    font-size: 1em;
+    margin-bottom: 15px;
     color: #555;
-    text-align: center; /* ให้คำแนะนำ QR จัดกลาง */
+    text-align: center;
 }
 
 .bank-details-text {
-    width: 100%; /* ให้ข้อความรายละเอียดธนาคารเต็มความกว้างของกล่อง */
-    text-align: left; /* จัดชิดซ้ายสำหรับรายละเอียดธนาคาร */
-    margin-bottom: 20px; /* ระยะห่างจากข้อมูลธนาคารไปถึงปุ่ม */
-    padding: 0 10px; /* เพิ่ม padding ด้านข้างเล็กน้อย */
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
 .bank-details-text p {
     margin-bottom: 5px;
-    text-align: left; /* ยืนยันให้ข้อความชิดซ้ายภายใน .bank-details-text */
-    font-size: 1.1em; /* ขนาดข้อความรายละเอียดธนาคาร */
+    text-align: left;
+    font-size: 1.1em;
 }
 
 .bank-details-text p strong {
@@ -681,6 +773,10 @@ p {
     gap: 15px;
     max-width: 500px;
     margin: 0 auto;
+    /* Animation for guestbook form when .section.fade-in is present */
+    animation: slideUpFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: opacity, transform;
 }
 
 .guestbook-section label {
@@ -704,8 +800,12 @@ p {
     margin-top: 40px;
     border-top: 1px solid #eee;
     padding-top: 20px;
-    max-height: 400px; /* จำกัดความสูงและทำให้มี scrollbar */
+    max-height: 400px;
     overflow-y: auto;
+    /* Animation for guestbook entries list when .section.fade-in is present */
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+    will-change: opacity;
 }
 
 .guestbook-entry {
@@ -733,17 +833,21 @@ p {
 /* Footer */
 footer {
     text-align: center;
-    padding: 40px 30px; /* Padding บน-ล่าง 40px, ซ้าย-ขวา 30px */
-    background-color: #D2B48C; /* สีเดียวกับปุ่ม/ลิงก์ - สามารถเปลี่ยนรหัสสี Hex code ตรงนี้ได้เลยค่ะ */
+    padding: 40px 30px;
+    background-color: #D2B48C;
     color: white;
     font-size: 0.9em;
-    margin-top: 20px; /* ระยะห่างจากส่วนด้านบน (RSVP) */
+    margin-top: 20px;
+    /* Animation for footer when .section.fade-in is present (if applicable, though usually not on scroll) */
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: opacity;
 }
 
 /* Music Toggle Button */
 .music-toggle-btn {
     position: fixed;
-    top: 94vh; /* ยังคง 94vh สำหรับ PC */
+    top: 94vh;
     right: 20px;
     background-color: #A0522D;
     color: white;
@@ -757,8 +861,9 @@ footer {
     align-items: center;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 1000; /* ให้อยู่ด้านบนสุด */
+    z-index: 1000;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    will-change: transform;
 }
 
 .music-toggle-btn:hover {
@@ -771,35 +876,35 @@ footer {
 .mobile-nav {
     position: fixed;
     bottom: 0;
-    left: 50%; /* จัดกึ่งกลางแนวนอน */
-    transform: translateX(-50%); /* ปรับตำแหน่งเพื่อให้กึ่งกลางสมบูรณ์ */
-    max-width: 500px; /* กำหนดความกว้างสูงสุดสำหรับแถบนำทางทั้งหมดบนมือถือ/แท็บเล็ตขนาดใหญ่ */
-    width: 95%; /* ความกว้างที่ตอบสนองสำหรับหน้าจอขนาดเล็ก */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 500px;
+    width: 95%;
     background-color: #fff;
     border-top: 1px solid #D2B48C;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    border-radius: 20px 20px 0 0; /* ทำให้มุมบนโค้งมน, มุมล่างคม */
+    border-radius: 20px 20px 0 0;
     z-index: 999;
     display: none; /* ซ่อนบนเดสก์ท็อปโดยค่าเริ่มต้น */
-    padding-bottom: env(safe-area-inset-bottom, 0); /* สำหรับโทรศัพท์ที่มีรอยบาก (notch) */
+    padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .mobile-nav-list {
     display: flex;
     justify-content: space-around;
-    align-items: center; /* เปลี่ยนจาก flex-end เป็น center เพื่อขยับไอคอนและข้อความขึ้น */
+    align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 70px; /* ความสูงของคอนเทนเนอร์แถบนำทาง */
-    width: 100%; /* ให้เต็มความกว้างของพาเรนต์ .mobile-nav */
+    height: 70px;
+    width: 100%;
 }
 
 .mobile-nav-item {
-    flex: 1; /* อนุญาตให้รายการเติบโต/หดตัวเท่าๆ กันเพื่อเติมพื้นที่ */
+    flex: 1;
     text-align: center;
-    position: relative; /* สำหรับการจัดตำแหน่งสัมพัทธ์ของปุ่มหลัก */
-    display: flex; /* ใช้ flex เพื่อจัดกลางไอคอน/ข้อความในปุ่มขนาดเล็ก */
+    position: relative;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -810,10 +915,10 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%; /* ทำให้ลิงก์เติมพื้นที่รายการ */
+    width: 100%;
     height: 100%;
     text-decoration: none;
-    color: #A0522D; /* สีไอคอน/ข้อความสำหรับปุ่มขนาดเล็ก */
+    color: #A0522D;
     font-size: 0.8em;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -830,45 +935,46 @@ footer {
 }
 
 .mobile-nav-link.active-nav {
-    color: #D2B48C; /* สีที่แตกต่างสำหรับลิงก์ที่ถูกเลือก */
+    color: #D2B48C;
 }
 
 .mobile-nav-link.active-nav i {
     transform: scale(1.1);
-    color: #D2B48C; /* ทำให้ไอคอนเปลี่ยนสีด้วย */
+    color: #D2B48C;
 }
 
 
 /* Specific styling for the main (RSVP) button */
 .main-nav-button {
-    flex: 0 0 auto; /* ไม่อนุญาตให้เติบโต/หดตัว, คงขนาดที่กำหนด */
-    position: relative; /* เพื่อให้สามารถใช้คุณสมบัติ 'top' ได้ */
-    top: -15px; /* ปรับค่านี้เพื่อควบคุมว่าปุ่มจะยื่นออกมามากแค่ไหน - ลดค่าลบให้น้อยลงเพื่อให้ปุ่มลงมาข้างล่าง */
+    flex: 0 0 auto;
+    position: relative;
+    top: -15px;
     background-color: #A0522D;
     border-radius: 50%;
-    width: 70px; /* ความกว้างคงที่ */
-    height: 70px; /* ความสูงคงที่ */
-    min-width: 70px; /* ตรวจสอบให้แน่ใจว่าไม่หดตัว */
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
     min-height: 70px;
-    box-shadow: 0 -3px 15px rgba(0,0,0,0.3); /* เงาที่เข้มขึ้น */
-    z-index: 1001; /* ตรวจสอบให้แน่ใจว่าอยู่เหนือองค์ประกอบนำทางอื่นๆ */
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.3);
+    z-index: 1001;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    will-change: transform;
 }
 
 .main-nav-button .mobile-nav-link {
-    color: white; /* สีไอคอน/ข้อความสำหรับปุ่มหลัก */
-    font-size: 0.75em; /* ขนาดข้อความที่เล็กลงเล็กน้อยเพื่อให้พอดี */
-    height: auto; /* ปรับความสูงตามเนื้อหา */
+    color: white;
+    font-size: 0.75em;
+    height: auto;
 }
 
 .main-nav-button .mobile-nav-link i {
-    font-size: 2.2em; /* ขนาดไอคอนที่ใหญ่ขึ้นสำหรับปุ่มหลัก */
-    margin-bottom: 0; /* ลบ margin-bottom ถ้าจัดกลางอยู่แล้ว */
+    font-size: 2.2em;
+    margin-bottom: 0;
 }
 
 .main-nav-button:hover {
     background-color: #CD853F;
-    transform: translateY(-18px) scale(1.05); /* ยกขึ้นเล็กน้อยและปรับขนาดเมื่อ hover (ค่า -25px จะถูกปรับเป็น -18px) */
+    transform: translateY(-18px) scale(1.05);
     box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
 }
 
@@ -876,54 +982,47 @@ footer {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     body {
-        padding-bottom: 90px; /* ความสูงของแถบนำทาง (70px) + ส่วนที่ยื่นออกมา (15px) + ระยะห่างเล็กน้อย */
+        padding-bottom: 90px;
     }
     .music-toggle-btn {
-        top: 84vh; /* คงค่าไว้ให้สอดคล้องกันสำหรับมือถือ */
+        top: 84vh;
     }
     .mobile-nav {
-        display: flex; /* แสดงเป็น flex เพื่อจัดกึ่งกลาง */
-        height: 70px; /* ความสูงพื้นฐาน */
+        display: flex;
+        height: 70px;
     }
-    /* ปรับขนาดปุ่มหลักสำหรับหน้าจอมือถือทั่วไป */
     .main-nav-button {
         width: 65px;
         height: 65px;
-        top: -10px; /* ปรับให้ลงมาอีกนิด (จากเดิม -15px) */
+        top: -10px;
     }
     .main-nav-button .mobile-nav-link i {
         font-size: 2em;
     }
 
-    /* Adjust wedding date text for tablets/smaller screens */
     .wedding-date-text {
-        font-size: 6.5em; /* คงขนาดนี้ไว้ */
+        font-size: 6.5em;
         letter-spacing: 2px;
     }
 
-    /* Adjust countdown spacing for tablets */
     #countdown > div:not(:last-child) {
-        margin-right: 47px; /* คงค่านี้ไว้ตามที่คุณปรับ */
+        margin-right: 47px;
     }
 
-    /* Gallery adjustments for mobile/tablet (<= 768px) */
     .slider-container {
         padding: 40px 0;
-        width: 100%; /* ทำให้แกลเลอรี่เต็มความกว้าง 100% บนมือถือ */
+        width: 100%;
         margin: 40px auto;
         box-sizing: border-box;
     }
     .slide {
-        width: 100%; /* แสดง 1 รูปต่อครั้งบนมือถือ */
-        padding: 0; /* ลบ padding ภายในแต่ละ slide บนมือถือ */
+        width: 100%;
+        padding: 0;
     }
     .slide img {
         height: auto;
         max-height: 80vh;
         width: 100%;
-    }
-    .slider-nav {
-        /* ลบ padding: 0 20px; ออกจากตรงนี้ เพราะเราจะกำหนดตำแหน่งปุ่มโดยตรง */
     }
     .slider-nav button {
         display: flex;
@@ -937,27 +1036,26 @@ footer {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 20; /* เพิ่ม z-index ให้ปุ่มอยู่เหนือภาพสไลด์ */
+        z-index: 20;
     }
     .slider-nav .prev-slide {
-        left: 20px; /* ปรับตำแหน่งปุ่มซ้ายให้มีระยะห่าง 20px จากขอบจอ */
+        left: 20px;
     }
     .slider-nav .next-slide {
-        right: 20px; /* ปรับตำแหน่งปุ่มขวาให้มีระยะห่าง 20px จากขอบจอ */
+        right: 20px;
     }
 
-    /* Map Section adjustments for mobile/tablet (<= 768px) */
     .map-section {
         padding: 0;
-        width: 100%; /* ทำให้แผนที่เต็มความกว้าง 100% บนมือถือ */
+        width: 100%;
         margin: 40px auto;
         box-sizing: border-box;
     }
     .map-section .location-header {
-        padding: 0 20px; /* เพิ่ม padding ซ้ายขวา เพื่อให้ข้อความไม่ติดขอบจอ */
+        padding: 0 20px;
     }
     .address-details {
-        padding: 0 20px; /* เพิ่ม padding ซ้ายขวา เพื่อให้ข้อความไม่ติดขอบจอ */
+        padding: 0 20px;
     }
 }
 
@@ -966,7 +1064,7 @@ footer {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
-        top: 84vh; /* คงค่าไว้ให้สอดคล้องกันสำหรับมือถือ */
+        top: 84vh;
     }
     h1 {
         font-size: 2em;
@@ -1011,9 +1109,7 @@ footer {
         width: 40px;
         height: 40px;
         font-size: 1.2em;
-        /* ไม่ต้องกำหนด bottom/right ซ้ำที่นี่แล้ว */
     }
-    /* Mobile nav button size adjustment for smallest screens */
     .main-nav-button {
         width: 60px;
         height: 60px;
@@ -1023,29 +1119,26 @@ footer {
         font-size: 1.8em;
     }
 
-    /* Adjust wedding date text for phones */
     .wedding-date-text {
-        font-size: 3.2em; /* คงขนาดนี้ไว้ */
+        font-size: 3.2em;
         line-height: 1.2;
         letter-spacing: 0.2px;
         word-break: break-word;
     }
 
-    /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 2.3em; /* คงขนาดนี้ไว้ */
+        font-size: 2.3em;
         line-height: 1;
         display: block;
         margin-bottom: 2px;
     }
     .countdown-modern .label {
-        font-size: 1.2em; /* คงขนาดนี้ไว้ */
+        font-size: 1.2em;
         margin-top: 0px;
         display: block;
         text-transform: uppercase;
     }
 
-    /* Adjust countdown spacing for phones */
     #countdown {
         padding: 0;
         justify-content: center;
@@ -1058,9 +1151,8 @@ footer {
         text-align: center;
     }
 
-    /* Reduce font size for details section paragraphs on phones */
     .details-section .detail-item p {
-        font-size: 1.6em; /* เดิม 2em, ลดลง 20% (2 * 0.8 = 1.6) */
+        font-size: 1.6em;
     }
 }
 
@@ -1075,7 +1167,20 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* ให้แสดงทับทุกอย่าง */
+    z-index: 10000;
+    opacity: 0; /* เริ่มต้นซ่อนไว้ */
+    transition: opacity 0.3s ease-out; /* เพิ่ม transition */
+    pointer-events: none; /* ทำให้คลิกผ่านได้เมื่อซ่อนอยู่ */
+}
+
+.custom-alert-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-alert-overlay:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .custom-alert-box {
@@ -1086,16 +1191,20 @@ footer {
     text-align: center;
     max-width: 400px;
     width: 90%;
+    transform: translateY(-20px); /* เริ่มต้นที่ต่ำกว่าเล็กน้อย */
+    opacity: 0; /* เริ่มต้นซ่อนไว้ */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* เพิ่ม transition */
+}
+
+.custom-alert-overlay:not(.hidden) .custom-alert-box {
+    transform: translateY(0); /* เลื่อนขึ้นเมื่อปรากฏ */
+    opacity: 1;
 }
 
 .custom-alert-box p {
     margin-bottom: 20px;
     font-size: 1.1em;
     color: #333;
-}
-
-.custom-alert-overlay.hidden {
-    display: none;
 }
 
 /* Loading Spinner styles */
@@ -1110,16 +1219,25 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 10001; /* ให้สูงกว่า alert เพื่อไม่ให้ซ้อนกัน */
+    z-index: 10001;
+    opacity: 0; /* เริ่มต้นซ่อนไว้ */
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
 }
 
 .loading-spinner.hidden {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #8B4513; /* สีสปินเนอร์ */
+    border-left-color: #8B4513;
     border-radius: 50%;
     width: 50px;
     height: 50px;
