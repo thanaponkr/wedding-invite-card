@@ -687,7 +687,7 @@ footer {
 /* Music Toggle Button */
 .music-toggle-btn {
     position: fixed;
-    top: 70vh; /* กำหนดให้ปุ่มอยู่ 70% จากขอบบนของหน้าจอ */
+    top: 90vh; /* ***เปลี่ยนจาก 70vh เป็น 90vh เพื่อเลื่อนลงมาอีก 20%*** */
     right: 20px;
     background-color: #A0522D;
     color: white;
@@ -703,7 +703,6 @@ footer {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     z-index: 1000; /* ให้อยู่ด้านบนสุด */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* bottom: auto; ถูกเอาออก เพราะ top: 70vh จะ override มัน */
 }
 
 .music-toggle-btn:hover {
@@ -824,8 +823,7 @@ footer {
         padding-bottom: 90px; /* ความสูงของแถบนำทาง (70px) + ส่วนที่ยื่นออกมา (15px) + ระยะห่างเล็กน้อย */
     }
     .music-toggle-btn {
-        top: 70vh; /* คงค่าไว้ให้สอดคล้องกันทุกขนาดหน้าจอ */
-        /* bottom: auto; ถูกเอาออก เพราะ top: 70vh จะ override มัน */
+        top: 90vh; /* คงค่าไว้ให้สอดคล้องกันทุกขนาดหน้าจอ */
     }
     .mobile-nav {
         display: flex; /* แสดงเป็น flex เพื่อจัดกึ่งกลาง */
@@ -912,8 +910,7 @@ footer {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
-        top: 70vh; /* คงค่าไว้ให้สอดคล้องกันทุกขนาดหน้าจอ */
-        /* bottom: auto; ถูกเอาออก เพราะ top: 70vh จะ override มัน */
+        top: 90vh; /* คงค่าไว้ให้สอดคล้องกันทุกขนาดหน้าจอ */
     }
     h1 {
         font-size: 2em;
