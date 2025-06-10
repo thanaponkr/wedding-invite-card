@@ -432,12 +432,10 @@ p {
 .transfer-button {
     display: block;
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto 0 auto; /* ปรับ margin ให้กึ่งกลางและมีระยะห่างด้านบน */
     background-color: #8B4513;
     color: #fff;
     padding: 12px 30px;
-    margin-top: 20px; /* ระยะห่างจากเลขที่บัญชี */
     border-radius: 5px;
     text-decoration: none;
     font-family: 'Sarabun', sans-serif;
@@ -622,8 +620,8 @@ p {
 .gift-options {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
+    align-items: flex-start; /* จัดให้เนื้อหาด้านบนชิดกัน */
+    gap: 40px; /* ระยะห่างระหว่างกล่อง QR และ Bank Info */
     margin-top: 30px;
     flex-wrap: wrap; /* ให้ห่อเมื่อหน้าจอเล็ก */
 }
@@ -634,8 +632,11 @@ p {
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    width: 250px;
+    width: 250px; /* กำหนดความกว้างของแต่ละกล่อง */
     text-align: center;
+    display: flex; /* ใช้ flexbox เพื่อจัดเรียงเนื้อหาภายใน */
+    flex-direction: column; /* จัดเรียงเนื้อหาในแนวตั้ง */
+    align-items: center; /* จัดกึ่งกลางเนื้อหาในแนวนอน */
 }
 
 .gift-options img {
@@ -646,14 +647,24 @@ p {
     border-radius: 5px;
 }
 
+.gift-options .qr-code h3,
+.gift-options .bank-info h3 {
+    margin-top: 0; /* ลบ margin ด้านบนของ h3 เพื่อให้ชิดขอบบนของกล่อง */
+    margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่างของ h3 */
+    text-align: center;
+}
+
 .gift-options .qr-code p {
     text-align: center; /* ทำให้ข้อความใน QR Code จัดกึ่งกลาง */
-    padding-left: 0;   /* ลบ padding-left ที่เคยทำให้ชิดซ้าย */
+    margin-bottom: 5px; /* ลดระยะห่างด้านล่างของ p ใน qr-code */
 }
 
 .gift-options .bank-info p {
-    text-align: left; /* คงการจัดซ้ายสำหรับข้อมูลธนาคาร */
-    padding-left: 10px;
+    text-align: left; /* จัดชิดซ้ายสำหรับข้อมูลธนาคาร */
+    width: 100%; /* ให้ข้อความเต็มความกว้างของกล่อง */
+    padding: 0 10px; /* เพิ่ม padding ด้านข้างเล็กน้อย */
+    margin-bottom: 5px; /* ลดระยะห่างด้านล่างของ p ใน bank-info */
+    box-sizing: border-box; /* ให้ padding ไม่เพิ่มขนาด */
 }
 .gift-options p strong {
     color: #A0522D;
