@@ -285,7 +285,7 @@ p {
     font-weight:normal;
     color: #333; /* สีดำ */
     line-height: 1; /* ชิดขอบด้านบน */
-    margin-bottom: 10px; /* เพิ่มช่องว่างด้านล่าง 5px (ปรับค่าได้ตามต้องการ) */
+    margin-bottom: 12px; /* ***ปรับจาก 10px เป็น 12px*** */
 }
 
 .countdown-modern .label {
@@ -293,7 +293,7 @@ p {
     font-size: 1.5em; /* ขนาดข้อความ */
     color: #777; /* สีเทา */
     text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
-    margin-top: 5px;
+    margin-top: 6px; /* ***ปรับจาก 5px เป็น 6px*** */
 }
 
 
@@ -823,7 +823,7 @@ footer {
         padding-bottom: 90px; /* ความสูงของแถบนำทาง (70px) + ส่วนที่ยื่นออกมา (15px) + ระยะห่างเล็กน้อย */
     }
     .music-toggle-btn {
-        top: 84vh; /* ***ปรับจาก 82vh เป็น 84vh เพื่อเลื่อนลงมาอีก 2% สำหรับมือถือ*** */
+        top: 84vh; /* ปรับจาก 82vh เป็น 84vh เพื่อเลื่อนลงมาอีก 2% สำหรับมือถือ */
     }
     .mobile-nav {
         display: flex; /* แสดงเป็น flex เพื่อจัดกึ่งกลาง */
@@ -910,7 +910,7 @@ footer {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
-        top: 84vh; /* ***ปรับจาก 82vh เป็น 84vh เพื่อเลื่อนลงมาอีก 2% สำหรับมือถือ*** */
+        top: 84vh; /* ปรับจาก 82vh เป็น 84vh เพื่อเลื่อนลงมาอีก 2% สำหรับมือถือ */
     }
     h1 {
         font-size: 2em;
