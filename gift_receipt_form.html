@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยืนยันการโอนเงินและข้อมูลของที่ระลึก - เมย์ & เต้ย</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <main>
+        <!-- Section for Gift Receipt Form -->
+        <section id="gift-receipt-section" class="section guestbook-section">
+            <!-- หัวข้อหลักใหม่ตามที่คุณต้องการ -->
+            <h2>กรุณาใส่ชื่อที่อยู่เพื่อรับของที่ระลึก</h2>
+            <p>สำหรับผู้ที่ได้ร่วมแสดงความยินดีผ่านการโอนเงิน กรุณากรอกข้อมูลด้านล่างนี้ เพื่อที่เมย์และเต้ยจะส่งมอบของที่ระลึกไปให้ถึงมือท่านนะคะ/ครับ</p>
+            <form id="giftReceiptForm">
+                <label for="receiptName">ชื่อ-นามสกุล ผู้รับ:</label>
+                <input type="text" id="receiptName" name="receiptName" required>
+
+                <label for="receiptAddress">ที่อยู่ (พร้อมรหัสไปรษณีย์):</label>
+                <textarea id="receiptAddress" name="receiptAddress" rows="4" required></textarea>
+
+                <label for="receiptPhone">เบอร์โทรติดต่อ:</label>
+                <input type="text" id="receiptPhone" name="receiptPhone" required>
+
+                <label for="receiptMessage">คำอวยพร (ไม่บังคับ):</label>
+                <textarea id="receiptMessage" name="receiptMessage" rows="5"></textarea>
+
+                <button type="submit" class="btn-submit">ส่งข้อมูล</button>
+                <p id="receiptStatus" class="status-message"></p>
+            </form>
+            <div class="guestbook-entries" id="receiptEntries">
+                <h3>ข้อมูลที่ส่งมาแล้ว (สำหรับบ่าวสาว)</h3>
+                <!-- Entries will be displayed here by JavaScript -->
+                <p>ยังไม่มีข้อมูลค่ะ</p> <!-- Placeholder if no entries -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Audio Player and Music Toggle Button for this new page -->
+    <audio id="backgroundMusic" loop>
+        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggle" class="music-toggle-btn"><i class="fas fa-music"></i></button>
+
+    <!-- Mobile Navigation Bar (copied from index.html, adjusted links) -->
+    <nav class="mobile-nav">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item">
+                <a href="index.html#hero-section" class="mobile-nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="index.html#schedule-section" class="mobile-nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Program</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item main-nav-button">
+                <a href="index.html#rsvp-section" class="mobile-nav-link">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>RSVP</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <!-- This button links back to the Gift Section in index.html, showing QR -->
+                <a href="index.html#gift-section" class="mobile-nav-link">
+                    <i class="fas fa-qrcode"></i>
+                    <span>QR</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="index.html#gallery-section" class="mobile-nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Custom Alert/Modal Structure (copied from index.html) -->
+    <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
+        <div class="custom-alert-box">
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-close-btn" class="btn-submit">ปิด</button>
+        </div>
+    </div>
+
+    <!-- Loading Spinner (copied from index.html) -->
+    <div id="loading-spinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>กำลังประมวลผล...</p>
+    </div>
+
+    <!-- JavaScript for this specific page -->
+    <script src="script_gift_form.js"></script>
+</body>
+</html>

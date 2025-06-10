@@ -55,8 +55,7 @@
                 <!-- ตัวเลขและข้อความ WEEKS/DAYS/HOURS/MIN/SEC จะถูกสร้างโดย JavaScript -->
             </div>
 
-            <!-- ปุ่ม "ดูรายละเอียดกำหนดการ" ยังคงอยู่หากมีใน script.js -->
-            <!-- <button id="scrollToSchedule" class="btn-scroll">ดูรายละเอียดกำหนดการ</button> -->
+            <button id="scrollToSchedule" class="btn-scroll">ดูรายละเอียดกำหนดการ</button>
         </section>
 
         <!-- 3. กำหนดการ: รายละเอียดพิธีการ -->
@@ -141,11 +140,11 @@
                     <p><strong>บัญชีธนาคาร:</strong> ธนาคาร SCB</p>
                     <p><strong>ชื่อบัญชี:</strong> นางสาวกัลยานี และ นายรัชพล</p>
                     <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
-                    <!-- ปุ่ม "โอนเงินแล้ว" ที่ถูกเพิ่มเข้ามา -->
+                    <!-- ปุ่ม "โอนเงินแล้ว" ที่ถูกเพิ่มเข้ามาใหม่ -->
                     <button class="transfer-button">โอนเงินแล้ว</button>
                 </div>
             </div>
-            <!-- ข้อความ "หรือสามารถร่วมอวยพรได้ในสมุดประสาทพรหน้างานค่ะ" ถูกลบออกแล้ว -->
+            <p>หรือสามารถร่วมอวยพรได้ในสมุดประสาทพรหน้างานค่ะ</p>
         </section>
 
         <!-- 8. ตอบรับการเข้าร่วมงาน (RSVP) -->
@@ -200,10 +199,9 @@
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <!-- เปลี่ยน Guestbook เป็น QR และลิงก์ไปยังส่วนของขวัญ -->
-                <a href="#gift-section" class="mobile-nav-link">
-                    <i class="fas fa-qrcode"></i> <!-- ไอคอน QR Code -->
-                    <span>QR</span>
+                <a href="guestbook.html" class="mobile-nav-link">
+                    <i class="fas fa-book-open"></i> <!-- ไอคอนสมุดสำหรับ Guestbook -->
+                    <span>Guestbook</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
@@ -214,20 +212,6 @@
             </li>
         </ul>
     </nav>
-
-    <!-- Custom Alert/Modal Structure (เพิ่มเข้ามาใหม่) -->
-    <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
-        <div class="custom-alert-box">
-            <p id="custom-alert-message"></p>
-            <button id="custom-alert-close-btn" class="btn-submit">ปิด</button>
-        </div>
-    </div>
-
-    <!-- Loading Spinner (เพิ่มเข้ามาใหม่) -->
-    <div id="loading-spinner" class="loading-spinner hidden">
-        <div class="spinner"></div>
-        <p>กำลังประมวลผล...</p>
-    </div>
 
     <script src="script.js"></script>
 </body>
