@@ -810,7 +810,7 @@ footer {
 }
 
 .main-nav-button:hover {
-    background-color: #CD853F; /* สี hover สำหรับปุ่มหลัก */
+    background-color: #CD853F;
     transform: translateY(-18px) scale(1.05); /* ยกขึ้นเล็กน้อยและปรับขนาดเมื่อ hover (ค่า -25px จะถูกปรับเป็น -18px) */
     box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
 }
@@ -840,7 +840,7 @@ footer {
 
     /* Adjust wedding date text for tablets/smaller screens */
     .wedding-date-text {
-        font-size: 7.2em; /* ***ปรับจาก 6em เป็น 7.2em (6 * 1.20 = 7.2) - สำหรับหน้าจอ tablet/เล็กกว่า*** */
+        font-size: 6.5em; /* ***ปรับจาก 7.2em (7.2 * 0.90 = 6.48)*** */
         letter-spacing: 2px;
     }
 
@@ -968,7 +968,7 @@ footer {
 
     /* Adjust wedding date text for phones */
     .wedding-date-text {
-        font-size: 3.6em; /* ***ปรับจาก 3em เป็น 3.6em (3 * 1.20 = 3.6) - สำหรับหน้าจอโทรศัพท์*** */
+        font-size: 3.2em; /* ***ปรับจาก 3.6em (3.6 * 0.90 = 3.24)*** */
         line-height: 1.2;
         letter-spacing: 0.2px;
         word-break: break-word;
