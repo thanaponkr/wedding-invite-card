@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. RSVP & Guestbook Form Submission (เชื่อมต่อกับ Google Apps Script) ---
     const rsvpForm = document.getElementById('rsvpForm');
-    const rsvpStatus = document.getElementById('rsvpStatus');
+    const rsvpStatus = document.getElementById('rsvpStatus'); // This element will no longer display the success message directly
     const guestbookForm = document.getElementById('guestbookForm'); // Keep reference for guestbook.html
     const guestbookStatus = document.getElementById('guestbookStatus'); // Keep reference for guestbook.html
     const guestbookEntries = document.getElementById('guestbookEntries'); // Keep reference for guestbook.html
@@ -57,12 +57,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // *** สำคัญมาก! เปลี่ยน URL นี้เป็น Web App URL ที่คุณคัดลอกมาจาก Google Apps Script ในขั้นตอน 3.3.6 ***
     const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec'; // <<< แก้ไขตรงนี้เท่านั้น!
 
+    // --- Custom Alert/Modal Functions (Moved here for accessibility) ---
+    const customAlertOverlay = document.getElementById('custom-alert-overlay');
+    const customAlertMessage = document.getElementById('custom-alert-message');
+    const customAlertCloseBtn = document.getElementById('custom-alert-close-btn');
+
+    function showAlert(message) {
+        customAlertMessage.textContent = message;
+        customAlertOverlay.classList.remove('hidden');
+        // Automatically hide the alert after 3 seconds
+        setTimeout(() => {
+            customAlertOverlay.classList.add('hidden');
+        }, 3000); // Pop-up will disappear after 3 seconds
+    }
+
+    // This event listener will be removed as the showAlert now handles auto-hide
+    if (customAlertCloseBtn) {
+        customAlertCloseBtn.addEventListener('click', () => {
+            customAlertOverlay.classList.add('hidden');
+        });
+    }
+
+    // --- Loading Spinner Functions ---
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    function showLoadingSpinner(message = "กำลังประมวลผล...") {
+        const spinnerP = loadingSpinner.querySelector('p');
+        if (spinnerP) spinnerP.textContent = message;
+        loadingSpinner.classList.remove('hidden');
+    }
+
+    function hideLoadingSpinner() {
+        loadingSpinner.classList.add('hidden');
+    }
+
+
     // Function to handle form submission for both RSVP and Guestbook
     const handleFormSubmission = async (event, formType) => {
         event.preventDefault(); // Prevent default form submission (page reload)
 
         let formData = {};
-        let statusElement;
+        let statusElement; // This is now primarily for displaying "กำลังส่งข้อมูล..."
         let successMessage = '';
         let errorMessage = '';
 
@@ -74,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('message').value
             };
             statusElement = rsvpStatus;
-            successMessage = 'ขอบคุณสำหรับการตอบรับ เราได้รับข้อมูลของคุณแล้ว!'; // Thank you for your RSVP. We have received your information!
-            errorMessage = 'เกิดข้อผิดพลาดในการส่งข้อมูล RSVP โปรดลองอีกครั้ง'; // Error sending RSVP data. Please try again.
+            successMessage = 'ขอบคุณสำหรับการตอบรับ เราได้รับข้อมูลของคุณแล้ว!'; // Message for Pop-up
+            errorMessage = 'เกิดข้อผิดพลาดในการส่งข้อมูล RSVP โปรดลองอีกครั้ง';
         } else if (formType === 'guestbook') {
             // Note: This part handles the guestbook form on guestbook.html
             formData = {
@@ -84,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('guestbookMessage').value
             };
             statusElement = guestbookStatus;
-            successMessage = 'ขอบคุณสำหรับคำอวยพรค่ะ! ข้อความของคุณถูกบันทึกแล้ว'; // Thank you for your well wishes! Your message has been saved.
-            errorMessage = 'เกิดข้อผิดพลาดในการส่งคำอวยพร โปรดลองอีกครั้ง'; // Error sending well wishes. Please trying again.
+            successMessage = 'ขอบคุณสำหรับคำอวยพรค่ะ! ข้อความของคุณถูกบันทึกแล้ว';
+            errorMessage = 'เกิดข้อผิดพลาดในการส่งคำอวยพร โปรดลองอีกครั้ง';
         } else {
             console.error('Unknown form type:', formType);
             return;
@@ -93,14 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if Apps Script URL is set
         if (GOOGLE_APPS_SCRIPT_URL === 'YOUR_WEB_APP_URL_GOES_HERE' || !GOOGLE_APPS_SCRIPT_URL) {
-            statusElement.textContent = 'โปรดตั้งค่า GOOGLE_APPS_SCRIPT_URL ใน script.js ก่อน!'; // Please set GOOGLE_APPS_SCRIPT_URL in script.js first!
-            statusElement.style.color = 'red';
+            // If URL is not set, use custom alert to inform user
+            showAlert('โปรดตั้งค่า GOOGLE_APPS_SCRIPT_URL ใน script.js ก่อน!');
             console.error('GOOGLE_APPS_SCRIPT_URL is not set or is still the placeholder.');
             return;
         }
 
-        statusElement.textContent = 'กำลังส่งข้อมูล...'; // Sending data...
+        statusElement.textContent = 'กำลังส่งข้อมูล...'; // Show loading message
         statusElement.style.color = '#007bff';
+        showLoadingSpinner("กำลังส่งข้อมูล..."); // Show spinner
         console.log(`Sending ${formType} data to:`, GOOGLE_APPS_SCRIPT_URL, formData);
 
         try {
@@ -114,39 +150,35 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             console.log(`Fetch request for ${formType} initiated. Check Google Sheet for updates.`);
-
-            // Update UI based on success (since no-cors prevents reading actual response)
-            statusElement.textContent = successMessage;
-            statusElement.style.color = '#28a745';
-
-            // For Guestbook, also display the new entry on the page
-            if (formType === 'guestbook') {
-                const newEntry = document.createElement('div');
-                newEntry.classList.add('guestbook-entry');
-                newEntry.innerHTML = `
-                    <p class="entry-name">${formData.name || 'ไม่ระบุชื่อ'}</p>
-                    <p class="entry-message">${formData.message || ''}</p>
-                `;
-                // Check if guestbookEntries exists before prepending
-                if (guestbookEntries) {
-                    guestbookEntries.prepend(newEntry); // Add to top
-                } else {
-                    console.warn("guestbookEntries element not found, cannot display new entry.");
-                }
-            }
+            hideLoadingSpinner(); // Hide spinner on success
+            showAlert(successMessage); // Show success message in pop-up
 
             // Reset the form
             if (formType === 'rsvp') {
                 rsvpForm.reset();
+                statusElement.textContent = ''; // Clear the text message under the RSVP button
             } else if (formType === 'guestbook') {
-                if (guestbookForm) { // Check if guestbookForm exists
+                if (guestbookForm) {
                     guestbookForm.reset();
+                    // For guestbook, we should also display the new entry
+                    const newEntry = document.createElement('div');
+                    newEntry.classList.add('guestbook-entry');
+                    newEntry.innerHTML = `
+                        <p class="entry-name">${formData.name || 'ไม่ระบุชื่อ'}</p>
+                        <p class="entry-message">${formData.message || ''}</p>
+                    `;
+                    if (guestbookEntries) {
+                        guestbookEntries.prepend(newEntry);
+                    }
                 }
+                statusElement.textContent = ''; // Clear the text message under the Guestbook button
             }
 
         } catch (error) {
             console.error(`Error sending ${formType} data:`, error);
-            statusElement.textContent = errorMessage;
+            hideLoadingSpinner(); // Hide spinner on error
+            showAlert(errorMessage); // Show error message in pop-up
+            statusElement.textContent = 'เกิดข้อผิดพลาดในการส่งข้อมูล โปรดลองอีกครั้ง'; // Still show text message for error
             statusElement.style.color = 'red';
         }
     };
