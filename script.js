@@ -373,11 +373,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSlider();
     }
 
-    // Handle "โอนเงินแล้ว" button click
+    // Handle "โอนเงินแล้ว" button click: NOW LINKS TO GUESTBOOK.HTML
     const transferButton = document.querySelector('.transfer-button');
     if (transferButton) {
         transferButton.addEventListener('click', () => {
-            showAlert("ขอบคุณสำหรับการร่วมยินดีค่ะ! ทางเราจะตรวจสอบยอดโอนและยืนยันในภายหลังนะคะ");
+            // Navigate to guestbook.html
+            window.location.href = 'guestbook.html';
         });
     }
 
