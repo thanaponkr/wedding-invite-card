@@ -281,7 +281,7 @@ p {
 
 .countdown-modern .value {
     font-family: 'Roboto', sans-serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
-    font-size: 6.8em; /* ***ปรับจาก 5.2em (5.2 * 1.3 = 6.76)*** */
+    font-size: 5.8em; /* ***ปรับจาก 6.8em (6.8 * 0.85 = 5.78em)*** */
     font-weight:normal;
     color: #333; /* สีดำ */
     line-height: 1; /* ชิดขอบด้านบน */
@@ -290,7 +290,7 @@ p {
 
 .countdown-modern .label {
     font-family: 'Sarabun', sans-serif; /* ฟอนต์สำหรับข้อความ WEEKS/DAYS */
-    font-size: 2.6em; /* ***ปรับจาก 2em (2 * 1.3 = 2.6)*** */
+    font-size: 2.2em; /* ***ปรับจาก 2.6em (2.6 * 0.85 = 2.21em)*** */
     color: #777; /* สีเทา */
     text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
     margin-top: 6px; /* คงค่านี้ไว้ตามที่คุณปรับ */
@@ -977,13 +977,13 @@ footer {
 
     /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 2.7em; /* ***ปรับจาก 2.1em (2.1 * 1.3 = 2.73)*** */
+        font-size: 2.3em; /* ***ปรับจาก 2.7em (2.7 * 0.85 = 2.295em)*** */
         line-height: 1;
         display: block;
         margin-bottom: 2px;
     }
     .countdown-modern .label {
-        font-size: 1.4em; /* ***ปรับจาก 1.05em (1.05 * 1.3 = 1.365)*** */
+        font-size: 1.2em; /* ***ปรับจาก 1.4em (1.4 * 0.85 = 1.19em)*** */
         margin-top: 0px;
         display: block;
         text-transform: uppercase;
