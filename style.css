@@ -428,6 +428,48 @@ p {
     background-color: #A0522D; /* สีปุ่มเมื่อเมาส์ชี้ */
 }
 
+/* New button for "โอนเงินแล้ว" - same style as direction-button */
+.transfer-button {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #8B4513;
+    color: #fff;
+    padding: 12px 30px;
+    margin-top: 20px; /* ระยะห่างจากเลขที่บัญชี */
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.transfer-button:hover {
+    background-color: #A0522D;
+}
+
+/* Styling for the new Gemini-powered button in Guestbook */
+.gemini-btn {
+    background-color: #4CAF50; /* สีเขียว */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* เพิ่มระยะห่างจาก textarea */
+    margin-bottom: 10px; /* ระยะห่างก่อนปุ่มส่ง */
+}
+
+.gemini-btn:hover {
+    background-color: #66BB6A; /* สีเขียวอ่อนลงเมื่อ hover */
+}
+
 /* Gallery Section (Slider Styling) */
 .slider-container {
     padding: 40px 20px; /* ปรับ padding ให้เหมาะสม */
@@ -840,7 +882,7 @@ footer {
 
     /* Adjust wedding date text for tablets/smaller screens */
     .wedding-date-text {
-        font-size: 6.5em; /* ***ปรับจาก 7.2em (7.2 * 0.90 = 6.48)*** */
+        font-size: 6.5em; /* คงขนาดนี้ไว้ */
         letter-spacing: 2px;
     }
 
@@ -968,7 +1010,7 @@ footer {
 
     /* Adjust wedding date text for phones */
     .wedding-date-text {
-        font-size: 3.2em; /* ***ปรับจาก 3.6em (3.6 * 0.90 = 3.24)*** */
+        font-size: 3.2em; /* คงขนาดนี้ไว้ */
         line-height: 1.2;
         letter-spacing: 0.2px;
         word-break: break-word;
@@ -1005,4 +1047,78 @@ footer {
     .details-section .detail-item p {
         font-size: 1.6em; /* เดิม 2em, ลดลง 20% (2 * 0.8 = 1.6) */
     }
+}
+
+/* Custom Alert/Modal styles */
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* ให้แสดงทับทุกอย่าง */
+}
+
+.custom-alert-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.custom-alert-box p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.custom-alert-overlay.hidden {
+    display: none;
+}
+
+/* Loading Spinner styles */
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001; /* ให้สูงกว่า alert เพื่อไม่ให้ซ้อนกัน */
+}
+
+.loading-spinner.hidden {
+    display: none;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #8B4513; /* สีสปินเนอร์ */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: #8B4513;
+    font-size: 1.2em;
+    font-weight: bold;
 }
