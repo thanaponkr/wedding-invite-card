@@ -730,8 +730,8 @@ p {
 footer {
     text-align: center;
     padding: 30px;
-    background-color: #D2B48C; /* สีเดียวกับปุ่ม/ลิงก์ */
-    color: white;
+    background-color: #fcf6ef; /* สีเดียวกับปุ่ม/ลิงก์ */
+    color: rgba(196, 110, 60, 0.83);
     font-size: 0.9em;
     margin-top: -50px;
 }
