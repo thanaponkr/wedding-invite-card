@@ -641,7 +641,7 @@ p {
 }
 
 .single-gift-box img {
-    max-width: 150px;
+    max-width: 195px; /* <<< ปรับขนาด QR Code ตรงนี้ (150 * 1.30 = 195px) */
     height: auto;
     margin-bottom: 15px;
     border: 1px solid #eee;
@@ -672,6 +672,7 @@ p {
 .bank-details-text p strong {
     color: #A0522D;
 }
+
 
 /* Guestbook Section (New) */
 .guestbook-section form {
