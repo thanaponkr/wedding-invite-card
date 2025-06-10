@@ -617,29 +617,30 @@ p {
     text-align: center;
 }
 
+/* ปรับ .gift-options ให้จัดกลางรายการ (ถ้ามีหลายกล่องในอนาคต) */
 .gift-options {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* จัดให้เนื้อหาด้านบนชิดกัน */
-    gap: 40px; /* ระยะห่างระหว่างกล่อง QR และ Bank Info */
+    justify-content: center; /* จัดกลางกล่องเดียว */
+    align-items: flex-start;
+    gap: 40px; /* ยังคงเผื่อไว้ในกรณีที่กลับไปมีหลายกล่อง */
     margin-top: 30px;
-    flex-wrap: wrap; /* ให้ห่อเมื่อหน้าจอเล็ก */
+    flex-wrap: wrap;
 }
 
-.gift-options .qr-code,
-.gift-options .bank-info {
+/* สไตล์สำหรับกล่องรวม QR และ Bank Info */
+.single-gift-box {
     background-color: #fcf6ef;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    width: 250px; /* กำหนดความกว้างของแต่ละกล่อง */
+    width: 280px; /* กำหนดความกว้างที่เหมาะสมสำหรับกล่องเดียว */
     text-align: center;
-    display: flex; /* ใช้ flexbox เพื่อจัดเรียงเนื้อหาภายใน */
-    flex-direction: column; /* จัดเรียงเนื้อหาในแนวตั้ง */
+    display: flex;
+    flex-direction: column; /* จัดเรียงเนื้อหาภายในในแนวตั้ง */
     align-items: center; /* จัดกึ่งกลางเนื้อหาในแนวนอน */
 }
 
-.gift-options img {
+.single-gift-box img {
     max-width: 150px;
     height: auto;
     margin-bottom: 15px;
@@ -647,26 +648,28 @@ p {
     border-radius: 5px;
 }
 
-.gift-options .qr-code h3,
-.gift-options .bank-info h3 {
-    margin-top: 0; /* ลบ margin ด้านบนของ h3 เพื่อให้ชิดขอบบนของกล่อง */
-    margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่างของ h3 */
-    text-align: center;
+.single-gift-box .qr-instruction {
+    font-size: 1em; /* ปรับขนาดข้อความคำแนะนำ QR */
+    margin-bottom: 15px; /* ระยะห่างจาก QR ไปยังข้อมูลธนาคาร */
+    color: #555;
+    text-align: center; /* ให้คำแนะนำ QR จัดกลาง */
 }
 
-.gift-options .qr-code p {
-    text-align: center; /* ทำให้ข้อความใน QR Code จัดกึ่งกลาง */
-    margin-bottom: 5px; /* ลดระยะห่างด้านล่างของ p ใน qr-code */
-}
-
-.gift-options .bank-info p {
-    text-align: left; /* จัดชิดซ้ายสำหรับข้อมูลธนาคาร */
-    width: 100%; /* ให้ข้อความเต็มความกว้างของกล่อง */
+.bank-details-text {
+    width: 100%; /* ให้ข้อความรายละเอียดธนาคารเต็มความกว้างของกล่อง */
+    text-align: left; /* จัดชิดซ้ายสำหรับรายละเอียดธนาคาร */
+    margin-bottom: 20px; /* ระยะห่างจากข้อมูลธนาคารไปถึงปุ่ม */
     padding: 0 10px; /* เพิ่ม padding ด้านข้างเล็กน้อย */
-    margin-bottom: 5px; /* ลดระยะห่างด้านล่างของ p ใน bank-info */
-    box-sizing: border-box; /* ให้ padding ไม่เพิ่มขนาด */
+    box-sizing: border-box;
 }
-.gift-options p strong {
+
+.bank-details-text p {
+    margin-bottom: 5px;
+    text-align: left; /* ยืนยันให้ข้อความชิดซ้ายภายใน .bank-details-text */
+    font-size: 1.1em; /* ขนาดข้อความรายละเอียดธนาคาร */
+}
+
+.bank-details-text p strong {
     color: #A0522D;
 }
 

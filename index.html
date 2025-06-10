@@ -137,21 +137,19 @@
             </div>
         </section>
 
-        <!-- 6. ร่วมยินดี & ของขวัญ: ช่องทางการโอนเงินและของขวัญ -->
+        <!-- 6. ร่วมยินดี & ของขวัญ: ช่องทางการโอนเงินและของขวัญ (ปรับให้กระชับขึ้น) -->
         <section id="gift-section" class="section gift-section">
             <h2>ร่วมยินดี & ของขวัญ</h2>
             <p>สำหรับแขกผู้มีเกียรติที่ต้องการร่วมแสดงความยินดีผ่านของขวัญ หรือช่องทางอิเล็กทรอนิกส์ เราได้เตรียมข้อมูลไว้ดังนี้ค่ะ</p>
             <div class="gift-options">
-                <div class="qr-code">
-                    <!-- ใช้รูปภาพ QR Code ที่คุณอัปโหลดมา -->
+                <div class="single-gift-box"> <!-- กล่องเดียวที่รวม QR และข้อมูลธนาคาร -->
                     <img src="images/qr-code.jpg" alt="QR Code">
-                    <p>สแกน QR Code เพื่อโอนเงิน</p>
-                </div>
-                <div class="bank-info">
-                    <p><strong>บัญชีธนาคาร:</strong> ธนาคาร SCB</p>
-                    <p><strong>ชื่อบัญชี:</strong> นางสาวกัลยานี และ นายรัชพล</p>
-                    <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
-                    <!-- ปุ่ม "โอนเงินแล้ว" ที่ถูกเพิ่มเข้ามา -->
+                    <p class="qr-instruction">สแกน QR Code เพื่อโอนเงิน</p>
+                    <div class="bank-details-text"> <!-- จัดกลุ่มข้อความรายละเอียดธนาคาร -->
+                        <p><strong>บัญชีธนาคาร:</strong> ธนาคาร SCB</p>
+                        <p><strong>ชื่อบัญชี:</strong> นางสาวกัลยานี และ นายรัชพล</p>
+                        <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
+                    </div>
                     <button class="transfer-button">โอนเงินแล้ว</button>
                 </div>
             </div>
@@ -172,7 +170,7 @@
                 <textarea id="message" name="message" rows="4"></textarea>
 
                 <button type="submit" class="btn-submit">ยืนยันการเข้าร่วม</button>
-                <p id="rsvpStatus" class="status-message"></p> <!-- Keep this for loading message, but success will be pop-up -->
+                <p id="rsvpStatus" class="status-message"></p>
             </form>
         </section>
     </main>
@@ -180,13 +178,6 @@
     <footer>
         <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
     </footer>
-
-    <!-- Audio Player (ซ่อนไว้และควบคุมด้วย JS) -->
-    <audio id="backgroundMusic" loop>
-        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <button id="musicToggle" class="music-toggle-btn"><i class="fas fa-music"></i></button>
 
     <!-- Mobile Navigation Bar -->
     <nav class="mobile-nav">
@@ -225,7 +216,6 @@
     </nav>
 
     <!-- Custom Alert/Modal Structure -->
-    <!-- ส่วนนี้เป็นส่วนที่คุณแจ้งว่าหายไป และฉันได้เพิ่มเข้าไปให้แล้วค่ะ -->
     <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
         <div class="custom-alert-box">
             <p id="custom-alert-message"></p>
@@ -234,7 +224,6 @@
     </div>
 
     <!-- Loading Spinner -->
-    <!-- ส่วนนี้เป็นส่วนที่คุณแจ้งว่าหายไป และฉันได้เพิ่มเข้าไปให้แล้วค่ะ -->
     <div id="loading-spinner" class="loading-spinner hidden">
         <div class="spinner"></div>
         <p>กำลังประมวลผล...</p>
