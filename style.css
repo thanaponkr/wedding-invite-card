@@ -281,19 +281,19 @@ p {
 
 .countdown-modern .value {
     font-family: 'Roboto', sans-serif; /* เปลี่ยนเป็นฟอนต์ใหม่ */
-    font-size: 4em; /* ขนาดตัวเลขให้ใหญ่ */
+    font-size: 5.2em; /* ***เพิ่มขนาด 30% จาก 4em (4 * 1.3 = 5.2em)*** */
     font-weight:normal;
     color: #333; /* สีดำ */
     line-height: 1; /* ชิดขอบด้านบน */
-    margin-bottom: 12px; /* ***ปรับจาก 10px เป็น 12px*** */
+    margin-bottom: 12px; /* คงค่านี้ไว้ตามที่คุณปรับ */
 }
 
 .countdown-modern .label {
     font-family: 'Sarabun', sans-serif; /* ฟอนต์สำหรับข้อความ WEEKS/DAYS */
-    font-size: 1.5em; /* ขนาดข้อความ */
+    font-size: 2em; /* ***เพิ่มขนาด 30% จาก 1.5em (1.5 * 1.3 = 1.95em, ปัดขึ้นเป็น 2em)*** */
     color: #777; /* สีเทา */
     text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ */
-    margin-top: 6px; /* ***ปรับจาก 5px เป็น 6px*** */
+    margin-top: 6px; /* คงค่านี้ไว้ตามที่คุณปรับ */
 }
 
 
@@ -823,7 +823,7 @@ footer {
         padding-bottom: 90px; /* ความสูงของแถบนำทาง (70px) + ส่วนที่ยื่นออกมา (15px) + ระยะห่างเล็กน้อย */
     }
     .music-toggle-btn {
-        top: 84vh; /* ปรับจาก 82vh เป็น 84vh เพื่อเลื่อนลงมาอีก 2% สำหรับมือถือ */
+        top: 84vh; /* คงค่าไว้ให้สอดคล้องกันสำหรับมือถือ */
     }
     .mobile-nav {
         display: flex; /* แสดงเป็น flex เพื่อจัดกึ่งกลาง */
@@ -910,7 +910,7 @@ footer {
         padding-bottom: 90px;
     }
     .music-toggle-btn {
-        top: 84vh; /* ปรับจาก 82vh เป็น 84vh เพื่อเลื่อนลงมาอีก 2% สำหรับมือถือ */
+        top: 84vh; /* คงค่าไว้ให้สอดคล้องกันสำหรับมือถือ */
     }
     h1 {
         font-size: 2em;
@@ -977,13 +977,13 @@ footer {
 
     /* Adjust countdown value and label sizes for phones */
     .countdown-modern .value {
-        font-size: 1.6em;
+        font-size: 2.1em; /* ***เพิ่มขนาด 30% จาก 1.6em (1.6 * 1.3 = 2.08em, ปัดขึ้นเป็น 2.1em)*** */
         line-height: 1;
         display: block;
         margin-bottom: 2px;
     }
     .countdown-modern .label {
-        font-size: 0.8em;
+        font-size: 1.05em; /* ***เพิ่มขนาด 30% จาก 0.8em (0.8 * 1.3 = 1.04em, ปัดขึ้นเป็น 1.05em)*** */
         margin-top: 0px;
         display: block;
         text-transform: uppercase;
