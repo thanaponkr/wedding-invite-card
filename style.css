@@ -18,18 +18,19 @@ h1, h2, h3 {
     font-family: 'Playfair+Display', serif;
     color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน ดูหรูหรา */
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* ลดช่องว่าง */
 }
 
 h1 {
     font-size: 3.5em;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* ลดช่องว่าง */
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 h2 {
     font-size: 2.5em; /* ขนาดฟอนต์สำหรับหัวข้อทั่วไป */
     padding-bottom: 0;
+    margin-bottom: 10px; /* ลดช่องว่าง */
 }
 
 h3 {
@@ -40,7 +41,7 @@ h3 {
 p {
     text-align: center;
     font-size: 1.1em;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* ลดช่องว่าง */
     color: #4A4A4A; /* ข้อความทั่วไป */
 }
 
@@ -48,7 +49,6 @@ p {
 .hero-section {
     background: url('images/hero-floral-frame.jpg') no-repeat center center; /* นำรูปภาพพื้นหลังกลับมา */
     background-size: cover; /* นำคุณสมบัติ background-size กลับมา */
-    /* Removed: background-color: transparent; */ /* ลบ background-color ออก */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -138,9 +138,9 @@ p {
 
 /* Main Sections (สไตล์ทั่วไปสำหรับทุก Section ที่เป็นเนื้อหา) */
 .section {
-    padding: 40px 20px;
+    padding: 20px 20px; /* ลด padding */
     max-width: 960px;
-    margin: 40px auto;
+    margin: 20px auto; /* ลด margin */
     background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     border-radius: 12px;
     box-shadow: none; /* ลบเงาออก */
@@ -264,7 +264,7 @@ p {
     max-width: 250px;
     height: auto;
     display: block;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 20px auto; /* ลดช่องว่าง */
     filter: drop-shadow(0 0 8px rgba(0,0,0,0.1));
     animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
     animation-delay: 0.7s;
@@ -289,7 +289,7 @@ p {
     font-size: 8.4em;
     color: #8C6A4F;
     font-weight: normal;
-    margin-bottom: 50px;
+    margin-bottom: 25px; /* ลดช่องว่าง */
     letter-spacing: 5px;
     animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
     animation-delay: 1.1s;
@@ -302,7 +302,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-top: 20px;
+    margin-top: 10px; /* ลดช่องว่าง */
     flex-wrap: wrap;
 }
 
@@ -319,7 +319,7 @@ p {
 
 
 #countdown > div:not(:last-child) {
-    margin-right: 47px;
+    margin-right: 20px; /* ลดช่องว่าง */
 }
 
 #countdown > div:first-child {
@@ -353,7 +353,7 @@ p {
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 25px; /* ลดช่องว่าง */
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
@@ -387,7 +387,7 @@ p {
 .details-section .detail-item h3 {
     font-size: 3em;
     text-align: left;
-    margin-top: 0;
+    margin-top: 5px; /* เพิ่มช่องว่างเล็กน้อยเหนือเนื้อหา */
     color: #8C6A4F;
 }
 
@@ -400,11 +400,11 @@ p {
 /* Map Section (สถานที่จัดงาน) */
 .map-section {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 20px; /* ลดช่องว่าง */
     padding: 0;
     max-width: none;
     width: 100%;
-    margin: 40px auto;
+    margin: 20px auto; /* ลดช่องว่าง */
     box-sizing: border-box;
     background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     border-radius: 12px;
@@ -443,7 +443,7 @@ p {
 }
 
 .map-container {
-    margin-top: 30px;
+    margin-top: 20px; /* ลดช่องว่าง */
     width: 100%;
     max-width: none;
     height: 400px;
@@ -468,7 +468,7 @@ p {
     font-family: 'Sarabun', sans-serif;
     font-size: 1em;
     color: #4A4A4A;
-    margin-top: 20px;
+    margin-top: 15px; /* ลดช่องว่าง */
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -486,7 +486,7 @@ p {
     background-color: #E1B29D;
     color: #fff;
     padding: 12px 30px;
-    margin-top: 30px;
+    margin-top: 20px; /* ลดช่องว่าง */
     border-radius: 5px;
     text-decoration: none;
     font-family: 'Sarabun', sans-serif;
@@ -505,7 +505,7 @@ p {
 .transfer-button {
     display: block;
     width: fit-content;
-    margin: 20px auto 0 auto;
+    margin: 10px auto 0 auto; /* ลดช่องว่าง */
     background-color: #E1B29D;
     color: #fff;
     padding: 12px 30px;
@@ -545,11 +545,16 @@ p {
     background-color: #8C6A4F;
 }
 
-/* Gallery Slider */
+/* Gallery Section */
+#gallery-section {
+    margin-top: 80px; /* ลดช่องว่างด้านบน 50% จากค่าเดิม 20px ของ .section สำหรับทั้ง PC และมือถือ */
+}
+
+/* Gallery Slider (ส่วนที่อยู่ภายใน gallery-section) */
 .slider-container {
-    padding: 40px 20px;
+    padding: 20px 20px; /* ลด padding */
     max-width: 960px;
-    margin: 40px auto;
+    margin: 10px auto 0 auto; /* ปรับ margin-bottom เป็น 0 เพื่อให้ .slider-dots ขยับขึ้นมา */
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -622,8 +627,8 @@ p {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 0px; /* ปรับลดช่องว่างด้านบน เพื่อให้ชิดกับ slider-container */
+    padding-bottom: 0px;
     animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
     animation-delay: 0.3s;
     will-change: opacity, transform;
@@ -646,6 +651,10 @@ p {
 
 
 /* RSVP Section */
+.rsvp-section {
+    margin-top: 16px; /* ปรับลดลง 60% จาก 40px (40 * 0.4 = 16) */
+}
+
 .rsvp-section form {
     display: flex;
     flex-direction: column;
@@ -707,6 +716,7 @@ p {
 /* Gift Section */
 .gift-section {
     text-align: center;
+    margin-bottom: 0px; /* ลดช่องว่างด้านล่างของส่วนนี้ เพื่อให้ชิดกับส่วนแกลเลอรี่ */
 }
 
 .gift-options {
@@ -806,6 +816,10 @@ p {
     resize: vertical;
 }
 
+.guestbook-section textarea {
+    resize: vertical;
+}
+
 .guestbook-entries {
     margin-top: 40px;
     border-top: 1px solid #EEEEEE;
@@ -842,11 +856,11 @@ p {
 /* Footer */
 footer {
     text-align: center;
-    padding: 40px 30px;
+    padding: 20px 20px; /* ลด padding */
     background-color: #FDF9F3; /* เปลี่ยนเป็นสีเดียวกับ background-color ของ body */
     color: #4A4A4A; /* ใช้สีข้อความทั่วไปที่เข้ากันได้ */
     font-size: 0.9em;
-    margin-top: -80px; /* ปรับลดลง 60% จาก 20px (20 * 0.4 = 8) */
+    margin-top: 8px; /* ปรับลดลง 60% จาก 20px (20 * 0.4 = 8) */
     animation: fadeIn 0.8s ease-out forwards; /* Direct animation */
     animation-delay: 0.1s;
     will-change: opacity;
@@ -1028,7 +1042,7 @@ footer p {
     .slider-container {
         padding: 40px 0;
         width: 100%;
-        margin: 40px auto;
+        margin: 20px auto 0 auto; /* ปรับ margin-bottom เป็น 0 สำหรับมือถือด้วย */
         box-sizing: border-box;
     }
     .slide {
