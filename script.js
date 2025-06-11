@@ -40,310 +40,409 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Call immediately to avoid 1-second delay on load
+        const countdownInterval = setInterval(updateCountdown, 1000); // Update every 1 second
+        updateCountdown(); // Call once immediately to display without delay
     }
 
-    // --- 2. Music Toggle Functionality ---
-    const musicToggleBtn = document.getElementById('musicToggle');
+
+    // --- 2. Music Toggle ---
     const backgroundMusic = document.getElementById('backgroundMusic');
+    const musicToggleButton = document.getElementById('musicToggle');
 
-    if (musicToggleBtn && backgroundMusic) {
-        let isPlaying = false; // Initial state
+    // Check localStorage for music preference or set default to playing
+    let isMusicPlaying = localStorage.getItem('isMusicPlaying') === 'true';
 
-        // Check if music was playing in previous session (optional, using localStorage)
-        const musicState = localStorage.getItem('backgroundMusicState');
-        if (musicState === 'playing') {
-            backgroundMusic.play().then(() => {
-                isPlaying = true;
-                musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Pause icon
-            }).catch(error => {
-                console.error("Autoplay prevented:", error);
-                // Autoplay might be blocked by browser. User has to click to play.
-                musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>'; // Music icon
-            });
+    // Set initial state based on preference
+    if (isMusicPlaying) {
+        backgroundMusic.play();
+        musicToggleButton.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+        backgroundMusic.pause();
+        musicToggleButton.innerHTML = '<i class="fas fa-music"></i>';
+    }
+
+    musicToggleButton.addEventListener('click', () => {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            musicToggleButton.innerHTML = '<i class="fas fa-pause"></i>';
+            isMusicPlaying = true;
         } else {
-            musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>'; // Music icon if not playing
+            backgroundMusic.pause();
+            musicToggleButton.innerHTML = '<i class="fas fa-music"></i>';
+            isMusicPlaying = false;
         }
+        localStorage.setItem('isMusicPlaying', isMusicPlaying); // Save preference
+    });
 
-        musicToggleBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                backgroundMusic.pause();
-                musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>'; // Music icon
-                localStorage.setItem('backgroundMusicState', 'paused');
-            } else {
-                backgroundMusic.play().then(() => {
-                    musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Pause icon
-                    localStorage.setItem('backgroundMusicState', 'playing');
-                }).catch(error => {
-                    console.error("Play prevented by browser:", error);
-                    // Inform user if necessary, e.g., show a small message
-                });
-            }
-            isPlaying = !isPlaying;
-        });
-    }
-
-    // --- 3. Scroll to Schedule Button (Removed as button is removed from HTML) ---
-    // The previous code block for 'scrollToScheduleBtn' has been completely removed.
-    // This section is commented out to reflect its removal in the HTML.
-
-    // --- 4. Gallery Slider Functionality ---
-    const sliderWrapper = document.querySelector('.slider-wrapper');
-    const prevButton = document.querySelector('.prev-slide');
-    const nextButton = document.querySelector('.next-slide');
-    const sliderDotsContainer = document.querySelector('.slider-dots');
-
-    if (sliderWrapper && prevButton && nextButton && sliderDotsContainer) {
-        const slides = document.querySelectorAll('.slide');
-        let currentIndex = 0;
-        let slidesPerView = window.innerWidth <= 768 ? 1 : 3; // 1 slide for mobile, 3 for desktop
-
-        // Function to create dots
-        const createDots = () => {
-            sliderDotsContainer.innerHTML = ''; // Clear existing dots
-            for (let i = 0; i < Math.ceil(slides.length / slidesPerView); i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (i === 0) {
-                    dot.classList.add('active-dot');
-                }
-                dot.addEventListener('click', () => {
-                    currentIndex = i * slidesPerView;
-                    updateSlider();
-                });
-                sliderDotsContainer.appendChild(dot);
-            }
-        };
-
-        // Function to update dots active state
-        const updateDots = () => {
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                if (index === Math.floor(currentIndex / slidesPerView)) {
-                    dot.classList.add('active-dot');
-                } else {
-                    dot.classList.remove('active-dot');
-                }
-            });
-        };
-
-        // Function to update slider position
-        const updateSlider = () => {
-            const slideWidth = slides[0].offsetWidth; // Get current width of a single slide
-            sliderWrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-            updateDots();
-        };
-
-        // Event listeners for prev/next buttons
-        prevButton.addEventListener('click', () => {
-            currentIndex = Math.max(0, currentIndex - slidesPerView);
-            updateSlider();
-        });
-
-        nextButton.addEventListener('click', () => {
-            currentIndex = Math.min(slides.length - slidesPerView, currentIndex + slidesPerView);
-            updateSlider();
-        });
-
-        // Update slider on window resize to adjust slidesPerView and position
-        window.addEventListener('resize', () => {
-            const newSlidesPerView = window.innerWidth <= 768 ? 1 : 3;
-            if (newSlidesPerView !== slidesPerView) {
-                slidesPerView = newSlidesPerView;
-                currentIndex = 0;
-                createDots();
-            }
-            updateSlider();
-        });
-
-        // Initial setup
-        createDots();
-        updateSlider();
-    }
-
-    // --- 5. Mobile Navigation Active State on Scroll ---
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    // For guestbook.html, we need to consider links back to index.html sections
-    const mainSections = document.querySelectorAll('main > section'); 
-
-    const updateMobileNavActiveState = () => {
-        let currentActiveSectionId = ''; // Default to empty
-
-        // If on guestbook.html, highlight the guestbook link
-        if (window.location.pathname.endsWith('guestbook.html')) {
-            currentActiveSectionId = 'guestbook.html';
-        } else {
-            // Logic for index.html sections
-            mainSections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - window.innerHeight * 0.3 && window.scrollY < sectionTop + sectionHeight - window.innerHeight * 0.3) {
-                    currentActiveSectionId = section.id;
-                }
-            });
-            // Special case for hero section when near the very top of index.html
-            if (window.location.pathname.endsWith('index.html') && window.scrollY < 100) {
-                 currentActiveSectionId = 'hero-section';
-            } else if (window.location.pathname === '/') { // For root path
-                if (window.scrollY < 100) {
-                    currentActiveSectionId = 'hero-section';
-                }
-            }
+    // Autoplay on user interaction (to bypass browser autoplay policies)
+    // This attempts to play music when user first clicks anywhere on the page
+    document.body.addEventListener('click', () => {
+        if (isMusicPlaying && backgroundMusic.paused) {
+            backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
         }
+    }, { once: true }); // Run this listener only once
 
 
-        mobileNavLinks.forEach(link => {
-            link.classList.remove('active-nav');
-            const href = link.getAttribute('href');
-            // Check for direct match or section hash
-            if (href === 'guestbook.html' && currentActiveSectionId === 'guestbook.html') {
-                link.classList.add('active-nav');
-            } else if (href.includes('#') && href.substring(href.indexOf('#') + 1) === currentActiveSectionId) {
-                link.classList.add('active-nav');
-            }
-        });
-    };
-
-    window.addEventListener('scroll', updateMobileNavActiveState);
-    window.addEventListener('load', updateMobileNavActiveState);
-    updateMobileNavActiveState(); // Initial check
-
-
-    // --- 6. Scroll Indicator functionality (for the hero section's scroll down arrow) ---
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-        scrollIndicator.addEventListener('click', () => {
-            const invitationSection = document.getElementById('invitation-section');
-            if (invitationSection) {
-                invitationSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-
-    // --- 7. Custom Alert/Modal Functionality (replacement for alert/confirm) ---
+    // --- 3. Custom Alert/Modal ---
     const customAlertOverlay = document.getElementById('custom-alert-overlay');
+    const customAlertBox = document.getElementById('custom-alert-box');
     const customAlertMessage = document.getElementById('custom-alert-message');
     const customAlertCloseBtn = document.getElementById('custom-alert-close-btn');
 
-    const showAlert = (message) => {
+    window.showAlert = (message) => {
         customAlertMessage.textContent = message;
         customAlertOverlay.classList.remove('hidden');
+        // Add a slight delay to ensure CSS transition plays
+        setTimeout(() => {
+            customAlertBox.style.transform = 'translateY(0)';
+            customAlertBox.style.opacity = '1';
+        }, 10);
     };
 
-    if (customAlertCloseBtn) {
-        customAlertCloseBtn.addEventListener('click', () => {
+    customAlertCloseBtn.addEventListener('click', () => {
+        customAlertBox.style.transform = 'translateY(-20px)';
+        customAlertBox.style.opacity = '0';
+        setTimeout(() => {
             customAlertOverlay.classList.add('hidden');
-        });
-    }
+        }, 300); // Match CSS transition duration
+    });
 
-    // --- 8. Loading Spinner Functionality ---
+
+    // --- 4. Loading Spinner ---
     const loadingSpinner = document.getElementById('loading-spinner');
 
-    const showLoading = () => {
+    window.showLoading = () => {
         loadingSpinner.classList.remove('hidden');
     };
 
-    const hideLoading = () => {
+    window.hideLoading = () => {
         loadingSpinner.classList.add('hidden');
     };
 
 
-    // --- 9. RSVP Form Submission (Example using showAlert, showLoading) ---
-    const rsvpForm = document.getElementById('rsvpForm');
-    const rsvpStatus = document.getElementById('rsvpStatus');
+    // --- 5. RSVP Form Submission ---
+    const rsvpForm = document.getElementById('rsvp-form');
+    const rsvpStatus = document.getElementById('rsvp-status');
 
     if (rsvpForm) {
-        rsvpForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission
+        rsvpForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
 
             showLoading(); // Show loading spinner
 
-            const guestName = document.getElementById('guestName').value;
-            const numGuests = document.getElementById('numGuests').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('rsvp-name').value;
+            const attendance = document.getElementById('rsvp-attendance').value; // ค่าจาก Dropdown "ท่านสะดวกมาร่วมงาน"
+            const guests = document.getElementById('rsvp-guests').value;         // ค่าจาก Dropdown "จำนวนผู้ร่วมงาน"
+            const message = document.getElementById('rsvp-message').value;
 
-            // Simulate API call or data processing
+            // Basic client-side validation
+            if (name.trim() === '') {
+                 showAlert('กรุณากรอกชื่อ-นามสกุลค่ะ/ครับ');
+                 hideLoading();
+                 return;
+            }
+            if (attendance === '') {
+                showAlert('กรุณาเลือกความสะดวกในการมาร่วมงานค่ะ/ครับ');
+                hideLoading();
+                return;
+            }
+            // ตรวจสอบ Dropdown จำนวนผู้ร่วมงาน
+            if (guests === '') {
+                showAlert('กรุณาเลือกจำนวนผู้ร่วมงานค่ะ/ครับ');
+                hideLoading();
+                return;
+            }
+
+
+            // --- Google Apps Script Web App URL for RSVP submission ---
+            // Replace with your actual Google Apps Script Web App URL
+            // const GOOGLE_APPS_SCRIPT_URL_RSVP = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_FOR_RSVP';
+
+            const formData = {
+                name: name,
+                attendance: attendance,
+                guests: guests, // ส่งค่าจาก dropdown
+                message: message
+            };
+
+            /*
+            // Uncomment the following block to enable actual submission to Google Sheet
+            try {
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL_RSVP, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Note: Due to 'no-cors' mode, response.ok will always be false
+                // and response.json() will cause an error.
+                // We rely on the script executing on the server side.
+                // A successful fetch implies the request was sent.
+
+                hideLoading(); // Hide loading spinner
+
+                showAlert('ส่งคำตอบรับสำเร็จ! ขอบคุณสำหรับข้อมูลค่ะ/ครับ');
+                rsvpStatus.textContent = 'ส่งคำตอบรับสำเร็จ! ขอบคุณค่ะ/ครับ';
+                rsvpStatus.style.color = '#8C6A4F'; // Themed color
+                rsvpForm.reset(); // Reset the form after successful submission
+            } catch (error) {
+                console.error('Error submitting RSVP:', error);
+                hideLoading(); // Hide loading spinner
+                showAlert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองอีกครั้ง');
+                rsvpStatus.textContent = 'เกิดข้อผิดพลาด';
+                rsvpStatus.style.color = 'red';
+            }
+            */
+
+            // For now, simulate success with a delay and show a confirmation message
             await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2-second delay
 
             hideLoading(); // Hide loading spinner
 
-            // In a real application, you would send this data to a server
-            // For now, just show a confirmation message
-            showAlert(`ขอบคุณค่ะคุณ ${guestName}!\nท่านและคณะ ${numGuests} ท่าน ได้ยืนยันการเข้าร่วมเรียบร้อยแล้วค่ะ`);
-            rsvpStatus.textContent = 'ยืนยันการเข้าร่วมสำเร็จ! ขอบคุณค่ะ';
+            showAlert('ส่งคำตอบรับสำเร็จ! ขอบคุณสำหรับข้อมูลค่ะ/ครับ');
+            rsvpStatus.textContent = 'ส่งคำตอบรับสำเร็จ! ขอบคุณค่ะ/ครับ';
             rsvpStatus.style.color = '#8C6A4F'; // Themed color
-            rsvpForm.reset(); // Reset the form after submission
+            rsvpForm.reset(); // Reset the form after successful submission
         });
     }
 
-    // --- 10. "รับของขวัญ" Button Functionality ---
-    const transferButton = document.querySelector('.transfer-button');
-    if (transferButton) {
-        transferButton.addEventListener('click', () => {
-            // Changed to direct navigation to guestbook.html
-            window.location.href = 'guestbook.html';
+
+    // --- 6. Gallery Slider ---
+    const sliderContainer = document.querySelector('.slider-container');
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev-slide');
+    const nextButton = document.querySelector('.next-slide');
+    const sliderDotsContainer = document.querySelector('.slider-dots');
+
+    let currentIndex = 0;
+    const numSlides = slides.length;
+    let slidesPerView = 3; // Default for larger screens
+
+    const updateSlidesPerView = () => {
+        if (window.innerWidth <= 768) {
+            slidesPerView = 1;
+            // Show navigation buttons only on mobile
+            if (prevButton && nextButton) {
+                prevButton.style.display = 'flex';
+                nextButton.style.display = 'flex';
+            }
+        } else {
+            slidesPerView = 3;
+            // Hide navigation buttons on desktop
+            if (prevButton && nextButton) {
+                prevButton.style.display = 'none';
+                nextButton.style.display = 'none';
+            }
+        }
+        // Recalculate index to prevent showing incomplete slides on resize
+        currentIndex = Math.floor(currentIndex / slidesPerView) * slidesPerView;
+        if (currentIndex > numSlides - slidesPerView) {
+            currentIndex = numSlides - slidesPerView;
+        }
+        if (currentIndex < 0) {
+            currentIndex = 0;
+        }
+        updateSlider();
+        createDots(); // Re-create dots on resize to reflect correct number
+    };
+
+    const updateSlider = () => {
+        const slideWidth = sliderContainer.clientWidth / slidesPerView;
+        slides.forEach(slide => {
+            slide.style.width = slideWidth + 'px';
         });
+        sliderWrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        updateDots();
+    };
+
+    const createDots = () => {
+        if (!sliderDotsContainer) return; // Exit if dots container not found
+        sliderDotsContainer.innerHTML = '';
+        const numDots = Math.ceil(numSlides / slidesPerView);
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => {
+                currentIndex = i * slidesPerView;
+                updateSlider();
+            });
+            sliderDotsContainer.appendChild(dot);
+        }
+        updateDots();
+    };
+
+    const updateDots = () => {
+        if (!sliderDotsContainer) return; // Exit if dots container not found
+        const dots = sliderDotsContainer.querySelectorAll('.dot');
+        const activeDotIndex = Math.floor(currentIndex / slidesPerView);
+        dots.forEach((dot, index) => {
+            if (index === activeDotIndex) {
+                dot.classList.add('active-dot');
+            } else {
+                dot.classList.remove('active-dot');
+            }
+        });
+    };
+
+    const nextSlide = () => {
+        if (currentIndex < numSlides - slidesPerView) {
+            currentIndex += slidesPerView;
+        } else {
+            currentIndex = 0; // Loop back to start
+        }
+        updateSlider();
+    };
+
+    const prevSlide = () => {
+        if (currentIndex > 0) {
+            currentIndex -= slidesPerView;
+        } else {
+            currentIndex = numSlides - slidesPerView; // Loop to end
+            // Ensure the last set of slides is fully visible if it's less than slidesPerView
+            if (numSlides % slidesPerView !== 0) {
+                currentIndex = Math.floor(numSlides / slidesPerView) * slidesPerView;
+            }
+        }
+        updateSlider();
+    };
+
+
+    if (sliderContainer) {
+        // Initial setup
+        updateSlidesPerView();
+        window.addEventListener('resize', updateSlidesPerView);
+
+        if (prevButton) prevButton.addEventListener('click', prevSlide);
+        if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+        // Auto-slide functionality (optional)
+        // setInterval(nextSlide, 5000); // Change slide every 5 seconds
     }
 
-    // --- 11. Guestbook Form Address Input (Reverted to single text input) ---
 
-    // Removed comprehensive Thai address data and related dropdown logic.
-    // The previous code for thaiAddressesFullData, populateDropdown, and associated
-    // event listeners (provinceSelect, districtSelect, subDistrictSelect) are removed.
+    // --- 7. Mobile Navigation Bar Active State ---
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-    // --- 12. Guestbook Form Submission (Updated for single address field) ---
-    const guestbookForm = document.getElementById('guestbookForm');
-    const guestbookStatus = document.getElementById('guestbookStatus');
+    const updateActiveNavLink = () => {
+        const sections = document.querySelectorAll('section[id]');
+        const currentScrollPos = window.scrollY + window.innerHeight / 2; // Mid-point of the viewport
 
-    if (guestbookForm) {
-        guestbookForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
 
-            showLoading(); // Show loading spinner
+            // Handle special cases for hero and rsvp link
+            let targetId = sectionId;
+            if (sectionId === 'hero-section' && currentScrollPos < sectionHeight / 2) {
+                targetId = 'hero-section';
+            } else if (sectionId === 'rsvp-section' && section.contains(document.getElementById('rsvp-form'))) {
+                // Ensure RSVP button becomes active when RSVP section is in view
+                // This will use the section's ID as the target, which the mobile nav links reference
+            }
 
-            const receiverName = document.getElementById('receiverName').value;
-            const contactNumber = document.getElementById('contactNumber').value;
-            const addressText = document.getElementById('addressText').value; // New address field
-            const wishMessage = document.getElementById('wishMessage').value;
+            if (currentScrollPos >= sectionTop && currentScrollPos < sectionTop + sectionHeight) {
+                mobileNavLinks.forEach(link => {
+                    link.classList.remove('active-nav');
+                    // Check if the link's href matches the current section ID (including # prefix)
+                    if (link.getAttribute('href') === `#${targetId}`) {
+                        link.classList.add('active-nav');
+                    }
+                });
+            }
+        });
+        // Special handling for the 'Gift' link, which previously was 'Guestbook'
+        // If the current section is 'gift-section', ensure the 'Gift' nav link is active
+        const giftSection = document.getElementById('gift-section');
+        if (giftSection) {
+            const giftSectionTop = giftSection.offsetTop;
+            const giftSectionHeight = giftSection.offsetHeight;
+            if (currentScrollPos >= giftSectionTop && currentScrollPos < giftSectionTop + giftSectionHeight) {
+                 mobileNavLinks.forEach(link => {
+                    link.classList.remove('active-nav');
+                    if (link.getAttribute('href') === '#gift-section') {
+                        link.classList.add('active-nav');
+                    }
+                });
+            }
+        }
+    };
 
-            // Basic validation for address field
-            if (!addressText.trim()) { // Check if address is empty or just whitespace
+    // Initial check and update on scroll
+    updateActiveNavLink();
+    window.addEventListener('scroll', updateActiveNavLink);
+
+
+    // --- Guestbook Form Submission (on guestbook.html) ---
+    const guestbookForm = document.getElementById('guestbook-form');
+    const guestbookStatus = document.getElementById('guestbook-status');
+
+    if (guestbookForm) { // Only run if guestbook form exists on the page
+        guestbookForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showLoading();
+
+            const name = document.getElementById('guestbook-name').value;
+            const address = document.getElementById('guestbook-address').value; // ดึงค่าจากช่องที่อยู่
+            const phone = document.getElementById('guestbook-phone').value;     // ดึงค่าจากช่องเบอร์โทรศัพท์
+
+            if (name.trim() === '') {
+                showAlert('กรุณากรอกชื่อ-นามสกุลค่ะ/ครับ');
                 hideLoading();
-                showAlert('กรุณากรอกที่อยู่ให้ครบถ้วนค่ะ/ครับ');
+                return;
+            }
+            if (address.trim() === '') {
+                showAlert('กรุณากรอกที่อยู่สำหรับจัดส่งของขวัญค่ะ/ครับ'); // ตรวจสอบที่อยู่
+                hideLoading();
+                return;
+            }
+            if (phone.trim() === '') {
+                showAlert('กรุณากรอกเบอร์โทรศัพท์สำหรับติดต่อค่ะ/ครับ'); // ตรวจสอบเบอร์โทร
+                hideLoading();
                 return;
             }
 
-            // Simulate sending data to backend (e.g., Google Sheet)
-            // In a real application, you would make a fetch() request to your backend endpoint here.
-            // Example of a fetch request (requires a backend endpoint configured to receive this data):
+            // --- Google Apps Script Web App URL for Guestbook submission ---
+            // Replace with your actual Google Apps Script Web App URL
+            // const GOOGLE_APPS_SCRIPT_URL_GUESTBOOK = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_FOR_GUESTBOOK';
+
+            const formData = {
+                name: name,
+                address: address, // เพิ่ม address ใน formData
+                phone: phone      // เพิ่ม phone ใน formData
+            };
+
             /*
+            // Uncomment this block if you want to send data to Google Sheet
             try {
-                const response = await fetch('/your-backend-api-for-guestbook-submission', {
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL_GUESTBOOK, {
                     method: 'POST',
+                    mode: 'no-cors',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        receiverName,
-                        contactNumber,
-                        addressText, // Use the new address field
-                        wishMessage
-                    })
+                    body: JSON.stringify(formData)
                 });
 
-                if (response.ok) {
-                    showAlert('ขอบคุณสำหรับคำอวยพรค่ะ/ครับ! คำอวยพรของท่านได้ถูกส่งเรียบร้อยแล้ว และจะถูกเก็บเป็นความลับเพื่อบ่าวสาวโดยเฉพาะค่ะ');
-                    guestbookStatus.textContent = 'ส่งคำอวยพรสำเร็จ! ขอบคุณค่ะ/ครับ';
+                hideLoading();
+
+                if (response.ok || response.type === 'opaque') { // 'opaque' is expected for no-cors
+                    showAlert('ขอบคุณสำหรับข้อมูลค่ะ/ครับ! บ่าวสาวจะจัดส่งของขวัญไปให้ตามที่อยู่ที่ระบุนะคะ/ครับ'); // เปลี่ยนข้อความ
+                    guestbookStatus.textContent = 'ส่งข้อมูลสำเร็จ! ขอบคุณค่ะ/ครับ'; // เปลี่ยนข้อความ
                     guestbookStatus.style.color = '#8C6A4F';
                     guestbookForm.reset(); // Reset the form after successful submission
                 } else {
-                    showAlert('เกิดข้อผิดพลาดในการส่งคำอวยพร กรุณาลองอีกครั้ง');
+                    showAlert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองอีกครั้ง'); // เปลี่ยนข้อความ
                     guestbookStatus.textContent = 'เกิดข้อผิดพลาด';
                     guestbookStatus.style.color = 'red';
                 }
             } catch (error) {
                 console.error('Error submitting guestbook:', error);
-                showAlert('เกิดข้อผิดพลาดในการส่งคำอวยพร กรุณาลองอีกครั้ง');
+                showAlert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองอีกครั้ง'); // เปลี่ยนข้อความ
                 guestbookStatus.textContent = 'เกิดข้อผิดพลาด';
                 guestbookStatus.style.color = 'red';
             }
@@ -354,10 +453,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             hideLoading(); // Hide loading spinner
 
-            showAlert('ขอบคุณสำหรับคำอวยพรค่ะ/ครับ! คำอวยพรของท่านได้ถูกส่งเรียบร้อยแล้ว และจะถูกเก็บเป็นความลับเพื่อบ่าวสาวโดยเฉพาะค่ะ');
-            guestbookStatus.textContent = 'ส่งคำอวยพรสำเร็จ! ขอบคุณค่ะ/ครับ';
+            showAlert('ขอบคุณสำหรับข้อมูลค่ะ/ครับ! บ่าวสาวจะจัดส่งของขวัญไปให้ตามที่อยู่ที่ระบุนะคะ/ครับ'); // เปลี่ยนข้อความ
+            guestbookStatus.textContent = 'ส่งข้อมูลสำเร็จ! ขอบคุณค่ะ/ครับ'; // เปลี่ยนข้อความ
             guestbookStatus.style.color = '#8C6A4F'; // Themed color
             guestbookForm.reset(); // Reset the form after submission
         });
     }
-});
+
+}); // DOMContentLoaded end

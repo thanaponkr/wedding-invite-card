@@ -547,7 +547,7 @@ p {
 
 /* Gallery Section */
 #gallery-section {
-    margin-top: 80px; /* ลดช่องว่างด้านบน 50% จากค่าเดิม 20px ของ .section สำหรับทั้ง PC และมือถือ */
+    margin-top: 10px; /* ลดช่องว่างด้านบน 50% จากค่าเดิม 20px ของ .section สำหรับทั้ง PC และมือถือ */
 }
 
 /* Gallery Slider (ส่วนที่อยู่ภายใน gallery-section) */
@@ -628,7 +628,7 @@ p {
     justify-content: center;
     gap: 8px;
     margin-top: 0px; /* ปรับลดช่องว่างด้านบน เพื่อให้ชิดกับ slider-container */
-    padding-bottom: 0px;
+    padding-bottom: 20px;
     animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
     animation-delay: 0.3s;
     will-change: opacity, transform;
@@ -682,6 +682,29 @@ p {
     width: 100%;
     box-sizing: border-box;
     resize: vertical;
+}
+
+/* Style for the new select dropdown */
+.rsvp-section select {
+    padding: 12px;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    appearance: none; /* Removes default dropdown arrow */
+    background-color: #FFFFFF; /* Ensure it has a background */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A4A%22%20d%3D%22M287%20197.8L154.7%2065.4c-4.6-4.6-12-4.6-16.6%200L5.4%20197.8c-4.6%204.6-4.6%2012%200%2016.6l16.6%2016.6c4.6%204.6%2012%204.6%2016.6%200L146.4%20110.6c4.6-4.6%2012-4.6%2016.6%200l91.2%2091.2c4.6%204.6%2012%204.6%2016.6%200l16.6-16.6c4.7-4.6%204.7-12.1%200.1-16.7z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+.rsvp-section select:focus {
+    border-color: #E1B29D;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(225, 178, 157, 0.3);
 }
 
 .rsvp-section textarea {

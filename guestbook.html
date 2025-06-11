@@ -3,65 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สมุดประสาทพร - เมย์ & เต้ย</title>
+    <title>รับของขวัญจากบ่าวสาว - เมย์ & เต้ย</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <!-- Audio for background music (same as index.html, optional depending on design) -->
     <audio id="backgroundMusic" loop>
         <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Music Toggle Button (same as index.html) -->
     <button id="musicToggle" class="music-toggle-btn">
         <i class="fas fa-music"></i>
     </button>
 
     <main>
         <section id="guestbook-section" class="section guestbook-section">
-            <h2>สมุดประสาทพร</h2>
-            <p>กรุณาฝากข้อความอวยพรสำหรับบ่าวสาว</p>
-            <form id="guestbookForm">
-                <label for="receiverName">ชื่อ-นามสกุล ผู้รับ (หากต้องการให้บ่าวสาวมอบของขวัญให้ถูกคน):</label>
-                <input type="text" id="receiverName" name="receiverName" required>
+            <h2>รับของขวัญจากบ่าวสาว</h2> <p>กรุณากรอกชื่อที่อยู่เพื่อที่เราจะได้ส่งของขวัญไปให้นะคะ/ครับ</p> <form id="guestbook-form">
+                <label for="guestbook-name">ชื่อ-นามสกุล:</label>
+                <input type="text" id="guestbook-name" name="name" required>
 
-                <label for="contactNumber">เบอร์โทรติดต่อ (สำหรับประสานงานเรื่องของขวัญ):</label>
-                <input type="tel" id="contactNumber" name="contactNumber" pattern="[0-9]{10}" placeholder="08XXXXXXXX" required>
-                <small>กรุณากรอกเบอร์โทร 10 หลัก (ไม่มีขีด)</small>
+                <label for="guestbook-address">ที่อยู่สำหรับจัดส่งของขวัญ:</label>
+                <textarea id="guestbook-address" name="address" rows="4" required></textarea>
 
-                <label for="addressText">ที่อยู่:</label>
-                <textarea id="addressText" name="addressText" rows="3" required></textarea>
+                <label for="guestbook-phone">เบอร์โทรศัพท์ (สำหรับติดต่อเรื่องการจัดส่ง):</label>
+                <input type="tel" id="guestbook-phone" name="phone" required>
 
-                <label for="wishMessage">คำอวยพร:</label>
-                <textarea id="wishMessage" name="wishMessage" rows="5" required></textarea>
-
-                <button type="submit" class="btn-submit gemini-btn">ส่งคำอวยพร</button>
-                <p id="guestbookStatus" class="status-message"></p>
+                <button type="submit" class="btn-submit">ส่งข้อมูล</button> <p id="guestbook-status" class="status-message"></p>
             </form>
         </section>
     </main>
 
-    <footer>
-        <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Mobile Navigation Bar (same as index.html) -->
     <nav class="mobile-nav">
         <ul class="mobile-nav-list">
             <li class="mobile-nav-item">
                 <a href="index.html#hero-section" class="mobile-nav-link">
-                    <i class="fas fa-heart"></i>
-                    <span>Home</span>
+                    <i class="fas fa-home"></i>
+                    <span>หน้าหลัก</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <a href="index.html#schedule-section" class="mobile-nav-link">
+                <a href="index.html#details-section" class="mobile-nav-link">
                     <i class="fas fa-calendar-alt"></i>
-                    <span>Program</span>
+                    <span>กำหนดการ</span>
                 </a>
             </li>
             <li class="mobile-nav-item main-nav-button">
@@ -71,9 +57,8 @@
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <a href="guestbook.html" class="mobile-nav-link active-nav"> <!-- ตั้งเป็น active สำหรับหน้านี้ -->
-                    <i class="fas fa-book-open"></i>
-                    <span>Guestbook</span>
+                <a href="index.html#gift-section" class="mobile-nav-link active-nav"> <i class="fas fa-gift"></i>
+                    <span>ของขวัญ</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
@@ -85,7 +70,6 @@
         </ul>
     </nav>
 
-    <!-- Custom Alert/Modal Structure (same as index.html) -->
     <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
         <div class="custom-alert-box">
             <p id="custom-alert-message"></p>
@@ -93,7 +77,6 @@
         </div>
     </div>
 
-    <!-- Loading Spinner (same as index.html) -->
     <div id="loading-spinner" class="loading-spinner hidden">
         <div class="spinner"></div>
         <p>กำลังประมวลผล...</p>
