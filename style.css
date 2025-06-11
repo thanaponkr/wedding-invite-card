@@ -8,15 +8,15 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #fcf6ef; /* สีพื้นหลังอ่อนๆ (คล้ายสีขาวนวล) */
-    color: #333;
+    background-color: #FDF9F3; /* สีขาวครีม/งาช้าง อบอุ่น */
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ สำหรับข้อความทั่วไป */
     line-height: 1.6;
     scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
 }
 
 h1, h2, h3 {
     font-family: 'Playfair+Display', serif;
-    color: #8B4513; /* สีน้ำตาลเข้ม */
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน ดูหรูหรา */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -24,7 +24,7 @@ h1, h2, h3 {
 h1 {
     font-size: 3.5em;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 h2 {
@@ -34,19 +34,21 @@ h2 {
 
 h3 {
     font-size: 1.8em;
-    color: #6C3400;
+    color: #A08369; /* สีน้ำตาลอ่อนลงเล็กน้อย */
 }
 
 p {
     text-align: center;
     font-size: 1.1em;
     margin-bottom: 10px;
+    color: #4A4A4A; /* ข้อความทั่วไป */
 }
 
 /* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
 .hero-section {
-    background: url('images/hero-floral-frame.jpg') no-repeat center center; /* ใช้รูปดอกไม้ที่คุณเตรียมมา */
-    background-size: cover; /* ทำให้รูปภาพครอบคลุมพื้นที่ทั้งหมดของ Hero Section */
+    /* พื้นหลังรูปภาพ floral frame อาจจะต้องเปลี่ยนเป็นแบบขาวดำ หรือปรับโทนสีใน Photoshop */
+    background: url('images/hero-floral-frame.jpg') no-repeat center center;
+    background-size: cover;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -55,8 +57,8 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: white; /* สีข้อความในส่วน Hero */
-    animation: heroBackgroundFadeIn 1.5s ease-out forwards; /* เพิ่ม animation ให้พื้นหลัง hero */
+    color: white; /* ข้อความในส่วน Hero ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลังรูปภาพ */
+    animation: heroBackgroundFadeIn 1.5s ease-out forwards;
 }
 
 /* Animation for hero section background */
@@ -77,14 +79,13 @@ p {
 }
 
 .wedding-logo {
-    max-width: 500px; /* กำหนดขนาดสูงสุดของโลโก้บน PC */
-    width: 80vw; /* ให้มันปรับขนาดตามความกว้างของหน้าจอ แต่ไม่เกิน max-width */
+    max-width: 500px;
+    width: 80vw;
     height: auto;
     display: block;
     margin: auto;
-    animation: fadeInScale 2s ease-out forwards; /* แอนิเมชั่นโลโก้ */
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* เพิ่มเงาให้โลโก้เด่นขึ้น */
-    /* Animate on first load with hero section */
+    animation: fadeInScale 2s ease-out forwards;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 }
 
 .hero-slogan {
@@ -92,7 +93,6 @@ p {
     font-style: italic;
     margin-top: 15px;
     animation: fadeIn 2.5s ease-out forwards;
-    /* Animate on first load with hero section */
 }
 
 /* Keyframes สำหรับแอนิเมชั่นโลโก้และข้อความ */
@@ -117,10 +117,10 @@ p {
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
+    color: #FFFFFF; /* สีขาว */
     font-size: 1.2em;
     text-align: center;
-    animation: bounce 2s infinite, fadeIn 1.5s ease-out forwards; /* เพิ่ม fadeIn */
+    animation: bounce 2s infinite, fadeIn 1.5s ease-out forwards;
     cursor: pointer;
 }
 
@@ -145,13 +145,16 @@ p {
 
 /* Main Sections (สไตล์ทั่วไปสำหรับทุก Section ที่เป็นเนื้อหา) */
 .section {
-    padding: 40px 20px; /* ลด padding ลง */
+    padding: 40px 20px;
     max-width: 960px;
     margin: 40px auto;
-    opacity: 0; /* ซ่อนไว้ก่อนเพื่อทำ fade-in เมื่อ scroll */
-    transform: translateY(20px); /* เริ่มต้นที่ต่ำกว่าเล็กน้อย */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* ปรับ transition */
-    will-change: opacity, transform; /* ช่วยเบราว์เซอร์ในการ render animation */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+    background-color: #FFFFFF; /* ส่วนเนื้อหาเป็นสีขาว */
+    border-radius: 12px; /* เพิ่มความโค้งมนเล็กน้อย */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* เพิ่มเงาอ่อนๆ */
 }
 
 .section.fade-in {
@@ -174,7 +177,7 @@ p {
 .honor-text {
     font-family: 'Playfair+Display', serif;
     font-size: 2.4em;
-    color: #6C3400;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     margin-top: -20px;
     margin-bottom: 40px;
     line-height: 1.5;
@@ -182,9 +185,8 @@ p {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    /* Animation applied when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.1s; /* หน่วงเวลาเล็กน้อย */
+    animation-delay: 0.1s;
     will-change: opacity, transform;
 }
 
@@ -200,9 +202,8 @@ p {
 
 .portrait-item {
     text-align: center;
-    /* Animation applied when .section.fade-in is present */
     animation: scaleInFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.3s; /* หน่วงเวลาเล็กน้อย */
+    animation-delay: 0.3s;
     will-change: opacity, transform;
 }
 
@@ -211,8 +212,8 @@ p {
     height: 400px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #D2B48C;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 3px solid #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* เงาอ่อนลง */
     transition: transform 0.3s ease;
 }
 
@@ -223,7 +224,7 @@ p {
 .portrait-name {
     font-family: 'Playfair+Display', serif;
     font-size: 1.8em;
-    color: #A0522D;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     margin-top: 15px;
     margin-bottom: 5px;
     font-weight: bold;
@@ -232,20 +233,19 @@ p {
 .portrait-fullname {
     font-family: 'Sarabun', sans-serif;
     font-size: 1.1em;
-    color: #555;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
     margin-bottom: 0;
 }
 
 .and-symbol {
     font-family: 'Playfair+Display', serif;
     font-size: 3em;
-    color: #D2B48C;
+    color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
     font-weight: bold;
     margin: 0 10px;
     display: block;
-    /* Animation applied when .section.fade-in is present */
     animation: fadeIn 0.8s ease-out forwards;
-    animation-delay: 0.5s; /* หน่วงเวลาเล็กน้อย */
+    animation-delay: 0.5s;
     will-change: opacity;
 }
 
@@ -257,9 +257,8 @@ p {
     display: block;
     margin: 0 auto 40px auto;
     filter: drop-shadow(0 0 8px rgba(0,0,0,0.1));
-    /* Animation applied when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.7s; /* หน่วงเวลาเล็กน้อย */
+    animation-delay: 0.7s;
     will-change: opacity, transform;
 }
 
@@ -274,14 +273,13 @@ p {
 .invitation-slogan {
     font-family: 'Roboto', sans-serif;
     font-size: 1.5em;
-    color: #555;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
     font-weight: thin;
     margin-bottom: 20px;
     line-height: 1.4;
     text-transform: uppercase;
-    /* Animation applied when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.9s; /* หน่วงเวลาเล็กน้อย */
+    animation-delay: 0.9s;
     will-change: opacity, transform;
 }
 
@@ -289,13 +287,12 @@ p {
 .wedding-date-text {
     font-family: 'Roboto', serif;
     font-size: 8.4em;
-    color: #333;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     font-weight: normal;
     margin-bottom: 50px;
     letter-spacing: 5px;
-    /* Animation applied when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    animation-delay: 1.1s; /* หน่วงเวลาเล็กน้อย */
+    animation-delay: 1.1s;
     will-change: opacity, transform;
 }
 
@@ -311,9 +308,7 @@ p {
 
 #countdown > div {
     text-align: center;
-    /* Animation for each countdown unit when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    /* Animation delay for each unit could be set with JavaScript if desired */
     will-change: opacity, transform;
 }
 
@@ -336,7 +331,7 @@ p {
     font-family: 'Roboto', sans-serif;
     font-size: 5.8em;
     font-weight:normal;
-    color: #333;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     line-height: 1;
     margin-bottom: 12px;
 }
@@ -344,7 +339,7 @@ p {
 .countdown-modern .label {
     font-family: 'Sarabun', sans-serif;
     font-size: 2.2em;
-    color: #777;
+    color: #6A6A6A; /* สีเทาอ่อน */
     text-transform: uppercase;
     margin-top: 6px;
 }
@@ -352,7 +347,7 @@ p {
 
 /* สไตล์สำหรับปุ่ม "ดูรายละเอียดกำหนดการ" */
 .btn-scroll {
-    background-color: #A0522D;
+    background-color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
     color: white;
     padding: 15px 30px;
     border: none;
@@ -362,26 +357,26 @@ p {
     margin-top: 50px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     will-change: transform;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* เพิ่มเงาเล็กน้อย */
 }
 
 .btn-scroll:hover {
-    background-color: #CD853F;
+    background-color: #D3A18C; /* สีชมพูเข้มขึ้นเมื่อ hover */
     transform: translateY(-3px);
 }
 
 
 /* Details Section (กำหนดการ) */
 .details-section .detail-item {
-    background-color: #fcf6ef;
+    background-color: #FDF9F3; /* สีขาวครีม */
     padding: 25px;
     border-radius: 8px;
     margin-bottom: 25px;
     text-align: left;
-    /* Animation for each detail item when .section.fade-in is present */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03); /* เงาอ่อนลง */
     animation: slideUpFadeIn 0.8s ease-out forwards;
     will-change: opacity, transform;
 }
-/* Staggered delay for multiple detail items if they exist */
 .details-section .detail-item:nth-child(1) { animation-delay: 0.1s; }
 .details-section .detail-item:nth-child(2) { animation-delay: 0.2s; }
 .details-section .detail-item:nth-child(3) { animation-delay: 0.3s; }
@@ -391,12 +386,13 @@ p {
     font-size: 3em;
     text-align: left;
     margin-top: 0;
-    color: #A0522D;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
 }
 
 .details-section .detail-item p {
     font-size: 2em;
     text-align: left;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
 }
 
 /* 4. Map Section (สถานที่จัดงาน) - สไตล์ใหม่ */
@@ -408,12 +404,14 @@ p {
     width: 100%;
     margin: 40px auto;
     box-sizing: border-box;
+    background-color: #FDF9F3; /* สีขาวครีม */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .map-section .location-header {
     margin-bottom: 20px;
     padding: 0 20px;
-    /* Animation for location header when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
     animation-delay: 0.1s;
     will-change: opacity, transform;
@@ -421,7 +419,7 @@ p {
 
 .map-section .location-icon {
     font-size: 2.5em;
-    color: #8B4513;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     margin-bottom: 10px;
     display: block;
 }
@@ -429,7 +427,7 @@ p {
 .map-section .venue-title {
     font-family: 'Roboto', serif;
     font-size: 2.5em;
-    color: #8B4513;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     margin-top: 0;
     margin-bottom: 5px;
 }
@@ -437,7 +435,7 @@ p {
 .map-section .venue-name {
     font-family: 'Sarabun', sans-serif;
     font-size: 1.2em;
-    color: #555;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -452,7 +450,6 @@ p {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    /* Animation for map container when .section.fade-in is present */
     animation: scaleInFadeIn 1s ease-out forwards;
     animation-delay: 0.3s;
     will-change: opacity, transform;
@@ -468,13 +465,12 @@ p {
     text-align: left;
     font-family: 'Sarabun', sans-serif;
     font-size: 1em;
-    color: #555;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
     margin-top: 20px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 20px;
-    /* Animation for address details when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
     animation-delay: 0.5s;
     will-change: opacity, transform;
@@ -485,7 +481,7 @@ p {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    background-color: #8B4513;
+    background-color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
     color: #fff;
     padding: 12px 30px;
     margin-top: 30px;
@@ -496,10 +492,11 @@ p {
     font-weight: bold;
     transition: background-color 0.3s ease;
     will-change: transform;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .direction-button:hover {
-    background-color: #A0522D;
+    background-color: #D3A18C; /* สีชมพูเข้มขึ้นเมื่อ hover */
 }
 
 /* New button for "โอนเงินแล้ว" - same style as direction-button */
@@ -507,7 +504,7 @@ p {
     display: block;
     width: fit-content;
     margin: 20px auto 0 auto;
-    background-color: #8B4513;
+    background-color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
     color: #fff;
     padding: 12px 30px;
     border-radius: 5px;
@@ -519,15 +516,16 @@ p {
     border: none;
     cursor: pointer;
     will-change: transform;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .transfer-button:hover {
-    background-color: #A0522D;
+    background-color: #D3A18C; /* สีชมพูเข้มขึ้นเมื่อ hover */
 }
 
-/* Styling for the new Gemini-powered button in Guestbook */
+/* Styling for the new Gemini-powered button in Guestbook (if used) */
 .gemini-btn {
-    background-color: #4CAF50; /* สีเขียว */
+    background-color: #A08369; /* สีน้ำตาลอ่อนลงเล็กน้อย */
     color: white;
     padding: 15px 25px;
     border: none;
@@ -538,10 +536,11 @@ p {
     margin-top: 10px;
     margin-bottom: 10px;
     will-change: transform;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .gemini-btn:hover {
-    background-color: #66BB6A; /* สีเขียวอ่อนลงเมื่อ hover */
+    background-color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อนเมื่อ hover */
 }
 
 /* Gallery Section (Slider Styling) */
@@ -552,7 +551,9 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    /* Animation for slider container when .section.fade-in is present */
+    background-color: #FFFFFF; /* พื้นหลังสีขาว */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     animation: scaleInFadeIn 1s ease-out forwards;
     animation-delay: 0.1s;
     will-change: opacity, transform;
@@ -579,7 +580,7 @@ p {
     max-height: 600px;
     object-fit: contain;
     border-radius: 8px;
-    background-color: #fcf6ef;
+    background-color: #F8F8F8; /* สีเทาอ่อนมากสำหรับพื้นหลังรูป */
     display: block;
 }
 
@@ -597,7 +598,7 @@ p {
 
 .slider-nav button {
     display: none;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(140, 106, 79, 0.5); /* สีน้ำตาลทองโปร่งแสง */
     color: white;
     border: none;
     padding: 15px 10px;
@@ -612,7 +613,7 @@ p {
 }
 
 .slider-nav button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(140, 106, 79, 0.7); /* สีน้ำตาลทองโปร่งแสงเข้มขึ้น */
     opacity: 1;
 }
 
@@ -622,7 +623,6 @@ p {
     gap: 8px;
     margin-top: 20px;
     padding-bottom: 20px;
-    /* Animation for dots when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
     animation-delay: 0.3s;
     will-change: opacity, transform;
@@ -631,14 +631,15 @@ p {
 .dot {
     width: 12px;
     height: 12px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(140, 106, 79, 0.3); /* สีน้ำตาลทองโปร่งแสง */
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid #A08369; /* สีน้ำตาลอ่อนลงเล็กน้อย */
 }
 
 .dot.active-dot {
-    background-color: #D2B48C;
+    background-color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อนเมื่อ active */
     transform: scale(1.2);
 }
 
@@ -650,23 +651,22 @@ p {
     gap: 15px;
     max-width: 500px;
     margin: 0 auto;
-    /* Animation for form elements when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.1s; /* Start with form elements */
+    animation-delay: 0.1s;
     will-change: opacity, transform;
 }
 
 .rsvp-section label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #6C3400;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
 }
 
 .rsvp-section input[type="text"],
 .rsvp-section input[type="number"],
 .rsvp-section textarea {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #D3D3D3; /* สีเทาอ่อน */
     border-radius: 5px;
     font-size: 1em;
     width: 100%;
@@ -679,7 +679,7 @@ p {
 }
 
 .btn-submit {
-    background-color: #A0522D;
+    background-color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
     color: white;
     padding: 15px 25px;
     border: none;
@@ -689,17 +689,18 @@ p {
     transition: background-color 0.3s ease;
     margin-top: 20px;
     will-change: transform;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .btn-submit:hover {
-    background-color: #CD853F;
+    background-color: #D3A18C; /* สีชมพูเข้มขึ้นเมื่อ hover */
 }
 
 .status-message {
     text-align: center;
     margin-top: 15px;
     font-weight: bold;
-    color: #007bff;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
 }
 
 /* Gift Section */
@@ -717,16 +718,15 @@ p {
 }
 
 .single-gift-box {
-    background-color: #fcf6ef;
+    background-color: #FDF9F3; /* สีขาวครีม */
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* เงาอ่อนลง */
     width: 280px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Animation for the single gift box when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
     animation-delay: 0.1s;
     will-change: opacity, transform;
@@ -736,14 +736,14 @@ p {
     max-width: 195px;
     height: auto;
     margin-bottom: 15px;
-    border: 1px solid #eee;
+    border: 1px solid #EAEAEA; /* สีเทาอ่อนมาก */
     border-radius: 5px;
 }
 
 .single-gift-box .qr-instruction {
     font-size: 1em;
     margin-bottom: 15px;
-    color: #555;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
     text-align: center;
 }
 
@@ -759,10 +759,11 @@ p {
     margin-bottom: 5px;
     text-align: left;
     font-size: 1.1em;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
 }
 
 .bank-details-text p strong {
-    color: #A0522D;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
 }
 
 
@@ -773,7 +774,6 @@ p {
     gap: 15px;
     max-width: 500px;
     margin: 0 auto;
-    /* Animation for guestbook form when .section.fade-in is present */
     animation: slideUpFadeIn 0.8s ease-out forwards;
     animation-delay: 0.1s;
     will-change: opacity, transform;
@@ -782,13 +782,13 @@ p {
 .guestbook-section label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #6C3400;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
 }
 
 .guestbook-section input[type="text"],
 .guestbook-section textarea {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #D3D3D3; /* สีเทาอ่อน */
     border-radius: 5px;
     font-size: 1em;
     width: 100%;
@@ -798,34 +798,33 @@ p {
 
 .guestbook-entries {
     margin-top: 40px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #EEEEEE; /* สีเทาอ่อนมาก */
     padding-top: 20px;
     max-height: 400px;
     overflow-y: auto;
-    /* Animation for guestbook entries list when .section.fade-in is present */
     animation: fadeIn 0.8s ease-out forwards;
     animation-delay: 0.3s;
     will-change: opacity;
 }
 
 .guestbook-entry {
-    background-color: #fcf6ef;
+    background-color: #FDF9F3; /* สีขาวครีม */
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* เงาอ่อนลง */
 }
 
 .guestbook-entry .entry-name {
     font-weight: bold;
-    color: #A0522D;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     margin-bottom: 5px;
     text-align: left;
 }
 
 .guestbook-entry .entry-message {
     font-style: italic;
-    color: #555;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
     text-align: left;
 }
 
@@ -834,11 +833,10 @@ p {
 footer {
     text-align: center;
     padding: 40px 30px;
-    background-color: #D2B48C;
+    background-color: #8C6A4F; /* เปลี่ยนเป็นสีน้ำตาลทอง/ทองแดงอ่อน */
     color: white;
     font-size: 0.9em;
     margin-top: 20px;
-    /* Animation for footer when .section.fade-in is present (if applicable, though usually not on scroll) */
     animation: fadeIn 0.8s ease-out forwards;
     animation-delay: 0.1s;
     will-change: opacity;
@@ -849,7 +847,7 @@ footer {
     position: fixed;
     top: 94vh;
     right: 20px;
-    background-color: #A0522D;
+    background-color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     color: white;
     border: none;
     border-radius: 50%;
@@ -860,14 +858,14 @@ footer {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     z-index: 1000;
     transition: background-color 0.3s ease, transform 0.2s ease;
     will-change: transform;
 }
 
 .music-toggle-btn:hover {
-    background-color: #CD853F;
+    background-color: #A08369; /* สีน้ำตาลอ่อนลงเล็กน้อยเมื่อ hover */
     transform: scale(1.1);
 }
 
@@ -880,12 +878,12 @@ footer {
     transform: translateX(-50%);
     max-width: 500px;
     width: 95%;
-    background-color: #fff;
-    border-top: 1px solid #D2B48C;
+    background-color: #FFFFFF; /* เปลี่ยนเป็นสีขาว */
+    border-top: 1px solid #D3D3D3; /* สีเทาอ่อน */
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     border-radius: 20px 20px 0 0;
     z-index: 999;
-    display: none; /* ซ่อนบนเดสก์ท็อปโดยค่าเริ่มต้น */
+    display: none;
     padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
@@ -918,7 +916,7 @@ footer {
     width: 100%;
     height: 100%;
     text-decoration: none;
-    color: #A0522D;
+    color: #6A6A6A; /* สีเทาอ่อน */
     font-size: 0.8em;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -931,16 +929,16 @@ footer {
 }
 
 .mobile-nav-link:hover {
-    color: #CD853F;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อนเมื่อ hover */
 }
 
 .mobile-nav-link.active-nav {
-    color: #D2B48C;
+    color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์เมื่อ active */
 }
 
 .mobile-nav-link.active-nav i {
     transform: scale(1.1);
-    color: #D2B48C;
+    color: #E1B29D; /* ทำให้ไอคอนเปลี่ยนสีด้วย */
 }
 
 
@@ -949,13 +947,13 @@ footer {
     flex: 0 0 auto;
     position: relative;
     top: -15px;
-    background-color: #A0522D;
+    background-color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน (เพื่อให้เด่นกว่าปุ่มเมนูย่อย) */
     border-radius: 50%;
     width: 70px;
     height: 70px;
     min-width: 70px;
     min-height: 70px;
-    box-shadow: 0 -3px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.2);
     z-index: 1001;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     will-change: transform;
@@ -973,9 +971,9 @@ footer {
 }
 
 .main-nav-button:hover {
-    background-color: #CD853F;
+    background-color: #A08369; /* สีน้ำตาลอ่อนลงเล็กน้อยเมื่อ hover */
     transform: translateY(-18px) scale(1.05);
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
 }
 
 
@@ -1163,14 +1161,14 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4); /* เปลี่ยนเป็นสีดำโปร่งแสงอ่อนลงเล็กน้อย */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    opacity: 0; /* เริ่มต้นซ่อนไว้ */
-    transition: opacity 0.3s ease-out; /* เพิ่ม transition */
-    pointer-events: none; /* ทำให้คลิกผ่านได้เมื่อซ่อนอยู่ */
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
 }
 
 .custom-alert-overlay.hidden {
@@ -1184,27 +1182,27 @@ footer {
 }
 
 .custom-alert-box {
-    background-color: #fff;
+    background-color: #FFFFFF; /* สีขาว */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* เงาอ่อนลงเล็กน้อย */
     text-align: center;
     max-width: 400px;
     width: 90%;
-    transform: translateY(-20px); /* เริ่มต้นที่ต่ำกว่าเล็กน้อย */
-    opacity: 0; /* เริ่มต้นซ่อนไว้ */
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* เพิ่ม transition */
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .custom-alert-overlay:not(.hidden) .custom-alert-box {
-    transform: translateY(0); /* เลื่อนขึ้นเมื่อปรากฏ */
+    transform: translateY(0);
     opacity: 1;
 }
 
 .custom-alert-box p {
     margin-bottom: 20px;
     font-size: 1.1em;
-    color: #333;
+    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
 }
 
 /* Loading Spinner styles */
@@ -1214,13 +1212,13 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7); /* สีขาวโปร่งแสงอ่อนลง */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 10001;
-    opacity: 0; /* เริ่มต้นซ่อนไว้ */
+    opacity: 0;
     transition: opacity 0.3s ease-out;
     pointer-events: none;
 }
@@ -1237,7 +1235,7 @@ footer {
 
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #8B4513;
+    border-left-color: #8C6A4F; /* เปลี่ยนสีสปินเนอร์เป็นสีน้ำตาลทอง/ทองแดงอ่อน */
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -1251,7 +1249,7 @@ footer {
 }
 
 .loading-spinner p {
-    color: #8B4513;
+    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
     font-size: 1.2em;
     font-weight: bold;
 }
