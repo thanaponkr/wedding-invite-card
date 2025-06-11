@@ -148,10 +148,10 @@ p {
     padding: 40px 20px;
     max-width: 960px;
     margin: 40px auto;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform;
+    opacity: 0; /* ซ่อนไว้ก่อนเพื่อทำ fade-in เมื่อ scroll */
+    transform: translateY(20px); /* เริ่มต้นที่ต่ำกว่าเล็กน้อย */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* ปรับ transition */
+    will-change: opacity, transform; /* ช่วยเบราว์เซอร์ในการ render animation */
     background-color: #FFFFFF; /* ส่วนเนื้อหาเป็นสีขาว */
     border-radius: 12px; /* เพิ่มความโค้งมนเล็กน้อย */
     box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* เพิ่มเงาอ่อนๆ */
@@ -173,6 +173,18 @@ p {
     to { opacity: 1; transform: scale(1); }
 }
 
+/* New animations for couple portraits */
+@keyframes slideInFromLeftFadeIn {
+    from { opacity: 0; transform: translateX(-100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromRightFadeIn {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+
 /* ข้อความ "THE HONOUR OF YOUR PRESENCE IS REQUESTED..." */
 .honor-text {
     font-family: 'Playfair+Display', serif;
@@ -186,7 +198,7 @@ p {
     margin-left: auto;
     margin-right: auto;
     animation: slideUpFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.1s;
+    animation-delay: 0.1s; /* หน่วงเวลาเล็กน้อย */
     will-change: opacity, transform;
 }
 
@@ -202,9 +214,18 @@ p {
 
 .portrait-item {
     text-align: center;
-    animation: scaleInFadeIn 0.8s ease-out forwards;
-    animation-delay: 0.3s;
+    /* Generic animation removed. Specific animations applied below. */
     will-change: opacity, transform;
+}
+
+.portrait-item.portrait-may {
+    animation: slideInFromLeftFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.3s; /* หน่วงเวลาเล็กน้อย */
+}
+
+.portrait-item.portrait-toey {
+    animation: slideInFromRightFadeIn 0.8s ease-out forwards;
+    animation-delay: 0.3s; /* หน่วงเวลาเล็กน้อย */
 }
 
 .portrait-img {
@@ -243,9 +264,9 @@ p {
     color: #E1B29D; /* สีชมพูอ่อน/โรสโกลด์ */
     font-weight: bold;
     margin: 0 10px;
-    display: block;
+    /* Animation applied when .section.fade-in is present */
     animation: fadeIn 0.8s ease-out forwards;
-    animation-delay: 0.5s;
+    animation-delay: 0.5s; /* หน่วงเวลาเล็กน้อย */
     will-change: opacity;
 }
 
@@ -407,6 +428,9 @@ p {
     background-color: #FDF9F3; /* สีขาวครีม */
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    animation: scaleInFadeIn 1s ease-out forwards;
+    animation-delay: 0.1s;
+    will-change: opacity, transform;
 }
 
 .map-section .location-header {
@@ -1161,7 +1185,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* เปลี่ยนเป็นสีดำโปร่งแสงอ่อนลงเล็กน้อย */
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1182,10 +1206,10 @@ footer {
 }
 
 .custom-alert-box {
-    background-color: #FFFFFF; /* สีขาว */
+    background-color: #FFFFFF;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* เงาอ่อนลงเล็กน้อย */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     max-width: 400px;
     width: 90%;
@@ -1202,7 +1226,7 @@ footer {
 .custom-alert-box p {
     margin-bottom: 20px;
     font-size: 1.1em;
-    color: #4A4A4A; /* สีเทาเข้มกลางๆ */
+    color: #4A4A4A;
 }
 
 /* Loading Spinner styles */
@@ -1212,7 +1236,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); /* สีขาวโปร่งแสงอ่อนลง */
+    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1235,7 +1259,7 @@ footer {
 
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #8C6A4F; /* เปลี่ยนสีสปินเนอร์เป็นสีน้ำตาลทอง/ทองแดงอ่อน */
+    border-left-color: #8C6A4F; /* สีสปินเนอร์ */
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -1249,7 +1273,7 @@ footer {
 }
 
 .loading-spinner p {
-    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน */
+    color: #8C6A4F;
     font-size: 1.2em;
     font-weight: bold;
 }
