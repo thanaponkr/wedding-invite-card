@@ -261,11 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 10. "โอนเงินแล้ว" Button Functionality ---
+    // --- 10. "รับของขวัญ" Button Functionality ---
     const transferButton = document.querySelector('.transfer-button');
     if (transferButton) {
         transferButton.addEventListener('click', () => {
-            showAlert('ขอบคุณสำหรับการร่วมแสดงความยินดีค่ะ! ทางบ่าวสาวได้รับทราบแล้วนะคะ');
+            // Changed from showAlert to direct navigation
+            window.location.href = 'guestbook.html';
         });
     }
 });
