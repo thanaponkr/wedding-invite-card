@@ -285,7 +285,131 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 11. Guestbook Form Submission (New Functionality) ---
+    // --- 11. Guestbook Form Address Dropdowns (New Functionality) ---
+
+    // Simplified Thai address data (Province -> District -> SubDistrict -> Postal Code)
+    // NOTE: This is a very small sample. For full functionality, you'd need a comprehensive
+    // external JSON file or API for all Thai addresses.
+    const thaiAddresses = {
+        "กรุงเทพมหานคร": {
+            "เขตจตุจักร": {
+                "จอมพล": "10900",
+                "จตุจักร": "10900",
+                "ลาดยาว": "10900",
+                "เสนานิคม": "10900"
+            },
+            "เขตดินแดง": {
+                "ดินแดง": "10400",
+                "บางซื่อ": "10400"
+            },
+            "เขตบางซื่อ": {
+                "บางซื่อ": "10800",
+                "วงศ์สว่าง": "10800"
+            }
+        },
+        "เชียงใหม่": {
+            "อำเภอเมืองเชียงใหม่": {
+                "ช้างเผือก": "50300",
+                "ศรีภูมิ": "50200",
+                "สุเทพ": "50200"
+            },
+            "อำเภอหางดง": {
+                "หางดง": "50230",
+                "บ้านแหวน": "50230"
+            }
+        },
+        "ชลบุรี": {
+            "อำเภอเมืองชลบุรี": {
+                "บางปลาสร้อย": "20000",
+                "หนองรี": "20000"
+            },
+            "อำเภอศรีราชา": {
+                "ศรีราชา": "20110",
+                "สุรศักดิ์": "20110"
+            }
+        },
+        "ภูเก็ต": {
+            "อำเภอเมืองภูเก็ต": {
+                "ตลาดใหญ่": "83000",
+                "ตลาดเหนือ": "83000"
+            }
+        }
+    };
+
+    const provinceSelect = document.getElementById('provinceSelect');
+    const districtSelect = document.getElementById('districtSelect');
+    const subDistrictSelect = document.getElementById('subDistrictSelect');
+    const postalCodeInput = document.getElementById('postalCode');
+
+    // Function to populate dropdowns
+    function populateDropdown(selectElement, options, defaultText) {
+        selectElement.innerHTML = `<option value="">${defaultText}</option>`;
+        selectElement.disabled = !options || options.length === 0;
+        if (options) {
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                selectElement.appendChild(opt);
+            });
+        }
+    }
+
+    // Populate Provinces on load
+    if (provinceSelect) {
+        const provinces = Object.keys(thaiAddresses).sort();
+        populateDropdown(provinceSelect, provinces, 'เลือกจังหวัด');
+
+        provinceSelect.addEventListener('change', () => {
+            const selectedProvince = provinceSelect.value;
+            districtSelect.value = ""; // Reset district
+            subDistrictSelect.value = ""; // Reset sub-district
+            postalCodeInput.value = ""; // Reset postal code
+
+            if (selectedProvince) {
+                const districts = Object.keys(thaiAddresses[selectedProvince]).sort();
+                populateDropdown(districtSelect, districts, 'เลือกอำเภอ/เขต');
+            } else {
+                populateDropdown(districtSelect, [], 'เลือกอำเภอ/เขต');
+            }
+            populateDropdown(subDistrictSelect, [], 'เลือกตำบล/แขวง'); // Disable sub-district
+        });
+    }
+
+    // Populate Districts when province changes
+    if (districtSelect) {
+        districtSelect.addEventListener('change', () => {
+            const selectedProvince = provinceSelect.value;
+            const selectedDistrict = districtSelect.value;
+            subDistrictSelect.value = ""; // Reset sub-district
+            postalCodeInput.value = ""; // Reset postal code
+
+            if (selectedProvince && selectedDistrict) {
+                const subDistricts = Object.keys(thaiAddresses[selectedProvince][selectedDistrict]).sort();
+                populateDropdown(subDistrictSelect, subDistricts, 'เลือกตำบล/แขวง');
+            } else {
+                populateDropdown(subDistrictSelect, [], 'เลือกตำบล/แขวง');
+            }
+        });
+    }
+
+    // Update Postal Code when sub-district changes
+    if (subDistrictSelect) {
+        subDistrictSelect.addEventListener('change', () => {
+            const selectedProvince = provinceSelect.value;
+            const selectedDistrict = districtSelect.value;
+            const selectedSubDistrict = subDistrictSelect.value;
+
+            if (selectedProvince && selectedDistrict && selectedSubDistrict) {
+                postalCodeInput.value = thaiAddresses[selectedProvince][selectedDistrict][selectedSubDistrict];
+            } else {
+                postalCodeInput.value = "";
+            }
+        });
+    }
+
+
+    // --- 12. Guestbook Form Submission (Updated for new fields) ---
     const guestbookForm = document.getElementById('guestbookForm');
     const guestbookStatus = document.getElementById('guestbookStatus');
 
@@ -295,15 +419,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showLoading(); // Show loading spinner
 
+            const guestbookName = document.getElementById('guestbookName').value;
             const receiverName = document.getElementById('receiverName').value;
             const contactNumber = document.getElementById('contactNumber').value;
             const province = document.getElementById('provinceSelect').value;
+            const district = document.getElementById('districtSelect').value;
+            const subDistrict = document.getElementById('subDistrictSelect').value;
+            const postalCode = document.getElementById('postalCode').value;
             const wishMessage = document.getElementById('wishMessage').value;
 
             // Simulate sending data to backend (e.g., Google Sheet)
             // In a real application, you would make a fetch() request to your backend endpoint here.
+            // Example of a fetch request (requires a backend endpoint configured to receive this data):
             /*
-            Example of a fetch request (requires a backend endpoint configured to receive this data):
             try {
                 const response = await fetch('/your-backend-api-for-guestbook-submission', {
                     method: 'POST',
@@ -311,9 +439,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        guestbookName,
                         receiverName,
                         contactNumber,
                         province,
+                        district,
+                        subDistrict,
+                        postalCode,
                         wishMessage
                     })
                 });
@@ -345,6 +477,10 @@ document.addEventListener('DOMContentLoaded', () => {
             guestbookStatus.textContent = 'ส่งคำอวยพรสำเร็จ! ขอบคุณค่ะ/ครับ';
             guestbookStatus.style.color = '#8C6A4F'; // Themed color
             guestbookForm.reset(); // Reset the form after submission
+            // Reset dropdowns and postal code after form reset
+            populateDropdown(districtSelect, [], 'เลือกอำเภอ/เขต');
+            populateDropdown(subDistrictSelect, [], 'เลือกตำบล/แขวง');
+            postalCodeInput.value = "";
         });
     }
 });
