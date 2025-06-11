@@ -3,59 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สมุดอวยพร - เมย์ & เต้ย</title>
+    <title>สมุดประสาทพร - เมย์ & เต้ย</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font จาก Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome สำหรับไอคอน -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
+    <!-- Audio for background music (same as index.html, optional depending on design) -->
+    <audio id="backgroundMusic" loop>
+        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Toggle Button (same as index.html) -->
+    <button id="musicToggle" class="music-toggle-btn">
+        <i class="fas fa-music"></i>
+    </button>
+
     <main>
-        <!-- 7. สมุดอวยพร (Guestbook) -->
         <section id="guestbook-section" class="section guestbook-section">
-            <!-- หัวข้อใหม่ตามที่คุณต้องการ -->
-            <h2>กรุณาใส่ชื่อที่อยู่ เพื่อที่เมย์และเต้ย ส่งมอบของที่ระลึกไปให้นะคะ/ครับ</h2>
-            <!-- ข้อความแนะนำใหม่ -->
-            <p>กรุณากรอกข้อมูลและคำอวยพรด้านล่างนี้ เพื่อให้บ่าวสาวจัดส่งของที่ระลึกไปให้ท่านค่ะ/ครับ</p>
+            <h2>สมุดประสาทพร</h2>
+            <p>กรุณาฝากข้อความอวยพรสำหรับบ่าวสาว</p>
             <form id="guestbookForm">
                 <label for="guestbookName">ชื่อ-นามสกุล:</label>
                 <input type="text" id="guestbookName" name="guestbookName" required>
 
-                <!-- เพิ่มช่องกรอกที่อยู่ -->
-                <label for="guestbookAddress">ที่อยู่ (พร้อมรหัสไปรษณีย์):</label>
-                <input type="text" id="guestbookAddress" name="guestbookAddress" required>
+                <label for="guestbookMessage">คำอวยพร:</label>
+                <textarea id="guestbookMessage" name="guestbookMessage" rows="5" required></textarea>
 
-                <!-- เพิ่มช่องกรอกเบอร์โทรติดต่อ -->
-                <label for="guestbookPhone">เบอร์โทรติดต่อ:</label>
-                <input type="text" id="guestbookPhone" name="guestbookPhone" required>
-
-                <label for="guestbookMessage">คำอวยพร (ไม่บังคับ):</label>
-                <textarea id="guestbookMessage" name="guestbookMessage" rows="5"></textarea>
-
-                <!-- New button for generating wish using LLM (if you want this back, it will need script.js update too) -->
-                <!-- <button type="button" id="generate-wish-btn" class="btn-submit gemini-btn">✨ สร้างคำอวยพร</button> -->
-
-                <!-- เปลี่ยนข้อความปุ่มส่ง -->
-                <button type="submit" class="btn-submit">ส่งข้อมูลและคำอวยพร</button>
+                <button type="submit" class="btn-submit gemini-btn">ส่งคำอวยพร</button>
                 <p id="guestbookStatus" class="status-message"></p>
             </form>
-            <div class="guestbook-entries" id="guestbookEntries">
-                <!-- คำอวยพรจะแสดงที่นี่ -->
+
+            <!-- Removed: ไม่ต้องแสดงคำอวยพรที่ถูกส่งมา -->
+            <!-- <div class="guestbook-entries">
+                <h3>คำอวยพรจากแขกท่านอื่น</h3>
                 <div class="guestbook-entry">
-                    <p class="entry-name">คุณพ่อคุณแม่</p>
-                    <p class="entry-address">ที่อยู่: 123/45 ถนนรักหวาน หมู่บ้านสุขใจ 10000</p>
-                    <p class="entry-phone">โทร: 081-123-4567</p>
-                    <p class="entry-message">ขอให้ลูกทั้งสองมีความสุขมากๆ รักกันตลอดไปนะจ๊ะ</p>
+                    <p class="entry-name">คุณ... & คุณ...</p>
+                    <p class="entry-message">ขอแสดงความยินดีกับบ่าวสาวด้วยนะคะ/ครับ</p>
                 </div>
-                <div class="guestbook-entry">
-                    <p class="entry-name">เพื่อนซี้</p>
-                    <p class="entry-address">ที่อยู่: 987/65 ถนนมิตรภาพ แขวงสามัคคี 20000</p>
-                    <p class="entry-phone">โทร: 098-765-4321</p>
-                    <p class="entry-message">ยินดีด้วยนะเพื่อน! ขอให้ชีวิตคู่มีแต่ความหวานชื่น</p>
-                </div>
-            </div>
+            </div> -->
         </section>
     </main>
 
@@ -63,14 +51,7 @@
         <p>© 2025 เมย์ & เต้ย. All Rights Reserved.</p>
     </footer>
 
-    <!-- Audio Player (ซ่อนไว้และควบคุมด้วย JS) -->
-    <audio id="backgroundMusic" loop>
-        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <button id="musicToggle" class="music-toggle-btn"><i class="fas fa-music"></i></button>
-
-    <!-- Mobile Navigation Bar -->
+    <!-- Mobile Navigation Bar (same as index.html) -->
     <nav class="mobile-nav">
         <ul class="mobile-nav-list">
             <li class="mobile-nav-item">
@@ -92,9 +73,9 @@
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <a href="guestbook.html" class="mobile-nav-link active-nav">
+                <a href="guestbook.html" class="mobile-nav-link active-nav"> <!-- ตั้งเป็น active สำหรับหน้านี้ -->
                     <i class="fas fa-book-open"></i>
-                    <span>QR CODE</span>
+                    <span>Guestbook</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
@@ -105,6 +86,20 @@
             </li>
         </ul>
     </nav>
+
+    <!-- Custom Alert/Modal Structure (same as index.html) -->
+    <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
+        <div class="custom-alert-box">
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-close-btn" class="btn-submit">ปิด</button>
+        </div>
+    </div>
+
+    <!-- Loading Spinner (same as index.html) -->
+    <div id="loading-spinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>กำลังประมวลผล...</p>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -163,27 +163,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 5. Mobile Navigation Active State on Scroll ---
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    const mainSections = document.querySelectorAll('main > section'); // Select all direct child sections of main
+    // For guestbook.html, we need to consider links back to index.html sections
+    const mainSections = document.querySelectorAll('main > section'); 
 
     const updateMobileNavActiveState = () => {
-        let currentActiveSectionId = 'hero-section'; // Default to home/hero
+        let currentActiveSectionId = ''; // Default to empty
 
-        mainSections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            // Adjust sensitivity: when section is about 30% from the top of the viewport
-            if (window.scrollY >= sectionTop - window.innerHeight * 0.3 && window.scrollY < sectionTop + sectionHeight - window.innerHeight * 0.3) {
-                currentActiveSectionId = section.id;
+        // If on guestbook.html, highlight the guestbook link
+        if (window.location.pathname.endsWith('guestbook.html')) {
+            currentActiveSectionId = 'guestbook.html';
+        } else {
+            // Logic for index.html sections
+            mainSections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - window.innerHeight * 0.3 && window.scrollY < sectionTop + sectionHeight - window.innerHeight * 0.3) {
+                    currentActiveSectionId = section.id;
+                }
+            });
+            // Special case for hero section when near the very top of index.html
+            if (window.location.pathname.endsWith('index.html') && window.scrollY < 100) {
+                 currentActiveSectionId = 'hero-section';
+            } else if (window.location.pathname === '/') { // For root path
+                if (window.scrollY < 100) {
+                    currentActiveSectionId = 'hero-section';
+                }
             }
-        });
+        }
+
 
         mobileNavLinks.forEach(link => {
             link.classList.remove('active-nav');
-            const targetId = link.getAttribute('href').substring(1); // Get target section ID from href
-            if (targetId === currentActiveSectionId) {
+            const href = link.getAttribute('href');
+            // Check for direct match or section hash
+            if (href === 'guestbook.html' && currentActiveSectionId === 'guestbook.html') {
                 link.classList.add('active-nav');
-            } else if (targetId === 'hero-section' && window.scrollY < 100) {
-                // Special case for hero section when near the very top
+            } else if (href.includes('#') && href.substring(href.indexOf('#') + 1) === currentActiveSectionId) {
                 link.classList.add('active-nav');
             }
         });
@@ -265,8 +280,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const transferButton = document.querySelector('.transfer-button');
     if (transferButton) {
         transferButton.addEventListener('click', () => {
-            // Changed from showAlert to direct navigation
+            // Changed to direct navigation to guestbook.html
             window.location.href = 'guestbook.html';
+        });
+    }
+
+    // --- 11. Guestbook Form Submission (New Functionality) ---
+    const guestbookForm = document.getElementById('guestbookForm');
+    const guestbookStatus = document.getElementById('guestbookStatus');
+
+    if (guestbookForm) {
+        guestbookForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            showLoading(); // Show loading spinner
+
+            const name = document.getElementById('guestbookName').value;
+            const message = document.getElementById('guestbookMessage').value;
+
+            // Simulate sending data to backend (e.g., Google Sheet)
+            // In a real application, you would make a fetch() request to your backend endpoint here.
+            /*
+            try {
+                const response = await fetch('/your-backend-api-for-guestbook-submission', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, message })
+                });
+
+                if (response.ok) {
+                    showAlert('ขอบคุณสำหรับคำอวยพรค่ะ/ครับ! คำอวยพรของท่านได้ถูกส่งเรียบร้อยแล้ว และจะถูกเก็บเป็นความลับเพื่อบ่าวสาวโดยเฉพาะค่ะ');
+                    guestbookStatus.textContent = 'ส่งคำอวยพรสำเร็จ! ขอบคุณค่ะ/ครับ';
+                    guestbookStatus.style.color = '#8C6A4F';
+                    guestbookForm.reset(); // Reset the form after successful submission
+                } else {
+                    showAlert('เกิดข้อผิดพลาดในการส่งคำอวยพร กรุณาลองอีกครั้ง');
+                    guestbookStatus.textContent = 'เกิดข้อผิดพลาด';
+                    guestbookStatus.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error submitting guestbook:', error);
+                showAlert('เกิดข้อผิดพลาดในการส่งคำอวยพร กรุณาลองอีกครั้ง');
+                guestbookStatus.textContent = 'เกิดข้อผิดพลาด';
+                guestbookStatus.style.color = 'red';
+            }
+            */
+
+            // For now, simulate success with a delay and show a confirmation message
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2-second delay
+
+            hideLoading(); // Hide loading spinner
+
+            showAlert('ขอบคุณสำหรับคำอวยพรค่ะ/ครับ! คำอวยพรของท่านได้ถูกส่งเรียบร้อยแล้ว และจะถูกเก็บเป็นความลับเพื่อบ่าวสาวโดยเฉพาะค่ะ');
+            guestbookStatus.textContent = 'ส่งคำอวยพรสำเร็จ! ขอบคุณค่ะ/ครับ';
+            guestbookStatus.style.color = '#8C6A4F'; // Themed color
+            guestbookForm.reset(); // Reset the form after submission
         });
     }
 });
