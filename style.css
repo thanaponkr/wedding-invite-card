@@ -846,7 +846,7 @@ footer {
     background-color: #FDF9F3; /* เปลี่ยนเป็นสีเดียวกับ background-color ของ body */
     color: #4A4A4A; /* ใช้สีข้อความทั่วไปที่เข้ากันได้ */
     font-size: 0.9em;
-    margin-top: 20px;
+    margin-top: -80px; /* ปรับลดลง 60% จาก 20px (20 * 0.4 = 8) */
     animation: fadeIn 0.8s ease-out forwards; /* Direct animation */
     animation-delay: 0.1s;
     will-change: opacity;
