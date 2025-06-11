@@ -46,9 +46,9 @@ p {
 
 /* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
 .hero-section {
-    /* Removed: background: url('images/hero-floral-frame.jpg') no-repeat center center; */ /* ลบรูปภาพพื้นหลังออก */
-    /* Removed: background-size: cover; */ /* ลบคุณสมบัติ background-size ออก */
-    background-color: transparent; /* ทำให้โปร่งใสเพื่อใช้สีพื้นหลังจาก body */
+    background: url('images/hero-floral-frame.jpg') no-repeat center center; /* นำรูปภาพพื้นหลังกลับมา */
+    background-size: cover; /* นำคุณสมบัติ background-size กลับมา */
+    /* Removed: background-color: transparent; */ /* ลบ background-color ออก */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -57,7 +57,7 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: white; /* ข้อความในส่วน Hero ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลังถ้ามีสีเข้ม */
+    color: white; /* ข้อความในส่วน Hero ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลังรูปภาพ */
     /* Initial hero section animation on page load */
     animation: heroBackgroundFadeIn 1.5s ease-out forwards;
 }
