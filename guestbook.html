@@ -26,10 +26,6 @@
             <h2>สมุดประสาทพร</h2>
             <p>กรุณาฝากข้อความอวยพรสำหรับบ่าวสาว</p>
             <form id="guestbookForm">
-                <!-- Removed "ชื่อ-นามสกุล ผู้ส่ง" field -->
-                <!-- <label for="guestbookName">ชื่อ-นามสกุล ผู้ส่ง:</label>
-                <input type="text" id="guestbookName" name="guestbookName" required> -->
-
                 <label for="receiverName">ชื่อ-นามสกุล ผู้รับ (หากต้องการให้บ่าวสาวมอบของขวัญให้ถูกคน):</label>
                 <input type="text" id="receiverName" name="receiverName" required>
 
@@ -37,26 +33,8 @@
                 <input type="tel" id="contactNumber" name="contactNumber" pattern="[0-9]{10}" placeholder="08XXXXXXXX" required>
                 <small>กรุณากรอกเบอร์โทร 10 หลัก (ไม่มีขีด)</small>
 
-                <label for="provinceSelect">จังหวัด:</label>
-                <select id="provinceSelect" name="province" required>
-                    <option value="">เลือกจังหวัด</option>
-                    <!-- Options will be populated by JavaScript -->
-                </select>
-
-                <label for="districtSelect">อำเภอ/เขต:</label>
-                <select id="districtSelect" name="district" required disabled>
-                    <option value="">เลือกอำเภอ/เขต</option>
-                    <!-- Options will be populated by JavaScript -->
-                </select>
-
-                <label for="subDistrictSelect">ตำบล/แขวง:</label>
-                <select id="subDistrictSelect" name="subDistrict" required disabled>
-                    <option value="">เลือกตำบล/แขวง</option>
-                    <!-- Options will be populated by JavaScript -->
-                </select>
-
-                <label for="postalCode">รหัสไปรษณีย์:</label>
-                <input type="text" id="postalCode" name="postalCode" readonly> <!-- Readonly as it's auto-filled -->
+                <label for="addressText">ที่อยู่:</label>
+                <textarea id="addressText" name="addressText" rows="3" required></textarea>
 
                 <label for="wishMessage">คำอวยพร:</label>
                 <textarea id="wishMessage" name="wishMessage" rows="5" required></textarea>
