@@ -169,44 +169,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateMobileNavActiveState = () => {
         let currentActiveSectionId = ''; // Default to empty
 
-        // Logic for index.html sections based on scroll position
-        if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+        // If on guestbook.html, highlight the guestbook link
+        if (window.location.pathname.endsWith('guestbook.html')) {
+            currentActiveSectionId = 'guestbook.html';
+        } else {
+            // Logic for index.html sections
             mainSections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                // Adjust sensitivity: when section is about 30% from the top of the viewport
                 if (window.scrollY >= sectionTop - window.innerHeight * 0.3 && window.scrollY < sectionTop + sectionHeight - window.innerHeight * 0.3) {
                     currentActiveSectionId = section.id;
                 }
             });
             // Special case for hero section when near the very top of index.html
-            if (window.scrollY < 100) {
+            if (window.location.pathname.endsWith('index.html') && window.scrollY < 100) {
                  currentActiveSectionId = 'hero-section';
+            } else if (window.location.pathname === '/') { // For root path
+                if (window.scrollY < 100) {
+                    currentActiveSectionId = 'hero-section';
+                }
             }
-        } else if (window.location.pathname.endsWith('guestbook.html')) {
-            // If on guestbook.html, no section will be "active" from index.html sections
-            // But we need to ensure no link is active unless explicitly clicked or scrolled.
-            // For QR Code/Gift button, it will be active only if it leads to the currently viewed section.
-            // Since guestbook.html has no sections matching index.html, no link will be active unless handled otherwise.
         }
+
 
         mobileNavLinks.forEach(link => {
             link.classList.remove('active-nav');
             const href = link.getAttribute('href');
-            let targetId = '';
-
-            // Extract section ID from href, handling both direct #section and index.html#section
-            if (href.includes('#')) {
-                targetId = href.substring(href.indexOf('#') + 1);
-            } else if (href.endsWith('guestbook.html') && window.location.pathname.endsWith('guestbook.html')) {
-                // This specific condition is no longer strictly needed for the 'QR Code' button
-                // as its href now points to index.html#gift-section.
-                // Keeping it as a placeholder for potential future direct page links if needed.
-                targetId = 'guestbook.html'; // For actual guestbook.html page (if it was a direct link)
-            }
-            
-            // Activate link if its target ID matches the current active section ID
-            if (targetId && targetId === currentActiveSectionId) {
+            // Check for direct match or section hash
+            if (href === 'guestbook.html' && currentActiveSectionId === 'guestbook.html') {
+                link.classList.add('active-nav');
+            } else if (href.includes('#') && href.substring(href.indexOf('#') + 1) === currentActiveSectionId) {
                 link.classList.add('active-nav');
             }
         });
@@ -285,13 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 10. "รับของขวัญ" Button Functionality ---
-    // This button was on index.html to navigate to guestbook.html.
-    // The user's request is now for the *navigation* button to go to the gift section.
-    // Keeping this transferButton as is, as it's separate from the navigation bar.
     const transferButton = document.querySelector('.transfer-button');
     if (transferButton) {
         transferButton.addEventListener('click', () => {
-            window.location.href = 'guestbook.html'; // Still navigates to guestbook.html
+            // Changed to direct navigation to guestbook.html
+            window.location.href = 'guestbook.html';
         });
     }
 
