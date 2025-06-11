@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showLoading(); // Show loading spinner
 
-            const guestbookName = document.getElementById('guestbookName').value;
+            // Removed guestbookName as it's no longer in the HTML form
             const receiverName = document.getElementById('receiverName').value;
             const contactNumber = document.getElementById('contactNumber').value;
             const province = document.getElementById('provinceSelect').value;
@@ -439,7 +439,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        guestbookName,
                         receiverName,
                         contactNumber,
                         province,
