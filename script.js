@@ -295,19 +295,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showLoading(); // Show loading spinner
 
-            const name = document.getElementById('guestbookName').value;
-            const message = document.getElementById('guestbookMessage').value;
+            const receiverName = document.getElementById('receiverName').value;
+            const contactNumber = document.getElementById('contactNumber').value;
+            const province = document.getElementById('provinceSelect').value;
+            const wishMessage = document.getElementById('wishMessage').value;
 
             // Simulate sending data to backend (e.g., Google Sheet)
             // In a real application, you would make a fetch() request to your backend endpoint here.
             /*
+            Example of a fetch request (requires a backend endpoint configured to receive this data):
             try {
                 const response = await fetch('/your-backend-api-for-guestbook-submission', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ name, message })
+                    body: JSON.stringify({
+                        receiverName,
+                        contactNumber,
+                        province,
+                        wishMessage
+                    })
                 });
 
                 if (response.ok) {
