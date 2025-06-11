@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #FDF9F3; /* สีขาวครีม/งาช้าง อบอุ่น */
+    background-color: #FDF9F3; /* สีขาวครีม/งาช้าง อบอุ่น - เป็นสีพื้นหลังหลักของทั้งเว็บ */
     color: #4A4A4A; /* สีเทาเข้มกลางๆ สำหรับข้อความทั่วไป */
     line-height: 1.6;
     scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
@@ -46,9 +46,9 @@ p {
 
 /* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
 .hero-section {
-    /* พื้นหลังรูปภาพ floral frame อาจจะต้องเปลี่ยนเป็นแบบขาวดำ หรือปรับโทนสีใน Photoshop */
-    background: url('images/hero-floral-frame.jpg') no-repeat center center;
-    background-size: cover;
+    /* Removed: background: url('images/hero-floral-frame.jpg') no-repeat center center; */ /* ลบรูปภาพพื้นหลังออก */
+    /* Removed: background-size: cover; */ /* ลบคุณสมบัติ background-size ออก */
+    background-color: transparent; /* ทำให้โปร่งใสเพื่อใช้สีพื้นหลังจาก body */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -57,7 +57,7 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: white; /* ข้อความในส่วน Hero ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลังรูปภาพ */
+    color: white; /* ข้อความในส่วน Hero ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลังถ้ามีสีเข้ม */
     /* Initial hero section animation on page load */
     animation: heroBackgroundFadeIn 1.5s ease-out forwards;
 }
@@ -141,9 +141,9 @@ p {
     padding: 40px 20px;
     max-width: 960px;
     margin: 40px auto;
-    background-color: #FFFFFF;
+    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     border-radius: 12px;
-    /* Removed: box-shadow: 0 4px 20px rgba(0,0,0,0.05); */ /* เงาใต้พื้นหลังถูกลบออก */
+    box-shadow: none; /* ลบเงาออก */
 
     /* Sections themselves are visible by default, their content animates */
     opacity: 1; /* Ensure section is visible */
@@ -369,10 +369,10 @@ p {
 
 /* Details Section (กำหนดการ) */
 .details-section .detail-item {
-    background-color: #FDF9F3;
+    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03); /* คงเงาเล็กน้อยสำหรับ item ย่อย */
+    box-shadow: none; /* ลบเงาออก */
     margin-bottom: 25px;
     text-align: left;
     animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
@@ -406,9 +406,9 @@ p {
     width: 100%;
     margin: 40px auto;
     box-sizing: border-box;
-    background-color: #FDF9F3;
+    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     border-radius: 12px;
-    /* Removed: box-shadow: 0 4px 20px rgba(0,0,0,0.05); */ /* เงาใต้พื้นหลังถูกลบออก */
+    box-shadow: none; /* ลบเงาออก */
 }
 
 .map-section .location-header {
@@ -450,7 +450,7 @@ p {
     margin-left: auto;
     margin-right: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* คงเงาบน map container */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* คงเงาบน map container ไว้เพื่อให้แผนที่ดูเด่นขึ้น */
     overflow: hidden;
     animation: scaleInFadeIn 1s ease-out forwards; /* Direct animation */
     animation-delay: 0.3s;
@@ -553,9 +553,9 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    background-color: #FFFFFF;
+    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* คงเงาบน slider container */
+    box-shadow: none; /* ลบเงาออก */
     animation: scaleInFadeIn 1s ease-out forwards; /* Direct animation */
     animation-delay: 0.1s;
     will-change: opacity, transform;
@@ -582,7 +582,7 @@ p {
     max-height: 600px;
     object-fit: contain;
     border-radius: 8px;
-    background-color: #F8F8F8;
+    background-color: #F8F8F8; /* ยังคงมีพื้นหลังสีเทาอ่อนสำหรับรูปภาพแต่ละรูปในสไลเดอร์ */
     display: block;
 }
 
@@ -593,7 +593,6 @@ p {
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
-    /* Removed: padding: 0 10px; */
     box-sizing: border-box;
     pointer-events: none;
 }
@@ -720,10 +719,10 @@ p {
 }
 
 .single-gift-box {
-    background-color: #FDF9F3;
+    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* คงเงาบนกล่อง gift box */
+    box-shadow: none; /* ลบเงาออก */
     width: 280px;
     text-align: center;
     display: flex;
@@ -819,10 +818,10 @@ p {
 }
 
 .guestbook-entry {
-    background-color: #FDF9F3;
+    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* คงเงาบน guestbook entry */
+    box-shadow: none; /* ลบเงาออก */
     margin-bottom: 15px;
 }
 
@@ -889,7 +888,7 @@ footer {
     transform: translateX(-50%);
     max-width: 500px;
     width: 95%;
-    background-color: #FFFFFF;
+    background-color: #FFFFFF; /* ส่วน navigation bar ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลัง body และเห็นชัดเจน */
     border-top: 1px solid #D3D3D3;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     border-radius: 20px 20px 0 0;
