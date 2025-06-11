@@ -593,7 +593,7 @@ p {
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
-    /* Removed: padding: 0 10px; */ /* Removed this line for better balance */
+    /* Removed: padding: 0 10px; */
     box-sizing: border-box;
     pointer-events: none;
 }
@@ -1039,7 +1039,7 @@ footer {
         z-index: 20;
     }
     .slider-nav .prev-slide {
-        left: 20px;
+        left: 0px; /* Changed from 20px to 0px for more flush left position */
     }
     .slider-nav .next-slide {
         right: 20px;
