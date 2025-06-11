@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Countdown Timer ---
     const countdownElement = document.getElementById('countdown');
     if (countdownElement) {
+        // ตั้งค่าวันแต่งงาน (เปลี่ยนเป็นวันที่แท้จริงของคุณ: ปี, เดือน(0-11), วัน, ชั่วโมง, นาที, วินาที)
         const weddingDate = new Date('July 28, 2025 07:30:00').getTime();
 
         const updateCountdown = () => {
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 countdownElement.innerHTML = "<div class='countdown-modern'><span class='value'>งานแต่งงานได้เริ่มต้นขึ้นแล้ว!</span></div>"; // Wedding has started!
                 clearInterval(countdownInterval); // Stop countdown
             } else {
+                // คำนวณเป็น วัน ชั่วโมง นาที วินาที
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -82,16 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. Scroll to Schedule Button ---
-    const scrollToScheduleBtn = document.getElementById('scrollToSchedule');
-    if (scrollToScheduleBtn) {
-        scrollToScheduleBtn.addEventListener('click', () => {
-            const scheduleSection = document.getElementById('schedule-section');
-            if (scheduleSection) {
-                scheduleSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
+    // --- 3. Scroll to Schedule Button (Removed as button is removed from HTML) ---
+    // The previous code block for 'scrollToScheduleBtn' has been completely removed.
+    // This section is commented out to reflect its removal in the HTML.
 
     // --- 4. Gallery Slider Functionality ---
     const sliderWrapper = document.querySelector('.slider-wrapper');
@@ -102,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sliderWrapper && prevButton && nextButton && sliderDotsContainer) {
         const slides = document.querySelectorAll('.slide');
         let currentIndex = 0;
-        const slidesPerView = window.innerWidth <= 768 ? 1 : 3; // 1 slide for mobile, 3 for desktop
+        let slidesPerView = window.innerWidth <= 768 ? 1 : 3; // 1 slide for mobile, 3 for desktop
 
         // Function to create dots
         const createDots = () => {
@@ -152,12 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update slider on window resize to adjust slidesPerView and position
         window.addEventListener('resize', () => {
-            // Re-calculate slidesPerView on resize
             const newSlidesPerView = window.innerWidth <= 768 ? 1 : 3;
             if (newSlidesPerView !== slidesPerView) {
-                // If slidesPerView changes, re-create dots and reset index
-                slidesPerView = newSlidesPerView; // This needs `let` for slidesPerView
-                currentIndex = 0; // Reset index to avoid out-of-bounds issues
+                slidesPerView = newSlidesPerView;
+                currentIndex = 0;
                 createDots();
             }
             updateSlider();
@@ -274,39 +267,5 @@ document.addEventListener('DOMContentLoaded', () => {
         transferButton.addEventListener('click', () => {
             showAlert('ขอบคุณสำหรับการร่วมแสดงความยินดีค่ะ! ทางบ่าวสาวได้รับทราบแล้วนะคะ');
         });
-    }
-
-    // --- 11. Intersection Observer for Section Animations on Scroll ---
-    const sectionsToAnimate = document.querySelectorAll('.section'); // Select all sections with the .section class
-
-    const observerOptions = {
-        root: null, // Use the viewport as the root
-        rootMargin: '0px',
-        threshold: 0.2 // Trigger when 20% of the section is visible
-    };
-
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in'); // Add 'fade-in' class when section enters viewport
-                observer.unobserve(entry.target); // Stop observing once the animation has triggered
-            }
-        });
-    }, observerOptions);
-
-    // Observe each section
-    sectionsToAnimate.forEach(section => {
-        sectionObserver.observe(section);
-    });
-
-    // Manually trigger fade-in for the hero section on page load
-    // The hero section's animation is handled by its own CSS keyframes,
-    // but applying `fade-in` ensures consistency if any nested elements
-    // rely on `.section.fade-in` for their transitions.
-    const heroSection = document.getElementById('hero-section');
-    if (heroSection) {
-        // The hero section has its own intro animations, so no need for translateY
-        // Just ensure it gets the 'fade-in' class if its child elements need it.
-        heroSection.classList.add('fade-in');
     }
 });
