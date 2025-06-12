@@ -9,6 +9,13 @@ body {
     line-height: 1.6;
     overflow-x: hidden; /* Prevent horizontal scroll due to animations */
     scroll-behavior: smooth;
+    display: flex; /* เพิ่ม: ใช้ flexbox จัดการโครงสร้างหลัก */
+    flex-direction: column; /* เพิ่ม: วางเรียงจากบนลงล่าง */
+    min-height: 100vh; /* เพิ่ม: ทำให้ body สูงเต็ม viewport */
+}
+
+main {
+    flex-grow: 1; /* เพิ่ม: ทำให้ main ขยายเต็มพื้นที่ที่เหลือ */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -314,7 +321,7 @@ p {
     margin-bottom: 5px;
 }
 
-/* Primary Button Style */
+/* Primary Button Style (used for Map, RSVP etc.) */
 .btn-primary {
     display: inline-block;
     background-color: #c9b19e; /* Muted light brown */
@@ -445,10 +452,6 @@ p {
 .direction-button:hover {
     background-color: #6a574c; /* Slightly darker brown on hover */
     transform: translateY(-2px);
-}
-
-.direction-button i {
-    margin-right: 8px;
 }
 
 
@@ -636,6 +639,7 @@ p {
 .rsvp-section, .guestbook-section { /* Apply these styles to both */
     background-color: #ffffff; /* White background */
     padding: 4em 1em;
+    padding-bottom: 80px; /* เพิ่ม padding ด้านล่างให้มีที่ว่างสำหรับ mobile nav */
 }
 
 .rsvp-section p, .guestbook-section p {
@@ -666,7 +670,11 @@ p {
 .rsvp-section textarea,
 .guestbook-section input[type="text"],
 .guestbook-section select,
-.guestbook-section textarea {
+.guestbook-section textarea,
+.guestbook-section input[type="number"], /* เพิ่ม input type number */
+.guestbook-section input[type="date"],  /* เพิ่ม input type date */
+.guestbook-section input[type="time"]   /* เพิ่ม input type time */
+{
     width: calc(100% - 20px); /* Account for padding */
     padding: 10px;
     margin-bottom: 20px;
@@ -696,6 +704,7 @@ p {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px; /* ค่าเริ่มต้น */
 }
 
 .btn-submit:hover {
@@ -715,6 +724,7 @@ p {
 .share-section {
     background-color: #fcfaf7;
     padding: 4em 1em;
+    padding-bottom: 80px; /* เพิ่ม padding ด้านล่างให้มีที่ว่างสำหรับ mobile nav */
 }
 
 .share-buttons {
@@ -778,14 +788,15 @@ footer {
     background-color: #7b685c; /* Muted warm brown for footer */
     color: white;
     text-align: center;
-    padding: 2em 1em;
-    font-size: 0.9em;
+    padding: 1em 1em; /* ขนาดเดิม */
+    font-size: 0.9em; /* ขนาดเดิม */
+    flex-shrink: 0; /* เพิ่ม: ไม่ให้ footer หดตัว */
 }
 
 
 /* Mobile Navigation Bar */
 .mobile-nav {
-    position: fixed;
+    position: sticky; /* เปลี่ยนเป็น sticky เพื่อให้ตามลงมาด้านล่างสุดของหน้าจอ */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -793,6 +804,7 @@ footer {
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     display: block; /* Show on mobile by default */
+    padding-bottom: env(safe-area-inset-bottom); /* รองรับ iPhone X notch */
 }
 
 .mobile-nav-list {
@@ -837,7 +849,10 @@ footer {
     .mobile-nav {
         display: none;
     }
-    /* Potentially add styles for desktop nav here if it exists */
+    /* Revert padding for sections on larger screens if mobile-nav isn't visible */
+    .rsvp-section, .guestbook-section, .share-section {
+        padding-bottom: 4em; /* Original padding */
+    }
 }
 
 
