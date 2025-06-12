@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --------------------------------------------------------
     const countdownElement = document.getElementById('countdown');
     // ตั้งค่าวันและเวลาแต่งงานที่นี่ (ปี-เดือน-วันTชั่วโมง:นาที:วินาที)
-    const weddingDate = new Date('2025-07-28T07:30:00'); 
+    const weddingDate = new Date('2025-07-28T07:30:00');
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -112,31 +112,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Intersection Observer for active nav link on scroll (for sections with IDs)
+    // Intersection Observer for active nav link on scroll (for sections with IDs) and fade-in animation
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.mobile-nav-link');
 
-    const observer = new IntersectionObserver((entries) => {
+    const observerOptions = {
+        rootMargin: '0px 0px -70% 0px', // Adjust this to make it active earlier or later
+        threshold: 0.1 // How much of the section needs to be visible
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Ensure only one active-nav is present
+                // For fade-in animation
+                entry.target.classList.add('visible');
+
+                // For active nav link
                 navLinks.forEach(link => {
                     link.classList.remove('active-nav');
                 });
-                // Find and activate the corresponding nav link
                 const targetNavLink = document.querySelector(`.mobile-nav-link[href*="#${entry.target.id}"]`);
                 if (targetNavLink) {
                     targetNavLink.classList.add('active-nav');
                 }
+            } else {
+                // Optional: remove visible class if you want animation to replay on scroll up
+                // entry.target.classList.remove('visible');
             }
         });
-    }, { 
-        rootMargin: '0px 0px -70% 0px', // Adjust this to make it active earlier or later
-        threshold: 0.1 // How much of the section needs to be visible
-    }); 
+    }, observerOptions);
 
     sections.forEach(section => {
-        observer.observe(section);
+        sectionObserver.observe(section);
     });
 
     // Handle initial active state for guestbook.html's nav link
@@ -160,10 +167,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const customAlertCloseBtn = document.getElementById('custom-alert-close-btn');
     const loadingSpinner = document.getElementById('loading-spinner');
 
-    function showAlert(message) {
+    // Initialize Confetti
+    const jsConfetti = new JSConfetti();
+
+    function showAlert(message, showConfetti = false) {
         if (customAlertMessage && customAlertOverlay) {
             customAlertMessage.textContent = message;
             customAlertOverlay.classList.remove('hidden');
+            if (showConfetti) {
+                jsConfetti.addConfetti({
+                    emojis: ['🎉', '💖', '💍', '✨'],
+                    emojiSize: 30,
+                    confettiNumber: 100
+                });
+            }
         }
     }
 
@@ -213,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2-second delay
 
             hideLoading();
-            showAlert('ขอบคุณสำหรับการตอบรับค่ะ/ครับ! เราได้รับข้อมูลของคุณแล้ว');
+            showAlert('ขอบคุณสำหรับการตอบรับค่ะ/ครับ! เราได้รับข้อมูลของคุณแล้ว', true); // Show confetti
             this.reset(); // Clear the form
         });
     }
@@ -235,50 +252,96 @@ document.addEventListener('DOMContentLoaded', function() {
             await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2-second delay
 
             hideLoading();
-            showAlert('ขอบคุณสำหรับการแจ้งข้อมูลค่ะ/ครับ! บ่าวสาวจะจัดส่งของขวัญให้เร็วที่สุดค่ะ/ครับ');
+            showAlert('ขอบคุณสำหรับการแจ้งข้อมูลค่ะ/ครับ! บ่าวสาวจะจัดส่งของขวัญให้เร็วที่สุดค่ะ/ครับ', true); // Show confetti
             this.reset(); // Clear the form
         });
     }
 
     // --------------------------------------------------------
-    // Gallery Manual Slide (Original, no auto-slide yet)
+    // Gallery Auto & Manual Slide with Lazy Loading
     // --------------------------------------------------------
     const sliderWrapper = document.querySelector('.slider-wrapper');
-    if (sliderWrapper) { 
+    if (sliderWrapper) {
         const slides = document.querySelectorAll('.slider-wrapper .slide');
+        const lazyLoadImages = document.querySelectorAll('.slider-wrapper .slide img.lazy-load');
         const totalSlides = slides.length;
         let currentSlide = 0;
+        let autoSlideInterval;
+        const autoSlideDelay = 5000; // 5 seconds
+
+        function loadSlideImage(imgElement) {
+            if (imgElement && imgElement.dataset.src) {
+                imgElement.src = imgElement.dataset.src;
+                imgElement.removeAttribute('data-src'); // Remove data-src once loaded
+                imgElement.classList.remove('lazy-load'); // Remove lazy-load class
+            }
+        }
+
+        function preloadSurroundingImages(index) {
+            // Load current, next, and previous slide images
+            loadSlideImage(lazyLoadImages[index]);
+            if (index + 1 < totalSlides) loadSlideImage(lazyLoadImages[index + 1]);
+            if (index - 1 >= 0) loadSlideImage(lazyLoadImages[index - 1]);
+            // Also load the last slide if current is first for wrap around
+            if (index === 0 && totalSlides > 1) loadSlideImage(lazyLoadImages[totalSlides - 1]);
+            // Also load the first slide if current is last for wrap around
+            if (index === totalSlides - 1 && totalSlides > 1) loadSlideImage(lazyLoadImages[0]);
+        }
 
         function showSlide(index) {
             if (index >= totalSlides) {
-                currentSlide = 0; 
+                currentSlide = 0;
             } else if (index < 0) {
-                currentSlide = totalSlides - 1; 
+                currentSlide = totalSlides - 1;
             } else {
                 currentSlide = index;
             }
             const offset = -currentSlide * 100;
             sliderWrapper.style.transform = `translateX(${offset}%)`;
             updateDots();
+            preloadSurroundingImages(currentSlide); // Lazy load images
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide(); // Clear any existing interval
+            autoSlideInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, autoSlideDelay);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
         }
 
         const prevButton = document.querySelector('.prev-slide');
         const nextButton = document.querySelector('.next-slide');
 
         if (prevButton) {
-            prevButton.addEventListener('click', () => showSlide(currentSlide - 1));
+            prevButton.addEventListener('click', () => {
+                stopAutoSlide(); // Stop auto-slide on manual interaction
+                showSlide(currentSlide - 1);
+                startAutoSlide(); // Restart auto-slide after a delay
+            });
         }
         if (nextButton) {
-            nextButton.addEventListener('click', () => showSlide(currentSlide + 1));
+            nextButton.addEventListener('click', () => {
+                stopAutoSlide(); // Stop auto-slide on manual interaction
+                showSlide(currentSlide + 1);
+                startAutoSlide(); // Restart auto-slide after a delay
+            });
         }
 
         const sliderDotsContainer = document.querySelector('.slider-dots');
         if (sliderDotsContainer) {
-            sliderDotsContainer.innerHTML = ''; 
+            sliderDotsContainer.innerHTML = '';
             for (let i = 0; i < totalSlides; i++) {
                 const dot = document.createElement('span');
                 dot.classList.add('dot');
-                dot.addEventListener('click', () => showSlide(i));
+                dot.addEventListener('click', () => {
+                    stopAutoSlide(); // Stop auto-slide on manual interaction
+                    showSlide(i);
+                    startAutoSlide(); // Restart auto-slide after a delay
+                });
                 sliderDotsContainer.appendChild(dot);
             }
         }
@@ -295,7 +358,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Initialize first slide and dots
+        // Initialize first slide and dots, and start auto-slide
         showSlide(0);
+        startAutoSlide();
+
+        // Optional: Pause auto-slide when mouse is over the slider
+        sliderWrapper.parentNode.addEventListener('mouseenter', stopAutoSlide);
+        sliderWrapper.parentNode.addEventListener('mouseleave', startAutoSlide);
     }
+
+    // --------------------------------------------------------
+    // Copy to Clipboard for Bank Account
+    // --------------------------------------------------------
+    window.copyToClipboard = function(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showAlert('คัดลอกเลขบัญชีสำเร็จ!');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            showAlert('ไม่สามารถคัดลอกเลขบัญชีได้ กรุณาลองใหม่');
+        });
+    };
+
+    // --------------------------------------------------------
+    // Share Website Link
+    // --------------------------------------------------------
+    window.copyWebsiteLink = function() {
+        const websiteUrl = window.location.origin + window.location.pathname; // Get current URL
+        navigator.clipboard.writeText(websiteUrl).then(() => {
+            const copyStatus = document.getElementById('copy-status');
+            if (copyStatus) {
+                copyStatus.textContent = 'คัดลอกลิงก์สำเร็จ!';
+                setTimeout(() => {
+                    copyStatus.textContent = '';
+                }, 3000); // Clear message after 3 seconds
+            }
+        }).catch(err => {
+            console.error('Failed to copy link: ', err);
+            const copyStatus = document.getElementById('copy-status');
+            if (copyStatus) {
+                copyStatus.textContent = 'ไม่สามารถคัดลอกลิงก์ได้ กรุณาลองใหม่';
+            }
+        });
+    };
+
+    // Note: Actual LINE/Facebook share URLs might need dynamic population
+    // For LINE, you might need an API or a more complex URL. This is a basic example.
+    // For Facebook, it typically scrapes the URL, so just passing the URL is often enough.
+
 }); // End of DOMContentLoaded

@@ -6,12 +6,12 @@
     <title>Guestbook - เมย์ & เต้ย</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
     <audio id="backgroundMusic" loop>
-        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
+        <source src="audio/wedding-song.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -20,7 +20,7 @@
     </button>
 
     <main>
-        <section id="guestbook-section" class="section guestbook-section">
+        <section id="guestbook-section" class="section guestbook-section fade-in-slide-up">
             <h2>แจ้งการโอนเงิน</h2>
             <p>กรุณากรอกรายละเอียดเพื่อแจ้งการโอนเงิน<br>และแสดงความยินดีกับคู่บ่าวสาว</p>
             <form id="guestbook-form">
@@ -38,7 +38,7 @@
 
                 <label for="bank">ธนาคารที่โอน:</label>
                 <select id="bank" name="bank" required>
-                    <option value="">-- กรุณาเลือกธนาคาร --</option>
+                    <option value="">-- กรุณาเลือกธนาを選 --</option>
                     <option value="kbank">กสิกรไทย</option>
                     <option value="scb">ไทยพาณิชย์</option>
                     <option value="bbl">กรุงเทพ</option>
@@ -108,5 +108,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.min.js"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ h2 {
     text-align: center;
     margin-bottom: 1.5em;
     position: relative;
-    padding-top: 1em;
+    padding-top: 1em; /* เพิ่ม padding เพื่อให้มีพื้นที่สำหรับ animation */
 }
 
 h2::after {
@@ -43,6 +43,14 @@ p {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
+    opacity: 0; /* เริ่มต้นซ่อนไว้สำหรับ animation */
+    transform: translateY(20px); /* เริ่มต้นอยู่ต่ำกว่าเล็กน้อยสำหรับ animation */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* เพิ่ม transition */
+}
+
+.section.fade-in-slide-up.visible { /* คลาสเมื่อส่วนนั้นถูกเห็น */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Music Toggle Button */
@@ -85,7 +93,7 @@ p {
     background: linear-gradient(rgba(100, 90, 80, 0.4), rgba(100, 90, 80, 0.4)), url('images/hero-background.jpg') no-repeat center center/cover;
     background-attachment: fixed; /* Parallax effect */
 }
-
+/* Hero content will fade-in using animation, not section.visible class */
 .hero-content {
     z-index: 10;
     opacity: 0;
@@ -110,6 +118,14 @@ p {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.hero-slogan { /* เพิ่มสไตล์สำหรับ Hero Slogan */
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    font-family: 'Sarabun', sans-serif;
+    color: #eee;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 @keyframes fadeInSlideUp {
@@ -466,6 +482,10 @@ p {
     width: 100%;
     display: block;
     border-radius: 10px; /* Match container border-radius */
+    /* Lazy load placeholder background */
+    background-color: #e0e0e0;
+    min-height: 200px; /* เพื่อให้เห็น placeholder ขณะโหลด */
+    object-fit: cover;
 }
 
 .slider-nav {
@@ -477,6 +497,7 @@ p {
     transform: translateY(-50%);
     padding: 0 10px;
     box-sizing: border-box;
+    pointer-events: none; /* เพื่อให้คลิกผ่านไปยังปุ่มได้ */
 }
 
 .slider-nav button {
@@ -488,6 +509,7 @@ p {
     border-radius: 5px;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
+    pointer-events: auto; /* ทำให้ปุ่มคลิกได้ */
 }
 
 .slider-nav button:hover {
@@ -642,9 +664,9 @@ p {
 .rsvp-section input[type="text"],
 .rsvp-section select,
 .rsvp-section textarea,
-.guestbook-section input[type="text"], /* New: Guestbook inputs */
-.guestbook-section select,           /* New: Guestbook selects */
-.guestbook-section textarea {         /* New: Guestbook textareas */
+.guestbook-section input[type="text"],
+.guestbook-section select,
+.guestbook-section textarea {
     width: calc(100% - 20px); /* Account for padding */
     padding: 10px;
     margin-bottom: 20px;
@@ -686,6 +708,68 @@ p {
     font-weight: 600;
     color: #7b685c; /* Muted warm brown */
     text-align: center;
+}
+
+
+/* Share Buttons Section */
+.share-section {
+    background-color: #fcfaf7;
+    padding: 4em 1em;
+}
+
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap; /* ให้ปุ่มขึ้นบรรทัดใหม่เมื่อหน้าจอเล็ก */
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: white; /* Default white text for all share buttons */
+}
+
+.share-btn i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.line-share {
+    background-color: #00B900; /* Line Green */
+}
+.line-share:hover {
+    background-color: #009900;
+    transform: translateY(-2px);
+}
+
+.facebook-share {
+    background-color: #3b5998; /* Facebook Blue */
+}
+.facebook-share:hover {
+    background-color: #2e4a86;
+    transform: translateY(-2px);
+}
+
+.copy-link-share {
+    background-color: #c9b19e; /* Muted light brown (accent color) */
+}
+.copy-link-share:hover {
+    background-color: #b7a08b;
+    transform: translateY(-2px);
+}
+
+.share-message {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #7b685c;
 }
 
 

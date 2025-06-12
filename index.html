@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การ์ดเชิญงานแต่งงาน - เมย์ & เต้ย</title>
+    <title>งานแต่งงาน เมย์ & เต้ย</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
     <audio id="backgroundMusic" loop>
-        <source src="audio/wedding-song.mp3.mp3" type="audio/mpeg">
+        <source src="audio/wedding-song.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -19,156 +19,177 @@
         <i class="fas fa-music"></i>
     </button>
 
-    <section id="hero-section" class="hero-section">
-        <div class="hero-content">
-            <img src="images/wedding-logo.png" alt="May & Toey Wedding Logo" class="wedding-logo">
-            <a href="#invitation-section" class="scroll-indicator">
-                <i class="fas fa-chevron-down"></i>
-                <span>เลื่อนลง</span>
-            </a>
-        </div>
-    </section>
-
     <main>
-        <section id="honor-section" class="section honor-section">
-            <h2 style="font-family: 'Sarabun', sans-serif;">กราบเรียนเชิญ</h2>
+        <section id="hero-section" class="hero-section">
+            <div class="hero-content fade-in-slide-up">
+                <img src="images/wedding-logo.png" alt="May & Toey Wedding Logo" class="wedding-logo">
+                <p class="hero-slogan">ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา</p>
+                <a href="#invitation-section" class="scroll-indicator">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>เลื่อนลง</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="honor-section" class="section honor-section fade-in-slide-up">
+            <h2>ด้วยความเคารพรัก</h2>
             <p class="honor-text">
-                คุณพ่อคุณแม่ของทั้งสองฝ่าย รวมถึงแขกผู้มีเกียรติทุกท่าน<br>
-                ขอเรียนเชิญเป็นเกียรติในพิธีฉลองมงคลสมรสระหว่าง
+                เนื่องด้วยเราทั้งสองจะได้เข้าสู่พิธีมงคลสมรส<br>
+                จึงขอเรียนเชิญท่านผู้มีเกียรติและญาติมิตรทุกท่าน<br>
+                โปรดให้เกียรติเป็นสักขีพยานและร่วมอวยพร<br>
+                ในการเริ่มต้นชีวิตคู่ของเรา
             </p>
         </section>
 
-        <section id="couple-portraits-section" class="section couple-portraits-section">
+        <section id="couple-portraits-section" class="section couple-portraits-section fade-in-slide-up">
+            <h2>เจ้าบ่าว & เจ้าสาว</h2>
             <div class="couple-portraits">
-                <div class="portrait-item portrait-may">
-                    <img src="images/may.jpg" alt="May" class="portrait-img">
-                    <p class="portrait-name">เมย์</p>
-                    <p class="portrait-fullname">นางสาวเมทินี ศรีสุธรรม</p>
+                <div class="portrait-item">
+                    <img src="images/groom-portrait.jpg" alt="เจ้าบ่าว" class="portrait-img">
+                    <h3 class="portrait-name">นายเต้ย</h3>
+                    <p class="portrait-fullname">นายสมชาย รักมั่น</p>
                 </div>
                 <div class="and-symbol">&</div>
-                <div class="portrait-item portrait-toey">
-                    <img src="images/toey.jpg" alt="Toey" class="portrait-img">
-                    <p class="portrait-name">เต้ย</p>
-                    <p class="portrait-fullname">นายทศพล ลิ้มมณี</p>
+                <div class="portrait-item">
+                    <img src="images/bride-portrait.jpg" alt="เจ้าสาว" class="portrait-img">
+                    <h3 class="portrait-name">นางสาวเมย์</h3>
+                    <p class="portrait-fullname">นางสาวสมหญิง ยืนยง</p>
                 </div>
             </div>
         </section>
 
-        <section id="invitation-section" class="section invitation-section">
-            <img src="images/invitation-floral.png" alt="Invitation Floral" class="invitation-wedding-logo">
-            <p class="invitation-slogan">วันแห่งความรักอันแสนอบอุ่นกำลังจะเริ่มต้นขึ้น</p>
-            <h2 class="wedding-date-text">28.07.25</h2>
-            <p class="wedding-date-text" style="font-size: 1.5em; margin-bottom: 30px; font-family: 'Sarabun', sans-serif; color: #4A4A4A;">
-                วันจันทร์ ที่ 28 กรกฎาคม พ.ศ. 2568
+        <section id="invitation-section" class="section invitation-section fade-in-slide-up">
+            <h2>เรียนเชิญ</h2>
+            <img src="images/invitation-floral.png" alt="Floral Invitation" class="invitation-wedding-logo">
+            <p class="invitation-slogan">
+                ขอเรียนเชิญท่านผู้มีเกียรติร่วมเป็นสักขีพยานในวันสำคัญของเรา
             </p>
+            <h3 class="wedding-date-text">28 กรกฎาคม 2568</h3>
+
             <div id="countdown" class="countdown-modern">
                 </div>
-            </section>
 
-        <section id="details-section" class="section details-section">
+            <a href="#map-section" class="btn-primary">ดูแผนที่จัดงาน</a>
+        </section>
+
+        <section id="details-section" class="section details-section fade-in-slide-up">
             <h2>กำหนดการ</h2>
             <div class="detail-item">
-                <h3><i class="fas fa-clock"></i> เวลา 07:30 น.</h3>
-                <p>พิธีหมั้นและหลั่งน้ำพระพุทธมนต์</p>
+                <h3><i class="far fa-clock"></i> 07:30 น.</h3>
+                <p>พิธีสงฆ์และทำบุญเพื่อความเป็นสิริมงคล</p>
             </div>
             <div class="detail-item">
-                <h3><i class="fas fa-clock"></i> เวลา 11:30 น.</h3>
-                <p>พิธีฉลองมงคลสมรสและรับประทานอาหาร</p>
+                <h3><i class="fas fa-handshake"></i> 09:00 น.</h3>
+                <p>พิธีหมั้นและพิธีหลั่งน้ำพระพุทธมนต์</p>
             </div>
             <div class="detail-item">
-                <h3><i class="fas fa-clock"></i> เวลา 12:00 น.</h3>
-                <p>รับประทานอาหารกลางวัน (โต๊ะจีน)</p>
+                <h3><i class="fas fa-concierge-bell"></i> 11:00 น.</h3>
+                <p>งานเลี้ยงรับประทานอาหาร</p>
             </div>
-            </section>
+            <div class="detail-item">
+                <h3><i class="fas fa-ring"></i> 12:00 น.</h3>
+                <p>พิธีฉลองมงคลสมรส</p>
+            </div>
+        </section>
 
-        <section id="map-section" class="map-section">
+        <section id="map-section" class="section map-section fade-in-slide-up">
             <div class="location-header">
-                <h2>สถานที่จัดงาน</h2>
                 <i class="fas fa-map-marker-alt location-icon"></i>
-                <h3 class="venue-title">โรงแรมรอยัล ออคิด เชอราตัน</h3>
-                <p class="venue-name">Royal Orchid Sheraton Hotel & Towers</p>
+                <h2 class="venue-title">สถานที่จัดงาน</h2>
+                <p class="venue-name">โรงแรมเดอะไทด์ รีสอร์ท</p>
             </div>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.922123689445!2d100.51000637508759!3d13.723049286665798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29930f7811771%3A0xc023a8e99e2a22a3!2sRoyal%20Orchid%20Sheraton%20Hotel%20%26%20Towers!5e0!3m2!1sen!2sth!4v1689255678901!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.536789066601!2d100.95759737525389!3d13.682664786720498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d4e1a0b0b0b0b%3A0x1c5a9b8b7e2d6c0!2sThe%20Tide%20Resort!5e0!3m2!1sen!2sth!4v1718167261884!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="address-details">
-                <p><strong>ที่อยู่:</strong> 23 ซอยเจริญกรุง 30 ถนนเจริญกรุง แขวงบางรัก เขตบางรัก กรุงเทพมหานคร 10500</p>
-            </div>
-            <a href="https://maps.app.goo.gl/YOUR_Maps_LINK" target="_blank" class="direction-button">
-                <i class="fas fa-directions"></i> นำทาง
+            <p class="address-details">220 หมู่ 2 ถนนสุขุมวิท ตำบลแสนสุข อำเภอเมืองชลบุรี ชลบุรี 20130</p>
+            <a href="https://maps.app.goo.gl/YourGoogleMapsLinkHere" target="_blank" class="direction-button">
+                <i class="fas fa-directions"></i> เส้นทาง
             </a>
         </section>
 
-        <section id="gallery-section" class="section gallery-section">
-            <h2>รูปภาพแกลเลอรี่</h2>
+        <section id="gallery-section" class="section gallery-section fade-in-slide-up">
+            <h2>แกลเลอรี่</h2>
             <div class="slider-container">
                 <div class="slider-wrapper">
-                    <div class="slide"><img src="images/gallery-1.jpg" alt="Wedding Photo 1"></div>
-                    <div class="slide"><img src="images/gallery-2.jpg" alt="Wedding Photo 2"></div>
-                    <div class="slide"><img src="images/gallery-3.jpg" alt="Wedding Photo 3"></div>
-                    <div class="slide"><img src="images/gallery-4.jpg" alt="Wedding Photo 4"></div>
-                    <div class="slide"><img src="images/gallery-5.jpg" alt="Wedding Photo 5"></div>
-                    <div class="slide"><img src="images/gallery-6.jpg" alt="Wedding Photo 6"></div>
-                </div>
+                    <div class="slide"><img data-src="images/gallery-1.jpg" alt="Wedding Gallery 1" class="lazy-load"></div>
+                    <div class="slide"><img data-src="images/gallery-2.jpg" alt="Wedding Gallery 2" class="lazy-load"></div>
+                    <div class="slide"><img data-src="images/gallery-3.jpg" alt="Wedding Gallery 3" class="lazy-load"></div>
+                    <div class="slide"><img data-src="images/gallery-4.jpg" alt="Wedding Gallery 4" class="lazy-load"></div>
+                    <div class="slide"><img data-src="images/gallery-5.jpg" alt="Wedding Gallery 5" class="lazy-load"></div>
+                    <div class="slide"><img data-src="images/gallery-6.jpg" alt="Wedding Gallery 6" class="lazy-load"></div>
+                    </div>
                 <div class="slider-nav">
                     <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
                     <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
                 </div>
+                <div class="slider-dots"></div>
             </div>
-            <div class="slider-dots">
-                </div>
         </section>
 
-        <section id="gift-section" class="section gift-section">
-            <h2>ร่วมยินดี & ของขวัญ</h2>
-            <p>หากท่านต้องการร่วมแสดงความยินดีและมอบของขวัญ<br>สามารถโอนเงินผ่านบัญชีดังต่อไปนี้ค่ะ/ครับ</p>
+        <section id="gift-section" class="section gift-section fade-in-slide-up">
+            <h2>ของขวัญสำหรับคู่บ่าวสาว</h2>
+            <p>หากท่านประสงค์จะร่วมแสดงความยินดีผ่านของขวัญหรือซอง<br>สามารถทำได้ตามช่องทางด้านล่างนี้ค่ะ/ครับ</p>
             <div class="gift-options">
                 <div class="single-gift-box">
-                    <img src="images/qr-may.png" alt="QR Code May">
-                    <p class="qr-instruction">สแกน QR Code สำหรับบัญชี<br>นางสาวเมทินี ศรีสุธรรม</p>
+                    <h3>QR Code สำหรับโอนเงิน</h3>
+                    <img src="images/qr-code.png" alt="QR Code">
+                    <p class="qr-instruction">สแกนเพื่อโอนเงินได้เลยค่ะ/ครับ</p>
+                </div>
+                <div class="single-gift-box">
+                    <h3>ข้อมูลบัญชีธนาคาร</h3>
                     <div class="bank-details-text">
-                        <p><strong>ธนาคาร:</strong> กสิกรไทย</p>
+                        <p><strong>ธนาคาร:</strong> กสิกรไทย (KBank)</p>
+                        <p><strong>ชื่อบัญชี:</strong> นายสมชาย รักมั่น และ/หรือ นางสาวสมหญิง ยืนยง</p>
                         <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
                     </div>
+                    <button class="transfer-button" onclick="copyToClipboard('XXX-X-XXXXX-X')">
+                        <i class="far fa-copy"></i> คัดลอกเลขบัญชี
+                    </button>
                 </div>
             </div>
-            <button class="transfer-button" onclick="window.location.href='guestbook.html';">
-                <i class="fas fa-check-circle"></i> แจ้งว่าโอนเงินแล้ว
-            </button>
-            <p class="gift-button-description">การแจ้งเตือนนี้จะเป็นการแสดงความขอบคุณจากบ่าวสาวเท่านั้น<br>และไม่ส่งผลต่อการตอบรับการเข้าร่วมงาน</p>
+            <p class="gift-button-description">บ่าวสาวขอขอบคุณทุกท่านที่มาร่วมอวยพรและแสดงความยินดีในวันนี้ค่ะ/ครับ</p>
         </section>
 
-        <section id="rsvp-section" class="section rsvp-section">
+        <section id="rsvp-section" class="section rsvp-section fade-in-slide-up">
             <h2>ตอบรับการเข้าร่วมงาน</h2>
-            <p>กรุณายืนยันการเข้าร่วมงาน เพื่อให้เราทราบจำนวนแขกผู้มีเกียรติ</p>
+            <p>กรุณาตอบรับการเข้าร่วมงานภายในวันที่ 15 กรกฎาคม 2568 เพื่อให้เราสามารถจัดเตรียมงานได้อย่างเหมาะสม</p>
             <form id="rsvp-form">
                 <label for="rsvp-name">ชื่อ-นามสกุล:</label>
                 <input type="text" id="rsvp-name" name="name" required>
 
-                <label for="rsvp-attendance">ท่านสะดวกมาร่วมงาน หรือไม่:</label>
+                <label for="rsvp-attendance">จะเข้าร่วมงานหรือไม่:</label>
                 <select id="rsvp-attendance" name="attendance" required>
                     <option value="">-- กรุณาเลือก --</option>
-                    <option value="yes">สะดวกมาร่วมงาน</option>
-                    <option value="no">ขออภัย ไม่สะดวกมาร่วมงานจริงๆ</option>
+                    <option value="yes">เข้าร่วมงาน</option>
+                    <option value="no">ไม่สามารถเข้าร่วมได้</option>
                 </select>
 
-                <label for="rsvp-guests">จำนวนผู้ร่วมงาน (รวมตัวท่านเอง):</label>
-                <select id="rsvp-guests" name="guests" required>
-                    <option value="">-- กรุณาเลือก --</option>
-                    <option value="1">1 ท่าน</option>
-                    <option value="2">2 ท่าน</option>
-                    <option value="3">3 ท่าน</option>
-                    <option value="4">4 ท่าน</option>
-                    <option value="5">5 ท่าน</option>
-                    <option value="6+">มากกว่า 5 ท่านขึ้นไป</option>
-                </select>
+                <label for="rsvp-guests">จำนวนแขกที่มาด้วย (รวมตัวท่านเอง):</label>
+                <input type="number" id="rsvp-guests" name="guests" min="1" value="1" required>
 
                 <label for="rsvp-message">ข้อความถึงคู่บ่าวสาว (ไม่บังคับ):</label>
                 <textarea id="rsvp-message" name="message" rows="4"></textarea>
 
-                <button type="submit" class="btn-submit">ยืนยันการเข้าร่วม</button>
+                <button type="submit" class="btn-submit">ส่งข้อมูลตอบรับ</button>
                 <p id="rsvp-status" class="status-message"></p>
             </form>
+        </section>
+
+        <section id="share-section" class="section share-section fade-in-slide-up">
+            <h2>บอกข่าวดีให้เพื่อน ๆ</h2>
+            <p>แชร์ลิงก์เว็บไซต์งานแต่งงานของเรา เพื่อให้เพื่อน ๆ ได้ทราบข่าวดี</p>
+            <div class="share-buttons">
+                <a href="https://social-share-url-for-line.com/?url=YOUR_WEBSITE_URL_HERE&text=ขอเชิญร่วมงานแต่งงานเมย์%20&%20เต้ย!" target="_blank" class="share-btn line-share" title="แชร์ผ่าน Line">
+                    <i class="fab fa-line"></i> Line
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_WEBSITE_URL_HERE" target="_blank" class="share-btn facebook-share" title="แชร์ผ่าน Facebook">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+                <button class="share-btn copy-link-share" title="คัดลอกลิงก์" onclick="copyWebsiteLink()">
+                    <i class="fas fa-link"></i> คัดลอกลิงก์
+                </button>
+            </div>
+            <p class="share-message" id="copy-status"></p>
         </section>
 
     </main>
@@ -225,5 +246,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.min.js"></script>
 </body>
 </html>
