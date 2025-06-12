@@ -9,13 +9,28 @@ body {
     line-height: 1.6;
     overflow-x: hidden; /* Prevent horizontal scroll due to animations */
     scroll-behavior: smooth;
-    display: flex; /* เพิ่ม: ใช้ flexbox จัดการโครงสร้างหลัก */
-    flex-direction: column; /* เพิ่ม: วางเรียงจากบนลงล่าง */
-    min-height: 100vh; /* เพิ่ม: ทำให้ body สูงเต็ม viewport */
+    display: flex; /* ใช้ flexbox จัดการโครงสร้างหลัก */
+    flex-direction: column; /* วางเรียงจากบนลงล่าง */
+    min-height: 100vh; /* ทำให้ body สูงเต็ม viewport */
 }
 
 main {
-    flex-grow: 1; /* เพิ่ม: ทำให้ main ขยายเต็มพื้นที่ที่เหลือ */
+    flex-grow: 1; /* ทำให้ main ขยายเต็มพื้นที่ที่เหลือ */
+}
+
+section {
+    padding: 2em 1em; /* ปรับลด padding-top และ padding-bottom ของแต่ละส่วนให้น้อยลง */
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0; /* เริ่มต้นซ่อนไว้สำหรับ animation */
+    transform: translateY(20px); /* เริ่มต้นอยู่ต่ำกว่าเล็กน้อยสำหรับ animation */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* เพิ่ม transition */
+}
+
+section.visible { /* คลาสเมื่อส่วนนั้นถูกเห็น */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -43,21 +58,6 @@ h2::after {
 
 p {
     margin-bottom: 1em;
-}
-
-.section {
-    padding: 4em 1em;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    opacity: 0; /* เริ่มต้นซ่อนไว้สำหรับ animation */
-    transform: translateY(20px); /* เริ่มต้นอยู่ต่ำกว่าเล็กน้อยสำหรับ animation */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* เพิ่ม transition */
-}
-
-.section.fade-in-slide-up.visible { /* คลาสเมื่อส่วนนั้นถูกเห็น */
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* Music Toggle Button */
@@ -97,9 +97,10 @@ p {
     color: white;
     overflow: hidden;
     /* Background image with a warm, desaturated overlay */
-    background: linear-gradient(rgba(100, 90, 80, 0.4), rgba(100, 90, 80, 0.4)), url('images/hero-background.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(100, 90, 80, 0.4), rgba(100, 90, 80, 0.4)), url('images/hero-bg.jpg') no-repeat center center/cover;
     background-attachment: fixed; /* Parallax effect */
 }
+
 /* Hero content will fade-in using animation, not section.visible class */
 .hero-content {
     z-index: 10;
@@ -127,7 +128,7 @@ p {
     }
 }
 
-.hero-slogan { /* เพิ่มสไตล์สำหรับ Hero Slogan */
+.hero-slogan {
     font-size: 1.5em;
     margin-bottom: 30px;
     font-family: 'Sarabun', sans-serif;
@@ -187,7 +188,7 @@ p {
 /* 2. Honor Section */
 .honor-section {
     background-color: #ffffff; /* White background */
-    padding: 3em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
 }
 
 .honor-text {
@@ -198,7 +199,7 @@ p {
 /* 3. Couple Portraits Section */
 .couple-portraits-section {
     background-color: #f8f5ed; /* Light beige/cream background */
-    padding: 3em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
 }
 
 .couple-portraits {
@@ -265,7 +266,7 @@ p {
 /* 4. Invitation Section (Date & Countdown) */
 .invitation-section {
     background-color: #fcfaf7; /* Off-white / Very light cream */
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
 }
 
 .invitation-wedding-logo {
@@ -344,7 +345,7 @@ p {
 /* 5. Details Section (กำหนดการ) */
 .details-section {
     background-color: #ffffff; /* White background */
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
 }
 
 .detail-item {
@@ -381,7 +382,7 @@ p {
 
 /* 6. Map Section */
 .map-section {
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
     background-color: #fcfaf7; /* Off-white / Very light cream */
     text-align: center;
 }
@@ -458,7 +459,7 @@ p {
 /* 9. Gallery Section */
 .gallery-section {
     background-color: #ffffff; /* White background */
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
 }
 
 .slider-container {
@@ -542,9 +543,32 @@ p {
 
 
 /* 8. Gift Section */
+/* Note: These styles apply to gift-section in both index.html and guestbook.html */
 .gift-section {
     background-color: #f8f5ed; /* Light beige/cream background */
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
+}
+
+/* Specific adjustment for gift-section when nested inside guestbook-section */
+.guestbook-section .gift-section {
+    background-color: #fdfaf5; /* Background for the gift section */
+    padding: 40px 20px; /* Adjust padding as needed */
+    margin-bottom: 40px; /* Space between gift section and guestbook form */
+    border-radius: 8px; /* Optional: add border radius */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Optional: add shadow */
+    margin-top: 20px; /* Add some space above if needed */
+}
+
+/* Ensure headings and paragraphs inside this nested section have correct colors */
+.guestbook-section .gift-section h2,
+.guestbook-section .gift-section h3,
+.guestbook-section .gift-section p {
+    color: #7b685c; /* Ensure text color is consistent */
+}
+
+.guestbook-section .gift-section p.qr-instruction,
+.guestbook-section .gift-section p.gift-button-description {
+    color: #555;
 }
 
 .gift-options {
@@ -592,7 +616,7 @@ p {
 .transfer-button {
     display: inline-flex; /* Use flex to align icon and text */
     align-items: center;
-    background-color: #c9b19e; /* Muted light brown */
+    background-color: #c9b19e;
     color: white;
     padding: 12px 25px;
     border-radius: 5px;
@@ -638,7 +662,7 @@ p {
 /* 7. RSVP Section (and now Guestbook Section) */
 .rsvp-section, .guestbook-section { /* Apply these styles to both */
     background-color: #ffffff; /* White background */
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
     padding-bottom: 80px; /* เพิ่ม padding ด้านล่างให้มีที่ว่างสำหรับ mobile nav */
 }
 
@@ -671,9 +695,9 @@ p {
 .guestbook-section input[type="text"],
 .guestbook-section select,
 .guestbook-section textarea,
-.guestbook-section input[type="number"], /* เพิ่ม input type number */
-.guestbook-section input[type="date"],  /* เพิ่ม input type date */
-.guestbook-section input[type="time"]   /* เพิ่ม input type time */
+.guestbook-section input[type="number"],
+.guestbook-section input[type="date"],
+.guestbook-section input[type="time"]
 {
     width: calc(100% - 20px); /* Account for padding */
     padding: 10px;
@@ -704,7 +728,7 @@ p {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 30px; /* ค่าเริ่มต้น */
+    margin-top: 30px;
 }
 
 .btn-submit:hover {
@@ -719,17 +743,28 @@ p {
     text-align: center;
 }
 
+/* สไตล์สำหรับข้อความลิขสิทธิ์ที่ย้ายไปอยู่ใน Guestbook form */
+.guestbook-copyright {
+    font-size: 0.85em; /* ทำให้ตัวอักษรเล็กลง */
+    color: #a0a0a0; /* สีเทาอ่อนลง */
+    margin-top: 25px; /* เพิ่มระยะห่างจากปุ่มด้านบน */
+    text-align: center; /* จัดให้อยู่ตรงกลาง */
+    padding-top: 15px; /* เพิ่ม padding ด้านบนเพื่อให้มีพื้นที่ */
+    border-top: 1px solid #e0d9d2; /* เพิ่มเส้นคั่นบางๆ ด้านบน */
+    margin-bottom: 0; /* ลบ margin ด้านล่างหากไม่ต้องการ */
+}
+
 
 /* Share Buttons Section */
 .share-section {
     background-color: #fcfaf7;
-    padding: 4em 1em;
+    padding: 2em 1em; /* Adjusted to match general section padding */
     padding-bottom: 80px; /* เพิ่ม padding ด้านล่างให้มีที่ว่างสำหรับ mobile nav */
 }
 
 .share-buttons {
     display: flex;
-    flex-wrap: wrap; /* ให้ปุ่มขึ้นบรรทัดใหม่เมื่อหน้าจอเล็ก */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
@@ -744,7 +779,7 @@ p {
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    color: white; /* Default white text for all share buttons */
+    color: white;
 }
 
 .share-btn i {
@@ -753,7 +788,7 @@ p {
 }
 
 .line-share {
-    background-color: #00B900; /* Line Green */
+    background-color: #00B900;
 }
 .line-share:hover {
     background-color: #009900;
@@ -761,7 +796,7 @@ p {
 }
 
 .facebook-share {
-    background-color: #3b5998; /* Facebook Blue */
+    background-color: #3b5998;
 }
 .facebook-share:hover {
     background-color: #2e4a86;
@@ -769,7 +804,7 @@ p {
 }
 
 .copy-link-share {
-    background-color: #c9b19e; /* Muted light brown (accent color) */
+    background-color: #c9b19e;
 }
 .copy-link-share:hover {
     background-color: #b7a08b;
@@ -783,28 +818,28 @@ p {
 }
 
 
-/* Footer */
+/* Footer (สำหรับ index.html เท่านั้น) */
 footer {
     background-color: #7b685c; /* Muted warm brown for footer */
     color: white;
     text-align: center;
-    padding: 1em 1em; /* ขนาดเดิม */
-    font-size: 0.9em; /* ขนาดเดิม */
-    flex-shrink: 0; /* เพิ่ม: ไม่ให้ footer หดตัว */
+    padding: 1em 1em;
+    font-size: 0.9em;
+    flex-shrink: 0;
 }
 
 
 /* Mobile Navigation Bar */
 .mobile-nav {
-    position: sticky; /* เปลี่ยนเป็น sticky เพื่อให้ตามลงมาด้านล่างสุดของหน้าจอ */
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #7b685c; /* Muted warm brown for nav bar */
+    background-color: #7b685c;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    display: block; /* Show on mobile by default */
-    padding-bottom: env(safe-area-inset-bottom); /* รองรับ iPhone X notch */
+    display: block;
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .mobile-nav-list {
@@ -827,20 +862,14 @@ footer {
     text-decoration: none;
     font-size: 0.8em;
     transition: background-color 0.3s ease, color 0.3s ease;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for long text */
-}
-
-.mobile-nav-link i {
-    display: block; /* Place icon above text */
-    font-size: 1.4em;
-    margin-bottom: 3px;
+    text-overflow: ellipsis;
 }
 
 .mobile-nav-link.active-nav,
 .mobile-nav-link:hover {
-    background-color: #c9b19e; /* Muted light brown accent on hover/active */
+    background-color: #c9b19e;
     color: white;
 }
 
@@ -851,7 +880,7 @@ footer {
     }
     /* Revert padding for sections on larger screens if mobile-nav isn't visible */
     .rsvp-section, .guestbook-section, .share-section {
-        padding-bottom: 4em; /* Original padding */
+        padding-bottom: 4em;
     }
 }
 
@@ -863,11 +892,11 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay for soft feel */
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1002; /* Above music button */
+    z-index: 1002;
     opacity: 1;
     visibility: visible;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -876,14 +905,14 @@ footer {
 .custom-alert-overlay.hidden {
     opacity: 0;
     visibility: hidden;
-    pointer-events: none; /* Allows clicks to pass through when hidden */
+    pointer-events: none;
 }
 
 .custom-alert-box {
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
     max-width: 400px;
     width: 90%;
@@ -908,7 +937,7 @@ footer {
     width: auto;
     padding: 10px 25px;
     display: inline-block;
-    background-color: #c9b19e; /* Muted light brown */
+    background-color: #c9b19e;
 }
 
 .custom-alert-box .btn-submit:hover {
@@ -922,12 +951,12 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.85); /* Slightly less transparent white */
+    background-color: rgba(255, 255, 255, 0.85);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1003; /* Above alert */
+    z-index: 1003;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
@@ -938,8 +967,8 @@ footer {
 }
 
 .spinner {
-    border: 5px solid #f0f0f0; /* Light grey for inner part */
-    border-top: 5px solid #c9b19e; /* Muted light brown accent color */
+    border: 5px solid #f0f0f0;
+    border-top: 5px solid #c9b19e;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -953,6 +982,6 @@ footer {
 }
 
 .loading-spinner p {
-    color: #7b685c; /* Muted warm brown */
+    color: #7b685c;
     font-size: 1.1em;
 }

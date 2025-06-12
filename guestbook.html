@@ -20,41 +20,50 @@
     </button>
 
     <main>
-        <section id="guestbook-section" class="section guestbook-section fade-in-slide-up">
-            <h2>แจ้งการโอนเงิน</h2>
-            <p>กรุณากรอกรายละเอียดเพื่อแจ้งการโอนเงิน<br>และแสดงความยินดีกับคู่บ่าวสาว</p>
+        <section id="guestbook-section" class="section guestbook-section visible">
+            <h2>สมุดประสาทพร</h2>
+            <p>กรุณาเขียนข้อความอวยพรและแสดงความยินดีให้กับคู่บ่าวสาว</p>
+
+            <div class="gift-section">
+                <h2>ของขวัญสำหรับคู่บ่าวสาว</h2>
+                <p>หากท่านประสงค์จะร่วมแสดงความยินดีผ่านของขวัญหรือซอง<br>สามารถทำได้ตามช่องทางด้านล่างนี้ค่ะ/ครับ</p>
+                <div class="gift-options">
+                    <div class="single-gift-box">
+                        <h3>QR Code สำหรับโอนเงิน</h3>
+                        <img src="images/qr-code.png" alt="QR Code">
+                        <p class="qr-instruction">สแกนเพื่อโอนเงินได้เลยค่ะ/ครับ</p>
+                    </div>
+                    <div class="single-gift-box">
+                        <h3>ข้อมูลบัญชีธนาคาร</h3>
+                        <div class="bank-details-text">
+                            <p><strong>ธนาคาร:</strong> กสิกรไทย (KBank)</p>
+                            <p><strong>ชื่อบัญชี:</strong> นายสมชาย รักมั่น และ/หรือ นางสาวสมหญิง ยืนยง</p>
+                            <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
+                        </div>
+                        <button class="transfer-button" onclick="copyToClipboard('XXX-X-XXXXX-X')">
+                            <i class="far fa-copy"></i> คัดลอกเลขบัญชี
+                        </button>
+                    </div>
+                </div>
+                <p class="gift-button-description">บ่าวสาวขอขอบคุณทุกท่านที่มาร่วมอวยพรและแสดงความยินดีในวันนี้ค่ะ/ครับ</p>
+            </div>
             <form id="guestbook-form">
-                <label for="name">ชื่อ-นามสกุล:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="gb-name">ชื่อ-นามสกุล:</label>
+                <input type="text" id="gb-name" name="name" required>
 
-                <label for="amount">จำนวนเงิน (บาท):</label>
-                <input type="number" id="amount" name="amount" min="0" required>
+                <label for="gb-message">ข้อความอวยพร:</label>
+                <textarea id="gb-message" name="message" rows="6" required></textarea>
 
-                <label for="date">วันที่โอน:</label>
-                <input type="date" id="date" name="date" required>
-
-                <label for="time">เวลาที่โอน:</label>
-                <input type="time" id="time" name="time" required>
-
-                <label for="bank">ธนาคารที่โอน:</label>
-                <select id="bank" name="bank" required>
-                    <option value="">-- กรุณาเลือกธนาを選 --</option>
-                    <option value="kbank">กสิกรไทย</option>
-                    <option value="scb">ไทยพาณิชย์</option>
-                    <option value="bbl">กรุงเทพ</option>
-                    <option value="ktb">กรุงไทย</option>
-                    <option value="bay">กรุงศรีอยุธยา</option>
-                    <option value="other">อื่นๆ</option>
-                </select>
-
-                <label for="message">ข้อความถึงคู่บ่าวสาว (ไม่บังคับ):</label>
-                <textarea id="message" name="message" rows="4"></textarea>
-
-                <button type="submit" class="btn-submit">ส่งข้อมูลการโอน</button>
+                <button type="submit" class="btn-submit">ส่งข้อความ</button>
                 <p id="guestbook-status" class="status-message"></p>
             </form>
-        </section>
+            
+            </section>
     </main>
+
+    <footer>
+        <p>© 2025 May & Toey Wedding. All Rights Reserved.</p>
+    </footer>
 
     <nav class="mobile-nav">
         <ul class="mobile-nav-list">
@@ -62,6 +71,12 @@
                 <a href="index.html#hero-section" class="mobile-nav-link">
                     <i class="fas fa-home"></i>
                     <span>หน้าหลัก</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="index.html#map-section" class="mobile-nav-link">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>สถานที่</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
@@ -90,10 +105,6 @@
             </li>
         </ul>
     </nav>
-
-    <footer>
-        <p>© 2025 May & Toey Wedding. All Rights Reserved.</p>
-    </footer>
 
     <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
         <div class="custom-alert-box">
