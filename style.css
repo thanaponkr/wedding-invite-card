@@ -1,112 +1,126 @@
-/* Import Fonts */
-html, body {
-    overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอนที่ไม่ต้องการ */
-}
-
+/* General Body and Font Styles */
 body {
     font-family: 'Sarabun', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #FDF9F3; /* สีขาวครีม/งาช้าง อบอุ่น - เป็นสีพื้นหลังหลักของทั้งเว็บ */
-    color: #4A4A4A; /* สีเทาเข้มกลางๆ สำหรับข้อความทั่วไป */
+    background-color: #fcfaf7; /* Off-white / Very light cream for body background */
+    color: #4a4a4a; /* Darker grey for main text for readability */
     line-height: 1.6;
-    scroll-behavior: smooth; /* ทำให้การเลื่อนหน้าจอนุ่มนวลขึ้น */
+    overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+    scroll-behavior: smooth;
 }
 
-h1, h2, h3 {
-    font-family: 'Playfair+Display', serif;
-    color: #8C6A4F; /* สีน้ำตาลทอง/ทองแดงอ่อน ดูหรูหรา */
-    text-align: center;
-    margin-bottom: 20px; /* ลดช่องว่าง */
-}
-
-h1 {
-    font-size: 3.5em;
-    margin-bottom: 5px; /* ลดช่องว่าง */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: #7b685c; /* Muted warm brown for headings */
+    margin-bottom: 0.8em;
 }
 
 h2 {
-    font-size: 2.5em; /* ขนาดฟอนต์สำหรับหัวข้อทั่วไป */
-    padding-bottom: 0;
-    margin-bottom: 10px; /* ลดช่องว่าง */
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 1.5em;
+    position: relative;
+    padding-top: 1em;
 }
 
-h3 {
-    font-size: 1.8em;
-    color: #A08369; /* สีน้ำตาลอ่อนลงเล็กน้อย */
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #c9b19e; /* Muted light brown for underline */
+    margin: 0.5em auto 0;
 }
 
 p {
-    text-align: center;
-    font-size: 1.1em;
-    margin-bottom: 5px; /* ลดช่องว่าง */
-    color: #4A4A4A; /* ข้อความทั่วไป */
+    margin-bottom: 1em;
 }
 
-/* Header - Hero Section (ส่วนโลโก้/ชื่อเจ้าบ่าวเจ้าสาว) */
+.section {
+    padding: 4em 1em;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Music Toggle Button */
+.music-toggle-btn {
+    position: fixed;
+    bottom: 80px; /* Above mobile nav */
+    right: 20px;
+    background-color: rgba(123, 104, 92, 0.7); /* Muted warm brown, semi-transparent */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Ensure it's above other content */
+    transition: background-color 0.3s ease;
+}
+
+.music-toggle-btn:hover {
+    background-color: rgba(123, 104, 92, 0.9);
+}
+
+
+/* 1. Hero Section (First Fold) */
 .hero-section {
-    background: url('images/hero-floral-frame.jpg') no-repeat center center; /* นำรูปภาพพื้นหลังกลับมา */
-    background-size: cover; /* นำคุณสมบัติ background-size กลับมา */
+    position: relative;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     text-align: center;
-    position: relative;
+    color: white;
     overflow: hidden;
-    color: white; /* ข้อความในส่วน Hero ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลังรูปภาพ */
-    /* Initial hero section animation on page load */
-    animation: heroBackgroundFadeIn 1.5s ease-out forwards;
-}
-
-/* Keyframes for hero section background initial fade-in */
-@keyframes heroBackgroundFadeIn {
-    from { opacity: 0; transform: scale(1.05); }
-    to { opacity: 1; transform: scale(1); }
+    /* Background image with a warm, desaturated overlay */
+    background: linear-gradient(rgba(100, 90, 80, 0.4), rgba(100, 90, 80, 0.4)), url('images/hero-background.jpg') no-repeat center center/cover;
+    background-attachment: fixed; /* Parallax effect */
 }
 
 .hero-content {
-    padding: 0;
-    border-radius: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%; /* ให้ hero-content เต็มพื้นที่ของ hero-section */
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1.5s ease-out forwards;
+    animation-delay: 0.5s;
 }
 
 .wedding-logo {
-    max-width: 500px;
-    width: 80vw;
+    max-width: 80%;
     height: auto;
-    display: block;
-    margin: auto;
-    /* Initial logo animation on page load */
-    animation: fadeInScale 2s ease-out forwards;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    margin-bottom: 20px;
+    animation: zoomIn 1.5s ease-out forwards;
 }
 
-.hero-slogan {
-    font-size: 1.5em;
-    font-style: italic;
-    margin-top: 15px;
-    /* Initial slogan animation on page load */
-    animation: fadeIn 2.5s ease-out forwards;
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-/* Keyframes for initial fade-in and scale for hero elements */
-@keyframes fadeInScale {
-    0% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .scroll-indicator {
@@ -114,481 +128,344 @@ p {
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    color: #FFFFFF;
-    font-size: 1.2em;
-    text-align: center;
-    /* Initial scroll indicator animations on page load */
-    animation: bounce 2s infinite, fadeIn 1.5s ease-out forwards;
-    cursor: pointer;
+    color: #f5f5f5; /* Light grey for indicator */
+    font-size: 1em;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
 }
 
 .scroll-indicator i {
-    display: block;
     font-size: 2em;
     margin-bottom: 5px;
 }
 
-/* Keyframes for bounce animation */
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-    40% { transform: translateX(-50%) translateY(-15px); }
-    60% { transform: translateX(-50%) translateY(-7px); }
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(-50%) translateY(0);
+    }
+    40% {
+        transform: translateY(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateY(-50%) translateY(-5px);
+    }
 }
 
 
-/* Main Sections (สไตล์ทั่วไปสำหรับทุก Section ที่เป็นเนื้อหา) */
-.section {
-    padding: 20px 20px; /* ลด padding */
-    max-width: 960px;
-    margin: 20px auto; /* ลด margin */
-    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
-    border-radius: 12px;
-    box-shadow: none; /* ลบเงาออก */
-
-    /* Sections themselves are visible by default, their content animates */
-    opacity: 1; /* Ensure section is visible */
-    transform: translateY(0); /* Ensure section is in place */
-    will-change: auto; /* Revert to auto as individual elements handle animations */
-    transition: none; /* No transition on section itself */
+/* 2. Honor Section */
+.honor-section {
+    background-color: #ffffff; /* White background */
+    padding: 3em 1em;
 }
 
-/* Common animations for elements within sections */
-@keyframes slideUpFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scaleInFadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* Animations for couple portraits */
-@keyframes slideInFromLeftFadeIn {
-    from { opacity: 0; transform: translateX(-100px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInFromRightFadeIn {
-    from { opacity: 0; transform: translateX(100px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-
-/* Honor Text */
 .honor-text {
-    font-family: 'Playfair+Display', serif;
-    font-size: 2.4em;
-    color: #8C6A4F;
-    margin-top: -20px;
-    margin-bottom: 40px;
-    line-height: 1.5;
-    text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity, transform;
+    font-size: 1.1em;
+    color: #5a5a5a; /* Slightly darker grey for readability */
 }
 
-/* Couple Portraits */
+/* 3. Couple Portraits Section */
+.couple-portraits-section {
+    background-color: #f8f5ed; /* Light beige/cream background */
+    padding: 3em 1em;
+}
+
 .couple-portraits {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     gap: 30px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
 }
 
 .portrait-item {
     text-align: center;
-    will-change: opacity, transform;
-}
-
-.portrait-item.portrait-may {
-    animation: slideInFromLeftFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.3s;
-}
-
-.portrait-item.portrait-toey {
-    animation: slideInFromRightFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.3s;
+    background-color: #ffffff; /* White background for portrait cards */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    width: 80%; /* Adjust for mobile view */
+    max-width: 300px; /* Limit max width */
 }
 
 .portrait-img {
-    width: 400px;
-    height: 400px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #E1B29D;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.portrait-img:hover {
-    transform: scale(1.05);
+    border: 5px solid #c9b19e; /* Muted light brown border */
+    margin-bottom: 15px;
 }
 
 .portrait-name {
-    font-family: 'Playfair+Display', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.8em;
-    color: #8C6A4F;
-    margin-top: 15px;
+    color: #7b685c; /* Muted warm brown */
     margin-bottom: 5px;
-    font-weight: bold;
 }
 
 .portrait-fullname {
-    font-family: 'Sarabun', sans-serif;
-    font-size: 1.1em;
-    color: #4A4A4A;
-    margin-bottom: 0;
+    font-size: 1em;
+    color: #888; /* Softer grey */
 }
 
 .and-symbol {
-    font-family: 'Playfair+Display', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 3em;
-    color: #E1B29D;
-    font-weight: bold;
-    margin: 0 10px;
-    animation: fadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.5s;
-    will-change: opacity;
+    color: #c9b19e; /* Muted light brown */
+    margin: 20px 0;
+}
+
+@media (min-width: 768px) {
+    .couple-portraits {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .portrait-item {
+        width: 40%;
+        max-width: 350px;
+    }
+    .and-symbol {
+        margin: 0 40px; /* Adjust spacing between portraits */
+        font-size: 4em;
+    }
 }
 
 
-/* Invitation Section Elements */
+/* 4. Invitation Section (Date & Countdown) */
+.invitation-section {
+    background-color: #fcfaf7; /* Off-white / Very light cream */
+    padding: 4em 1em;
+}
+
 .invitation-wedding-logo {
-    max-width: 250px;
+    max-width: 100%; /* Default to full width of container */
     height: auto;
-    display: block;
-    margin: 0 auto 20px auto; /* ลดช่องว่าง */
-    filter: drop-shadow(0 0 8px rgba(0,0,0,0.1));
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.7s;
-    will-change: opacity, transform;
+    margin-bottom: 20px;
+    width: 50%; /* Adjusted size as per previous request */
 }
 
 .invitation-slogan {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5em;
-    color: #4A4A4A;
-    font-weight: thin;
-    margin-bottom: 20px;
-    line-height: 1.4;
-    text-transform: uppercase;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.9s;
-    will-change: opacity, transform;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 1em;
 }
 
 .wedding-date-text {
-    font-family: 'Roboto', serif;
-    font-size: 8.4em;
-    color: #8C6A4F;
-    font-weight: normal;
-    margin-bottom: 25px; /* ลดช่องว่าง */
-    letter-spacing: 5px;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 1.1s;
-    will-change: opacity, transform;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    color: #7b685c; /* Muted warm brown */
+    margin-bottom: 10px;
 }
 
-
-/* Countdown Timer */
-#countdown {
+/* Countdown */
+.countdown-modern {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    margin-top: 10px; /* ลดช่องว่าง */
-    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 40px; /* Space below countdown */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
-#countdown > div {
-    text-align: center;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    will-change: opacity, transform;
-}
-/* Staggered animation delays for countdown units */
-#countdown > div:nth-child(1) { animation-delay: 1.3s; }
-#countdown > div:nth-child(2) { animation-delay: 1.4s; }
-#countdown > div:nth-child(3) { animation-delay: 1.5s; }
-#countdown > div:nth-child(4) { animation-delay: 1.6s; }
-
-
-#countdown > div:not(:last-child) {
-    margin-right: 20px; /* ลดช่องว่าง */
+.countdown-item {
+    background-color: #ffffff; /* White background for countdown boxes */
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1em;
+    color: #7b685c; /* Muted warm brown */
+    min-width: 80px; /* Ensure items have a minimum width */
 }
 
-#countdown > div:first-child {
-    margin-left: 0;
-}
-
-.countdown-modern .value {
-    font-family: 'Roboto', sans-serif;
-    font-size: 5.8em;
-    font-weight:normal;
-    color: #8C6A4F;
+.countdown-item span {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #c9b19e; /* Muted light brown accent color */
     line-height: 1;
-    margin-bottom: 12px;
-}
-
-.countdown-modern .label {
-    font-family: 'Sarabun', sans-serif;
-    font-size: 2.2em;
-    color: #6A6A6A;
-    text-transform: uppercase;
-    margin-top: 6px;
-}
-
-
-/* Scroll to Schedule Button */
-.btn-scroll {
-    background-color: #E1B29D;
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 25px; /* ลดช่องว่าง */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 1.7s; /* After countdown */
-    will-change: transform, opacity;
-}
-
-.btn-scroll:hover {
-    background-color: #D3A18C;
-    transform: translateY(-3px);
-}
-
-
-/* Details Section (กำหนดการ) */
-.details-section .detail-item {
-    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: none; /* ลบเงาออก */
-    margin-bottom: 25px;
-    text-align: left;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    will-change: opacity, transform;
-}
-/* Staggered delay for multiple detail items */
-.details-section .detail-item:nth-child(1) { animation-delay: 0.1s; }
-.details-section .detail-item:nth-child(2) { animation-delay: 0.2s; }
-.details-section .detail-item:nth-child(3) { animation-delay: 0.3s; }
-
-
-.details-section .detail-item h3 {
-    font-size: 3em;
-    text-align: left;
-    margin-top: 5px; /* เพิ่มช่องว่างเล็กน้อยเหนือเนื้อหา */
-    color: #8C6A4F;
-}
-
-.details-section .detail-item p {
-    font-size: 2em;
-    text-align: left;
-    color: #4A4A4A;
-}
-
-/* Map Section (สถานที่จัดงาน) */
-.map-section {
-    text-align: center;
-    margin-top: 20px; /* ลดช่องว่าง */
-    padding: 0;
-    max-width: none;
-    width: 100%;
-    margin: 20px auto; /* ลดช่องว่าง */
-    box-sizing: border-box;
-    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
-    border-radius: 12px;
-    box-shadow: none; /* ลบเงาออก */
-}
-
-.map-section .location-header {
-    margin-bottom: 20px;
-    padding: 0 20px;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity, transform;
-}
-
-.map-section .location-icon {
-    font-size: 2.5em;
-    color: #8C6A4F;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.map-section .venue-title {
-    font-family: 'Roboto', serif;
-    font-size: 2.5em;
-    color: #8C6A4F;
-    margin-top: 0;
     margin-bottom: 5px;
 }
 
-.map-section .venue-name {
+/* Primary Button Style */
+.btn-primary {
+    display: inline-block;
+    background-color: #c9b19e; /* Muted light brown */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #b7a08b; /* Slightly darker brown on hover */
+    transform: translateY(-2px);
+}
+
+
+/* 5. Details Section (กำหนดการ) */
+.details-section {
+    background-color: #ffffff; /* White background */
+    padding: 4em 1em;
+}
+
+.detail-item {
+    background-color: #f8f5ed; /* Light beige/cream background */
+    border-left: 5px solid #c9b19e; /* Muted light brown border */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); /* Very soft shadow */
+}
+
+.detail-item h3 {
     font-family: 'Sarabun', sans-serif;
-    font-size: 1.2em;
-    color: #4A4A4A;
+    font-size: 1.5em;
+    color: #7b685c; /* Muted warm brown */
     margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.detail-item h3 i {
+    color: #c9b19e; /* Muted light brown */
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.detail-item p {
+    font-size: 1em;
+    color: #666;
     margin-bottom: 0;
+    padding-left: 30px; /* Align with text after icon */
+}
+
+/* 6. Map Section */
+.map-section {
+    padding: 4em 1em;
+    background-color: #fcfaf7; /* Off-white / Very light cream */
+    text-align: center;
+}
+
+.location-header {
+    margin-bottom: 30px;
+}
+
+.location-icon {
+    font-size: 3em;
+    color: #c9b19e; /* Muted light brown */
+    margin-bottom: 15px;
+}
+
+.venue-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #7b685c; /* Muted warm brown */
+}
+
+.venue-name {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
 }
 
 .map-container {
-    margin-top: 20px; /* ลดช่องว่าง */
-    width: 100%;
-    max-width: none;
-    height: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* คงเงาบน map container ไว้เพื่อให้แผนที่ดูเด่นขึ้น */
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
     overflow: hidden;
-    animation: scaleInFadeIn 1s ease-out forwards; /* Direct animation */
-    animation-delay: 0.3s;
-    will-change: opacity, transform;
+    max-width: 100%;
+    background: #e9e5e0; /* Light greyish beige placeholder */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    margin-bottom: 20px;
 }
 
 .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border: 0;
+    border-radius: 10px;
 }
 
 .address-details {
-    text-align: left;
-    font-family: 'Sarabun', sans-serif;
     font-size: 1em;
-    color: #4A4A4A;
-    margin-top: 15px; /* ลดช่องว่าง */
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.5s;
-    will-change: opacity, transform;
+    color: #555;
+    margin-bottom: 20px;
 }
 
 .direction-button {
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #E1B29D;
-    color: #fff;
-    padding: 12px 30px;
-    margin-top: 20px; /* ลดช่องว่าง */
+    display: inline-block;
+    background-color: #7b685c; /* Muted warm brown for contrast */
+    color: white;
+    padding: 12px 25px;
     border-radius: 5px;
     text-decoration: none;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 1.1em;
-    font-weight: bold;
+    font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    will-change: transform;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .direction-button:hover {
-    background-color: #D3A18C;
+    background-color: #6a574c; /* Slightly darker brown on hover */
+    transform: translateY(-2px);
 }
 
-/* "โอนเงินแล้ว" Button */
-.transfer-button {
-    display: block;
-    width: fit-content;
-    margin: 10px auto 0 auto; /* ลดช่องว่าง */
-    background-color: #E1B29D;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    will-change: transform;
+.direction-button i {
+    margin-right: 8px;
 }
 
-.transfer-button:hover {
-    background-color: #D3A18C;
+
+/* 9. Gallery Section */
+.gallery-section {
+    background-color: #ffffff; /* White background */
+    padding: 4em 1em;
 }
 
-/* Gemini-powered button in Guestbook */
-.gemini-btn {
-    background-color: #A08369;
-    color: white;
-    padding: 15px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    will-change: transform;
-}
-
-.gemini-btn:hover {
-    background-color: #8C6A4F;
-}
-
-/* Gallery Section */
-#gallery-section {
-    margin-top: 10px; /* ลดช่องว่างด้านบน 50% จากค่าเดิม 20px ของ .section สำหรับทั้ง PC และมือถือ */
-}
-
-/* Gallery Slider (ส่วนที่อยู่ภายใน gallery-section) */
 .slider-container {
-    padding: 20px 20px; /* ลด padding */
-    max-width: 960px;
-    margin: 10px auto 0 auto; /* ปรับ margin-bottom เป็น 0 เพื่อให้ .slider-dots ขยับขึ้นมา */
-    text-align: center;
     position: relative;
+    width: 100%;
+    max-width: 700px; /* Max width for the slider */
+    margin: 0 auto 30px;
     overflow: hidden;
-    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
-    border-radius: 12px;
-    box-shadow: none; /* ลบเงาออก */
-    animation: scaleInFadeIn 1s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity, transform;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
 
 .slider-wrapper {
     display: flex;
-    transition: transform 0.8s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .slide {
-    flex-shrink: 0;
-    width: calc(100% / 3);
+    min-width: 100%;
     box-sizing: border-box;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .slide img {
     width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: contain;
-    border-radius: 8px;
-    background-color: #F8F8F8; /* ยังคงมีพื้นหลังสีเทาอ่อนสำหรับรูปภาพแต่ละรูปในสไลเดอร์ */
     display: block;
+    border-radius: 10px; /* Match container border-radius */
 }
 
 .slider-nav {
@@ -598,330 +475,227 @@ p {
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
+    padding: 0 10px;
     box-sizing: border-box;
-    pointer-events: none;
 }
 
 .slider-nav button {
-    display: none;
-    background-color: rgba(140, 106, 79, 0.5);
+    background-color: rgba(123, 104, 92, 0.5); /* Muted warm brown, semi-transparent */
     color: white;
     border: none;
-    padding: 15px 10px;
+    padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     transition: background-color 0.3s ease;
-    pointer-events: all;
-    opacity: 0.7;
-    z-index: 20;
-    will-change: transform;
 }
 
 .slider-nav button:hover {
-    background-color: rgba(140, 106, 79, 0.7);
-    opacity: 1;
+    background-color: rgba(123, 104, 92, 0.7);
 }
 
 .slider-dots {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 0px; /* ปรับลดช่องว่างด้านบน เพื่อให้ชิดกับ slider-container */
-    padding-bottom: 20px;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.3s;
-    will-change: opacity, transform;
+    margin-top: 15px;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
-    background-color: rgba(140, 106, 79, 0.3);
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #d8d8d8; /* Light grey for inactive dots */
     border-radius: 50%;
+    display: inline-block;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: 1px solid #A08369;
+    transition: background-color 0.3s ease;
 }
 
-.dot.active-dot {
-    background-color: #8C6A4F;
-    transform: scale(1.2);
+.dot.active {
+    background-color: #c9b19e; /* Muted light brown for active dot */
 }
 
 
-/* RSVP Section */
-.rsvp-section {
-    margin-top: 16px; /* ปรับลดลง 60% จาก 40px (40 * 0.4 = 16) */
-}
-
-.rsvp-section form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity, transform;
-}
-
-.rsvp-section label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #8C6A4F;
-}
-
-.rsvp-section input[type="text"],
-.rsvp-section input[type="number"],
-.rsvp-section textarea {
-    padding: 12px;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-    resize: vertical;
-}
-
-/* Style for the new select dropdown */
-.rsvp-section select {
-    padding: 12px;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-    appearance: none; /* Removes default dropdown arrow */
-    background-color: #FFFFFF; /* Ensure it has a background */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A4A%22%20d%3D%22M287%20197.8L154.7%2065.4c-4.6-4.6-12-4.6-16.6%200L5.4%20197.8c-4.6%204.6-4.6%2012%200%2016.6l16.6%2016.6c4.6%204.6%2012%204.6%2016.6%200L146.4%20110.6c4.6-4.6%2012-4.6%2016.6%200l91.2%2091.2c4.6%204.6%2012%204.6%2016.6%200l16.6-16.6c4.7-4.6%204.7-12.1%200.1-16.7z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px;
-    cursor: pointer;
-}
-
-.rsvp-section select:focus {
-    border-color: #E1B29D;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(225, 178, 157, 0.3);
-}
-
-.rsvp-section textarea {
-    resize: vertical;
-}
-
-.btn-submit {
-    background-color: #E1B29D;
-    color: white;
-    padding: 15px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    will-change: transform;
-}
-
-.btn-submit:hover {
-    background-color: #D3A18C;
-}
-
-.status-message {
-    text-align: center;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #8C6A4F;
-}
-
-/* Gift Section */
+/* 8. Gift Section */
 .gift-section {
-    text-align: center;
-    margin-bottom: 0px; /* ลดช่องว่างด้านล่างของส่วนนี้ เพื่อให้ชิดกับส่วนแกลเลอรี่ */
+    background-color: #f8f5ed; /* Light beige/cream background */
+    padding: 4em 1em;
 }
 
 .gift-options {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
+    flex-direction: column; /* Stack vertically on small screens */
+    align-items: center;
+    gap: 30px;
     margin-top: 30px;
-    flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 .single-gift-box {
-    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
+    background-color: #ffffff; /* White background for gift boxes */
     padding: 25px;
-    border-radius: 8px;
-    box-shadow: none; /* ลบเงาออก */
-    width: 280px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity, transform;
+    width: 80%;
+    max-width: 350px;
 }
 
 .single-gift-box img {
-    max-width: 195px;
-    height: auto;
+    width: 180px; /* Size of QR code */
+    height: 180px;
+    object-fit: contain;
     margin-bottom: 15px;
-    border: 1px solid #EAEAEA;
+    border: 1px solid #eee;
     border-radius: 5px;
 }
 
-.single-gift-box .qr-instruction {
-    font-size: 1em;
-    margin-bottom: 15px;
-    color: #4A4A4A;
-    text-align: center;
-}
-
-.bank-details-text {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 20px;
-    padding: 0 10px;
-    box-sizing: border-box;
+.qr-instruction {
+    font-size: 1.1em;
+    color: #7b685c; /* Muted warm brown */
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .bank-details-text p {
-    margin-bottom: 5px;
-    text-align: left;
-    font-size: 1.1em;
-    color: #4A4A4A;
-}
-
-.bank-details-text p strong {
-    color: #8C6A4F;
-}
-
-/* Styling for the new gift button description */
-.gift-button-description {
-    font-size: 0.95em; /* ขนาดข้อความที่เหมาะสม */
-    color: #6A6A6A; /* สีเทาอ่อนลงเล็กน้อย */
-    margin-top: 15px; /* ระยะห่างจากปุ่ม */
+    font-size: 0.95em;
+    color: #666;
+    margin: 5px 0;
     line-height: 1.4;
-    text-align: center;
+}
+
+.transfer-button {
+    display: inline-flex; /* Use flex to align icon and text */
+    align-items: center;
+    background-color: #c9b19e; /* Muted light brown */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transfer-button i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.transfer-button:hover {
+    background-color: #b7a08b; /* Slightly darker brown on hover */
+    transform: translateY(-2px);
+}
+
+.gift-button-description {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 768px) {
+    .gift-options {
+        flex-direction: row; /* Display side-by-side on larger screens */
+        justify-content: center;
+    }
+    .single-gift-box {
+        width: 45%; /* Adjust width for side-by-side */
+    }
 }
 
 
-/* Guestbook Section */
-.guestbook-section form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+/* 7. RSVP Section (and now Guestbook Section) */
+.rsvp-section, .guestbook-section { /* Apply these styles to both */
+    background-color: #ffffff; /* White background */
+    padding: 4em 1em;
+}
+
+.rsvp-section p, .guestbook-section p {
+    margin-bottom: 2em;
+    color: #5a5a5a; /* Slightly darker grey */
+    font-size: 1.1em;
+}
+
+.rsvp-section form, .guestbook-section form { /* Apply these styles to both */
     max-width: 500px;
     margin: 0 auto;
-    animation: slideUpFadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity, transform;
+    background-color: #f8f5ed; /* Light beige/cream background for form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    text-align: left;
 }
 
-.guestbook-section label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #8C6A4F;
+.rsvp-section label, .guestbook-section label { /* Apply these styles to both */
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #7b685c; /* Muted warm brown */
 }
 
-.guestbook-section input[type="text"],
-.guestbook-section textarea {
-    padding: 12px;
-    border: 1px solid #D3D3D3;
+.rsvp-section input[type="text"],
+.rsvp-section select,
+.rsvp-section textarea,
+.guestbook-section input[type="text"], /* New: Guestbook inputs */
+.guestbook-section select,           /* New: Guestbook selects */
+.guestbook-section textarea {         /* New: Guestbook textareas */
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e0d9d2; /* Light beige border */
     border-radius: 5px;
+    font-family: 'Sarabun', sans-serif;
     font-size: 1em;
+    box-sizing: border-box; /* Include padding in width */
+    background-color: #ffffff; /* White background for inputs */
+    color: #4a4a4a;
+}
+
+.rsvp-section textarea, .guestbook-section textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.btn-submit {
+    display: block;
     width: 100%;
-    box-sizing: border-box;
-    resize: vertical;
+    background-color: #c9b19e; /* Muted light brown */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.guestbook-section textarea {
-    resize: vertical;
+.btn-submit:hover {
+    background-color: #b7a08b; /* Slightly darker brown on hover */
+    transform: translateY(-2px);
 }
 
-.guestbook-entries {
-    margin-top: 40px;
-    border-top: 1px solid #EEEEEE;
-    padding-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    animation: fadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.3s;
-    will-change: opacity;
-}
-
-.guestbook-entry {
-    background-color: transparent; /* เปลี่ยนเป็นโปร่งใสเพื่อใช้สีพื้นหลัง body */
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: none; /* ลบเงาออก */
-    margin-bottom: 15px;
-}
-
-.guestbook-entry .entry-name {
-    font-weight: bold;
-    color: #8C6A4F;
-    margin-bottom: 5px;
-    text-align: left;
-}
-
-.guestbook-entry .entry-message {
-    font-style: italic;
-    color: #4A4A4A;
-    text-align: left;
+.status-message {
+    margin-top: 20px;
+    font-weight: 600;
+    color: #7b685c; /* Muted warm brown */
+    text-align: center;
 }
 
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 20px 20px; /* ลด padding */
-    background-color: #FDF9F3; /* เปลี่ยนเป็นสีเดียวกับ background-color ของ body */
-    color: #4A4A4A; /* ใช้สีข้อความทั่วไปที่เข้ากันได้ */
-    font-size: 0.9em;
-    margin-top: 8px; /* ปรับลดลง 60% จาก 20px (20 * 0.4 = 8) */
-    animation: fadeIn 0.8s ease-out forwards; /* Direct animation */
-    animation-delay: 0.1s;
-    will-change: opacity;
-    border-top: 1px solid rgba(0, 0, 0, 0.05); /* เพิ่มเส้นคั่นบางๆ เพื่อความสวยงาม */
-}
-
-/* เพิ่ม CSS Selector สำหรับข้อความใน Footer */
-footer p {
-    margin: 0;
-    color: #8C6A4F; /* ปรับสีข้อความลิขสิทธิ์ให้เป็นสีหัวข้อ ดูเด่นขึ้นและเข้ากับธีม */
-}
-
-
-/* Music Toggle Button */
-.music-toggle-btn {
-    position: fixed;
-    top: 94vh;
-    right: 20px;
-    background-color: #8C6A4F;
+    background-color: #7b685c; /* Muted warm brown for footer */
     color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    will-change: transform;
-}
-
-.music-toggle-btn:hover {
-    background-color: #A08369;
-    transform: scale(1.1);
+    text-align: center;
+    padding: 2em 1em;
+    font-size: 0.9em;
 }
 
 
@@ -929,368 +703,144 @@ footer p {
 .mobile-nav {
     position: fixed;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 500px;
-    width: 95%;
-    background-color: #FFFFFF; /* ส่วน navigation bar ยังคงเป็นสีขาวเพื่อให้ตัดกับพื้นหลัง body และเห็นชัดเจน */
-    border-top: 1px solid #D3D3D3;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    border-radius: 20px 20px 0 0;
-    z-index: 999;
-    display: none;
-    padding-bottom: env(safe-area-inset-bottom, 0);
+    left: 0;
+    width: 100%;
+    background-color: #7b685c; /* Muted warm brown for nav bar */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: block; /* Show on mobile by default */
 }
 
 .mobile-nav-list {
     display: flex;
     justify-content: space-around;
-    align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 70px;
-    width: 100%;
 }
 
 .mobile-nav-item {
     flex: 1;
     text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .mobile-nav-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    display: block;
+    padding: 10px 5px;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    color: #6A6A6A;
     font-size: 0.8em;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for long text */
 }
 
 .mobile-nav-link i {
-    font-size: 1.6em;
-    margin-bottom: 4px;
-    transition: transform 0.2s ease;
+    display: block; /* Place icon above text */
+    font-size: 1.4em;
+    margin-bottom: 3px;
 }
 
+.mobile-nav-link.active-nav,
 .mobile-nav-link:hover {
-    color: #8C6A4F;
-}
-
-.mobile-nav-link.active-nav {
-    color: #E1B29D;
-}
-
-.mobile-nav-link.active-nav i {
-    transform: scale(1.1);
-    color: #E1B29D;
-}
-
-
-/* Specific styling for the main (RSVP) button */
-.main-nav-button {
-    flex: 0 0 auto;
-    position: relative;
-    top: -15px;
-    background-color: #8C6A4F;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    min-width: 70px;
-    min-height: 70px;
-    box-shadow: 0 -3px 15px rgba(0,0,0,0.2);
-    z-index: 1001;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    will-change: transform;
-}
-
-.main-nav-button .mobile-nav-link {
+    background-color: #c9b19e; /* Muted light brown accent on hover/active */
     color: white;
-    font-size: 0.75em;
-    height: auto;
 }
 
-.main-nav-button .mobile-nav-link i {
-    font-size: 2.2em;
-    margin-bottom: 0;
-}
-
-.main-nav-button:hover {
-    background-color: #A08369;
-    transform: translateY(-18px) scale(1.05);
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    body {
-        padding-bottom: 90px;
-    }
-    .music-toggle-btn {
-        top: 84vh;
-    }
+/* Hide desktop navigation if it exists */
+@media (min-width: 769px) {
     .mobile-nav {
-        display: flex;
-        height: 70px;
+        display: none;
     }
-    .main-nav-button {
-        width: 65px;
-        height: 65px;
-        top: -10px;
-    }
-    .main-nav-button .mobile-nav-link i {
-        font-size: 2em;
-    }
-
-    .wedding-date-text {
-        font-size: 6.5em;
-        letter-spacing: 2px;
-    }
-
-    #countdown > div:not(:last-child) {
-        margin-right: 47px;
-    }
-
-    .slider-container {
-        padding: 40px 0;
-        width: 100%;
-        margin: 20px auto 0 auto; /* ปรับ margin-bottom เป็น 0 สำหรับมือถือด้วย */
-        box-sizing: border-box;
-    }
-    .slide {
-        width: 100%;
-        padding: 0;
-    }
-    .slide img {
-        height: auto;
-        max-height: 80vh;
-        width: 100%;
-    }
-    .slider-nav button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-        padding: 0;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 20;
-    }
-    .slider-nav .prev-slide {
-        left: 0px; /* Changed from 20px to 0px for more flush left position */
-    }
-    .slider-nav .next-slide {
-        right: 20px;
-    }
-
-    .map-section {
-        padding: 0;
-        width: 100%;
-        margin: 40px auto;
-        box-sizing: border-box;
-    }
-    .map-section .location-header {
-        padding: 0 20px;
-    }
-    .address-details {
-        padding: 0 20px;
-    }
+    /* Potentially add styles for desktop nav here if it exists */
 }
 
-@media (max-width: 480px) {
-    body {
-        padding-bottom: 90px;
-    }
-    .music-toggle-btn {
-        top: 84vh;
-    }
-    h1 {
-        font-size: 2em;
-    }
-    h2 {
-        font-size: 1.8em;
-    }
 
-    .wedding-logo {
-        max-width: 70%;
-    }
-    .hero-slogan {
-        font-size: 1em;
-    }
-    .invitation-section h2 {
-        font-size: 1.8em;
-    }
-    .couple-main-photo img {
-        width: 150px;
-        height: 150px;
-    }
-    .couple-names-text {
-        font-size: 1.8em;
-    }
-    .date-location {
-        font-size: 1em;
-    }
-    .countdown {
-        font-size: 1.5em;
-    }
-    .btn-scroll {
-        font-size: 0.9em;
-        padding: 10px 20px;
-    }
-    .section {
-        padding: 30px 10px;
-    }
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-    .music-toggle-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-    }
-    .main-nav-button {
-        width: 60px;
-        height: 60px;
-        top: -5px;
-    }
-    .main-nav-button .mobile-nav-link i {
-        font-size: 1.8em;
-    }
-
-    .wedding-date-text {
-        font-size: 3.2em;
-        line-height: 1.2;
-        letter-spacing: 0.2px;
-        word-break: break-word;
-    }
-
-    .countdown-modern .value {
-        font-size: 2.3em;
-        line-height: 1;
-        display: block;
-        margin-bottom: 2px;
-    }
-    .countdown-modern .label {
-        font-size: 1.2em;
-        margin-top: 0px;
-        display: block;
-        text-transform: uppercase;
-    }
-
-    #countdown {
-        padding: 0;
-        justify-content: center;
-        flex-wrap: nowrap;
-    }
-    #countdown > div {
-        margin: 0 1px;
-        flex: 0 0 auto;
-        box-sizing: border-box;
-        text-align: center;
-    }
-
-    .details-section .detail-item p {
-        font-size: 1.6em;
-    }
-}
-
-/* Custom Alert/Modal styles */
+/* Custom Alert/Modal Styles */
 .custom-alert-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay for soft feel */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-    pointer-events: none;
+    z-index: 1002; /* Above music button */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .custom-alert-overlay.hidden {
     opacity: 0;
-    pointer-events: none;
-}
-
-.custom-alert-overlay:not(.hidden) {
-    opacity: 1;
-    pointer-events: all;
+    visibility: hidden;
+    pointer-events: none; /* Allows clicks to pass through when hidden */
 }
 
 .custom-alert-box {
-    background-color: #FFFFFF;
+    background-color: #ffffff; /* White background */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Softer shadow */
     text-align: center;
     max-width: 400px;
     width: 90%;
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-.custom-alert-overlay:not(.hidden) .custom-alert-box {
     transform: translateY(0);
     opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.custom-alert-overlay.hidden .custom-alert-box {
+    transform: translateY(-20px);
+    opacity: 0;
 }
 
 .custom-alert-box p {
-    margin-bottom: 20px;
     font-size: 1.1em;
-    color: #4A4A4A;
+    color: #4a4a4a;
+    margin-bottom: 25px;
 }
 
-/* Loading Spinner styles */
+.custom-alert-box .btn-submit {
+    margin-top: 15px;
+    width: auto;
+    padding: 10px 25px;
+    display: inline-block;
+    background-color: #c9b19e; /* Muted light brown */
+}
+
+.custom-alert-box .btn-submit:hover {
+    background-color: #b7a08b;
+}
+
+/* Loading Spinner */
 .loading-spinner {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly less transparent white */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 10001;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-    pointer-events: none;
+    z-index: 1003; /* Above alert */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .loading-spinner.hidden {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
 
-.loading-spinner:not(.hidden) {
-    opacity: 1;
-    pointer-events: all;
-}
-
 .spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #8C6A4F;
+    border: 5px solid #f0f0f0; /* Light grey for inner part */
+    border-top: 5px solid #c9b19e; /* Muted light brown accent color */
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -1304,7 +854,6 @@ footer p {
 }
 
 .loading-spinner p {
-    color: #8C6A4F;
-    font-size: 1.2em;
-    font-weight: bold;
+    color: #7b685c; /* Muted warm brown */
+    font-size: 1.1em;
 }
