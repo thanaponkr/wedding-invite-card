@@ -163,7 +163,6 @@ h2, h3, h4 {
     margin-top: 40px;
 }
 
-/* --- เพิ่มสไตล์สำหรับไอคอน Location --- */
 .location-icon {
     width: 32px;
     height: 32px;
@@ -200,7 +199,7 @@ h2, h3, h4 {
     background-color: var(--gray-light);
     border: 1px dashed var(--gray-medium);
     padding: 20px;
-    margin: 30px auto;
+    margin: 0 auto 30px auto; /* ปรับ margin */
     max-width: 350px;
     border-radius: 8px;
 }
@@ -215,6 +214,19 @@ h2, h3, h4 {
     letter-spacing: 2px;
     margin-top: 10px !important;
 }
+
+.qr-code-img {
+    margin: 0 auto 30px auto; /* ปรับ margin */
+    display: block;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--gray-medium);
+    padding: 5px;
+    background-color: white;
+}
+
 
 /* --- RSVP Form --- */
 #rsvp-form {
