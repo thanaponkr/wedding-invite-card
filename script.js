@@ -63,27 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerText = 'กำลังส่ง...';
         submitBtn.disabled = true;
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec';
+        // อัปเดตเป็น URL ใหม่ของคุณแล้ว
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwvoqj7g4-8Lr68w-EI-XlBiKGbT0zyr5VdMVFFitrSdlWv6HNyjsDg9jG1cKNId5XL/exec';
         
         const formData = new FormData(rsvpForm);
 
-        // --- จุดที่แก้ไข ---
-        // เพิ่ม mode: 'no-cors' เพื่อแก้ไขปัญหาเรื่องความปลอดภัย (CORS)
         fetch(scriptURL, { 
             method: 'POST', 
             body: formData,
             mode: 'no-cors' 
         })
         .then(response => {
-            // เมื่อใช้ 'no-cors' เราจะไม่สามารถดูข้อมูลที่ตอบกลับได้
-            // แต่ถ้าโค้ดทำงานมาถึงตรงนี้ได้ หมายถึงการส่งข้อมูลสำเร็จแล้ว
             console.log('Success! (Opaque response)');
             showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
             rsvpForm.reset(); 
             guestCountGroup.style.display = 'none';
         })
         .catch(error => {
-            // ส่วนนี้จะทำงานก็ต่อเมื่อมีปัญหาด้านเครือข่ายจริงๆ เช่น อินเทอร์เน็ตหลุด
             console.error('Error!', error.message);
             showToast('เกิดข้อผิดพลาด กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต', 'error');
         })
