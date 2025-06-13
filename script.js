@@ -1,408 +1,311 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // --------------------------------------------------------
-    // Music Toggle
-    // --------------------------------------------------------
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    let isPlaying = false; // Initial state
+// script.js
 
-    // Check if music was playing in previous session (using localStorage)
-    if (localStorage.getItem('musicPlaying') === 'true') {
-        backgroundMusic.play().then(() => {
-            isPlaying = true;
-            musicToggle.querySelector('i').classList.remove('fa-volume-mute');
-            musicToggle.querySelector('i').classList.add('fa-music');
-        }).catch(error => {
-            console.warn("Autoplay was prevented:", error);
-            // Autoplay blocked, keep mute icon or handle accordingly
-            musicToggle.querySelector('i').classList.remove('fa-music');
-            musicToggle.querySelector('i').classList.add('fa-volume-mute');
-            isPlaying = false;
-        });
-    } else {
-        // If not explicitly playing, ensure mute icon is shown initially
-        musicToggle.querySelector('i').classList.remove('fa-music');
-        musicToggle.querySelector('i').classList.add('fa-volume-mute');
+// --- Countdown Timer ---
+const weddingDate = new Date('2025-07-28T00:00:00'); // July 28, 2025
+const countdownElements = {
+    days: document.getElementById('days'),
+    hours: document.getElementById('hours'),
+    minutes: document.getElementById('minutes'),
+    seconds: document.getElementById('seconds')
+};
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = weddingDate.getTime() - now;
+
+    if (distance < 0) {
+        clearInterval(countdownInterval);
+        for (const key in countdownElements) {
+            countdownElements[key].innerHTML = '0';
+        }
+        return;
     }
 
-    musicToggle.addEventListener('click', () => {
-        if (isPlaying) {
-            backgroundMusic.pause();
-            musicToggle.querySelector('i').classList.remove('fa-music');
-            musicToggle.querySelector('i').classList.add('fa-volume-mute');
-            localStorage.setItem('musicPlaying', 'false');
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownElements.days.innerHTML = days;
+    countdownElements.hours.innerHTML = hours;
+    countdownElements.minutes.innerHTML = minutes;
+    countdownElements.seconds.innerHTML = seconds;
+}
+
+const countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown(); // Initial call to display countdown immediately
+
+
+// --- Smooth Scrolling for Navigation ---
+function scrollToSection(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Update active state in nav bar
+        document.querySelectorAll('.nav-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        // Simple logic for active state based on current scroll position
+        // For a more robust solution, use Intersection Observer
+        const activeButton = document.querySelector(`.nav-button[onclick*="${id}"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+    }
+}
+window.scrollToSection = scrollToSection; // Make it globally accessible for inline onclick
+
+
+// --- Calendar Event Download (ICS) ---
+document.getElementById('addToCalendarBtn').addEventListener('click', function() {
+    const title = 'งานแต่งงานของเมย์และเต้ย';
+    const description = 'ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเมย์และเต้ย';
+    const location = 'อาปาเก้ การ์เด้น';
+    const start = '20250728T090000'; // YYYYMMDDTHHMMSS (e.g., 9:00 AM)
+    const end = '20250728T140000';   // YYYYMMDDTHHMMSS (e.g., 2:00 PM)
+
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MayAndToeyWedding//NONSGML v1.0//EN
+BEGIN:VEVENT
+UID:${new Date().getTime()}@weddinginvite.com
+DTSTAMP:${new Date().toISOString().replace(/[-:]|\.\d{3}/g, '')}Z
+DTSTART:${start}
+DTEND:${end}
+SUMMARY:${title}
+DESCRIPTION:${description}
+LOCATION:${location}
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'wedding_invite_may_toey.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPopup('แจ้งเตือนถูกเพิ่มไปยังปฏิทินแล้วค่ะ/ครับ!', 3000);
+});
+
+// --- Gallery Logic ---
+const galleryImages = [
+    "https://placehold.co/800x1000/A0B9AE/FFF?text=Couple+Photo+1",
+    "https://placehold.co/800x1000/C5D9BE/FFF?text=Couple+Photo+2",
+    "https://placehold.co/800x1000/E1EFD6/FFF?text=Couple+Photo+3",
+    "https://placehold.co/800x1000/AAD5BB/FFF?text=Couple+Photo+4",
+    "https://placehold.co/800x1000/D1E9D6/FFF?text=Couple+Photo+5",
+];
+let currentGalleryIndex = 0;
+const galleryImage = document.getElementById('galleryImage');
+const prevImageBtn = document.getElementById('prevImageBtn');
+const nextImageBtn = document.getElementById('nextImageBtn');
+const galleryDotsContainer = document.getElementById('galleryDots');
+
+function updateGallery() {
+    galleryImage.src = galleryImages[currentGalleryIndex];
+    updateGalleryDots();
+}
+
+function updateGalleryDots() {
+    galleryDotsContainer.innerHTML = ''; // Clear existing dots
+    galleryImages.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.classList.add('rounded-full', 'bg-gray-400', 'transition-all', 'duration-300');
+        if (index === currentGalleryIndex) {
+            dot.classList.add('w-3', 'h-3', 'bg-pink-500');
         } else {
-            backgroundMusic.play().then(() => {
-                musicToggle.querySelector('i').classList.remove('fa-volume-mute');
-                musicToggle.querySelector('i').classList.add('fa-music');
-                localStorage.setItem('musicPlaying', 'true');
-            }).catch(error => {
-                console.warn("Failed to play music on click:", error);
-                // Handle cases where play() might still fail (e.g., user interaction not strong enough)
-                // Keep mute icon or provide feedback
-            });
+            dot.classList.add('w-2', 'h-2');
         }
-        isPlaying = !isPlaying;
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.addEventListener('click', () => {
+            currentGalleryIndex = index;
+            updateGallery();
+        });
+        galleryDotsContainer.appendChild(dot);
     });
+}
 
-    // --------------------------------------------------------
-    // Countdown Timer
-    // --------------------------------------------------------
-    const countdownElement = document.getElementById('countdown');
-    // ตั้งค่าวันและเวลาแต่งงานที่นี่ (ปี-เดือน-วันTชั่วโมง:นาที:วินาที)
-    const weddingDate = new Date('2025-07-28T07:30:00');
+prevImageBtn.addEventListener('click', () => {
+    currentGalleryIndex = (currentGalleryIndex === 0) ? galleryImages.length - 1 : currentGalleryIndex - 1;
+    updateGallery();
+});
 
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
+nextImageBtn.addEventListener('click', () => {
+    currentGalleryIndex = (currentGalleryIndex === galleryImages.length - 1) ? 0 : currentGalleryIndex + 1;
+    updateGallery();
+});
 
-        if (distance < 0) {
-            if(countdownElement) { // Check if element exists before updating
-                countdownElement.innerHTML = "<h3>งานแต่งงานได้เริ่มต้นขึ้นแล้ว!</h3>";
-            }
-            clearInterval(countdownInterval);
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if(countdownElement) { // Check if element exists before updating
-            countdownElement.innerHTML = `
-                <div class="countdown-item"><span>${days}</span>วัน</div>
-                <div class="countdown-item"><span>${hours}</span>ชั่วโมง</div>
-                <div class="countdown-item"><span>${minutes}</span>นาที</div>
-                <div class="countdown-item"><span>${seconds}</span>วินาที</div>
-            `;
-        }
+// Touch swipe for gallery
+let touchStartX = 0;
+galleryImage.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+galleryImage.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartX;
+    if (deltaX > 50) { // Swipe right
+        currentGalleryIndex = (currentGalleryIndex === 0) ? galleryImages.length - 1 : currentGalleryIndex - 1;
+        updateGallery();
+    } else if (deltaX < -50) { // Swipe left
+        currentGalleryIndex = (currentGalleryIndex === galleryImages.length - 1) ? 0 : currentGalleryIndex + 1;
+        updateGallery();
     }
-    // Only set up countdown if the element exists on the page
-    if (countdownElement) {
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to display countdown immediately
-    }
+});
+
+updateGallery(); // Initialize gallery
 
 
-    // --------------------------------------------------------
-    // Smooth scrolling for navigation links & Active Nav Link
-    // --------------------------------------------------------
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+// --- Google App Script Submission (RSVP & Gift) ---
+const appScriptUrl = "https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPxXxNQESlmwg4oIRNG3oGluhN-/exec"; // URL จากคุณ
 
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
+async function submitForm(formData, formType) {
+    try {
+        const payload = {
+            type: formType,
+            ...formData,
+            timestamp: new Date().toISOString()
+        };
 
-                // Update active nav link for internal links
-                document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                    link.classList.remove('active-nav');
-                });
-                // Find the direct link in the nav bar
-                const currentNavLink = document.querySelector(`.mobile-nav-link[href="${targetId}"]`);
-                if (currentNavLink) {
-                    currentNavLink.classList.add('active-nav');
-                }
-            }
+        const response = await fetch(appScriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+            redirect: 'follow',
+            mode: 'no-cors' // ใช้ 'no-cors' เพื่อหลีกเลี่ยงปัญหา CORS ในเบราว์เซอร์
         });
+
+        // เนื่องจากใช้ 'no-cors', response จะเป็น opaque. เราไม่สามารถอ่าน response ได้
+        // ถือว่าสำเร็จและแสดง pop-up
+        showPopup('ขอบคุณค่ะ/ครับ ข้อมูลของคุณถูกส่งแล้ว!');
+
+        // Clear form
+        if (formType === 'rsvp') {
+            document.getElementById('rsvpForm').reset();
+            document.getElementById('guestsField').classList.add('hidden'); // ซ่อนช่องจำนวนแขก
+        } else if (formType === 'gift') {
+            document.getElementById('giftForm').reset();
+        }
+
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        showPopup('ขออภัยค่ะ/ครับ เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองอีกครั้ง');
+    }
+}
+
+// --- RSVP Form Logic ---
+const rsvpForm = document.getElementById('rsvpForm');
+const attendingSelect = document.getElementById('attending');
+const guestsField = document.getElementById('guestsField');
+
+attendingSelect.addEventListener('change', function() {
+    if (this.value === 'สะดวกมา') {
+        guestsField.classList.remove('hidden');
+    } else {
+        guestsField.classList.add('hidden');
+    }
+});
+
+rsvpForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = {
+        name: document.getElementById('rsvpName').value,
+        attending: attendingSelect.value,
+        guests: attendingSelect.value === 'สะดวกมา' ? document.getElementById('guests').value : 0,
+        message: document.getElementById('message').value
+    };
+    submitForm(formData, 'rsvp');
+});
+
+// --- Gift Form Logic ---
+const giftForm = document.getElementById('giftForm');
+giftForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = {
+        amount: document.getElementById('giftAmount').value,
+        date: document.getElementById('giftDate').value,
+        time: document.getElementById('giftTime').value,
+        address: document.getElementById('giftAddress').value
+    };
+    submitForm(formData, 'gift');
+});
+
+// --- Popup Message Logic ---
+const popupOverlay = document.getElementById('popupOverlay');
+const popupMessageElem = document.getElementById('popupMessage');
+const popupCloseBtn = document.getElementById('popupCloseBtn');
+const popupConfirmBtn = document.getElementById('popupConfirmBtn');
+let popupTimeout;
+
+function showPopup(message, duration = 3000) {
+    popupMessageElem.textContent = message;
+    popupOverlay.classList.remove('hidden');
+    clearTimeout(popupTimeout); // Clear any existing timeout
+    popupTimeout = setTimeout(() => {
+        hidePopup();
+    }, duration);
+}
+
+function hidePopup() {
+    popupOverlay.classList.add('hidden');
+}
+
+popupCloseBtn.addEventListener('click', hidePopup);
+popupConfirmBtn.addEventListener('click', hidePopup);
+
+
+// --- Copy to Clipboard Function ---
+document.getElementById('copyAccountBtn').addEventListener('click', function() {
+    const accountNumber = document.getElementById('accountNumber').textContent;
+    const textarea = document.createElement('textarea');
+    textarea.value = accountNumber;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = 0;
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+        const successful = document.execCommand('copy');
+        const msg = successful ? 'คัดลอกสำเร็จ!' : 'คัดลอกไม่สำเร็จ';
+        showPopup(msg, 3000);
+    } catch (err) {
+        console.error('Failed to copy text', err);
+        showPopup('คัดลอกไม่สำเร็จ', 3000);
+    }
+    document.body.removeChild(textarea);
+});
+
+// --- Intersection Observer for Fade-in Sections ---
+const fadeSections = document.querySelectorAll('.fade-in-section');
+
+const observerOptions = {
+    root: null, // viewport
+    rootMargin: '0px',
+    threshold: 0.1 // 10% of the section is visible
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target); // Stop observing once visible
+        }
     });
+}, observerOptions);
 
-    // Intersection Observer for active nav link on scroll (for sections with IDs) and fade-in animation
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.mobile-nav-link');
+fadeSections.forEach(section => {
+    observer.observe(section);
+});
 
-    const observerOptions = {
-        rootMargin: '0px 0px -70% 0px', // Adjust this to make it active earlier or later
-        threshold: 0.1 // How much of the section needs to be visible
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // For fade-in animation
-                entry.target.classList.add('visible');
-
-                // For active nav link
-                navLinks.forEach(link => {
-                    link.classList.remove('active-nav');
-                });
-                const targetNavLink = document.querySelector(`.mobile-nav-link[href*="#${entry.target.id}"]`);
-                if (targetNavLink) {
-                    targetNavLink.classList.add('active-nav');
-                }
-            } else {
-                // Optional: remove visible class if you want animation to replay on scroll up
-                // entry.target.classList.remove('visible');
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        sectionObserver.observe(section);
+// Initial check for sections already in view on load
+window.addEventListener('load', () => {
+    fadeSections.forEach(section => {
+        if (section.getBoundingClientRect().top < window.innerHeight) {
+            section.classList.add('is-visible');
+        }
     });
-
-    // Handle initial active state for guestbook.html's nav link
-    const currentPath = window.location.pathname.split('/').pop();
-    if (currentPath === 'guestbook.html') {
-        navLinks.forEach(link => {
-            link.classList.remove('active-nav');
-        });
-        const guestbookNavLink = document.querySelector('.mobile-nav-link[href="guestbook.html"]');
-        if (guestbookNavLink) {
-            guestbookNavLink.classList.add('active-nav');
-        }
-    }
-
-
-    // --------------------------------------------------------
-    // Custom Alert/Modal (shared between RSVP and Guestbook)
-    // --------------------------------------------------------
-    const customAlertOverlay = document.getElementById('custom-alert-overlay');
-    const customAlertMessage = document.getElementById('custom-alert-message');
-    const customAlertCloseBtn = document.getElementById('custom-alert-close-btn');
-    const loadingSpinner = document.getElementById('loading-spinner');
-
-    // Initialize Confetti
-    const jsConfetti = new JSConfetti();
-
-    function showAlert(message, showConfetti = false) {
-        if (customAlertMessage && customAlertOverlay) {
-            customAlertMessage.textContent = message;
-            customAlertOverlay.classList.remove('hidden');
-            if (showConfetti) {
-                jsConfetti.addConfetti({
-                    emojis: ['🎉', '💖', '💍', '✨'],
-                    emojiSize: 30,
-                    confettiNumber: 100
-                });
-            }
-        }
-    }
-
-    function hideAlert() {
-        if (customAlertOverlay) {
-            customAlertOverlay.classList.add('hidden');
-        }
-    }
-
-    if (customAlertCloseBtn) {
-        customAlertCloseBtn.addEventListener('click', hideAlert);
-    }
-    if (customAlertOverlay) {
-        customAlertOverlay.addEventListener('click', (e) => {
-            if (e.target === customAlertOverlay) {
-                hideAlert();
-            }
-        });
-    }
-
-    function showLoading() {
-        if (loadingSpinner) {
-            loadingSpinner.classList.remove('hidden');
-        }
-    }
-
-    function hideLoading() {
-        if (loadingSpinner) {
-            loadingSpinner.classList.add('hidden');
-        }
-    }
-
-    // --------------------------------------------------------
-    // RSVP Form Submission (index.html)
-    // --------------------------------------------------------
-    const rsvpForm = document.getElementById('rsvp-form');
-    if (rsvpForm) {
-        rsvpForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            showLoading();
-
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-
-            // Simulate API call (replace with actual backend submission)
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2-second delay
-
-            hideLoading();
-            showAlert('ขอบคุณสำหรับการตอบรับค่ะ/ครับ! เราได้รับข้อมูลของคุณแล้ว', true); // Show confetti
-            this.reset(); // Clear the form
-        });
-    }
-
-    // --------------------------------------------------------
-    // Guestbook Form Submission (guestbook.html)
-    // --------------------------------------------------------
-    const guestbookForm = document.getElementById('guestbook-form');
-    if (guestbookForm) {
-        guestbookForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            showLoading();
-
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-
-            // Simulate API call (replace with actual backend submission)
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2-second delay
-
-            hideLoading();
-            showAlert('ขอบคุณสำหรับการแจ้งข้อมูลค่ะ/ครับ! บ่าวสาวจะจัดส่งของขวัญให้เร็วที่สุดค่ะ/ครับ', true); // Show confetti
-            this.reset(); // Clear the form
-        });
-    }
-
-    // --------------------------------------------------------
-    // Gallery Auto & Manual Slide with Lazy Loading
-    // --------------------------------------------------------
-    const sliderWrapper = document.querySelector('.slider-wrapper');
-    if (sliderWrapper) {
-        const slides = document.querySelectorAll('.slider-wrapper .slide');
-        const lazyLoadImages = document.querySelectorAll('.slider-wrapper .slide img.lazy-load');
-        const totalSlides = slides.length;
-        let currentSlide = 0;
-        let autoSlideInterval;
-        const autoSlideDelay = 5000; // 5 seconds
-
-        function loadSlideImage(imgElement) {
-            if (imgElement && imgElement.dataset.src) {
-                imgElement.src = imgElement.dataset.src;
-                imgElement.removeAttribute('data-src'); // Remove data-src once loaded
-                imgElement.classList.remove('lazy-load'); // Remove lazy-load class
-            }
-        }
-
-        function preloadSurroundingImages(index) {
-            // Load current, next, and previous slide images
-            loadSlideImage(lazyLoadImages[index]);
-            if (index + 1 < totalSlides) loadSlideImage(lazyLoadImages[index + 1]);
-            if (index - 1 >= 0) loadSlideImage(lazyLoadImages[index - 1]);
-            // Also load the last slide if current is first for wrap around
-            if (index === 0 && totalSlides > 1) loadSlideImage(lazyLoadImages[totalSlides - 1]);
-            // Also load the first slide if current is last for wrap around
-            if (index === totalSlides - 1 && totalSlides > 1) loadSlideImage(lazyLoadImages[0]);
-        }
-
-        function showSlide(index) {
-            if (index >= totalSlides) {
-                currentSlide = 0;
-            } else if (index < 0) {
-                currentSlide = totalSlides - 1;
-            } else {
-                currentSlide = index;
-            }
-            const offset = -currentSlide * 100;
-            sliderWrapper.style.transform = `translateX(${offset}%)`;
-            updateDots();
-            preloadSurroundingImages(currentSlide); // Lazy load images
-        }
-
-        function startAutoSlide() {
-            stopAutoSlide(); // Clear any existing interval
-            autoSlideInterval = setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, autoSlideDelay);
-        }
-
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        const prevButton = document.querySelector('.prev-slide');
-        const nextButton = document.querySelector('.next-slide');
-
-        if (prevButton) {
-            prevButton.addEventListener('click', () => {
-                stopAutoSlide(); // Stop auto-slide on manual interaction
-                showSlide(currentSlide - 1);
-                startAutoSlide(); // Restart auto-slide after a delay
-            });
-        }
-        if (nextButton) {
-            nextButton.addEventListener('click', () => {
-                stopAutoSlide(); // Stop auto-slide on manual interaction
-                showSlide(currentSlide + 1);
-                startAutoSlide(); // Restart auto-slide after a delay
-            });
-        }
-
-        const sliderDotsContainer = document.querySelector('.slider-dots');
-        if (sliderDotsContainer) {
-            sliderDotsContainer.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('span');
-                dot.classList.add('dot');
-                dot.addEventListener('click', () => {
-                    stopAutoSlide(); // Stop auto-slide on manual interaction
-                    showSlide(i);
-                    startAutoSlide(); // Restart auto-slide after a delay
-                });
-                sliderDotsContainer.appendChild(dot);
-            }
-        }
-
-        function updateDots() {
-            if (sliderDotsContainer) {
-                document.querySelectorAll('.slider-dots .dot').forEach((dot, index) => {
-                    if (index === currentSlide) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-        }
-
-        // Initialize first slide and dots, and start auto-slide
-        showSlide(0);
-        startAutoSlide();
-
-        // Optional: Pause auto-slide when mouse is over the slider
-        sliderWrapper.parentNode.addEventListener('mouseenter', stopAutoSlide);
-        sliderWrapper.parentNode.addEventListener('mouseleave', startAutoSlide);
-    }
-
-    // --------------------------------------------------------
-    // Copy to Clipboard for Bank Account
-    // --------------------------------------------------------
-    window.copyToClipboard = function(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            showAlert('คัดลอกเลขบัญชีสำเร็จ!');
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-            showAlert('ไม่สามารถคัดลอกเลขบัญชีได้ กรุณาลองใหม่');
-        });
-    };
-
-    // --------------------------------------------------------
-    // Share Website Link
-    // --------------------------------------------------------
-    window.copyWebsiteLink = function() {
-        const websiteUrl = window.location.origin + window.location.pathname; // Get current URL
-        navigator.clipboard.writeText(websiteUrl).then(() => {
-            const copyStatus = document.getElementById('copy-status');
-            if (copyStatus) {
-                copyStatus.textContent = 'คัดลอกลิงก์สำเร็จ!';
-                setTimeout(() => {
-                    copyStatus.textContent = '';
-                }, 3000); // Clear message after 3 seconds
-            }
-        }).catch(err => {
-            console.error('Failed to copy link: ', err);
-            const copyStatus = document.getElementById('copy-status');
-            if (copyStatus) {
-                copyStatus.textContent = 'ไม่สามารถคัดลอกลิงก์ได้ กรุณาลองใหม่';
-            }
-        });
-    };
-
-    // Note: Actual LINE/Facebook share URLs might need dynamic population
-    // For LINE, you might need an API or a more complex URL. This is a basic example.
-    // For Facebook, it typically scrapes the URL, so just passing the URL is often enough.
-
-}); // End of DOMContentLoaded
+});

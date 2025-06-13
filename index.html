@@ -3,237 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>งานแต่งงาน เมย์ & เต้ย</title>
+    <title>งานวิวาห์ เมย์ & เต้ย</title>
+    <!-- Tailwind CSS CDN for simplicity -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body class="min-h-screen relative pb-20">
 
-    <audio id="backgroundMusic" loop>
-        <source src="audio/wedding-song.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <!-- Header / Hero Section -->
+    <header
+        id="home"
+        class="relative h-[60vh] md:h-[70vh] header-bg flex items-center justify-center rounded-b-xl shadow-lg"
+    >
+        <div class="absolute inset-0 bg-black opacity-30 rounded-b-xl"></div>
+        <div class="relative z-10 text-center">
+            <img
+                src="https://placehold.co/200x200/FFF/000?text=Wedding+Logo"
+                alt="Wedding Logo"
+                class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full object-cover shadow-lg mb-4 transform hover:scale-105 transition-transform duration-300"
+            />
+            <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-lg leading-tight">
+                เมย์ & เต้ย
+            </h1>
+            <p class="text-xl md:text-2xl text-white mt-2 drop-shadow-md">งานวิวาห์ของเรา</p>
+        </div>
+    </header>
 
-    <button id="musicToggle" class="music-toggle-btn">
-        <i class="fas fa-music"></i>
-    </button>
+    <main class="container mx-auto px-4">
+        <!-- 7.1) Invitation Section - ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา -->
+        <section id="invitation" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <h2 class="text-3xl font-semibold mb-6 text-pink-700">ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="text-center">
+                        <img
+                            src="https://placehold.co/150x150/FFD1DC/666?text=May"
+                            alt="May"
+                            class="w-32 h-32 rounded-full object-cover mx-auto mb-2 shadow-md transform hover:scale-105 transition-transform duration-300"
+                        />
+                        <p class="font-semibold text-lg">เมย์</p>
+                        <p class="text-sm text-gray-600">นางสาววิไลลักษณ์ จันทร์เต็มดวง</p>
+                    </div>
+                    <div class="text-center text-3xl text-pink-500 font-bold hidden md:block">&amp;</div>
+                    <div class="text-center">
+                        <img
+                            src="https://placehold.co/150x150/C1E1C1/666?text=Toey"
+                            alt="Toey"
+                            class="w-32 h-32 rounded-full object-cover mx-auto mb-2 shadow-md transform hover:scale-105 transition-transform duration-300"
+                        />
+                        <p class="font-semibold text-lg">เต้ย</p>
+                        <p class="text-sm text-gray-600">นายธนาธร สุขสมหมาย</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <main>
-        <section id="hero-section" class="hero-section">
-            <div class="hero-content fade-in-slide-up">
-                <img src="images/wedding-logo.png" alt="May & Toey Wedding Logo" class="wedding-logo">
-                <p class="hero-slogan">ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา</p>
-                <a href="#invitation-section" class="scroll-indicator">
-                    <i class="fas fa-chevron-down"></i>
-                    <span>เลื่อนลง</span>
+        <hr class="my-8 border-gray-200 w-1/2 mx-auto" />
+
+        <!-- 7.2) Wedding Date & Countdown - วันแต่งงานและนับถอยหลัง -->
+        <section id="countdown" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <i class="fas fa-calendar-alt icon-small mx-auto mb-4 text-pink-600"></i>
+                <h2 class="text-3xl font-semibold mb-4 text-pink-700">วันแต่งงาน</h2>
+                <p class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">28 กรกฎาคม 2568</p>
+                <div class="flex justify-center items-center space-x-4 mb-8">
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md w-20">
+                        <p class="text-3xl font-bold text-pink-600" id="days">0</p>
+                        <p class="text-sm text-gray-600">วัน</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md w-20">
+                        <p class="text-3xl font-bold text-pink-600" id="hours">0</p>
+                        <p class="text-sm text-gray-600">ชั่วโมง</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md w-20">
+                        <p class="text-3xl font-bold text-pink-600" id="minutes">0</p>
+                        <p class="text-sm text-gray-600">นาที</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow-md w-20">
+                        <p class="text-3xl font-bold text-pink-600" id="seconds">0</p>
+                        <p class="text-sm text-gray-600">วินาที</p>
+                    </div>
+                </div>
+                <button
+                    id="addToCalendarBtn"
+                    class="button-primary"
+                >
+                    <i class="fas fa-calendar-plus mr-2"></i> แจ้งเตือนในปฏิทิน
+                </button>
+                <p class="text-xs text-gray-500 mt-2">
+                    (สำหรับ iOS/Android อาจต้องเพิ่มเข้าปฏิทินด้วยตนเอง)
+                </p>
+            </div>
+        </section>
+
+        <hr class="my-8 border-gray-200 w-1/2 mx-auto" />
+
+        <!-- 7.3) Location Section - สถานที่จัดงาน -->
+        <section id="location" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <i class="fas fa-map-marker-alt icon-small mx-auto mb-4 text-pink-600"></i>
+                <h2 class="text-3xl font-semibold mb-4 text-pink-700">สถานที่จัดงาน</h2>
+                <p class="text-2xl font-bold text-gray-900 mb-6">อาปาเก้ การ์เด้น</p>
+                <div class="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg mb-6">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.568469399878!2d100.5011746750379!3d13.746193586616424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29930f3f2a741%3A0xc3f2c3a5e8e8e8e!2sA-Pa-Ke%20Garden!5e0!3m2!1sen!2sth!4v1701768480000!5m2!1sen!2sth"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Google Map of Apake Garden"
+                    ></iframe>
+                </div>
+                <p class="text-md text-gray-700 mb-4">
+                    44/1 ซอยอินทรพิทักษ์ ถนนอินทรพิทักษ์ แขวงปากคลองตลาด เขตพระนคร กรุงเทพมหานคร 10200
+                </p>
+                <a
+                    href="https://maps.app.goo.gl/YourActualApakeGardenLinkHere"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button-primary"
+                >
+                    <i class="fas fa-route mr-2"></i> เส้นทาง
                 </a>
             </div>
         </section>
 
-        <section id="honor-section" class="section honor-section fade-in-slide-up">
-            <h2>ด้วยความเคารพรัก</h2>
-            <p class="honor-text">
-                เนื่องด้วยเราทั้งสองจะได้เข้าสู่พิธีมงคลสมรส<br>
-                จึงขอเรียนเชิญท่านผู้มีเกียรติและญาติมิตรทุกท่าน<br>
-                โปรดให้เกียรติเป็นสักขีพยานและร่วมอวยพร<br>
-                ในการเริ่มต้นชีวิตคู่ของเรา
-            </p>
-        </section>
+        <hr class="my-8 border-gray-200 w-1/2 mx-auto" />
 
-        <section id="couple-portraits-section" class="section couple-portraits-section fade-in-slide-up">
-            <h2>เจ้าบ่าว & เจ้าสาว</h2>
-            <div class="couple-portraits">
-                <div class="portrait-item">
-                    <img src="images/groom-portrait.jpg" alt="เจ้าบ่าว" class="portrait-img">
-                    <h3 class="portrait-name">นายเต้ย</h3>
-                    <p class="portrait-fullname">นายสมชาย รักมั่น</p>
-                </div>
-                <div class="and-symbol">&</div>
-                <div class="portrait-item">
-                    <img src="images/bride-portrait.jpg" alt="เจ้าสาว" class="portrait-img">
-                    <h3 class="portrait-name">นางสาวเมย์</h3>
-                    <p class="portrait-fullname">นางสาวสมหญิง ยืนยง</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="invitation-section" class="section invitation-section fade-in-slide-up">
-            <h2>เรียนเชิญ</h2>
-            <img src="images/invitation-floral.png" alt="Floral Invitation" class="invitation-wedding-logo">
-            <p class="invitation-slogan">
-                ขอเรียนเชิญท่านผู้มีเกียรติร่วมเป็นสักขีพยานในวันสำคัญของเรา
-            </p>
-            <h3 class="wedding-date-text">28 กรกฎาคม 2568</h3>
-
-            <div id="countdown" class="countdown-modern">
-                </div>
-
-            </section>
-
-        <section id="map-section" class="section map-section fade-in-slide-up">
-            <div class="location-header">
-                <i class="fas fa-map-marker-alt location-icon"></i>
-                <h2 class="venue-title">สถานที่จัดงาน</h2>
-                <p class="venue-name">อากาเป้ การ์เด้น</p>
-            </div>
-            <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.4394779176796!2d100.62415307589701!3d13.93241819308456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d7d8c41fa35ff%3A0x9e00d26ce693dbc5!2z4Lit4Liy4LiB4Liy4LmA4Lib4LmJIOC4geC4suC4o-C5jOC5gOC4lOC5ieC4mQ!5e0!3m2!1sth!2sth!4v1749761075224!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <p class="address-details">อากาเป้ การ์เด้น
-888, 8 ซอย พหลโยธิน 54/4 แขวงสายไหม เขตสายไหม กรุงเทพมหานคร 102200</p>
-            <a href="https://maps.app.goo.gl/k8RZ5iyWVDejdzM88" target="_blank" class="direction-button">
-                <i class="fas fa-directions"></i> เส้นทาง
-            </a>
-        </section>
-        <section id="details-section" class="section details-section fade-in-slide-up">
-            <h2>กำหนดการ</h2>
-            <div class="detail-item">
-                <h3><i class="far fa-clock"></i> 07:30 น.</h3>
-                <p>พิธีแห่ขันหมาก</p>
-            </div>
-            <div class="detail-item">
-                <h3><i class="fas fa-handshake"></i> 09:00 น.</h3>
-                <p>พิธีหมั้นและพิธีหลั่งน้ำพระพุทธมนต์</p>
-            </div>
-            <div class="detail-item">
-                <h3><i class="fas fa-ring"></i> 11:00 น.</h3>
-                <p>พิธีฉลองมงคลสมรส</p>
-            </div>
-            <div class="detail-item">
-                <h3><i class="fas fa-concierge-bell"></i> 12:00 น.</h3>
-                <p>งานเลี้ยงรับประทานอาหาร (โต๊ะจีน)</p>
-            </div>
-        </section>
-        <section id="gallery-section" class="section gallery-section fade-in-slide-up">
-            <h2>แกลเลอรี่</h2>
-            <div class="slider-container">
-                <div class="slider-wrapper">
-                    <div class="slide"><img data-src="images/gallery-1.jpg" alt="Wedding Gallery 1" class="lazy-load"></div>
-                    <div class="slide"><img data-src="images/gallery-2.jpg" alt="Wedding Gallery 2" class="lazy-load"></div>
-                    <div class="slide"><img data-src="images/gallery-3.jpg" alt="Wedding Gallery 3" class="lazy-load"></div>
-                    <div class="slide"><img data-src="images/gallery-4.jpg" alt="Wedding Gallery 4" class="lazy-load"></div>
-                    <div class="slide"><img data-src="images/gallery-5.jpg" alt="Wedding Gallery 5" class="lazy-load"></div>
-                    <div class="slide"><img data-src="images/gallery-6.jpg" alt="Wedding Gallery 6" class="lazy-load"></div>
-                     <div class="slide"><img data-src="images/gallery-photo-1.jpg" alt="รูปภาพแกลเลอรี่ใหม่" class="lazy-load"></div>
+        <!-- 7.4) Schedule Section - กำหนดการ -->
+        <section id="schedule" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <i class="fas fa-clock icon-small mx-auto mb-4 text-pink-600"></i>
+                <h2 class="text-3xl font-semibold mb-6 text-pink-700">กำหนดการ</h2>
+                <div class="space-y-6">
+                    <div class="flex items-center bg-white p-4 rounded-lg shadow-md">
+                        <span class="flex-shrink-0 text-pink-500 mr-4">
+                            <i class="fas fa-clock"></i>
+                        </span>
+                        <div>
+                            <p class="text-xl font-bold text-gray-900">07:30 น.</p>
+                            <p class="text-gray-700">พิธีแห่ขันหมาก</p>
+                        </div>
                     </div>
-                <div class="slider-nav">
-                    <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                    <div class="flex items-center bg-white p-4 rounded-lg shadow-md">
+                        <span class="flex-shrink-0 text-pink-500 mr-4">
+                            <i class="fas fa-heart"></i>
+                        </span>
+                        <div>
+                            <p class="text-xl font-bold text-gray-900">09:00 น.</p>
+                            <p class="text-gray-700">พิธีหลั่งน้ำพระพุทธมนต์</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-white p-4 rounded-lg shadow-md">
+                        <span class="flex-shrink-0 text-pink-500 mr-4">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                        <div>
+                            <p class="text-xl font-bold text-gray-900">09:30 น.</p>
+                            <p class="text-gray-700">พิธีมงคลสมรส</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-white p-4 rounded-lg shadow-md">
+                        <span class="flex-shrink-0 text-pink-500 mr-4">
+                            <i class="fas fa-users"></i>
+                        </span>
+                        <div>
+                            <p class="text-xl font-bold text-gray-900">11:30 น.</p>
+                            <p class="text-gray-700">งานเลี้ยงรับประทานอาหาร (โต๊ะจีน)</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="slider-dots"></div>
             </div>
         </section>
 
-        <section id="gift-section" class="section gift-section fade-in-slide-up">
-            <h2>ของขวัญสำหรับคู่บ่าวสาว</h2>
-            <p>หากท่านประสงค์จะร่วมแสดงความยินดีผ่านของขวัญหรือซอง<br>สามารถทำได้ตามช่องทางด้านล่างนี้ค่ะ/ครับ</p>
-            <div class="gift-options">
-                <div class="single-gift-box">
-                    <h3>QR Code สำหรับโอนเงิน</h3>
-                    <img src="images/qr-code.png" alt="QR Code">
-                    <p class="qr-instruction">สแกนเพื่อโอนเงินได้เลยค่ะ/ครับ</p>
-                </div>
-                <div class="single-gift-box">
-                    <h3>ข้อมูลบัญชีธนาคาร</h3>
-                    <div class="bank-details-text">
-                        <p><strong>ธนาคาร:</strong> กสิกรไทย (KBank)</p>
-                        <p><strong>ชื่อบัญชี:</strong> นายสมชาย รักมั่น และ/หรือ นางสาวสมหญิง ยืนยง</p>
-                        <p><strong>เลขที่บัญชี:</strong> XXX-X-XXXXX-X</p>
-                    </div>
-                    <button class="transfer-button" onclick="copyToClipboard('XXX-X-XXXXX-X')">
-                        <i class="far fa-copy"></i> คัดลอกเลขบัญชี
+        <hr class="my-8 border-gray-200 w-1/2 mx-auto" />
+
+        <!-- 7.5) Gallery Section - แกลเลอรี่รูปภาพ -->
+        <section id="gallery" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <i class="fas fa-camera-retro icon-small mx-auto mb-4 text-pink-600"></i>
+                <h2 class="text-3xl font-semibold mb-6 text-pink-700">แกลเลอรี่</h2>
+                <div class="relative w-full max-w-sm mx-auto rounded-lg overflow-hidden shadow-lg aspect-[3/4]">
+                    <img
+                        id="galleryImage"
+                        src="https://placehold.co/800x1000/A0B9AE/FFF?text=Couple+Photo+1"
+                        alt="Couple Photo 1"
+                        class="w-full h-full object-cover"
+                    />
+                    <button
+                        id="prevImageBtn"
+                        class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black bg-opacity-40 text-white rounded-full hover:bg-opacity-60 transition-colors"
+                    >
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button
+                        id="nextImageBtn"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black bg-opacity-40 text-white rounded-full hover:bg-opacity-60 transition-colors"
+                    >
+                        <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
+                <div id="galleryDots" class="flex justify-center mt-4 space-x-2">
+                    <!-- Dots will be dynamically added here by JavaScript -->
+                </div>
             </div>
-            <p class="gift-button-description">บ่าวสาวขอขอบคุณทุกท่านที่มาร่วมอวยพรและแสดงความยินดีในวันนี้ค่ะ/ครับ</p>
         </section>
 
-        <section id="rsvp-section" class="section rsvp-section fade-in-slide-up">
-            <h2>ตอบรับการเข้าร่วมงาน</h2>
-            <p>กรุณาตอบรับการเข้าร่วมงานภายในวันที่ 15 กรกฎาคม 2568 เพื่อให้เราสามารถจัดเตรียมงานได้อย่างเหมาะสม</p>
-            <form id="rsvp-form">
-                <label for="rsvp-name">ชื่อ-นามสกุล:</label>
-                <input type="text" id="rsvp-name" name="name" required>
+        <hr class="my-8 border-gray-200 w-1/2 mx-auto" />
 
-                <label for="rsvp-attendance">จะเข้าร่วมงานหรือไม่:</label>
-                <select id="rsvp-attendance" name="attendance" required>
-                    <option value="">-- กรุณาเลือก --</option>
-                    <option value="yes">เข้าร่วมงาน</option>
-                    <option value="no">ไม่สามารถเข้าร่วมได้</option>
-                </select>
+        <!-- 7.6) Gift Section - ของขวัญสำหรับบ่าวสาว -->
+        <section id="gift" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <i class="fas fa-gift icon-small mx-auto mb-4 text-pink-600"></i>
+                <h2 class="text-3xl font-semibold mb-6 text-pink-700">ของขวัญสำหรับบ่าวสาว</h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    ขอบคุณสำหรับความปรารถนาดีของท่านค่ะ/ครับ
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-md max-w-sm mx-auto mb-6">
+                    <img
+                        src="https://placehold.co/200x200/F0F0F0/555?text=QR+Code"
+                        alt="QR Code for Transfer"
+                        class="w-48 h-48 mx-auto mb-4 rounded-lg"
+                    />
+                    <p class="text-md text-gray-800 font-semibold mb-2">แสกนเพื่อโอนเงินได้เลยค่ะ/ครับ</p>
+                    <div class="text-left mb-4">
+                        <p class="text-gray-700"><strong>ธนาคาร:</strong> กสิกรไทย</p>
+                        <p class="text-gray-700"><strong>ชื่อบัญชี:</strong> เมย์ และ เต้ย</p>
+                        <p class="text-gray-700"><strong id="accountNumber">012-3-45678-9</strong></p>
+                    </div>
+                    <button
+                        id="copyAccountBtn"
+                        class="button-secondary"
+                    >
+                        คัดลอกเลขบัญชี
+                    </button>
+                </div>
 
-                <label for="rsvp-guests">จำนวนแขกที่มาด้วย (รวมตัวท่านเอง):</label>
-                <input type="number" id="rsvp-guests" name="guests" min="1" value="1" required>
-
-                <label for="rsvp-message">ข้อความถึงคู่บ่าวสาว (ไม่บังคับ):</label>
-                <textarea id="rsvp-message" name="message" rows="4"></textarea>
-
-                <button type="submit" class="btn-submit">ส่งข้อมูลตอบรับ</button>
-                <p id="rsvp-status" class="status-message"></p>
-            </form>
+                <div class="form-container">
+                    <p class="text-lg font-semibold text-gray-800">แจ้งข้อมูลการโอนเงิน</p>
+                    <form id="giftForm">
+                        <div>
+                            <label for="giftAmount" class="block text-gray-700 text-left font-semibold mb-2">
+                                จำนวนเงินที่โอน:
+                            </label>
+                            <input
+                                type="number"
+                                id="giftAmount"
+                                name="amount"
+                                class="input-field"
+                                required
+                                min="0"
+                            />
+                        </div>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="giftDate" class="block text-gray-700 text-left font-semibold mb-2">
+                                    วันที่โอน:
+                                </label>
+                                <input
+                                    type="date"
+                                    id="giftDate"
+                                    name="date"
+                                    class="input-field bg-white"
+                                    required
+                                />
+                            </div>
+                            <div class="flex-1">
+                                <label for="giftTime" class="block text-gray-700 text-left font-semibold mb-2">
+                                    เวลาที่โอน:
+                                </label>
+                                <input
+                                    type="time"
+                                    id="giftTime"
+                                    name="time"
+                                    class="input-field bg-white"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="giftAddress" class="block text-gray-700 text-left font-semibold mb-2">
+                                ที่อยู่ของท่าน (สำหรับรับของที่ระลึก):
+                            </label>
+                            <textarea
+                                id="giftAddress"
+                                name="address"
+                                rows="4"
+                                class="input-field resize-y"
+                                required
+                            ></textarea>
+                        </div>
+                        <button
+                            type="submit"
+                            class="button-primary"
+                        >
+                            ยืนยัน
+                        </button>
+                    </form>
+                </div>
+            </div>
         </section>
 
-        </main>
+        <hr class="my-8 border-gray-200 w-1/2 mx-auto" />
 
-    <footer>
-        <p>© 2025 May & Toey Wedding. All Rights Reserved.</p>
-    </footer>
+        <!-- 7.7) RSVP Section - ตอบรับการเข้าร่วม -->
+        <section id="rsvp" class="py-12 px-6 text-gray-800 fade-in-section">
+            <div class="text-center">
+                <i class="fas fa-check-circle icon-small mx-auto mb-4 text-pink-600"></i>
+                <h2 class="text-3xl font-semibold mb-6 text-pink-700">ตอบรับการเข้าร่วม</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    กรุณาตอบรับการเข้าร่วมงานเพื่อให้เราสามารถจัดเตรียมงานได้อย่างเหมาะสม
+                </p>
+                <form id="rsvpForm" class="form-container">
+                    <div>
+                        <label for="rsvpName" class="block text-gray-700 text-left font-semibold mb-2">
+                            ชื่อของท่าน:
+                        </label>
+                        <input
+                            type="text"
+                            id="rsvpName"
+                            name="name"
+                            class="input-field"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label for="attending" class="block text-gray-700 text-left font-semibold mb-2">
+                            สามารถเข้าร่วมงานได้หรือไม่:
+                        </label>
+                        <select
+                            id="attending"
+                            name="attending"
+                            class="input-field bg-white"
+                            required
+                        >
+                            <option value="">-- กรุณาเลือก --</option>
+                            <option value="สะดวกมา">สะดวกมา</option>
+                            <option value="ขออภัย ไม่สะดวกมาจริงๆ">ขออภัย ไม่สะดวกมาจริงๆ</option>
+                        </select>
+                    </div>
+                    <div id="guestsField" class="hidden">
+                        <label for="guests" class="block text-gray-700 text-left font-semibold mb-2">
+                            จำนวนแขกที่มาด้วย (รวมตัวท่านเอง):
+                        </label>
+                        <select
+                            id="guests"
+                            name="guests"
+                            class="input-field bg-white"
+                            required
+                        >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 text-left font-semibold mb-2">
+                            ข้อความถึงคู่บ่าวสาว (ไม่บังคับ):
+                        </label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="4"
+                            class="input-field resize-y"
+                        ></textarea>
+                    </div>
+                    <button
+                        type="submit"
+                        class="button-primary"
+                    >
+                        ส่งข้อมูลตอบรับ
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-    <nav class="mobile-nav">
-        <ul class="mobile-nav-list">
-            <li class="mobile-nav-item">
-                <a href="#hero-section" class="mobile-nav-link active-nav">
-                    <i class="fas fa-home"></i>
-                    <span>หน้าหลัก</span>
-                </a>
-            </li>
-            <li class="mobile-nav-item">
-                <a href="#map-section" class="mobile-nav-link">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>สถานที่</span>
-                </a>
-            </li>
-            <li class="mobile-nav-item">
-                <a href="#details-section" class="mobile-nav-link">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>กำหนดการ</span>
-                </a>
-            </li>
-            <li class="mobile-nav-item main-nav-button">
-                <a href="#rsvp-section" class="mobile-nav-link">
-                    <i class="fas fa-clipboard-check"></i>
-                    <span>RSVP</span>
-                </a>
-            </li>
-            <li class="mobile-nav-item">
-                <a href="guestbook.html" class="mobile-nav-link">
-                    <i class="fas fa-gift"></i>
-                    <span>Gift</span>
-                </a>
-            </li>
-            <li class="mobile-nav-item">
-                <a href="#gallery-section" class="mobile-nav-link">
-                    <i class="fas fa-images"></i>
-                    <span>Gallery</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <div id="custom-alert-overlay" class="custom-alert-overlay hidden">
-        <div class="custom-alert-box">
-            <p id="custom-alert-message"></p>
-            <button id="custom-alert-close-btn" class="btn-submit">ปิด</button>
+    <!-- Fixed Bottom Navigation - ปุ่มนำทางด้านล่างที่ตรึงอยู่ -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
+        <div class="flex justify-around items-center h-16">
+            <button onclick="scrollToSection('home')" class="nav-button active" aria-label="หน้าหลัก">
+                <i class="fas fa-heart"></i>
+                <span class="text-xs mt-1">หน้าหลัก</span>
+            </button>
+            <button onclick="scrollToSection('invitation')" class="nav-button" aria-label="คำเชิญ">
+                <i class="fas fa-users"></i>
+                <span class="text-xs mt-1">คำเชิญ</span>
+            </button>
+            <button onclick="scrollToSection('location')" class="nav-button" aria-label="สถานที่">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="text-xs mt-1">สถานที่</span>
+            </button>
+            <button onclick="scrollToSection('schedule')" class="nav-button" aria-label="กำหนดการ">
+                <i class="fas fa-clock"></i>
+                <span class="text-xs mt-1">กำหนดการ</span>
+            </button>
+            <button onclick="scrollToSection('gallery')" class="nav-button" aria-label="แกลเลอรี่">
+                <i class="fas fa-camera-retro"></i>
+                <span class="text-xs mt-1">แกลเลอรี่</span>
+            </button>
+            <button onclick="scrollToSection('gift')" class="nav-button" aria-label="ของขวัญ">
+                <i class="fas fa-gift"></i>
+                <span class="text-xs mt-1">ของขวัญ</span>
+            </button>
+            <button onclick="scrollToSection('rsvp')" class="nav-button" aria-label="ตอบรับ">
+                <i class="fas fa-envelope-open-text"></i>
+                <span class="text-xs mt-1">ตอบรับ</span>
+            </button>
         </div>
     </div>
 
-    <div id="loading-spinner" class="loading-spinner hidden">
-        <div class="spinner"></div>
-        <p>กำลังประมวลผล...</p>
+    <!-- Popup Message - ข้อความ Pop-up -->
+    <div id="popupOverlay" class="popup-overlay hidden">
+        <div class="popup-content">
+            <button id="popupCloseBtn" class="popup-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <i class="fas fa-check-circle popup-icon"></i>
+            <p id="popupMessage" class="text-lg font-semibold text-gray-800 mb-4"></p>
+            <button
+                id="popupConfirmBtn"
+                class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
+            >
+                ปิด
+            </button>
+        </div>
     </div>
 
+    <!-- Link to external JavaScript file -->
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.min.js"></script>
 </body>
 </html>
