@@ -110,7 +110,6 @@ h2, h3, h4 {
     background-color: #f9f6f2;
 }
 
-/* --- สไตล์สำหรับวันที่ตัวใหญ่ --- */
 .wedding-date-display {
     font-family: var(--heading-font);
     font-size: 2.2rem;
@@ -159,10 +158,21 @@ h2, h3, h4 {
     text-align: left;
     flex-basis: 200px;
 }
+
 .location {
     margin-top: 40px;
 }
-.location h4{
+
+/* --- เพิ่มสไตล์สำหรับไอคอน Location --- */
+.location-icon {
+    width: 32px;
+    height: 32px;
+    stroke: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.location h4 {
+    margin-top: 0;
     margin-bottom: 5px;
 }
 .location p {
@@ -316,4 +326,3 @@ input[type="radio"] {
 #toast.error {
     background-color: #dc3545;
 }
-
