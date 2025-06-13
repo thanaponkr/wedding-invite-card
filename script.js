@@ -45,8 +45,9 @@ function scrollToSection(id) {
         document.querySelectorAll('.nav-button').forEach(btn => {
             btn.classList.remove('active');
         });
-        // Simple logic for active state based on current scroll position
-        // For a more robust solution, use Intersection Observer
+        // A more robust way to set active state based on current scroll position
+        // This is simplified for inline onclick. For a more precise solution,
+        // use Intersection Observer for navigation highlighting as well.
         const activeButton = document.querySelector(`.nav-button[onclick*="${id}"]`);
         if (activeButton) {
             activeButton.classList.add('active');
@@ -93,9 +94,9 @@ END:VCALENDAR`;
 // --- Gallery Logic ---
 // โปรดเปลี่ยนพาธรูปภาพในแกลเลอรี่ให้เป็นรูปภาพจริงของคุณ
 const galleryImages = [
-    "./images/gallery-photo-1.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 1
-    "./images/gallery-photo-2.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 2
-    "./images/gallery-photo-3.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 3
+    "./images/gallery-photo-1.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 1 (อ้างอิงจาก ss04.jpg)
+    "./images/gallery-photo-2.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 2 (อ้างอิงจาก ss06.jpg)
+    "./images/gallery-photo-3.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 3 (อ้างอิงจาก ss05.jpg หรือรูปอื่น)
     "./images/gallery-photo-4.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 4
     "./images/gallery-photo-5.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 5
     "./images/gallery-photo-6.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 6
@@ -115,11 +116,11 @@ function updateGalleryDots() {
     galleryDotsContainer.innerHTML = ''; // Clear existing dots
     galleryImages.forEach((_, index) => {
         const dot = document.createElement('button');
-        dot.classList.add('rounded-full', 'bg-gray-400', 'transition-all', 'duration-300');
+        dot.classList.add('rounded-full', 'bg-light-grey', 'transition-all', 'duration-300'); // Use custom light-grey
         if (index === currentGalleryIndex) {
-            dot.classList.add('w-3', 'h-3', 'bg-rose-500'); // Active dot color
+            dot.classList.add('w-3', 'h-3', 'bg-gold-accent'); // Active dot color (using custom gold-accent)
         } else {
-            dot.classList.add('w-2', 'h-2');
+            dot.classList.add('w-2', 'h-2', 'hover:bg-gold-light'); // Inactive dot color
         }
         dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
         dot.addEventListener('click', () => {
@@ -311,3 +312,53 @@ window.addEventListener('load', () => {
         }
     });
 });
+
+// --- Background Music Logic ---
+const backgroundMusic = document.getElementById('backgroundMusic');
+const musicToggleBtn = document.getElementById('musicToggleBtn');
+let isPlaying = false; // Track music state
+
+// Check if music was playing from previous session (optional, for persistent state)
+// let savedMusicState = localStorage.getItem('backgroundMusicPlaying');
+// if (savedMusicState === 'true') {
+//     backgroundMusic.play().catch(e => console.error("Auto-play blocked:", e));
+//     isPlaying = true;
+//     musicToggleBtn.classList.add('playing');
+// }
+
+musicToggleBtn.addEventListener('click', () => {
+    if (isPlaying) {
+        backgroundMusic.pause();
+        musicToggleBtn.classList.remove('playing');
+        showPopup('ปิดเพลง', 1500);
+    } else {
+        // Attempt to play, catch potential auto-play policy errors
+        backgroundMusic.play().then(() => {
+            musicToggleBtn.classList.add('playing');
+            showPopup('เปิดเพลง', 1500);
+        }).catch(e => {
+            console.error("Failed to play music:", e);
+            showPopup('ไม่สามารถเล่นเพลงได้ (เบราว์เซอร์บล็อกอัตโนมัติ)', 3000);
+        });
+    }
+    isPlaying = !isPlaying;
+    // Save state (optional)
+    // localStorage.setItem('backgroundMusicPlaying', isPlaying);
+});
+
+// Play music automatically once user interacts with the page (e.g., clicks anywhere)
+// This is a common workaround for browser auto-play policies.
+document.body.addEventListener('click', function playMusicOnFirstInteraction() {
+    if (!isPlaying) { // Only try to play if it's not already playing
+        backgroundMusic.play().then(() => {
+            isPlaying = true;
+            musicToggleBtn.classList.add('playing');
+            showPopup('เปิดเพลง', 1500);
+            // Remove listener after first successful play to avoid redundant calls
+            document.body.removeEventListener('click', playMusicOnFirstInteraction);
+        }).catch(e => {
+            console.warn("Auto-play blocked, waiting for user interaction:", e);
+            // Keep the button available for manual play if auto-play fails
+        });
+    }
+}, { once: true }); // Ensure this listener only triggers once

@@ -1,76 +1,97 @@
 /* style.css */
 
+/* Global body styling, now using custom Tailwind colors and fonts from index.html */
 body {
-    font-family: 'Inter', sans-serif;
     overflow-x: hidden; /* Hide horizontal scroll */
-    background-color: #fcf8f5; /* Light cream/blush background */
-    color: #334155; /* Tailwind: text-gray-800 */
+    /* Background color, text color, and font-family are now applied as Tailwind classes directly in body tag in index.html */
 }
 
-/* Custom Fonts */
-.font-playfair {
-    font-family: 'Playfair Display', serif;
-}
-.font-inter {
-    font-family: 'Inter', sans-serif;
-}
+/* Custom Fonts are defined as Tailwind utilities in index.html */
+/* .font-playfair {} */
+/* .font-inter {} */
 
+/* Fade-in Animation for Sections */
 .fade-in-section {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px); /* Slightly more pronounced translateY */
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Slower and smoother transition */
 }
 .fade-in-section.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
+/* Keyframe for subtle header text animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px); /* Slightly more pronounced initial offset */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1.8s ease-out forwards; /* Apply animation, slightly longer duration */
+    animation-delay: 0.3s; /* Delay slightly to let background load */
+}
+
+
 /* Custom styles for the new theme */
 .header-bg {
-    /* Updated background image URL placeholder */
-    background-image: url('./images/hero-floral-frame.jpg'); /* Please change to your actual floral background image path */
+    /* Background image URL is now in index.html, as a direct style attribute */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* Removed rounded-b-xl shadow-lg */
+    /* No shadows as requested */
 }
 
-.icon-small {
-    font-size: 2.25rem; /* text-4xl */
+/* Icon size is set directly in index.html with Tailwind's text-xl, text-2xl, etc. */
+
+.button-outline-primary {
+    /* Outline style with gold accent */
+    @apply inline-flex items-center px-8 py-3 text-gold-accent text-lg font-semibold rounded-full border-2 border-gold-accent bg-transparent transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold-light focus:ring-opacity-75;
+}
+.button-outline-primary:hover {
+    @apply bg-gold-accent text-white-pure; /* Fill on hover */
 }
 
-.button-primary {
-    /* Removed shadow-lg, updated color to rose-500 */
-    @apply inline-flex items-center px-6 py-3 bg-rose-500 text-white text-lg font-semibold rounded-full hover:bg-rose-600 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-opacity-75 border border-rose-500;
+.button-outline-secondary {
+    /* Outline style with gold accent for secondary buttons */
+    @apply w-full px-8 py-3 text-gold-accent font-semibold rounded-full border-2 border-gold-accent bg-transparent transition-all duration-300;
 }
-.button-secondary {
-    /* Removed shadow-lg, updated color to rose-500 */
-    @apply w-full px-6 py-3 bg-rose-500 text-white font-semibold rounded-full hover:bg-rose-600 transition-all duration-300 border border-rose-500;
+.button-outline-secondary:hover {
+    @apply bg-gold-accent text-white-pure; /* Fill on hover */
 }
-.input-field {
-    /* Updated border color */
-    @apply w-full p-3 border border-rose-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-400;
-}
-.form-container {
-    /* Removed shadow-md, added border */
-    @apply bg-white p-6 rounded-lg max-w-md mx-auto space-y-4 border border-rose-100;
-}
+
+/* Input fields and form containers now mostly styled with Tailwind classes in HTML directly */
+/* .input-field {} */
+/* .form-container {} */
+
 .nav-button {
-    /* Removed shadow, updated hover/active color to rose-500 */
-    @apply flex flex-col items-center p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:text-rose-500;
+    /* No shadow, updated hover/active color to gold-accent, slight icon scale on hover */
+    @apply flex flex-col items-center p-2 rounded-lg transition-colors duration-200 text-medium-grey hover:text-gold-accent;
 }
 .nav-button.active {
-    @apply text-rose-600;
+    @apply text-gold-accent;
+}
+.nav-button i {
+    transition: transform 0.2s ease-in-out;
+}
+.nav-button:hover i {
+    transform: scale(1.1);
 }
 
-/* Popup styles (removed shadow-xl, updated border color) */
+/* Popup styles (no shadow, updated border color, slightly more rounded) */
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay */
+    background-color: rgba(0, 0, 0, 0.3); /* Lighter overlay */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,28 +99,38 @@ body {
     padding: 1rem;
 }
 .popup-content {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 0.75rem; /* Slightly more rounded */
-    /* Removed box-shadow */
+    background-color: var(--tw-colors-white-pure);
+    padding: 2.5rem; /* Increased padding */
+    border-radius: 1.5rem; /* More rounded corners */
     text-align: center;
     position: relative;
-    max-width: 24rem;
+    max-width: 26rem; /* Slightly wider */
     width: 100%;
-    border: 1px solid #fbcfe8; /* rose-200 */
+    border: 2px solid var(--tw-colors-gold-light); /* Use custom color variable for border */
 }
 .popup-close-btn {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    color: #6b7280;
+    top: 1rem;
+    right: 1rem;
+    color: var(--tw-colors-medium-grey);
     cursor: pointer;
 }
 .popup-close-btn:hover {
-    color: #4b5563;
+    color: var(--tw-colors-gold-accent);
 }
 .popup-icon {
-    color: #10b981; /* green-500 remains for checkmark */
-    margin: 0 auto 1rem;
-    font-size: 3rem;
+    color: #10b981; /* green-500 for checkmark, kept for standard success indication */
+    margin: 0 auto 1.5rem; /* Increased margin */
+    font-size: 4rem; /* Larger icon */
+}
+
+/* Music Toggle Button */
+#musicToggleBtn.playing i {
+    animation: pulse 1.5s infinite; /* Add a pulsating effect when playing */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }

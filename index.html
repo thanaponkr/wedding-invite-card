@@ -4,113 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>งานวิวาห์ เมย์ & เต้ย</title>
+    <!-- Custom Tailwind Config for custom colors and fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream-light': '#FDFBF9', /* Light cream/off-white background */
+                        'gold-accent': '#D4AF37', /* Primary Gold accent */
+                        'gold-light': '#F2DE9F',  /* Lighter Gold for subtle elements */
+                        'gold-dark': '#8B7B5D',   /* Darker Gold for rich tones */
+                        'dark-grey': '#333333',   /* For main text */
+                        'medium-grey': '#6B6B6B', /* For secondary text */
+                        'light-grey': '#D1D1D1',  /* For very subtle lines/dividers */
+                        'white-pure': '#FFFFFF',  /* Pure white for elements */
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Playfair Display for headers, Inter for body -->
+    <!-- Google Fonts: Playfair Display for headings, Inter for body -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen relative pb-20">
+<body class="min-h-screen relative pb-20 font-inter bg-cream-light text-dark-grey">
+
+    <!-- Audio Player (Floating) -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="./images/wedding-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggleBtn" class="fixed bottom-24 right-4 p-3 bg-white-pure text-gold-accent rounded-full border border-gold-light cursor-pointer z-50 transition-all duration-300 hover:scale-110 shadow-md">
+        <i class="fas fa-music text-xl"></i>
+    </button>
 
     <!-- Header / Hero Section -->
     <header
         id="home"
-        class="relative h-[80vh] md:h-screen header-bg flex items-center justify-center rounded-b-xl overflow-hidden"
+        class="relative h-[85vh] md:h-screen header-bg flex items-center justify-center rounded-b-3xl overflow-hidden"
+        style="background-image: url('./images/my_floral_bg.jpg');" <!-- โปรดเปลี่ยนเป็นพาธรูปพื้นหลังดอกไม้ของคุณ -->
     >
-        <div class="absolute inset-0 bg-black opacity-10 rounded-b-xl"></div>
-        <div class="relative z-10 text-center p-4">
+        <div class="absolute inset-0 bg-black opacity-10 rounded-b-3xl"></div>
+        <div class="relative z-10 text-center p-4 animate-fade-in-up">
             <img
-                src="./images/wedding-logo.png" <!-- โปรดเปลี่ยนเป็นพาธรูป Logo ของคุณ -->
+                src="./images/my_wedding_logo.png" <!-- โปรดเปลี่ยนเป็นพาธรูป Logo ของคุณ (แนะนำให้เป็นไฟล์ PNG ไม่มีพื้นหลัง) -->
                 alt="Wedding Logo"
-                class="w-40 h-auto md:w-56 mx-auto mb-4 object-contain transform hover:scale-105 transition-transform duration-300"
+                class="w-52 h-auto md:w-72 mx-auto mb-8 object-contain drop-shadow-sm"
             />
-            <h1 class="font-playfair text-5xl md:text-7xl font-bold text-white leading-tight">
+            <h1 class="font-playfair text-6xl md:text-8xl font-normal text-white-pure leading-tight drop-shadow-md">
                 เมย์ & เต้ย
             </h1>
-            <p class="font-inter text-xl md:text-2xl text-white mt-4 tracking-wide">งานวิวาห์ของเรา</p>
-            <p class="font-inter text-lg md:text-xl text-white mt-2">ขอเชิญร่วมเป็นเกียรติ</p>
+            <p class="font-inter text-2xl md:text-3xl text-white-pure mt-4 tracking-wide drop-shadow-sm">งานวิวาห์ของเรา</p>
+            <p class="font-inter text-xl md:text-2xl text-white-pure mt-2 drop-shadow-sm">ขอเชิญร่วมเป็นเกียรติ</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-4">
+    <main class="container mx-auto px-4 py-12">
         <!-- 7.1) Invitation Section - ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา -->
-        <section id="invitation" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="invitation" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-8 text-rose-700">ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
-                    <div class="text-center">
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-12 text-gold-accent">ขอเชิญร่วมเป็นเกียรติในวันวิวาห์ของเรา</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20">
+                    <div class="text-center group">
                         <img
-                            src="./images/may-portrait.png" <!-- โปรดเปลี่ยนเป็นพาธรูปเจ้าสาวของคุณ -->
+                            src="./images/may_profile.jpg" <!-- โปรดเปลี่ยนเป็นพาธรูปเจ้าสาวของคุณ -->
                             alt="May"
-                            class="w-36 h-36 md:w-48 md:h-48 rounded-full object-cover mx-auto mb-3 border-4 border-rose-200 transform hover:scale-105 transition-transform duration-300"
+                            class="w-44 h-44 md:w-56 md:h-56 rounded-full object-cover mx-auto mb-5 border-4 border-gold-light transition-all duration-300 transform group-hover:scale-105"
                         />
-                        <p class="font-playfair font-semibold text-2xl text-rose-800">เมย์</p>
-                        <p class="font-inter text-sm text-gray-600 mt-1">นางสาววิไลลักษณ์ จันทร์เต็มดวง</p>
+                        <p class="font-playfair font-semibold text-3xl text-gold-accent">เมย์</p>
+                        <p class="font-inter text-md text-medium-grey mt-1">นางสาววิไลลักษณ์ จันทร์เต็มดวง</p>
                     </div>
-                    <div class="font-playfair text-4xl text-rose-500 font-bold hidden md:block">&amp;</div>
-                    <div class="text-center">
+                    <div class="font-playfair text-5xl text-gold-dark font-bold hidden md:block select-none">&amp;</div>
+                    <div class="text-center group">
                         <img
-                            src="./images/toey-portrait.png" <!-- โปรดเปลี่ยนเป็นพาธรูปเจ้าบ่าวของคุณ -->
+                            src="./images/toey_profile.jpg" <!-- โปรดเปลี่ยนเป็นพาธรูปเจ้าบ่าวของคุณ -->
                             alt="Toey"
-                            class="w-36 h-36 md:w-48 md:h-48 rounded-full object-cover mx-auto mb-3 border-4 border-rose-200 transform hover:scale-105 transition-transform duration-300"
+                            class="w-44 h-44 md:w-56 md:h-56 rounded-full object-cover mx-auto mb-5 border-4 border-gold-light transition-all duration-300 transform group-hover:scale-105"
                         />
-                        <p class="font-playfair font-semibold text-2xl text-rose-800">เต้ย</p>
-                        <p class="font-inter text-sm text-gray-600 mt-1">นายธนาธร สุขสมหมาย</p>
+                        <p class="font-playfair font-semibold text-3xl text-gold-accent">เต้ย</p>
+                        <p class="font-inter text-md text-medium-grey mt-1">นายธนาธร สุขสมหมาย</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <hr class="my-10 border-rose-100 w-1/2 mx-auto" />
+        <hr class="my-16 border-light-grey w-1/2 mx-auto opacity-50" />
 
         <!-- 7.2) Wedding Date & Countdown - วันแต่งงานและนับถอยหลัง -->
-        <section id="countdown" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="countdown" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <i class="fas fa-calendar-alt text-rose-500 text-4xl mx-auto mb-6"></i>
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-4 text-rose-700">วันแต่งงาน</h2>
-                <p class="font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-8">28 กรกฎาคม 2568</p>
-                <div class="flex justify-center items-center space-x-4 md:space-x-8 mb-10">
-                    <div class="text-center p-4 bg-white rounded-lg w-24 md:w-28 border border-rose-200">
-                        <p class="font-playfair text-4xl font-bold text-rose-600" id="days">0</p>
-                        <p class="font-inter text-sm text-gray-600 mt-1">วัน</p>
+                <i class="fas fa-calendar-alt text-gold-accent text-4xl mx-auto mb-8"></i>
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-4 text-gold-accent">วันแต่งงาน</h2>
+                <p class="font-playfair text-5xl md:text-6xl font-bold text-dark-grey mb-12">28 กรกฎาคม 2568</p>
+                <!-- Countdown numbers without individual boxes, like ss03.jpg -->
+                <div class="flex justify-center items-end space-x-6 md:space-x-12 mb-16">
+                    <div class="text-center">
+                        <p class="font-playfair text-7xl md:text-8xl font-bold text-gold-accent" id="days">0</p>
+                        <p class="font-inter text-base md:text-lg text-medium-grey mt-2 tracking-wide">วัน</p>
                     </div>
-                    <div class="text-center p-4 bg-white rounded-lg w-24 md:w-28 border border-rose-200">
-                        <p class="font-playfair text-4xl font-bold text-rose-600" id="hours">0</p>
-                        <p class="font-inter text-sm text-gray-600 mt-1">ชั่วโมง</p>
+                    <div class="text-center">
+                        <p class="font-playfair text-7xl md:text-8xl font-bold text-gold-accent" id="hours">0</p>
+                        <p class="font-inter text-base md:text-lg text-medium-grey mt-2 tracking-wide">ชั่วโมง</p>
                     </div>
-                    <div class="text-center p-4 bg-white rounded-lg w-24 md:w-28 border border-rose-200">
-                        <p class="font-playfair text-4xl font-bold text-rose-600" id="minutes">0</p>
-                        <p class="font-inter text-sm text-gray-600 mt-1">นาที</p>
+                    <div class="text-center">
+                        <p class="font-playfair text-7xl md:text-8xl font-bold text-gold-accent" id="minutes">0</p>
+                        <p class="font-inter text-base md:text-lg text-medium-grey mt-2 tracking-wide">นาที</p>
                     </div>
-                    <div class="text-center p-4 bg-white rounded-lg w-24 md:w-28 border border-rose-200">
-                        <p class="font-playfair text-4xl font-bold text-rose-600" id="seconds">0</p>
-                        <p class="font-inter text-sm text-gray-600 mt-1">วินาที</p>
+                    <div class="text-center">
+                        <p class="font-playfair text-7xl md:text-8xl font-bold text-gold-accent" id="seconds">0</p>
+                        <p class="font-inter text-base md:text-lg text-medium-grey mt-2 tracking-wide">วินาที</p>
                     </div>
                 </div>
                 <button
                     id="addToCalendarBtn"
-                    class="button-primary"
+                    class="button-outline-primary group"
                 >
-                    <i class="fas fa-calendar-plus mr-3 text-xl"></i> เพิ่มลงปฏิทิน
+                    <i class="fas fa-calendar-plus mr-3 text-xl group-hover:rotate-3 transition-transform duration-300"></i> เพิ่มลงปฏิทิน
                 </button>
-                <p class="font-inter text-xs text-gray-500 mt-3">
+                <p class="font-inter text-xs text-medium-grey mt-4 opacity-75">
                     (สำหรับ iOS/Android อาจต้องเพิ่มเข้าปฏิทินด้วยตนเอง)
                 </p>
             </div>
         </section>
 
-        <hr class="my-10 border-rose-100 w-1/2 mx-auto" />
+        <hr class="my-16 border-light-grey w-1/2 mx-auto opacity-50" />
 
         <!-- 7.3) Location Section - สถานที่จัดงาน -->
-        <section id="location" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="location" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <i class="fas fa-map-marker-alt text-rose-500 text-4xl mx-auto mb-6"></i>
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-4 text-rose-700">สถานที่จัดงาน</h2>
-                <p class="font-playfair text-2xl font-bold text-gray-900 mb-6">อาปาเก้ การ์เด้น</p>
-                <div class="relative w-full h-72 md:h-96 rounded-lg overflow-hidden border border-rose-200 mb-6">
+                <i class="fas fa-map-marker-alt text-gold-accent text-4xl mx-auto mb-8"></i>
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-4 text-gold-accent">สถานที่จัดงาน</h2>
+                <p class="font-playfair text-2xl font-bold text-dark-grey mb-8">อาปาเก้ การ์เด้น</p>
+                <div class="relative w-full h-80 md:h-96 rounded-xl overflow-hidden border border-gold-light mb-8">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.568469399878!2d100.5011746750379!3d13.746193586616424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29930f3f2a741%3A0xc3f2c3a5e8e8e8e!2sA-Pa-Ke%20Garden!5e0!3m2!1sen!2sth!4v1701768480000!5m2!1sen!2sth"
                         width="100%"
@@ -122,133 +156,136 @@
                         title="Google Map of Apake Garden"
                     ></iframe>
                 </div>
-                <p class="font-inter text-md text-gray-700 mb-4">
+                <p class="font-inter text-md text-medium-grey mb-6">
                     44/1 ซอยอินทรพิทักษ์ ถนนอินทรพิทักษ์ แขวงปากคลองตลาด เขตพระนคร กรุงเทพมหานคร 10200
                 </p>
                 <a
                     href="https://maps.app.goo.gl/YourActualApakeGardenLinkHere" <!-- โปรดเปลี่ยนเป็นลิงก์ Google Map จริงของสถานที่จัดงาน -->
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="button-primary"
+                    class="button-outline-primary group"
                 >
-                    <i class="fas fa-route mr-3 text-xl"></i> เส้นทาง
+                    <i class="fas fa-route mr-3 text-xl group-hover:rotate-3 transition-transform duration-300"></i> เส้นทาง
                 </a>
             </div>
         </section>
 
-        <hr class="my-10 border-rose-100 w-1/2 mx-auto" />
+        <hr class="my-16 border-light-grey w-1/2 mx-auto opacity-50" />
 
         <!-- 7.4) Schedule Section - กำหนดการ -->
-        <section id="schedule" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="schedule" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <i class="fas fa-clock text-rose-500 text-4xl mx-auto mb-6"></i>
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-8 text-rose-700">กำหนดการ</h2>
-                <div class="space-y-6">
-                    <div class="flex items-center bg-white p-5 rounded-lg border border-rose-100">
-                        <span class="flex-shrink-0 text-rose-500 mr-4 text-2xl">
+                <i class="fas fa-clock text-gold-accent text-4xl mx-auto mb-8"></i>
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-12 text-gold-accent">กำหนดการ</h2>
+                <div class="space-y-8">
+                    <div class="flex items-center bg-white-pure p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:border-gold-light border-b-2 border-transparent">
+                        <span class="flex-shrink-0 text-gold-accent mr-5 text-2xl">
                             <i class="fas fa-clock"></i>
                         </span>
-                        <div>
-                            <p class="font-playfair text-xl font-bold text-gray-900">07:30 น.</p>
-                            <p class="font-inter text-gray-700">พิธีแห่ขันหมาก</p>
+                        <div class="text-left">
+                            <p class="font-playfair text-xl font-bold text-dark-grey">07:30 น.</p>
+                            <p class="font-inter text-medium-grey">พิธีแห่ขันหมาก</p>
                         </div>
                     </div>
-                    <div class="flex items-center bg-white p-5 rounded-lg border border-rose-100">
-                        <span class="flex-shrink-0 text-rose-500 mr-4 text-2xl">
+                    <div class="flex items-center bg-white-pure p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:border-gold-light border-b-2 border-transparent">
+                        <span class="flex-shrink-0 text-gold-accent mr-5 text-2xl">
                             <i class="fas fa-heart"></i>
                         </span>
-                        <div>
-                            <p class="font-playfair text-xl font-bold text-gray-900">09:00 น.</p>
-                            <p class="font-inter text-gray-700">พิธีหลั่งน้ำพระพุทธมนต์</p>
+                        <div class="text-left">
+                            <p class="font-playfair text-xl font-bold text-dark-grey">09:00 น.</p>
+                            <p class="font-inter text-medium-grey">พิธีหลั่งน้ำพระพุทธมนต์</p>
                         </div>
                     </div>
-                    <div class="flex items-center bg-white p-5 rounded-lg border border-rose-100">
-                        <span class="flex-shrink-0 text-rose-500 mr-4 text-2xl">
+                    <div class="flex items-center bg-white-pure p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:border-gold-light border-b-2 border-transparent">
+                        <span class="flex-shrink-0 text-gold-accent mr-5 text-2xl">
                             <i class="fas fa-check-circle"></i>
                         </span>
-                        <div>
-                            <p class="font-playfair text-xl font-bold text-gray-900">09:30 น.</p>
-                            <p class="font-inter text-gray-700">พิธีมงคลสมรส</p>
+                        <div class="text-left">
+                            <p class="font-playfair text-xl font-bold text-dark-grey">09:30 น.</p>
+                            <p class="font-inter text-medium-grey">พิธีมงคลสมรส</p>
                         </div>
                     </div>
-                    <div class="flex items-center bg-white p-5 rounded-lg border border-rose-100">
-                        <span class="flex-shrink-0 text-rose-500 mr-4 text-2xl">
+                    <div class="flex items-center bg-white-pure p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:border-gold-light border-b-2 border-transparent">
+                        <span class="flex-shrink-0 text-gold-accent mr-5 text-2xl">
                             <i class="fas fa-users"></i>
                         </span>
-                        <div>
-                            <p class="font-playfair text-xl font-bold text-gray-900">11:30 น.</p>
-                            <p class="font-inter text-gray-700">งานเลี้ยงรับประทานอาหาร (โต๊ะจีน)</p>
+                        <div class="text-left">
+                            <p class="font-playfair text-xl font-bold text-dark-grey">11:30 น.</p>
+                            <p class="font-inter text-medium-grey">งานเลี้ยงรับประทานอาหาร (โต๊ะจีน)</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <hr class="my-10 border-rose-100 w-1/2 mx-auto" />
+        <hr class="my-16 border-light-grey w-1/2 mx-auto opacity-50" />
 
         <!-- 7.5) Gallery Section - แกลเลอรี่รูปภาพ -->
-        <section id="gallery" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="gallery" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <i class="fas fa-camera-retro text-rose-500 text-4xl mx-auto mb-6"></i>
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-8 text-rose-700">แกลเลอรี่</h2>
-                <div class="relative w-full max-w-sm mx-auto rounded-lg overflow-hidden border border-rose-200 aspect-[3/4]">
+                <i class="fas fa-camera-retro text-gold-accent text-4xl mx-auto mb-8"></i>
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-12 text-gold-accent">แกลเลอรี่</h2>
+                <div class="relative w-full max-w-sm mx-auto rounded-xl overflow-hidden border border-gold-light aspect-[3/4]">
                     <img
                         id="galleryImage"
-                        src="./images/gallery-photo-1.jpg" <!-- โปรดเปลี่ยนเป็นพาธรูปภาพแกลเลอรี่แรกของคุณ -->
-                        alt="Couple Photo 1"
+                        src="./images/gallery_1.jpg" <!-- โปรดเปลี่ยนเป็นพาธรูปภาพแกลเลอรี่แรกของคุณ -->
+                        alt="Couple Photo"
                         class="w-full h-full object-cover"
                     />
                     <button
                         id="prevImageBtn"
-                        class="absolute left-3 top-1/2 -translate-y-1/2 p-3 bg-white bg-opacity-80 text-gray-700 rounded-full hover:bg-opacity-100 hover:text-rose-500 transition-colors duration-200 focus:outline-none"
+                        class="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white-pure bg-opacity-80 text-dark-grey rounded-full transition-all duration-200 hover:bg-opacity-100 hover:text-gold-accent focus:outline-none"
                     >
                         <i class="fas fa-chevron-left text-xl"></i>
                     </button>
                     <button
                         id="nextImageBtn"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 p-3 bg-white bg-opacity-80 text-gray-700 rounded-full hover:bg-opacity-100 hover:text-rose-500 transition-colors duration-200 focus:outline-none"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white-pure bg-opacity-80 text-dark-grey rounded-full transition-all duration-200 hover:bg-opacity-100 hover:text-gold-accent focus:outline-none"
                     >
                         <i class="fas fa-chevron-right text-xl"></i>
                     </button>
                 </div>
-                <div id="galleryDots" class="flex justify-center mt-6 space-x-3">
+                <div id="galleryDots" class="flex justify-center mt-8 space-x-3">
                     <!-- Dots will be dynamically added here by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <hr class="my-10 border-rose-100 w-1/2 mx-auto" />
+        <hr class="my-16 border-light-grey w-1/2 mx-auto opacity-50" />
 
         <!-- 7.6) Gift Section - ของขวัญสำหรับบ่าวสาว -->
-        <section id="gift" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="gift" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <i class="fas fa-gift text-rose-500 text-4xl mx-auto mb-6"></i>
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-8 text-rose-700">ของขวัญสำหรับบ่าวสาว</h2>
-                <p class="font-inter text-lg text-gray-700 mb-6">
+                <i class="fas fa-gift text-gold-accent text-4xl mx-auto mb-8"></i>
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-10 text-gold-accent">ของขวัญสำหรับบ่าวสาว</h2>
+                <p class="font-inter text-lg text-medium-grey mb-8">
                     ขอบคุณสำหรับความปรารถนาดีของท่านค่ะ/ครับ
                 </p>
-                <div class="bg-white p-8 rounded-lg border border-rose-100 max-w-sm mx-auto mb-8">
+                <div class="bg-white-pure p-8 rounded-xl border border-gold-light max-w-sm mx-auto mb-8 transition-all duration-300 hover:border-gold-accent">
                     <img
-                        src="./images/qr-code.jpg" <!-- โปรดเปลี่ยนเป็นพาธรูป QR Code ของคุณ -->
-                    <p class="font-inter text-md text-gray-800 font-semibold mb-3">แสกนเพื่อโอนเงินได้เลยค่ะ/ครับ</p>
-                    <div class="text-left mb-5">
-                        <p class="font-inter text-gray-700 mb-1"><strong>ธนาคาร:</strong> กสิกรไทย</p>
-                        <p class="font-inter text-gray-700 mb-1"><strong>ชื่อบัญชี:</strong> เมย์ และ เต้ย</p>
-                        <p class="font-inter text-gray-700"><strong id="accountNumber">012-3-45678-9</strong></p>
+                        src="./images/my_qr_code.png" <!-- โปรดเปลี่ยนเป็นพาธรูป QR Code ของคุณ -->
+                        alt="QR Code for Transfer"
+                        class="w-60 h-auto mx-auto mb-6 rounded-lg object-contain"
+                    />
+                    <p class="font-inter text-md text-dark-grey font-semibold mb-3">แสกนเพื่อโอนเงินได้เลยค่ะ/ครับ</p>
+                    <div class="text-left mb-6">
+                        <p class="font-inter text-medium-grey mb-1"><strong>ธนาคาร:</strong> กสิกรไทย</p>
+                        <p class="font-inter text-medium-grey mb-1"><strong>ชื่อบัญชี:</strong> เมย์ และ เต้ย</p>
+                        <p class="font-inter text-medium-grey"><strong id="accountNumber">012-3-45678-9</strong></p>
                     </div>
                     <button
                         id="copyAccountBtn"
-                        class="button-secondary"
+                        class="button-outline-secondary group"
                     >
-                        คัดลอกเลขบัญชี
+                        <i class="fas fa-copy mr-3 text-lg group-hover:scale-105 transition-transform duration-300"></i> คัดลอกเลขบัญชี
                     </button>
                 </div>
 
-                <div class="form-container border border-rose-100">
-                    <p class="font-playfair text-2xl font-semibold text-gray-800 mb-6">แจ้งข้อมูลการโอนเงิน</p>
+                <div class="form-container border border-gold-light transition-all duration-300 hover:border-gold-accent">
+                    <p class="font-playfair text-2xl font-normal text-gold-accent mb-8">แจ้งข้อมูลการโอนเงิน</p>
                     <form id="giftForm">
                         <div>
-                            <label for="giftAmount" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                            <label for="giftAmount" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                                 จำนวนเงินที่โอน:
                             </label>
                             <input
@@ -260,34 +297,34 @@
                                 min="0"
                             />
                         </div>
-                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-4">
                             <div class="flex-1">
-                                <label for="giftDate" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                                <label for="giftDate" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                                     วันที่โอน:
                                 </label>
                                 <input
                                     type="date"
                                     id="giftDate"
                                     name="date"
-                                    class="input-field bg-white"
+                                    class="input-field bg-white-pure"
                                     required
                                 />
                             </div>
                             <div class="flex-1">
-                                <label for="giftTime" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                                <label for="giftTime" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                                     เวลาที่โอน:
                                 </label>
                                 <input
                                     type="time"
                                     id="giftTime"
                                     name="time"
-                                    class="input-field bg-white"
+                                    class="input-field bg-white-pure"
                                     required
                                 />
                             </div>
                         </div>
                         <div>
-                            <label for="giftAddress" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                            <label for="giftAddress" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                                 ที่อยู่ของท่าน (สำหรับรับของที่ระลึก):
                             </label>
                             <textarea
@@ -300,28 +337,28 @@
                         </div>
                         <button
                             type="submit"
-                            class="button-primary"
+                            class="button-outline-primary group"
                         >
-                            ยืนยัน
+                            <i class="fas fa-paper-plane mr-3 text-xl group-hover:scale-105 transition-transform duration-300"></i> ยืนยัน
                         </button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <hr class="my-10 border-rose-100 w-1/2 mx-auto" />
+        <hr class="my-16 border-light-grey w-1/2 mx-auto opacity-50" />
 
         <!-- 7.7) RSVP Section - ตอบรับการเข้าร่วม -->
-        <section id="rsvp" class="py-12 px-6 text-gray-800 fade-in-section">
+        <section id="rsvp" class="py-16 px-6 fade-in-section">
             <div class="text-center">
-                <i class="fas fa-check-circle text-rose-500 text-4xl mx-auto mb-6"></i>
-                <h2 class="font-playfair text-3xl md:text-4xl font-semibold mb-8 text-rose-700">ตอบรับการเข้าร่วม</h2>
-                <p class="font-inter text-lg text-gray-700 mb-6">
+                <i class="fas fa-check-circle text-gold-accent text-4xl mx-auto mb-8"></i>
+                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-10 text-gold-accent">ตอบรับการเข้าร่วม</h2>
+                <p class="font-inter text-lg text-medium-grey mb-8">
                     กรุณาตอบรับการเข้าร่วมงานเพื่อให้เราสามารถจัดเตรียมงานได้อย่างเหมาะสม
                 </p>
-                <form id="rsvpForm" class="form-container border border-rose-100">
+                <form id="rsvpForm" class="form-container border border-gold-light transition-all duration-300 hover:border-gold-accent">
                     <div>
-                        <label for="rsvpName" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                        <label for="rsvpName" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                             ชื่อของท่าน:
                         </label>
                         <input
@@ -333,13 +370,13 @@
                         />
                     </div>
                     <div>
-                        <label for="attending" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                        <label for="attending" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                             สามารถเข้าร่วมงานได้หรือไม่:
                         </label>
                         <select
                             id="attending"
                             name="attending"
-                            class="input-field bg-white"
+                            class="input-field bg-white-pure"
                             required
                         >
                             <option value="">-- กรุณาเลือก --</option>
@@ -348,13 +385,13 @@
                         </select>
                     </div>
                     <div id="guestsField" class="hidden">
-                        <label for="guests" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                        <label for="guests" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                             จำนวนแขกที่มาด้วย (รวมตัวท่านเอง):
                         </label>
                         <select
                             id="guests"
                             name="guests"
-                            class="input-field bg-white"
+                            class="input-field bg-white-pure"
                             required
                         >
                             <option value="1">1</option>
@@ -370,7 +407,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="message" class="block font-inter text-gray-700 text-left font-semibold mb-2">
+                        <label for="message" class="block font-inter text-medium-grey text-left font-semibold mb-2">
                             ข้อความถึงคู่บ่าวสาว (ไม่บังคับ):
                         </label>
                         <textarea
@@ -382,60 +419,58 @@
                     </div>
                     <button
                         type="submit"
-                        class="button-primary"
+                        class="button-outline-primary group"
                     >
-                        ส่งข้อมูลตอบรับ
+                        <i class="fas fa-paper-plane mr-3 text-xl group-hover:scale-105 transition-transform duration-300"></i> ส่งข้อมูลตอบรับ
                     </button>
                 </form>
             </div>
         </section>
     </main>
 
-    <!-- Fixed Bottom Navigation - ปุ่มนำทางด้านล่างที่ตรึงอยู่ -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-rose-100 z-40">
-        <div class="flex justify-around items-center h-16">
+    <!-- Fixed Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white-pure border-t border-gold-light z-40">
+        <div class="flex justify-around items-center h-20 py-2">
             <button onclick="scrollToSection('home')" class="nav-button active" aria-label="หน้าหลัก">
-                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart text-2xl"></i>
                 <span class="font-inter text-xs mt-1">หน้าหลัก</span>
             </button>
-            <button onclick="scrollToSection('invitation')" class="nav-button" aria-label="คำเชิญ">
-                <i class="fas fa-users"></i>
-                <span class="font-inter text-xs mt-1">คำเชิญ</span>
-            </button>
-            <button onclick="scrollToSection('location')" class="nav-button" aria-label="สถานที่">
-                <i class="fas fa-map-marker-alt"></i>
-                <span class="font-inter text-xs mt-1">สถานที่</span>
+            <!-- Removed Invitation Button -->
+            <!-- Removed Location Button -->
+            <button onclick="scrollToSection('countdown')" class="nav-button" aria-label="วันแต่งงาน">
+                <i class="fas fa-calendar-alt text-2xl"></i>
+                <span class="font-inter text-xs mt-1">วันแต่งงาน</span>
             </button>
             <button onclick="scrollToSection('schedule')" class="nav-button" aria-label="กำหนดการ">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-clock text-2xl"></i>
                 <span class="font-inter text-xs mt-1">กำหนดการ</span>
             </button>
             <button onclick="scrollToSection('gallery')" class="nav-button" aria-label="แกลเลอรี่">
-                <i class="fas fa-camera-retro"></i>
+                <i class="fas fa-camera-retro text-2xl"></i>
                 <span class="font-inter text-xs mt-1">แกลเลอรี่</span>
             </button>
             <button onclick="scrollToSection('gift')" class="nav-button" aria-label="ของขวัญ">
-                <i class="fas fa-gift"></i>
+                <i class="fas fa-gift text-2xl"></i>
                 <span class="font-inter text-xs mt-1">ของขวัญ</span>
             </button>
             <button onclick="scrollToSection('rsvp')" class="nav-button" aria-label="ตอบรับ">
-                <i class="fas fa-envelope-open-text"></i>
+                <i class="fas fa-envelope-open-text text-2xl"></i>
                 <span class="font-inter text-xs mt-1">ตอบรับ</span>
             </button>
         </div>
     </div>
 
-    <!-- Popup Message - ข้อความ Pop-up -->
+    <!-- Popup Message -->
     <div id="popupOverlay" class="popup-overlay hidden">
-        <div class="popup-content border border-rose-200">
+        <div class="popup-content border border-gold-light rounded-xl">
             <button id="popupCloseBtn" class="popup-close-btn">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times text-xl text-medium-grey hover:text-gold-accent"></i>
             </button>
-            <i class="fas fa-check-circle popup-icon"></i>
-            <p id="popupMessage" class="font-inter text-lg font-semibold text-gray-800 mb-4"></p>
+            <i class="fas fa-check-circle popup-icon text-green-500"></i>
+            <p id="popupMessage" class="font-inter text-lg font-semibold text-dark-grey mb-4"></p>
             <button
                 id="popupConfirmBtn"
-                class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
+                class="bg-gold-accent hover:bg-gold-dark text-white-pure font-bold py-3 px-6 rounded-full transition-colors duration-300"
             >
                 ปิด
             </button>
