@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // --- Countdown Timer ---
-    // TODO: ตั้งค่าวันแต่งงานของคุณ (Year, Month (0-11), Day, Hour, Minute, Second)
-    const weddingDate = new Date(2025, 10, 22, 9, 9, 0).getTime();
+    // อัปเดตวันแต่งงานเป็น 28 กรกฎาคม 2025
+    // หมายเหตุ: เดือนใน JavaScript เริ่มจาก 0 (มกราคม) ดังนั้น กรกฎาคม คือเดือนที่ 6
+    const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime();
 
     const countdownFunction = setInterval(function() {
         const now = new Date().getTime();
