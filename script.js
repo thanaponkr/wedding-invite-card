@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // --- Countdown Timer ---
-    // อัปเดตวันแต่งงานเป็น 28 กรกฎาคม 2025
     // หมายเหตุ: เดือนใน JavaScript เริ่มจาก 0 (มกราคม) ดังนั้น กรกฎาคม คือเดือนที่ 6
     const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime();
 
@@ -9,19 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
 
-        // Calculations for days, hours, minutes and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the elements
         document.getElementById("days").innerText = String(days).padStart(2, '0');
         document.getElementById("hours").innerText = String(hours).padStart(2, '0');
         document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
         document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
 
-        // If the countdown is over, write some text 
         if (distance < 0) {
             clearInterval(countdownFunction);
             document.getElementById("countdown").innerHTML = "<h2>The Wedding Day is Here!</h2>";
@@ -33,12 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const giftAccount = document.querySelector('.account-number');
     copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(giftAccount.innerText).then(() => {
-            copyBtn.innerText = 'Copied!';
+            copyBtn.innerText = 'คัดลอกแล้ว!';
             setTimeout(() => {
-                copyBtn.innerText = 'Copy Account Number';
+                copyBtn.innerText = 'คัดลอกเลขบัญชี';
             }, 2000);
         }).catch(err => {
             console.error('Failed to copy: ', err);
+            showToast('ไม่สามารถคัดลอกได้', 'error');
         });
     });
 
@@ -47,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submit-rsvp');
     const toast = document.getElementById('toast');
     
-    // Show/hide guest count based on attendance
     const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
     const guestCountGroup = document.getElementById('guest-count-group');
     attendanceRadios.forEach(radio => {
@@ -60,34 +56,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
     rsvpForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault(); 
 
         const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = 'Submitting...';
+        submitBtn.innerText = 'กำลังส่ง...';
         submitBtn.disabled = true;
 
-        // The URL for your Google Apps Script Web App
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586LPkxxNQESlmwg4oIRNG3oGluhN-/exec';
         
         const formData = new FormData(rsvpForm);
 
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .then(response => {
-                console.log('Success!', response);
-                showToast('ขอบคุณที่ตอบกลับ lờiเชิญ!', 'success');
-                rsvpForm.reset(); // Reset form fields
-                guestCountGroup.style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                showToast('เกิดข้อผิดพลาด กรุณาลองอีกครั้ง', 'error');
-            })
-            .finally(() => {
-                 submitBtn.innerText = originalBtnText;
-                 submitBtn.disabled = false;
-            });
+        // --- จุดที่แก้ไข ---
+        // เพิ่ม mode: 'no-cors' เพื่อแก้ไขปัญหาเรื่องความปลอดภัย (CORS)
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: formData,
+            mode: 'no-cors' 
+        })
+        .then(response => {
+            // เมื่อใช้ 'no-cors' เราจะไม่สามารถดูข้อมูลที่ตอบกลับได้
+            // แต่ถ้าโค้ดทำงานมาถึงตรงนี้ได้ หมายถึงการส่งข้อมูลสำเร็จแล้ว
+            console.log('Success! (Opaque response)');
+            showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
+            rsvpForm.reset(); 
+            guestCountGroup.style.display = 'none';
+        })
+        .catch(error => {
+            // ส่วนนี้จะทำงานก็ต่อเมื่อมีปัญหาด้านเครือข่ายจริงๆ เช่น อินเทอร์เน็ตหลุด
+            console.error('Error!', error.message);
+            showToast('เกิดข้อผิดพลาด กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต', 'error');
+        })
+        .finally(() => {
+             submitBtn.innerText = originalBtnText;
+             submitBtn.disabled = false;
+        });
     });
 
     // Function to show toast notification
@@ -98,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
             toast.classList.add('error');
         }
 
-        // After 3 seconds, remove the show class from DIV
         setTimeout(function(){ 
             toast.className = toast.className.replace('show', ''); 
             toast.classList.remove('error');
