@@ -91,12 +91,14 @@ END:VCALENDAR`;
 });
 
 // --- Gallery Logic ---
+// โปรดเปลี่ยนพาธรูปภาพในแกลเลอรี่ให้เป็นรูปภาพจริงของคุณ
 const galleryImages = [
-    "https://placehold.co/800x1000/A0B9AE/FFF?text=Couple+Photo+1",
-    "https://placehold.co/800x1000/C5D9BE/FFF?text=Couple+Photo+2",
-    "https://placehold.co/800x1000/E1EFD6/FFF?text=Couple+Photo+3",
-    "https://placehold.co/800x1000/AAD5BB/FFF?text=Couple+Photo+4",
-    "https://placehold.co/800x1000/D1E9D6/FFF?text=Couple+Photo+5",
+    "./images/gallery-photo-1.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 1
+    "./images/gallery-photo-2.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 2
+    "./images/gallery-photo-3.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 3
+    "./images/gallery-photo-4.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 4
+    "./images/gallery-photo-5.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 5
+    "./images/gallery-photo-6.jpg", // ตัวอย่าง: รูปภาพคู่บ่าวสาว 6
 ];
 let currentGalleryIndex = 0;
 const galleryImage = document.getElementById('galleryImage');
@@ -115,7 +117,7 @@ function updateGalleryDots() {
         const dot = document.createElement('button');
         dot.classList.add('rounded-full', 'bg-gray-400', 'transition-all', 'duration-300');
         if (index === currentGalleryIndex) {
-            dot.classList.add('w-3', 'h-3', 'bg-pink-500');
+            dot.classList.add('w-3', 'h-3', 'bg-rose-500'); // Active dot color
         } else {
             dot.classList.add('w-2', 'h-2');
         }
@@ -176,17 +178,17 @@ async function submitForm(formData, formType) {
             },
             body: JSON.stringify(payload),
             redirect: 'follow',
-            mode: 'no-cors' // ใช้ 'no-cors' เพื่อหลีกเลี่ยงปัญหา CORS ในเบราว์เซอร์
+            mode: 'no-cors' // Use 'no-cors' to avoid CORS issues in the browser
         });
 
-        // เนื่องจากใช้ 'no-cors', response จะเป็น opaque. เราไม่สามารถอ่าน response ได้
-        // ถือว่าสำเร็จและแสดง pop-up
+        // Since using 'no-cors', the response will be opaque. We can't read the response.
+        // Assume success and show popup.
         showPopup('ขอบคุณค่ะ/ครับ ข้อมูลของคุณถูกส่งแล้ว!');
 
         // Clear form
         if (formType === 'rsvp') {
             document.getElementById('rsvpForm').reset();
-            document.getElementById('guestsField').classList.add('hidden'); // ซ่อนช่องจำนวนแขก
+            document.getElementById('guestsField').classList.add('hidden'); // Hide guest count field
         } else if (formType === 'gift') {
             document.getElementById('giftForm').reset();
         }
