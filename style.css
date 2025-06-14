@@ -69,6 +69,13 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .account-number { font-weight: 500; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px !important; }
 .qr-code-img { margin: 0 auto 30px auto; display: block; max-width: 200px; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--gray-medium); padding: 5px; background-color: white; }
 
+/* Style for the copy button to match the record button */
+#copy-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 /* --- RSVP Form --- */
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
 .form-group { margin-bottom: 20px; }
@@ -94,6 +101,18 @@ input[type="radio"] { accent-color: var(--accent-color); }
 .recording-dot { width: 12px; height: 12px; background-color: var(--danger-color); border-radius: 50%; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
 #audio-playback { width: 100%; max-width: 350px; }
+
+/* --- Submit Button Area --- */
+.form-submit-area {
+    text-align: center;
+    margin-top: 20px;
+}
+#submit-rsvp {
+    width: auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+}
 
 
 /* --- Bottom Navigation --- */
