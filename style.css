@@ -73,7 +73,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     object-fit: cover;
     border-radius: 8px;
     aspect-ratio: 3 / 4;
-    cursor: pointer; /* Add pointer cursor on hover */
+    cursor: pointer;
     transition: transform 0.2s;
 }
 .gallery-grid img:hover {
@@ -81,6 +81,15 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 
 /* --- Gift Section --- */
+.gift-section-icon {
+    width: 40px;
+    height: 40px;
+    stroke: var(--accent-color);
+    margin-bottom: 10px;
+}
+#gift h2 {
+    margin-top: 0;
+}
 .gift-box { background-color: var(--gray-light); border: 1px dashed var(--gray-medium); padding: 20px; margin: 0 auto 30px auto; max-width: 350px; border-radius: 8px; }
 .gift-box p { margin: 5px 0; }
 .account-number { font-weight: 500; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px !important; }
