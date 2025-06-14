@@ -1,91 +1,151 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     // --- Countdown Timer ---
-    // หมายเหตุ: เดือนใน JavaScript เริ่มจาก 0 (มกราคม) ดังนั้น กรกฎาคม คือเดือนที่ 6
     const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime();
-
-    const countdownFunction = setInterval(function() {
+    const countdownInterval = setInterval(() => {
         const now = new Date().getTime();
         const distance = weddingDate - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-
         if (distance < 0) {
-            clearInterval(countdownFunction);
+            clearInterval(countdownInterval);
             document.getElementById("countdown").innerHTML = "<h2>The Wedding Day is Here!</h2>";
+            return;
         }
+        document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
 
-    // --- Copy Gift Account Number ---
-    const copyBtn = document.getElementById('copy-btn');
-    const giftAccount = document.querySelector('.account-number');
-    copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(giftAccount.innerText).then(() => {
-            copyBtn.innerText = 'คัดลอกแล้ว!';
-            setTimeout(() => {
-                copyBtn.innerText = 'คัดลอกเลขบัญชี';
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
-            showToast('ไม่สามารถคัดลอกได้', 'error');
-        });
+    // --- Copy Button ---
+    document.getElementById('copy-btn').addEventListener('click', () => {
+        const accountNumber = document.querySelector('.account-number').innerText;
+        navigator.clipboard.writeText(accountNumber).then(() => showToast('คัดลอกเลขบัญชีแล้ว!'), () => showToast('เกิดข้อผิดพลาด', 'error'));
     });
 
-    // --- RSVP Form Handling ---
+    // --- RSVP Form and Voice Recording ---
     const rsvpForm = document.getElementById('rsvp-form');
     const submitBtn = document.getElementById('submit-rsvp');
     const toast = document.getElementById('toast');
     
-    const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-    const guestCountGroup = document.getElementById('guest-count-group');
-    attendanceRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'Attending') {
-                guestCountGroup.style.display = 'block';
-            } else {
-                guestCountGroup.style.display = 'none';
-            }
+    // Voice recording elements
+    const recordBtn = document.getElementById('record-btn');
+    const recordStatus = document.getElementById('record-status');
+    const timerDisplay = document.getElementById('timer');
+    const audioPlayback = document.getElementById('audio-playback');
+    let mediaRecorder;
+    let audioChunks = [];
+    let audioAsBase64 = null;
+    let timerInterval;
+
+    // Show/hide guest count
+    document.querySelectorAll('input[name="attendance"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            document.getElementById('guest-count-group').style.display = e.target.value === 'Attending' ? 'block' : 'none';
         });
     });
 
-    rsvpForm.addEventListener('submit', function(e) {
-        e.preventDefault(); 
+    // Handle recording button click
+    recordBtn.addEventListener('click', async () => {
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+            // Stop recording
+            mediaRecorder.stop();
+            clearInterval(timerInterval);
+            recordBtn.classList.remove('recording');
+            recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกอีกครั้ง</span>';
+            recordStatus.style.display = 'none';
+        } else {
+            // Start recording
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = []; // Reset chunks
+                audioAsBase64 = null; // Reset previous recording
 
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const reader = new FileReader();
+                    reader.readAsDataURL(audioBlob);
+                    reader.onloadend = () => {
+                        audioAsBase64 = reader.result;
+                        audioPlayback.src = URL.createObjectURL(audioBlob);
+                        audioPlayback.style.display = 'block';
+                    };
+                    stream.getTracks().forEach(track => track.stop()); // Stop mic access
+                };
+
+                mediaRecorder.start();
+                startTimer();
+                recordBtn.classList.add('recording');
+                recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg><span>หยุดบันทึก</span>';
+                recordStatus.style.display = 'flex';
+                audioPlayback.style.display = 'none';
+
+            } catch (err) {
+                console.error("Error accessing microphone:", err);
+                showToast('ไม่สามารถเข้าถึงไมโครโฟนได้', 'error');
+            }
+        }
+    });
+    
+    function startTimer() {
+        let seconds = 0;
+        timerDisplay.textContent = "00:00";
+        timerInterval = setInterval(() => {
+            seconds++;
+            const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const sec = String(seconds % 60).padStart(2, '0');
+            timerDisplay.textContent = `${min}:${sec}`;
+        }, 1000);
+    }
+
+    // Handle form submission
+    rsvpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         const originalBtnText = submitBtn.innerText;
         submitBtn.innerText = 'กำลังส่ง...';
         submitBtn.disabled = true;
 
-        // อัปเดตเป็น URL ใหม่ของคุณแล้ว
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwvoqj7g4-8Lr68w-EI-XlBiKGbT0zyr5VdMVFFitrSdlWv6HNyjsDg9jG1cKNId5XL/exec';
+        // !!! IMPORTANT !!!
+        // PASTE YOUR NEW WEB APP URL FROM GOOGLE APPS SCRIPT HERE
+        const scriptURL = '!!!วาง_WEB_APP_URL_ใหม่ของคุณที่นี่!!!'; 
         
         const formData = new FormData(rsvpForm);
+        const data = {};
+        for (const [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        data.audioData = audioAsBase64; // Add audio data to the payload
 
-        fetch(scriptURL, { 
-            method: 'POST', 
-            body: formData,
-            mode: 'no-cors' 
+        fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8', // Use text/plain for GAS
+            }
         })
+        .then(res => res.json())
         .then(response => {
-            console.log('Success! (Opaque response)');
-            showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
-            rsvpForm.reset(); 
-            guestCountGroup.style.display = 'none';
+            if (response.result === 'success') {
+                showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
+                rsvpForm.reset();
+                document.getElementById('guest-count-group').style.display = 'none';
+                audioPlayback.style.display = 'none';
+                recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกเสียง</span>';
+                audioAsBase64 = null;
+            } else {
+                throw new Error(response.error || 'Unknown error from script');
+            }
         })
         .catch(error => {
             console.error('Error!', error.message);
-            showToast('เกิดข้อผิดพลาด กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต', 'error');
+            showToast('เกิดข้อผิดพลาด กรุณาลองอีกครั้ง', 'error');
         })
         .finally(() => {
-             submitBtn.innerText = originalBtnText;
-             submitBtn.disabled = false;
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
         });
     });
 
@@ -93,13 +153,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function showToast(message, type = 'success') {
         toast.innerText = message;
         toast.className = 'show';
-        if(type === 'error') {
+        if (type === 'error') {
             toast.classList.add('error');
         }
-
-        setTimeout(function(){ 
-            toast.className = toast.className.replace('show', ''); 
-            toast.classList.remove('error');
+        setTimeout(() => {
+            toast.className = toast.className.replace('show', '').replace('error', '');
         }, 3000);
     }
 });

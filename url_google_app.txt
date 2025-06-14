@@ -3,6 +3,9 @@ https://script.google.com/macros/s/AKfycbxX20hHm-7FwtkH1bQfaI_8PvSSTnA5RO1Bdo586
 https://calm-sopapillas-690b48.netlify.app/
 
 
+AppScript พร้อม บันทึกเสียง
+https://script.google.com/macros/s/AKfycbzllDZtsBJQ1lAZhxu-3LHOYOU-bK0lxLHajDs1GcBoZNokuS3K2KczMqd2-MC5pw/exec
+
 คำสั่งบันทึกและpushในgithub cmd
 
 git add .

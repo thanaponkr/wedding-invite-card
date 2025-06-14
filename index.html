@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Sarabun:wght@400&display=swap" rel="stylesheet">
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
@@ -42,7 +42,6 @@
         <!-- Section 2: Program -->
         <section id="program" class="content-section">
             <h2>กำหนดการ</h2>
-            <!-- เปลี่ยนข้อความตามที่ต้องการ -->
             <p class="section-subtitle">ขอเชิญร่วมเฉลิมฉลองในวันพิเศษของเรา</p>
             <div class="schedule">
                 <div class="schedule-item">
@@ -64,9 +63,9 @@
             </div>
             <div class="location">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="location-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <h4>อากาเป้ การ์เด้น</h4>
-                <p>888, 8 ซอย พหลโยธิน 54/4 แขวงสายไหม เขตสายไหม กรุงเทพมหานคร 10220</p>
-                <a href="https://maps.app.goo.gl/PUXic9aYVv6yawAi7" target="_blank" class="btn">ดูแผนที่</a>
+                <h4>At The Peninsula Bangkok</h4>
+                <p>333 Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600</p>
+                <a href="https://maps.app.goo.gl/abcdef123456" target="_blank" class="btn">ดูแผนที่</a>
             </div>
         </section>
 
@@ -86,7 +85,7 @@
         <!-- Section 4: Gift -->
         <section id="gift" class="content-section">
             <h2>ของขวัญแสดงความยินดี</h2>
-            <p class="section-subtitle">การมาร่วมงานของท่านคือของขวัญที่ล้ำค่าที่สุดสำหรับเราแล้ว หากท่านมีความประสงค์จะมอบของขวัญเพื่อแสดงความยินดี สามารถร่วมสมทบได้ตามสะดวกนะคะ/ครับ</p>
+            <p class="section-subtitle">การมาร่วมงานของท่านคือของขวัญที่ล้ำค่าที่สุดสำหรับเราแล้ว หากท่านมีความประสงค์จะมอบของขวัญเพื่อแสดงความยินดี สามารถร่วมสมทบได้ตามสะดวก</p>
             
             <img src="images/qr-code.jpg" alt="Wedding Gift QR Code" class="qr-code-img">
 
@@ -101,7 +100,7 @@
         <!-- Section 5: RSVP -->
         <section id="rsvp" class="content-section">
             <h2>ตอบรับคำเชิญ</h2>
-            <p class="section-subtitle">กรุณาตอบกลับภายในวันที่ 20 กรกฏาคม 2568</p>
+            <p class="section-subtitle">กรุณาตอบกลับภายในวันที่ 30 มิถุนายน 2568</p>
             <form id="rsvp-form">
                 <div class="form-group">
                     <label for="name">ชื่อ-นามสกุล:</label>
@@ -126,9 +125,26 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="wishes">คำอวยพร:</label>
-                    <textarea id="wishes" name="wishes" rows="4" placeholder="ฝากคำอวยพรถึงเราได้ที่นี่..."></textarea>
+                    <label for="wishes">คำอวยพร (ข้อความ):</label>
+                    <textarea id="wishes" name="wishes" rows="3" placeholder="ฝากคำอวยพรถึงเราได้ที่นี่..."></textarea>
                 </div>
+                
+                <!-- Voice Recording UI -->
+                <div class="form-group">
+                    <label>คำอวยพร (เสียง):</label>
+                    <div class="voice-recorder">
+                        <button type="button" id="record-btn" class="record-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
+                            <span>บันทึกเสียง</span>
+                        </button>
+                        <div id="record-status" class="record-status" style="display: none;">
+                             <div class="recording-dot"></div>
+                             <span id="timer">00:00</span>
+                        </div>
+                        <audio id="audio-playback" controls style="display: none;"></audio>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn" id="submit-rsvp">ยืนยันการเข้าร่วม</button>
             </form>
         </section>
@@ -161,8 +177,6 @@
     <!-- Toast Notification for alerts -->
     <div id="toast"></div>
 
-    <!-- JavaScript -->
     <script src="script.js"></script>
-
 </body>
 </html>
