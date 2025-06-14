@@ -48,10 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mediaRecorder && mediaRecorder.state === "recording") {
             // Stop recording
             mediaRecorder.stop();
-            clearInterval(timerInterval);
-            recordBtn.classList.remove('recording');
-            recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกอีกครั้ง</span>';
-            recordStatus.style.display = 'none';
         } else {
             // Start recording
             try {
@@ -64,8 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     audioChunks.push(event.data);
                 };
 
+                mediaRecorder.onstart = () => {
+                    startTimer();
+                    recordBtn.classList.add('recording');
+                    recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg><span>หยุดบันทึก</span>';
+                    recordStatus.style.display = 'flex';
+                    audioPlayback.style.display = 'none';
+                };
+
                 mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    // --- จุดที่แก้ไข ---
+                    // ไม่ต้องระบุ type ให้เบราว์เซอร์จัดการเองเพื่อความเข้ากันได้สูงสุด
+                    const audioBlob = new Blob(audioChunks); 
+                    
                     const reader = new FileReader();
                     reader.readAsDataURL(audioBlob);
                     reader.onloadend = () => {
@@ -73,15 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         audioPlayback.src = URL.createObjectURL(audioBlob);
                         audioPlayback.style.display = 'block';
                     };
+                    
                     stream.getTracks().forEach(track => track.stop()); // Stop mic access
+                    clearInterval(timerInterval);
+                    recordBtn.classList.remove('recording');
+                    recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกอีกครั้ง</span>';
+                    recordStatus.style.display = 'none';
                 };
 
                 mediaRecorder.start();
-                startTimer();
-                recordBtn.classList.add('recording');
-                recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg><span>หยุดบันทึก</span>';
-                recordStatus.style.display = 'flex';
-                audioPlayback.style.display = 'none';
 
             } catch (err) {
                 console.error("Error accessing microphone:", err);
@@ -95,6 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
         timerDisplay.textContent = "00:00";
         timerInterval = setInterval(() => {
             seconds++;
+            if (seconds >= 30) { // จำกัดเวลาอัดเสียง 30 วินาที
+                mediaRecorder.stop();
+                return;
+            }
             const min = String(Math.floor(seconds / 60)).padStart(2, '0');
             const sec = String(seconds % 60).padStart(2, '0');
             timerDisplay.textContent = `${min}:${sec}`;
@@ -117,13 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
         for (const [key, value] of formData.entries()) {
             data[key] = value;
         }
-        data.audioData = audioAsBase64; // Add audio data to the payload
+        data.audioData = audioAsBase64;
 
         fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'text/plain;charset=utf-8', // Use text/plain for GAS
+                'Content-Type': 'text/plain;charset=utf-8',
             }
         })
         .then(res => res.json())
