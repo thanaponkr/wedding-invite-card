@@ -20,11 +20,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const accountNumber = document.querySelector('.account-number').innerText;
         navigator.clipboard.writeText(accountNumber).then(() => showToast('คัดลอกเลขบัญชีแล้ว!'), () => showToast('เกิดข้อผิดพลาด', 'error'));
     });
+    
+    // --- Lightbox for Gallery ---
+    const lightbox = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const galleryImages = document.querySelectorAll('.gallery-grid img');
+    const closeLightbox = document.querySelector('.lightbox-close');
+
+    galleryImages.forEach(image => {
+        image.addEventListener('click', () => {
+            lightbox.style.display = "block";
+            lightboxImg.src = image.src;
+        });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = "none";
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = "none";
+        }
+    });
 
     // --- RSVP Form and Voice Recording ---
     const rsvpForm = document.getElementById('rsvp-form');
     const submitBtn = document.getElementById('submit-rsvp');
-    const toast = document.getElementById('toast');
     
     // Voice recording elements
     const recordBtn = document.getElementById('record-btn');
@@ -51,12 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                
-                // Find a supported MIME type for maximum compatibility
                 const mimeTypes = ['audio/mp4', 'audio/webm', 'audio/aac', 'audio/ogg'];
                 supportedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
-                console.log('Using MIME type:', supportedMimeType);
-
+                
                 mediaRecorder = new MediaRecorder(stream, { mimeType: supportedMimeType });
                 audioChunks = [];
                 audioAsBase64 = null;
@@ -122,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerText = 'กำลังส่ง...';
         submitBtn.disabled = true;
 
-        // URL has been updated with your latest link.
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzllDZtsBJQ1lAZhxu-3LHOYOU-bK0lxLHajDs1GcBoZNokuS3K2KczMqd2-MC5pw/exec'; 
         
         const formData = new FormData(rsvpForm);
@@ -159,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to show toast notification
+    const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         toast.innerText = message;
         toast.className = 'show';
