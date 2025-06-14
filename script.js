@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let audioChunks = [];
     let audioAsBase64 = null;
     let timerInterval;
+    let supportedMimeType = '';
 
     // Show/hide guest count
     document.querySelectorAll('input[name="attendance"]').forEach(radio => {
@@ -46,15 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle recording button click
     recordBtn.addEventListener('click', async () => {
         if (mediaRecorder && mediaRecorder.state === "recording") {
-            // Stop recording
             mediaRecorder.stop();
         } else {
-            // Start recording
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = []; // Reset chunks
-                audioAsBase64 = null; // Reset previous recording
+                
+                // Find a supported MIME type for maximum compatibility
+                const mimeTypes = ['audio/mp4', 'audio/webm', 'audio/aac', 'audio/ogg'];
+                supportedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+                console.log('Using MIME type:', supportedMimeType);
+
+                mediaRecorder = new MediaRecorder(stream, { mimeType: supportedMimeType });
+                audioChunks = [];
+                audioAsBase64 = null;
 
                 mediaRecorder.ondataavailable = event => {
                     audioChunks.push(event.data);
@@ -66,13 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg><span>หยุดบันทึก</span>';
                     recordStatus.style.display = 'flex';
                     audioPlayback.style.display = 'none';
+                    audioPlayback.src = '';
                 };
 
                 mediaRecorder.onstop = () => {
-                    // --- จุดที่แก้ไข ---
-                    // ไม่ต้องระบุ type ให้เบราว์เซอร์จัดการเองเพื่อความเข้ากันได้สูงสุด
-                    const audioBlob = new Blob(audioChunks); 
-                    
+                    const audioBlob = new Blob(audioChunks, { type: supportedMimeType });
                     const reader = new FileReader();
                     reader.readAsDataURL(audioBlob);
                     reader.onloadend = () => {
@@ -81,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         audioPlayback.style.display = 'block';
                     };
                     
-                    stream.getTracks().forEach(track => track.stop()); // Stop mic access
+                    stream.getTracks().forEach(track => track.stop());
                     clearInterval(timerInterval);
                     recordBtn.classList.remove('recording');
                     recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกอีกครั้ง</span>';
@@ -102,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
         timerDisplay.textContent = "00:00";
         timerInterval = setInterval(() => {
             seconds++;
-            if (seconds >= 30) { // จำกัดเวลาอัดเสียง 30 วินาที
-                mediaRecorder.stop();
+            if (seconds >= 30) {
+                if(mediaRecorder && mediaRecorder.state === "recording") mediaRecorder.stop();
                 return;
             }
             const min = String(Math.floor(seconds / 60)).padStart(2, '0');
@@ -119,9 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerText = 'กำลังส่ง...';
         submitBtn.disabled = true;
 
-        // !!! IMPORTANT !!!
-        // PASTE YOUR NEW WEB APP URL FROM GOOGLE APPS SCRIPT HERE
-        const scriptURL = '!!!วาง_WEB_APP_URL_ใหม่ของคุณที่นี่!!!'; 
+        // URL has been updated with your latest link.
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzllDZtsBJQ1lAZhxu-3LHOYOU-bK0lxLHajDs1GcBoZNokuS3K2KczMqd2-MC5pw/exec'; 
         
         const formData = new FormData(rsvpForm);
         const data = {};
@@ -129,29 +131,25 @@ document.addEventListener('DOMContentLoaded', function() {
             data[key] = value;
         }
         data.audioData = audioAsBase64;
+        data.mimeType = supportedMimeType;
 
         fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
-            }
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' }
         })
-        .then(res => res.json())
-        .then(response => {
-            if (response.result === 'success') {
-                showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
-                rsvpForm.reset();
-                document.getElementById('guest-count-group').style.display = 'none';
-                audioPlayback.style.display = 'none';
-                recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกเสียง</span>';
-                audioAsBase64 = null;
-            } else {
-                throw new Error(response.error || 'Unknown error from script');
-            }
+        .then(() => {
+            showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
+            rsvpForm.reset();
+            document.getElementById('guest-count-group').style.display = 'none';
+            audioPlayback.style.display = 'none';
+            audioPlayback.src = '';
+            recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกเสียง</span>';
+            audioAsBase64 = null;
         })
         .catch(error => {
-            console.error('Error!', error.message);
+            console.error('Fetch Error!', error);
             showToast('เกิดข้อผิดพลาด กรุณาลองอีกครั้ง', 'error');
         })
         .finally(() => {
