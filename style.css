@@ -407,3 +407,9 @@ input[type="radio"] { accent-color: var(--accent-color); }
 .site-footer p {
     margin: 0;
 }
+.closing-message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #8A7F75;
+}
