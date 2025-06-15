@@ -1,4 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- Music Player ---
+    const music = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    const playIcon = musicToggle.querySelector('.icon-play');
+    const pauseIcon = musicToggle.querySelector('.icon-pause');
+    let hasInteracted = false;
+
+    function toggleMusic() {
+        if (music.paused) {
+            music.play().catch(e => console.error("Audio play failed:", e));
+            musicToggle.classList.add('playing');
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+        } else {
+            music.pause();
+            musicToggle.classList.remove('playing');
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+        }
+    }
+
+    // Play music on first user interaction
+    function startMusicOnFirstInteraction() {
+        if (!hasInteracted) {
+            hasInteracted = true;
+            toggleMusic();
+            document.body.removeEventListener('click', startMusicOnFirstInteraction);
+            document.body.removeEventListener('touchstart', startMusicOnFirstInteraction);
+        }
+    }
+    
+    musicToggle.addEventListener('click', toggleMusic);
+    document.body.addEventListener('click', startMusicOnFirstInteraction, { once: true });
+    document.body.addEventListener('touchstart', startMusicOnFirstInteraction, { once: true });
+
+
     // --- Countdown Timer ---
     const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime();
     const countdownInterval = setInterval(() => {

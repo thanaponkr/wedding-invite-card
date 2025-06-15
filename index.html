@@ -15,6 +15,14 @@
 </head>
 <body>
 
+    <!-- Music Control Button -->
+    <button id="music-toggle" class="music-control">
+        <!-- Play Icon -->
+        <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <!-- Pause Icon -->
+        <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+    </button>
+    
     <!-- Main Content -->
     <main class="container">
 
@@ -41,6 +49,9 @@
 
         <!-- Section 2: Program -->
         <section id="program" class="content-section">
+            <div class="section-top-logo">
+                <img src="images/logo-m&t-small.png" alt="May & Toey" class="section-logo-small">
+            </div>
             <h2>กำหนดการ</h2>
             <p class="section-subtitle">ขอเชิญร่วมเฉลิมฉลองในวันพิเศษของเรา</p>
             <div class="schedule">
@@ -187,6 +198,11 @@
         </section>
     </main>
     
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <p>ขออภัยหากมิได้เรียนเชิญด้วยตนเอง</p>
+    </footer>
+
     <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="#home" class="nav-item">
@@ -216,6 +232,9 @@
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
     </div>
+
+    <!-- Audio Player -->
+    <audio id="bg-music" loop src="audio/wedding-song.mp3"></audio>
 
     <!-- Toast Notification for alerts -->
     <div id="toast"></div>

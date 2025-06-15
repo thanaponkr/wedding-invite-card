@@ -1,13 +1,18 @@
-/* --- Global Styles & Variables (New Nude Pink Theme) --- */
+/* --- Global Styles & Variables (Nude Pink Theme) --- */
 :root {
-    --bg-color: #FCFBF8; /* A very light, warm off-white */
-    --text-color: #5C524A; /* Warm Brown for text */
+    --bg-color: #FCFBF8;
+    --text-color: #5C524A;
     --primary-font: 'Sarabun', 'Montserrat', sans-serif;
     --heading-font: 'Playfair Display', serif;
-    --accent-color: #D4B4A8; /* Nude Pink for buttons and highlights */
-    --gray-light: #EFEAE4; /* Soft Beige for section backgrounds */
-    --gray-medium: #DCD3C9;
+    --accent-color: #D4B4A8;
+    --gray-light: #EFEAE4;
+    --gray-medium: #d1b292;
     --danger-color: #dc3545;
+    
+    /* Font Size Hierarchy */
+    --font-size-lg: 2rem;
+    --font-size-md: 1.1rem;
+    --font-size-sm: 1rem;
 }
 
 html { scroll-behavior: smooth; }
@@ -17,12 +22,20 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    padding-bottom: 80px;
+    padding-bottom: 120px;
+    font-size: var(--font-size-sm);
 }
 h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .container { width: 100%; max-width: 800px; margin: 0 auto; overflow-x: hidden; }
-.content-section { padding: 50px 20px; text-align: center; }
-.section-subtitle { color: #8A7F75; margin-top: -10px; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 1px; }
+.content-section { 
+    padding: 50px 20px; 
+    text-align: center; 
+}
+#rsvp.content-section { 
+    padding-bottom: 30px; 
+} 
+
+.section-subtitle { color: #8A7F75; margin-top: -10px; margin-bottom: 30px; font-size: var(--font-size-md); letter-spacing: 1px; }
 .btn {
     display: inline-block;
     background-color: var(--accent-color);
@@ -37,6 +50,65 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 .btn:hover { background-color: #C0A092; transform: translateY(-2px); }
 
+/* --- Music Control Button (Enhanced) --- */
+.music-control {
+    position: fixed;
+    bottom: 125px;
+    right: 20px;
+    z-index: 1001;
+    background-color: rgba(252, 251, 248, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--gray-medium);
+    border-radius: 50%;
+    width: 48px; /* Slightly larger */
+    height: 48px; /* Slightly larger */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Deeper shadow */
+    transition: all 0.3s ease-in-out;
+}
+.music-control:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.music-control:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+.music-control svg {
+    stroke: var(--text-color);
+    width: 22px;
+    height: 22px;
+}
+.music-control .icon-pause {
+    display: none;
+}
+.music-control.playing .icon-play {
+    display: none;
+}
+.music-control.playing .icon-pause {
+    display: block;
+}
+/* Animation for playing state */
+@keyframes pulse-music {
+    0% {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 0 0 0 rgba(212, 180, 168, 0.7);
+    }
+    70% {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 0 0 10px rgba(212, 180, 168, 0);
+    }
+    100% {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 0 0 0 rgba(212, 180, 168, 0);
+    }
+}
+.music-control.playing {
+    border-color: var(--accent-color);
+    animation: pulse-music 2s infinite;
+}
+
+
 /* --- Hero Section & Countdown --- */
 .hero-section { position: relative; text-align: center; }
 .hero-image { position: relative; width: 100%; height: 100vh; max-height: 800px; }
@@ -48,6 +120,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     left: 50%;
     transform: translate(-50%, -50%); 
     width: 90%;
+    text-align: center;
 }
 
 .hero-logo {
@@ -64,7 +137,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     color: var(--text-color);
     text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.4);
 }
-.countdown-container { padding: 40px 20px; background-color: var(--gray-light); }
+.countdown-container { padding: 40px 20px; background-color: var(--gray-light); text-align: center; }
 .countdown-icon {
     width: 48px;
     height: 48px;
@@ -93,7 +166,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .countdown { display: flex; justify-content: center; gap: 20px; }
 .countdown div { 
     text-align: center;
-    color: var(--accent-color);
+    color: var(--text-color);
 }
 .countdown span { 
     display: block; 
@@ -106,8 +179,15 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 
 /* --- Program Section --- */
+.section-top-logo {
+    margin-bottom: 20px;
+}
+.section-logo-small {
+    max-width: 100px;
+    height: auto;
+}
 #program h2, #gallery h2, #gift h2, #rsvp h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-lg);
 }
 .schedule-item { 
     display: flex; 
@@ -115,13 +195,13 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     align-items: baseline; 
     gap: 20px; 
     margin-bottom: 15px;
-    font-size: 1.1rem;
+    font-size: var(--font-size-md);
 }
 .schedule-item .time { font-weight: 500; color: var(--accent-color); flex-basis: 80px; text-align: right; }
 .schedule-item .event { text-align: left; flex-basis: 200px; }
 
 #program .section-subtitle {
-    font-size: 1.1rem;
+    font-size: var(--font-size-md);
     font-weight: 400;
 }
 
@@ -133,12 +213,13 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .dress-code-section h4 {
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: var(--font-size-md);
     margin-bottom: 0;
 }
 .dress-code-section .section-subtitle {
     margin-top: 5px;
     margin-bottom: 20px;
+    font-size: var(--font-size-sm);
 }
 .color-palette {
     display: flex;
@@ -160,8 +241,9 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     margin-bottom: 5px;
     font-family: var(--primary-font);
     font-weight: 500;
+    font-size: var(--font-size-md);
 }
-.location p { margin-top: 5px; color: #8A7F75; }
+.location p { margin-top: 5px; color: #8A7F75; font-size: var(--font-size-sm); }
 
 /* --- Gallery Section --- */
 .gallery-grid {
@@ -196,23 +278,27 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 #gift h2 {
     margin-top: 0;
 }
+#gift .section-subtitle {
+    font-size: var(--font-size-sm);
+    padding: 0 10px;
+}
 .gift-box { background-color: #F8F4F0; border: 1px dashed var(--gray-medium); padding: 20px; margin: 0 auto 30px auto; max-width: 350px; border-radius: 8px; }
-.gift-box p { margin: 5px 0; }
+.gift-box p { margin: 5px 0; font-size: var(--font-size-sm); }
 .account-number { font-weight: 500; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px !important; }
 .qr-code-img { margin: 0 auto 30px auto; display: block; max-width: 200px; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--gray-medium); padding: 5px; background-color: white; }
 #copy-btn {
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
     font-weight: 500;
 }
 
 /* --- RSVP Form --- */
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
 .form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
-.form-group input[type="text"], .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: var(--primary-font); font-size: 1rem; box-sizing: border-box; background-color: #F8F4F0; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: var(--font-size-md); }
+.form-group input[type="text"], .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: var(--primary-font); font-size: var(--font-size-sm); box-sizing: border-box; background-color: #F8F4F0; }
 .radio-group { display: flex; gap: 20px; align-items: center; }
-.radio-group label { margin-bottom: 0; font-weight: 400; }
+.radio-group label { margin-bottom: 0; font-weight: 400; font-size: var(--font-size-sm); }
 input[type="radio"] { accent-color: var(--accent-color); }
 
 /* --- Voice Recorder Styles --- */
@@ -222,12 +308,12 @@ input[type="radio"] { accent-color: var(--accent-color); }
     background-color: var(--accent-color);
     color: white;
     border: none; padding: 10px 20px; border-radius: 50px;
-    cursor: pointer; font-size: 1rem; font-family: var(--primary-font);
+    cursor: pointer; font-size: var(--font-size-sm); font-family: var(--primary-font);
     transition: all 0.3s;
     min-width: 150px; 
 }
 .record-btn svg { stroke: white; }
-.record-btn.recording { background-color: #C0A092; }
+.record-btn.recording { background-color: #b5b285; }
 .record-btn:disabled { background-color: var(--gray-medium); cursor: not-allowed; }
 .record-status { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; }
 .recording-dot { width: 12px; height: 12px; background-color: var(--accent-color); border-radius: 50%; animation: pulse 1.5s infinite; }
@@ -242,12 +328,12 @@ input[type="radio"] { accent-color: var(--accent-color); }
 #submit-rsvp {
     background-color: var(--text-color);
     min-width: 150px; 
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
     font-weight: 500;
     padding: 12px 20px;
 }
 #submit-rsvp:hover {
-    background-color: #4a423b;
+    background-color: #5e3615;
 }
 
 
@@ -302,4 +388,22 @@ input[type="radio"] { accent-color: var(--accent-color); }
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* --- Site Footer --- */
+.site-footer {
+    position: fixed;
+    bottom: 70px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: var(--bg-color);
+    color: #8A7F75;
+    font-size: var(--font-size-sm);
+    z-index: 999;
+    box-sizing: border-box;
+}
+.site-footer p {
+    margin: 0;
 }
