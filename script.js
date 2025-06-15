@@ -21,16 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
         navigator.clipboard.writeText(accountNumber).then(() => showToast('คัดลอกเลขบัญชีแล้ว!'), () => showToast('เกิดข้อผิดพลาด', 'error'));
     });
     
-    // --- Lightbox for Gallery ---
+    // --- Lightbox for Gallery and QR Code ---
     const lightbox = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
-    const galleryImages = document.querySelectorAll('.gallery-grid img');
+    const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
     const closeLightbox = document.querySelector('.lightbox-close');
 
-    galleryImages.forEach(image => {
-        image.addEventListener('click', () => {
+    lightboxTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
             lightbox.style.display = "block";
-            lightboxImg.src = image.src;
+            lightboxImg.src = trigger.src;
         });
     });
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- NEW: Show/hide shipping address ---
+    // Show/hide shipping address
     const favorRadios = document.querySelectorAll('input[name="wantsFavor"]');
     const shippingAddressGroup = document.getElementById('shipping-address-group');
     favorRadios.forEach(radio => {

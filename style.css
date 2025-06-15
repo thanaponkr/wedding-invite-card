@@ -57,13 +57,6 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     margin-bottom: 1rem;
 }
 
-.hero-icon {
-    width: 28px;
-    height: 28px;
-    stroke: var(--accent-color);
-    margin-bottom: 0.75rem;
-}
-
 .hero-text p { 
     font-size: 1.2rem; 
     margin: 0; 
@@ -73,9 +66,8 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 .countdown-container { padding: 40px 20px; background-color: var(--gray-light); }
 .countdown-icon {
-    width: 32px;
-    height: 32px;
-    stroke: var(--accent-color);
+    width: 48px;
+    height: 48px;
     margin-bottom: 15px;
 }
 .countdown-container h3 {
@@ -117,7 +109,14 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 #program h2, #gallery h2, #gift h2, #rsvp h2 {
     font-size: 2rem;
 }
-.schedule-item { display: flex; justify-content: center; align-items: baseline; gap: 20px; margin-bottom: 10px; }
+.schedule-item { 
+    display: flex; 
+    justify-content: center; 
+    align-items: baseline; 
+    gap: 20px; 
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
 .schedule-item .time { font-weight: 500; color: var(--accent-color); flex-basis: 80px; text-align: right; }
 .schedule-item .event { text-align: left; flex-basis: 200px; }
 
@@ -126,9 +125,42 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-weight: 400;
 }
 
+.dress-code-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--gray-medium);
+}
+.dress-code-section h4 {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+.dress-code-section .section-subtitle {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.color-swatch {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .location { margin-top: 40px; }
 .location-icon { width: 32px; height: 32px; stroke: var(--accent-color); margin-bottom: 10px; }
-.location h4 { margin-top: 0; margin-bottom: 5px; }
+.location h4 { 
+    margin-top: 0; 
+    margin-bottom: 5px;
+    font-family: var(--primary-font);
+    font-weight: 500;
+}
 .location p { margin-top: 5px; color: #8A7F75; }
 
 /* --- Gallery Section --- */
@@ -139,17 +171,19 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     gap: 10px;
     margin-top: 30px;
 }
-.gallery-grid img {
+.lightbox-trigger {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.lightbox-trigger:hover {
+    transform: scale(1.05);
+}
+.gallery-grid .lightbox-trigger {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
     aspect-ratio: 3 / 4;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-.gallery-grid img:hover {
-    transform: scale(1.05);
 }
 
 /* --- Gift Section --- */
@@ -190,6 +224,7 @@ input[type="radio"] { accent-color: var(--accent-color); }
     border: none; padding: 10px 20px; border-radius: 50px;
     cursor: pointer; font-size: 1rem; font-family: var(--primary-font);
     transition: all 0.3s;
+    min-width: 150px; 
 }
 .record-btn svg { stroke: white; }
 .record-btn.recording { background-color: #C0A092; }
@@ -205,11 +240,11 @@ input[type="radio"] { accent-color: var(--accent-color); }
     margin-top: 20px;
 }
 #submit-rsvp {
-    width: auto;
-    padding: 10px 20px;
+    background-color: var(--text-color);
+    min-width: 150px; 
     font-size: 1rem;
     font-weight: 500;
-    background-color: var(--text-color);
+    padding: 12px 20px;
 }
 #submit-rsvp:hover {
     background-color: #4a423b;
