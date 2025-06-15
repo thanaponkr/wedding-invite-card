@@ -21,7 +21,6 @@
         <!-- Section 1: Home -->
         <section id="home" class="hero-section">
             <div class="hero-image">
-                <!-- เปลี่ยนรูปภาพหลักเป็นไฟล์ใหม่ -->
                 <img src="images/our-wedding-photo.jpg" alt="May and Toey Wedding">
                 <div class="hero-text">
                     <h2>May & Toey</h2>
@@ -147,6 +146,22 @@
                         <audio id="audio-playback" controls style="display: none;"></audio>
                     </div>
                 </div>
+
+                <!-- Wedding Favor Section -->
+                <div class="form-group">
+                    <label>ของชำร่วยที่ระลึก:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="favor-yes" name="wantsFavor" value="Yes" required>
+                        <label for="favor-yes">ต้องการ</label>
+                        <input type="radio" id="favor-no" name="wantsFavor" value="No">
+                        <label for="favor-no">ไม่ต้องการ</label>
+                    </div>
+                </div>
+                <div class="form-group" id="shipping-address-group" style="display: none;">
+                    <label for="shippingAddress">ที่อยู่สำหรับจัดส่ง:</label>
+                    <textarea id="shippingAddress" name="shippingAddress" rows="4" placeholder="กรุณากรอกบ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด และรหัสไปรษณีย์"></textarea>
+                </div>
+
 
                 <!-- Centered Submit Button Area -->
                 <div class="form-submit-area">

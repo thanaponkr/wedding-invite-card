@@ -44,11 +44,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- RSVP Form and Voice Recording ---
+    // --- RSVP Form Logic ---
     const rsvpForm = document.getElementById('rsvp-form');
     const submitBtn = document.getElementById('submit-rsvp');
     
-    // Voice recording elements
+    // Show/hide guest count
+    document.querySelectorAll('input[name="attendance"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            document.getElementById('guest-count-group').style.display = e.target.value === 'Attending' ? 'block' : 'none';
+        });
+    });
+
+    // --- NEW: Show/hide shipping address ---
+    const favorRadios = document.querySelectorAll('input[name="wantsFavor"]');
+    const shippingAddressGroup = document.getElementById('shipping-address-group');
+    favorRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'Yes') {
+                shippingAddressGroup.style.display = 'block';
+                document.getElementById('shippingAddress').required = true;
+            } else {
+                shippingAddressGroup.style.display = 'none';
+                document.getElementById('shippingAddress').required = false;
+            }
+        });
+    });
+
+    // --- Voice Recording Logic ---
     const recordBtn = document.getElementById('record-btn');
     const recordStatus = document.getElementById('record-status');
     const timerDisplay = document.getElementById('timer');
@@ -59,14 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let timerInterval;
     let supportedMimeType = '';
 
-    // Show/hide guest count
-    document.querySelectorAll('input[name="attendance"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            document.getElementById('guest-count-group').style.display = e.target.value === 'Attending' ? 'block' : 'none';
-        });
-    });
-
-    // Handle recording button click
     recordBtn.addEventListener('click', async () => {
         if (mediaRecorder && mediaRecorder.state === "recording") {
             mediaRecorder.stop();
@@ -134,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    // Handle form submission
+    // --- Form Submission ---
     rsvpForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const originalBtnText = submitBtn.innerText;
@@ -161,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
             rsvpForm.reset();
             document.getElementById('guest-count-group').style.display = 'none';
+            document.getElementById('shipping-address-group').style.display = 'none';
             audioPlayback.style.display = 'none';
             audioPlayback.src = '';
             recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกเสียง</span>';
@@ -176,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Function to show toast notification
+    // --- Toast Notification ---
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         toast.innerText = message;
