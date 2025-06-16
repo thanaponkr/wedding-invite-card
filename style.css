@@ -165,10 +165,10 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-weight: 400;
 }
 
-/* --- New Styles for Parent Names --- */
+/* --- Styles for Parent Names & Invitation Text --- */
 .parent-names {
-    margin-bottom: 20px;
-    font-size: var(--font-size-sm);
+    margin-bottom: 10px; /* Adjusted margin */
+    font-size: 1.2rem; /* <-- FONT SIZE ADJUSTED */
 }
 .parent-row {
     display: flex;
@@ -179,16 +179,22 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 .and-separator {
     text-align: center;
-    margin: 4px 0 !important; /* Use !important to override other p styles if needed */
+    margin: 4px 0 !important;
     font-size: 1rem;
 }
-/* --- End of New Styles --- */
+.invitation-text {
+    font-size: 1.2rem; /* <-- FONT SIZE ADJUSTED */
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+}
+/* --- End of New/Adjusted Styles --- */
 
 .wedding-date-display {
     font-family: var(--primary-font);
     font-size: 2.6rem;
     color: var(--text-color);
-    margin-top: 10px;
+    margin-top: 25px; /* Increased top margin */
     margin-bottom: 25px;
     letter-spacing: 1px;
     font-weight: 400;
