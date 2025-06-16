@@ -183,7 +183,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1rem;
 }
 .invitation-text {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.7;
     margin: 0;
     padding: 0;
@@ -205,7 +205,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1.6rem;
     color: var(--text-color);
     margin-top: 25px;
-    margin-bottom: 15px; /* <-- SPACING ADJUSTED */
+    margin-bottom: 10px; /* <-- SPACING ADJUSTED */
     letter-spacing: 1px;
     font-weight: 400;
 }
