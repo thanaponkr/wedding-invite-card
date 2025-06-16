@@ -5,28 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>May & Toey | Wedding Invitation</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Sarabun:wght@400&display=swap" rel="stylesheet">
     
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Music Control Button -->
     <button id="music-toggle" class="music-control">
-        <!-- Play Icon -->
         <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-        <!-- Pause Icon -->
         <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
     </button>
     
-    <!-- Main Content -->
     <main class="container">
 
-        <!-- Section 1: Home -->
         <section id="home" class="hero-section">
             <div class="hero-image">
                 <img src="images/our-wedding-photo01.png" alt="May and Toey Wedding">
@@ -35,8 +28,22 @@
                 </div>
             </div>
             <div class="countdown-container">
-                <img src="images/logo-rings.png" alt="Wedding Rings Icon" class="countdown-icon">
-                <h3>มีความยินดีขอเรียนเชิญเป็นเกียรติเนื่องในพิธีมงคลสมรส<br><span class="sub-heading-connector">ระหว่าง</span><br>กัลยาณี & รัชพล</h3>
+                <img src="images/logo-m&t-small.png" alt="May & Toey" class="section-logo-small">
+                
+                <div class="parent-names">
+                    <div class="parent-row">
+                        <span>นางสวาท แก้วกอ</span>
+                        <span>นางรสริน มั่งมี</span>
+                    </div>
+                    <p class="and-separator">และ</p>
+                    <div class="parent-row">
+                        <span>นายประจบแก้วกอ</span>
+                        <span>นางศิริลักษณ์ มั่งมี</span>
+                    </div>
+                </div>
+
+                <p>มีความยินดีขอเรียนเชิญเพื่อมาเป็นเกียรติเนื่องในพิธีมงคลสมรส<br>ระหว่าง<br>
+                    <br>นางสาวกัลยาณี มั่งมี<br>และ<br>นายรัชพล แก้วกอ</p>
                 <p class="wedding-date-display">28 กรกฎาคม 2568</p>
                 <div id="countdown" class="countdown">
                     <div><span id="days">00</span>วัน</div>
@@ -47,10 +54,9 @@
             </div>
         </section>
 
-        <!-- Section 2: Program -->
         <section id="program" class="content-section">
             <div class="section-top-logo">
-                <img src="images/logo-m&t-small.png" alt="May & Toey" class="section-logo-small">
+                                <img src="images/logo-rings.png" alt="Wedding Rings Icon" class="countdown-icon">
             </div>
             <h2>กำหนดการ</h2>
             <p class="section-subtitle">ขอเชิญร่วมเฉลิมฉลองในวันพิเศษของเรา</p>
@@ -77,7 +83,6 @@
                 </div>
             </div>
 
-            <!-- Dress Code Section -->
             <div class="dress-code-section">
                 <h4>การแต่งกาย (Dress Code)</h4>
                 <p class="section-subtitle">ธีมสี: เอิร์ธโทน (Earth Tone)</p>
@@ -96,7 +101,6 @@
             </div>
         </section>
 
-        <!-- Section 3: Gallery -->
         <section id="gallery" class="content-section">
             <h2>แกลเลอรีภาพ</h2>
             <div class="gallery-grid">
@@ -111,7 +115,6 @@
             </div>
         </section>
 
-        <!-- Section 4: Gift -->
         <section id="gift" class="content-section">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gift-section-icon"><path d="M20 12v10H4V12"/><path d="M20 7H4v5h16V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C9.8 2 12 4.2 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C14.2 2 12 4.2 12 7z"/></svg>
             <h2>ของขวัญแสดงความยินดี</h2>
@@ -127,7 +130,6 @@
             <button class="btn" id="copy-btn">คัดลอกเลขบัญชี</button>
         </section>
 
-        <!-- Section 5: RSVP -->
         <section id="rsvp" class="content-section">
             <h2>ตอบรับคำเชิญ</h2>
             <p class="section-subtitle">กรุณาตอบกลับภายในวันที่ 28 กรกฎาคม 2568</p>
@@ -174,7 +176,6 @@
                     </div>
                 </div>
 
-                <!-- Wedding Favor Section -->
                 <div class="form-group">
                     <label>จัดส่งของชำร่วยที่ระลึก (สำหรับท่านที่ไม่สะดวกเข้าร่วมงาน):</label>
                     <div class="radio-group">
@@ -190,7 +191,6 @@
                 </div>
 
 
-                <!-- Centered Submit Button Area -->
                 <div class="form-submit-area">
                     <button type="submit" class="btn" id="submit-rsvp">ยืนยัน</button>
                 </div>
@@ -199,12 +199,10 @@
 
     </main>
     
-    <!-- Site Footer -->
     <footer class="site-footer">
         <p>#MT2025</p>
     </footer>
 
-    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="#home" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -228,16 +226,13 @@
         </a>
     </nav>
 
-    <!-- Lightbox Modal -->
     <div id="lightbox-modal" class="lightbox">
-        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-close">×</span>
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
-    <!-- Audio Player -->
     <audio id="bg-music" loop src="audio/wedding-song.mp3"></audio>
 
-    <!-- Toast Notification for alerts -->
     <div id="toast"></div>
 
     <script src="script.js"></script>

@@ -164,6 +164,26 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     color: var(--accent-color);
     font-weight: 400;
 }
+
+/* --- New Styles for Parent Names --- */
+.parent-names {
+    margin-bottom: 20px;
+    font-size: var(--font-size-sm);
+}
+.parent-row {
+    display: flex;
+    justify-content: space-between;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+.and-separator {
+    text-align: center;
+    margin: 4px 0 !important; /* Use !important to override other p styles if needed */
+    font-size: 1rem;
+}
+/* --- End of New Styles --- */
+
 .wedding-date-display {
     font-family: var(--primary-font);
     font-size: 2.6rem;
