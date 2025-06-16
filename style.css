@@ -336,7 +336,7 @@ input[type="radio"] { accent-color: var(--accent-color); }
     margin-top: 20px;
 }
 #submit-rsvp {
-    background-color: var(--text-color);
+    background-color: #75421b;
     min-width: 150px; 
     font-size: var(--font-size-sm);
     font-weight: 500;
