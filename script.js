@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- Music Player ---
     const music = document.getElementById('bg-music');
-    music.volume = 0.5; // Set volume to 50%
+    music.volume = 0.3; // Set volume to 30%
     const musicToggle = document.getElementById('music-toggle');
     const playIcon = musicToggle.querySelector('.icon-play');
     const pauseIcon = musicToggle.querySelector('.icon-pause');

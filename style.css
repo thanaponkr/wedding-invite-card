@@ -202,7 +202,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 
 .wedding-date-display {
     font-family: var(--primary-font);
-    font-size: 2rem; /* <-- FONT SIZE ADJUSTED */
+    font-size: 1.6rem; /* <-- FONT SIZE ADJUSTED */
     color: var(--text-color);
     margin-top: 25px;
     margin-bottom: 25px;
@@ -217,7 +217,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .countdown span { 
     display: block; 
     font-family: var(--primary-font);
-    font-size: 1.5rem; /* <-- FONT SIZE ADJUSTED */
+    font-size: 1.5rem;
     font-weight: 300;
     color: var(--accent-color); 
     letter-spacing: 2px;
