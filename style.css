@@ -168,7 +168,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 /* --- Styles for Parent Names & Invitation Text --- */
 .parent-names {
     margin-bottom: 10px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 .parent-row {
     display: flex;
@@ -183,7 +183,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1rem;
 }
 .invitation-text {
-    font-size: 0.9rem; /* <-- FONT SIZE ADJUSTED */
+    font-size: 0.95rem; /* <-- FONT SIZE ADJUSTED */
     line-height: 1.7;
     margin: 0;
     padding: 0;
