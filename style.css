@@ -167,8 +167,8 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 
 /* --- Styles for Parent Names & Invitation Text --- */
 .parent-names {
-    margin-bottom: 10px; /* Adjusted margin */
-    font-size: 1.2rem; /* <-- FONT SIZE ADJUSTED */
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 .parent-row {
     display: flex;
@@ -183,18 +183,28 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1rem;
 }
 .invitation-text {
-    font-size: 1.2rem; /* <-- FONT SIZE ADJUSTED */
+    font-size: 1.2rem;
     line-height: 1.7;
     margin: 0;
     padding: 0;
 }
+
+.bride-groom-names {
+    font-family: var(--heading-font);
+    font-size: 2rem;
+    font-weight: 500;
+    display: block;
+    margin: 10px 0;
+    line-height: 1.2;
+}
+
 /* --- End of New/Adjusted Styles --- */
 
 .wedding-date-display {
     font-family: var(--primary-font);
-    font-size: 2.6rem;
+    font-size: 2rem; /* <-- FONT SIZE ADJUSTED */
     color: var(--text-color);
-    margin-top: 25px; /* Increased top margin */
+    margin-top: 25px;
     margin-bottom: 25px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -207,7 +217,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .countdown span { 
     display: block; 
     font-family: var(--primary-font);
-    font-size: 2.2rem;
+    font-size: 1.5rem; /* <-- FONT SIZE ADJUSTED */
     font-weight: 300;
     color: var(--accent-color); 
     letter-spacing: 2px;
