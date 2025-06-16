@@ -183,7 +183,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1rem;
 }
 .invitation-text {
-    font-size: 1.2rem;
+    font-size: 0.9rem; /* <-- FONT SIZE ADJUSTED */
     line-height: 1.7;
     margin: 0;
     padding: 0;
@@ -202,14 +202,18 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 
 .wedding-date-display {
     font-family: var(--primary-font);
-    font-size: 1.6rem; /* <-- FONT SIZE ADJUSTED */
+    font-size: 1.6rem;
     color: var(--text-color);
     margin-top: 25px;
     margin-bottom: 25px;
     letter-spacing: 1px;
     font-weight: 400;
 }
-.countdown { display: flex; justify-content: center; gap: 20px; }
+.countdown { 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; /* <-- SPACING ADJUSTED */
+}
 .countdown div { 
     text-align: center;
     color: var(--text-color);
@@ -217,7 +221,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .countdown span { 
     display: block; 
     font-family: var(--primary-font);
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* <-- FONT SIZE ADJUSTED */
     font-weight: 300;
     color: var(--accent-color); 
     letter-spacing: 2px;
