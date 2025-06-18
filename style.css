@@ -219,7 +219,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1rem;
 }
 .invitation-text {
-    font-size: 1rem;
+    font-size: 0.96rem;
     line-height: 1.7;
     margin: 0;
     padding: 0;
@@ -359,7 +359,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     aspect-ratio: 3 / 4;
 }
 
-/* --- [UPDATED] Gift Section --- */
+/* --- Gift Section --- */
 .gift-section-icon {
     width: 40px;
     height: 40px;
@@ -373,6 +373,9 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     border-radius: 12px;
     margin: 20px auto 30px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* [UPDATED] Set aspect ratio to 1:1 and ensure image covers the area */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 .gift-box-container {
     background-color: white;
