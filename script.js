@@ -1,5 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
+// [UPDATED] Use window.onload to wait for all content to load
+window.onload = function() {
     
+    // --- Preloader ---
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 750); // Match this with CSS transition time
+    }
+
+    // --- All other code will run after the page is fully loaded ---
+
     // --- Music Player ---
     const music = document.getElementById('bg-music');
     music.volume = 0.3; // Set volume to 30%
@@ -260,4 +272,4 @@ document.addEventListener('DOMContentLoaded', function() {
     fadeInSections.forEach(section => {
         observer.observe(section);
     });
-});
+};
