@@ -236,8 +236,12 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     max-width: 100px;
     height: auto;
 }
-#program h2, #gallery h2, #gift h2, #rsvp h2 {
+#program h2, #gallery h2, #rsvp h2 {
     font-size: var(--font-size-lg);
+}
+#gift h2 {
+    font-size: var(--font-size-lg);
+    margin-top: 15px;
 }
 .schedule-item { 
     display: flex; 
@@ -250,9 +254,10 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .schedule-item .time { font-weight: 500; color: var(--accent-color); flex-basis: 80px; text-align: right; }
 .schedule-item .event { text-align: left; flex-basis: 200px; }
 
-#program .section-subtitle {
-    font-size: var(--font-size-md);
+#program .section-subtitle, #gift .section-subtitle, #rsvp .section-subtitle {
+    font-size: 1rem;
     font-weight: 400;
+    line-height: 1.7;
 }
 
 .dress-code-section {
@@ -318,29 +323,88 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     aspect-ratio: 3 / 4;
 }
 
-/* --- Gift Section --- */
+/* --- [UPDATED] Gift Section --- */
 .gift-section-icon {
     width: 40px;
     height: 40px;
     stroke: var(--accent-color);
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    animation: gentle-pulse 3s infinite ease-in-out;
 }
-#gift h2 {
-    margin-top: 0;
+.gift-intro-photo {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    margin: 20px auto 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-#gift .section-subtitle {
-    font-size: var(--font-size-sm);
-    padding: 0 10px;
+.gift-box-container {
+    background-color: white;
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(92, 82, 74, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid rgba(92, 82, 74, 0.05);
 }
-.gift-box { background-color: #F8F4F0; border: 1px dashed var(--gray-medium); padding: 20px; margin: 0 auto 30px auto; max-width: 350px; border-radius: 8px; }
-.gift-box p { margin: 5px 0; font-size: var(--font-size-sm); }
-.account-number { font-weight: 500; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px !important; }
-.qr-code-img { margin: 0 auto 30px auto; display: block; max-width: 200px; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--gray-medium); padding: 5px; background-color: white; }
+.qr-code-img { 
+    margin: 0 auto 25px auto;
+    display: block; 
+    max-width: 200px;
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+    border: 1px solid var(--gray-light); 
+    padding: 8px;
+    background-color: white; 
+}
+.gift-box { 
+    background-color: transparent; 
+    border: none;
+    padding: 25px 0 0 0;
+    margin: 0 auto 25px auto;
+    max-width: 350px; 
+    border-top: 1px dashed var(--gray-medium);
+}
+.gift-box p { 
+    margin: 5px 0; 
+    font-size: var(--font-size-sm); 
+}
+.account-number { 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500; 
+    font-size: 1.25rem; 
+    letter-spacing: 2px; 
+    margin-top: 10px !important; 
+    color: var(--text-color);
+    background-color: #f8f4f0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+}
 #copy-btn {
-    padding: 10px 20px;
-    font-size: var(--font-size-sm);
+    width: 100%;
+    background-color: #75421b;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-family: var(--primary-font);
     font-weight: 500;
 }
+#copy-btn:hover {
+    background-color: #5e3615;
+}
+.couple-note {
+    margin-top: 30px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #8A7F75;
+}
+.couple-note strong {
+    font-family: var(--heading-font);
+    color: var(--text-color);
+    font-weight: 500;
+}
+
 
 /* --- RSVP Form --- */
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
@@ -464,6 +528,18 @@ input[type="radio"] { accent-color: var(--accent-color); }
     text-align: center;
 }
 
+/* --- [NEW] Fade-in on Scroll Animation --- */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Animation Keyframes */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -473,4 +549,13 @@ input[type="radio"] { accent-color: var(--accent-color); }
 @keyframes backgroundFadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
 }
