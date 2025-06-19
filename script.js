@@ -119,6 +119,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let audioAsBase64 = null;
     let timerInterval;
     let supportedMimeType = '';
+    
+    // [MODIFIED] Store SVG icons in variables
+    const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
+    const stopIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>`;
+
 
     recordBtn.addEventListener('click', async () => {
         if (mediaRecorder && mediaRecorder.state === "recording") {
@@ -140,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mediaRecorder.onstart = () => {
                     startTimer();
                     recordBtn.classList.add('recording');
-                    recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg><span>หยุดบันทึก</span>';
+                    recordBtn.innerHTML = stopIconSVG; // Use stop icon
                     recordStatus.style.display = 'flex';
                     audioPlayback.style.display = 'none';
                     audioPlayback.src = '';
@@ -159,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     stream.getTracks().forEach(track => track.stop());
                     clearInterval(timerInterval);
                     recordBtn.classList.remove('recording');
-                    recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกอีกครั้ง</span>';
+                    recordBtn.innerHTML = micIconSVG; // Use mic icon
                     recordStatus.style.display = 'none';
                 };
 
@@ -217,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('shipping-address-group').style.display = 'none';
             audioPlayback.style.display = 'none';
             audioPlayback.src = '';
-            recordBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg><span>บันทึกเสียง</span>';
+            recordBtn.innerHTML = micIconSVG; // Reset to mic icon
             audioAsBase64 = null;
         })
         .catch(error => {

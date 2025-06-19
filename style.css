@@ -47,11 +47,11 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-weight: 500;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s; /* Added back */
+    transition: background-color 0.3s, transform 0.2s;
 }
 .btn:hover { 
     background-color: #C0A092; 
-    transform: translateY(-2px); /* Added back */
+    transform: translateY(-2px);
 }
 
 /* --- Music Control Button (Enhanced) --- */
@@ -289,10 +289,10 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 .lightbox-trigger {
     cursor: pointer;
-    transition: transform 0.2s; /* Added back */
+    transition: transform 0.2s;
 }
 .lightbox-trigger:hover {
-    transform: scale(1.05); /* Added back */
+    transform: scale(1.05);
 }
 .gallery-grid .lightbox-trigger {
     width: 100%;
@@ -396,21 +396,64 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 input[type="radio"] { accent-color: var(--accent-color); }
 
 /* --- Voice Recorder Styles --- */
-.voice-recorder { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-.record-btn {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    background-color: var(--accent-color);
-    color: white;
-    border: none; padding: 10px 20px; border-radius: 50px;
-    cursor: pointer; font-size: var(--font-size-sm); font-family: var(--primary-font);
-    min-width: 150px; 
+.voice-recorder { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
 }
-.record-btn svg { stroke: white; }
-.record-btn.recording { background-color: #b5b285; }
-.record-btn:disabled { background-color: var(--gray-medium); cursor: not-allowed; }
-.record-status { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; }
-.recording-dot { width: 12px; height: 12px; background-color: var(--accent-color); border-radius: 50%; }
-#audio-playback { width: 100%; max-width: 350px; }
+.record-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.record-btn:hover {
+    background-color: #C0A092;
+    transform: translateY(-2px);
+}
+.record-btn svg {
+    stroke: white;
+    width: 28px;
+    height: 28px;
+}
+.record-btn.recording { 
+    background-color: var(--danger-color);
+}
+.record-btn.recording svg {
+    fill: white;
+}
+.record-btn:disabled { 
+    background-color: var(--gray-medium); 
+    cursor: not-allowed; 
+}
+.record-status { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 1.2rem; 
+}
+.recording-dot { 
+    width: 12px; 
+    height: 12px; 
+    background-color: var(--danger-color); 
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+#audio-playback { 
+    width: 100%; 
+    max-width: 350px; 
+}
 
 /* --- Submit Button Area --- */
 .form-submit-area {
