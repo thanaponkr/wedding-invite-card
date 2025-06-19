@@ -1,16 +1,5 @@
-// [UPDATED] Use window.onload to wait for all content to load
-window.onload = function() {
-    
-    // --- Preloader ---
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        preloader.classList.add('fade-out');
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 750); // Match this with CSS transition time
-    }
-
-    // --- All other code will run after the page is fully loaded ---
+// Wait for the initial HTML document to be completely loaded and parsed
+document.addEventListener('DOMContentLoaded', function() {
 
     // --- Music Player ---
     const music = document.getElementById('bg-music');
@@ -253,23 +242,4 @@ window.onload = function() {
             toast.className = toast.className.replace('show', '').replace('error', '');
         }, 3000);
     }
-
-    // --- [NEW] Fade-in on Scroll ---
-    const fadeInSections = document.querySelectorAll('.fade-in-section');
-    const observerOptions = {
-        root: null, // relative to the viewport
-        rootMargin: '0px',
-        threshold: 0.1 // 10% of the item must be visible
-    };
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Stop observing after it's visible
-            }
-        });
-    }, observerOptions);
-    fadeInSections.forEach(section => {
-        observer.observe(section);
-    });
-};
+});
