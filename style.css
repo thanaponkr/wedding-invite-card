@@ -140,7 +140,8 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .countdown-icon {
     width: 48px;
     height: 48px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 .countdown-container h3 {
     font-size: 2rem;
@@ -169,7 +170,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .and-separator {
     text-align: center;
     margin: 4px 0 !important;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 .invitation-text {
     font-size: 0.96rem;
