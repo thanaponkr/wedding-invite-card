@@ -53,7 +53,7 @@
 
                 <p class="invitation-text">มีความยินดีขอเรียนเชิญเพื่อมาเป็นเกียรติเนื่องในพิธีมงคลสมรส ระหว่าง<br>
                     <span class="bride-groom-names">นางสาวกัลยาณี มั่งมี</span>
-                    และ<br>
+                    <img src="images/and.png" alt="" class="and-separator-image">
                     <span class="bride-groom-names">นายรัชพล แก้วกอ</span>
                 </p>
                 
@@ -73,7 +73,7 @@
                 <img src="images/logo-rings.png" alt="Wedding Rings Icon" class="countdown-icon">
             </div>
             <h2>กำหนดการ</h2>
-            <p class="section-subtitle">ขอเชิญร่วมเฉลิมฉลองในวันพิเศษของเรา</p>
+            <p class="section-subtitle program-subtitle">ขอเชิญร่วมเฉลิมฉลองในวันพิเศษของเรา</p>
             <div class="schedule">
                 <div class="schedule-item">
                     <p class="time">09:09 น.</p>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="schedule-item">
                     <p class="time">10:09 น.</p>
-                    <p class="event">งานพิธี</p>
+                    <p class="event">งานพิธีสวมแหวน</p>
                 </div>
                 <div class="schedule-item">
                     <p class="time">11:09 น.</p>
@@ -131,7 +131,7 @@
 
         <section id="rsvp" class="content-section">
             <h2>ตอบรับคำเชิญ</h2>
-            <p class="section-subtitle">กรุณาตอบกลับภายในวันที่ 28 กรกฎาคม 2568</p>
+            <p class="section-subtitle">กรุณาตอบกลับภายในวันที่ 20 กรกฎาคม 2568</p>
             <form id="rsvp-form">
                 <div class="form-group">
                     <label for="name">ชื่อ-นามสกุล:</label>
@@ -161,9 +161,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>คำอวยพร (เสียง) พวกเรารอฟังเสียงของทุกท่านนะคะ/ครับ:</label>
+                    <label>อวยพรผ่านเสียง (กดปุ่มไมค์เพื่อบันทึก):</label>
                     <div class="voice-recorder">
-                        <!-- [MODIFIED] Changed button to an icon button -->
                         <button type="button" id="record-btn" class="record-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
                         </button>
@@ -176,12 +175,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label>จัดส่งของชำร่วยที่ระลึก (สำหรับท่านที่ไม่สะดวกเข้าร่วมงาน):</label>
+                    <label>รับของที่ระลึกทางไปรษณีย์ (สำหรับท่านที่ไม่ได้มาร่วมงาน)</label>
                     <div class="radio-group">
                         <input type="radio" id="favor-yes" name="wantsFavor" value="Yes" required>
-                        <label for="favor-yes">ต้องการ</label>
+                        <label for="favor-yes">รับของที่ระลึก</label>
                         <input type="radio" id="favor-no" name="wantsFavor" value="No">
-                        <label for="favor-no">ไม่ต้องการ</label>
+                        <label for="favor-no">ไม่เป็นไรครับ/ค่ะ</label>
                     </div>
                 </div>
                 <div class="form-group" id="shipping-address-group" style="display: none;">
