@@ -169,13 +169,14 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 }
 .and-separator {
     text-align: center;
-    margin: 4px 0 !important;
+    margin: 0px 0 !important;
     font-size: 1.2rem;
 }
 .invitation-text {
     font-size: 1.2rem;
-    line-height: 2;
-    margin: 20px 0 0 0;
+    line-height: 2.2;
+    margin-top: 20px;
+    margin-bottom: 0px;
     padding: 0;
 }
 
@@ -184,15 +185,15 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 2rem;
     font-weight: 500;
     display: block;
-    margin: 15px 0;
+    margin: 20px 0;
     line-height: 1.4;
 }
 
 .and-separator-image {
     display: block;
-    width: 90px;
+    width: 100px;
     height: auto;
-    margin: 8px auto;
+    margin: -5px auto;
 }
 
 
@@ -201,7 +202,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1.6rem;
     color: var(--text-color);
     margin-top: 40px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     letter-spacing: 1px;
     font-weight: 400;
 }
@@ -220,7 +221,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     font-size: 1.4rem;
     font-weight: 300;
     color: var(--strong-accent-color); 
-    letter-spacing: 2px;
+    letter-spacing: 1.2px;
     font-variant-numeric: tabular-nums;
 }
 
