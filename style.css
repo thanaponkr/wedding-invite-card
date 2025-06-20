@@ -170,7 +170,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .and-separator {
     text-align: center;
     margin: 4px 0 !important;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
 }
 .invitation-text {
     font-size: 1.2rem;
