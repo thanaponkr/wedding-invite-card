@@ -195,8 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Form Submission ---
     rsvpForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = 'กำลังส่ง...';
+        const originalBtnHTML = submitBtn.innerHTML; 
+        submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
         submitBtn.disabled = true;
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzllDZtsBJQ1lAZhxu-3LHOYOU-bK0lxLHajDs1GcBoZNokuS3K2KczMqd2-MC5pw/exec'; 
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showToast('เกิดข้อผิดพลาด กรุณาลองอีกครั้ง', 'error');
         })
         .finally(() => {
-            submitBtn.innerText = originalBtnText;
+            submitBtn.innerHTML = originalBtnHTML; 
             submitBtn.disabled = false;
         });
     });

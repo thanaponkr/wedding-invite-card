@@ -405,7 +405,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 /* --- RSVP Form --- */
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
 .form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: var(--font-size-md); }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: var(--font-size-sm); } /* <<< จุดที่แก้ไข */
 .form-group input[type="text"], .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: var(--primary-font); font-size: var(--font-size-sm); box-sizing: border-box; background-color: white; }
 .radio-group { display: flex; gap: 20px; align-items: center; }
 .radio-group label { margin-bottom: 0; font-weight: 400; font-size: var(--font-size-sm); }
