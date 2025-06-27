@@ -23,6 +23,12 @@ https://script.google.com/macros/s/AKfycbwv3OaRu56_f6sQ9dIRXmtk81uZBLC3E77q6ITDq
 AppScript พร้อมแนบสลิปแก้ไขล่าสุดfinal2
 https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec
 
+
+https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec
+
+AppScript พร้อมแนบสลิปแก้ไขล่าสุดfinal3
+https://script.google.com/macros/s/AKfycbwR3iak2aB2irb2SckEZt_8P0iSrm3w6uzJhkQLEAEweY-UvC4qQ8GC6liqAKyzM44V/exec
+
 คำสั่งบันทึกและpushในgithub cmd
 
 git add .

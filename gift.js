@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
 
             // !! สำคัญ: ตรวจสอบให้แน่ใจว่า URL นี้เป็นตัวล่าสุดที่คุณได้จากการ Deploy Apps Script !!
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec'; 
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwR3iak2aB2irb2SckEZt_8P0iSrm3w6uzJhkQLEAEweY-UvC4qQ8GC6liqAKyzM44V/exec'; 
             
             const formData = new FormData(giftForm);
             const data = {};
