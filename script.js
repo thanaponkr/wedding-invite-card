@@ -81,14 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const rsvpForm = document.getElementById('rsvp-form');
     const submitBtn = document.getElementById('submit-rsvp');
     
-    // Show/hide guest count
     document.querySelectorAll('input[name="attendance"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
             document.getElementById('guest-count-group').style.display = e.target.value === 'Attending' ? 'block' : 'none';
         });
     });
 
-    // Show/hide shipping address
     const favorRadios = document.querySelectorAll('input[name="wantsFavor"]');
     const shippingAddressGroup = document.getElementById('shipping-address-group');
     favorRadios.forEach(radio => {
@@ -114,62 +112,62 @@ document.addEventListener('DOMContentLoaded', function() {
     let timerInterval;
     let supportedMimeType = '';
     
-    // [MODIFIED] Store SVG icons in variables
     const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
     const stopIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>`;
 
-
-    recordBtn.addEventListener('click', async () => {
-        if (mediaRecorder && mediaRecorder.state === "recording") {
-            mediaRecorder.stop();
-        } else {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                const mimeTypes = ['audio/mp4', 'audio/webm', 'audio/aac', 'audio/ogg'];
-                supportedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
-                
-                mediaRecorder = new MediaRecorder(stream, { mimeType: supportedMimeType });
-                audioChunks = [];
-                audioAsBase64 = null;
-
-                mediaRecorder.ondataavailable = event => {
-                    audioChunks.push(event.data);
-                };
-
-                mediaRecorder.onstart = () => {
-                    startTimer();
-                    recordBtn.classList.add('recording');
-                    recordBtn.innerHTML = stopIconSVG; // Use stop icon
-                    recordStatus.style.display = 'flex';
-                    audioPlayback.style.display = 'none';
-                    audioPlayback.src = '';
-                };
-
-                mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: supportedMimeType });
-                    const reader = new FileReader();
-                    reader.readAsDataURL(audioBlob);
-                    reader.onloadend = () => {
-                        audioAsBase64 = reader.result;
-                        audioPlayback.src = URL.createObjectURL(audioBlob);
-                        audioPlayback.style.display = 'block';
-                    };
+    if(recordBtn) {
+        recordBtn.addEventListener('click', async () => {
+            if (mediaRecorder && mediaRecorder.state === "recording") {
+                mediaRecorder.stop();
+            } else {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    const mimeTypes = ['audio/mp4', 'audio/webm', 'audio/aac', 'audio/ogg'];
+                    supportedMimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
                     
-                    stream.getTracks().forEach(track => track.stop());
-                    clearInterval(timerInterval);
-                    recordBtn.classList.remove('recording');
-                    recordBtn.innerHTML = micIconSVG; // Use mic icon
-                    recordStatus.style.display = 'none';
-                };
+                    mediaRecorder = new MediaRecorder(stream, { mimeType: supportedMimeType });
+                    audioChunks = [];
+                    audioAsBase64 = null;
 
-                mediaRecorder.start();
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
 
-            } catch (err) {
-                console.error("Error accessing microphone:", err);
-                showToast('ไม่สามารถเข้าถึงไมโครโฟนได้', 'error');
+                    mediaRecorder.onstart = () => {
+                        startTimer();
+                        recordBtn.classList.add('recording');
+                        recordBtn.innerHTML = stopIconSVG;
+                        recordStatus.style.display = 'flex';
+                        audioPlayback.style.display = 'none';
+                        audioPlayback.src = '';
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: supportedMimeType });
+                        const reader = new FileReader();
+                        reader.readAsDataURL(audioBlob);
+                        reader.onloadend = () => {
+                            audioAsBase64 = reader.result;
+                            audioPlayback.src = URL.createObjectURL(audioBlob);
+                            audioPlayback.style.display = 'block';
+                        };
+                        
+                        stream.getTracks().forEach(track => track.stop());
+                        clearInterval(timerInterval);
+                        recordBtn.classList.remove('recording');
+                        recordBtn.innerHTML = micIconSVG;
+                        recordStatus.style.display = 'none';
+                    };
+
+                    mediaRecorder.start();
+
+                } catch (err) {
+                    console.error("Error accessing microphone:", err);
+                    showToast('ไม่สามารถเข้าถึงไมโครโฟนได้', 'error');
+                }
             }
-        }
-    });
+        });
+    }
     
     function startTimer() {
         let seconds = 0;
@@ -186,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    // === โค้ดที่เพิ่มเข้ามาใหม่สำหรับจัดการไฟล์สลิป ===
+    // === SLIP UPLOAD LOGIC WITH IMAGE RESIZING (FINAL VERSION) ===
     let slipAsBase64 = null; 
     const uploadSlipBtn = document.getElementById('upload-slip-btn');
     const slipInput = document.getElementById('slip-input');
@@ -201,21 +199,43 @@ document.addEventListener('DOMContentLoaded', function() {
             const file = event.target.files[0];
             if (!file) return;
 
-            slipFilenameDisplay.textContent = `ไฟล์: ${file.name}`;
+            slipFilenameDisplay.textContent = `กำลังย่อขนาดไฟล์: ${file.name}`;
+
+            // --- Image Resizing Logic ---
+            const MAX_WIDTH = 1024; // กำหนดความกว้างสูงสุดของรูป
             const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let { width, height } = img;
+                    
+                    // คำนวณขนาดใหม่เพื่อคงสัดส่วน
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // แปลงรูปที่ย่อแล้วเป็น Base64 ที่มีคุณภาพ 80% (ลดขนาดไฟล์)
+                    slipAsBase64 = canvas.toDataURL('image/jpeg', 0.8);
+                    
+                    slipFilenameDisplay.textContent = `แนบไฟล์: ${file.name} (ย่อขนาดแล้ว)`;
+                    showToast('แนบไฟล์สลิปเรียบร้อยแล้ว', 'success');
+                };
+            };
+            
             reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                slipAsBase64 = reader.result;
-                showToast('แนบไฟล์สลิปเรียบร้อยแล้ว', 'success');
-            };
-            reader.onerror = () => {
-                showToast('ไม่สามารถอ่านไฟล์ได้', 'error');
-                slipAsBase64 = null;
-                slipFilenameDisplay.textContent = '';
-            };
         });
     }
-    // === จบส่วนที่เพิ่มเข้ามา ===
+    // === END OF SLIP UPLOAD LOGIC ===
 
     // --- Form Submission ---
     rsvpForm.addEventListener('submit', function(e) {
@@ -224,8 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
         submitBtn.disabled = true;
 
-        // !!! URL ที่อัปเดตแล้ว !!!
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwv3OaRu56_f6sQ9dIRXmtk81uZBLC3E77q6ITDq7h5s_fwlaVg00K49FcEjviZBeFO/exec'; 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpBG3Ft0q6aJ2SZyK5LmNGk7Dobimj5XgaQ--wdGzPZ3LT8jUv3xu6hmQl0InG8yWX/exec'; 
         
         const formData = new FormData(rsvpForm);
         const data = {};
@@ -234,12 +253,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         data.audioData = audioAsBase64;
         data.mimeType = supportedMimeType;
-        data.slipData = slipAsBase64; // << เพิ่มข้อมูลสลิป
+        data.slipData = slipAsBase64;
 
         fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
-            mode: 'no-cors', // สำคัญ: ใช้ no-cors สำหรับ Google Apps Script เพื่อลดข้อผิดพลาด CORS
+            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' }
         })
         .then(() => {
@@ -247,12 +266,13 @@ document.addEventListener('DOMContentLoaded', function() {
             rsvpForm.reset();
             document.getElementById('guest-count-group').style.display = 'none';
             document.getElementById('shipping-address-group').style.display = 'none';
-            audioPlayback.style.display = 'none';
-            audioPlayback.src = '';
-            recordBtn.innerHTML = micIconSVG;
+            if(audioPlayback) {
+                audioPlayback.style.display = 'none';
+                audioPlayback.src = '';
+            }
+            if(recordBtn) recordBtn.innerHTML = micIconSVG;
             audioAsBase64 = null;
             
-            // รีเซ็ตข้อมูลสลิป
             slipAsBase64 = null;
             if(slipFilenameDisplay) slipFilenameDisplay.textContent = '';
 
