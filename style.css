@@ -39,13 +39,13 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 
 .section-subtitle { color: #6c757d; margin-top: -10px; margin-bottom: 30px; font-size: var(--font-size-md); letter-spacing: 1px; }
 .btn {
-    display: inline-flex; /* Changed to inline-flex */
-    align-items: center; /* Vertically align items */
-    justify-content: center; /* Horizontally align items */
-    gap: 8px; /* Space between text and icon */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     background-image: linear-gradient(145deg, var(--strong-accent-color), var(--strong-accent-hover));
     color: white;
-    padding: 14px 25px; /* Adjusted padding */
+    padding: 14px 25px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 500;
@@ -59,7 +59,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     box-shadow: 0 8px 20px rgba(117, 66, 27, 0.4);
 }
 .btn .btn-icon {
-    width: 18px; /* Icon size */
+    width: 18px;
     height: 18px;
     stroke-width: 2.5px;
 }
@@ -385,10 +385,6 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     border-radius: 8px;
     display: inline-block;
 }
-#copy-btn {
-    width: 100%;
-    font-size: 1.1rem;
-}
 .couple-note {
     margin-top: 30px;
     font-size: 1rem;
@@ -405,7 +401,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 /* --- RSVP Form --- */
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
 .form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: var(--font-size-sm); } /* <<< จุดที่แก้ไข */
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: var(--font-size-sm); }
 .form-group input[type="text"], .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: var(--primary-font); font-size: var(--font-size-sm); box-sizing: border-box; background-color: white; }
 .radio-group { display: flex; gap: 20px; align-items: center; }
 .radio-group label { margin-bottom: 0; font-weight: 400; font-size: var(--font-size-sm); }
@@ -560,14 +556,14 @@ input[type="radio"] { accent-color: var(--accent-color); }
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 20px; /* เพิ่มระยะห่างจากส่วนเลขบัญชี */
+    margin-top: 20px;
 }
 .btn.btn-primary {
-    background-image: linear-gradient(145deg, #0d6efd, #0a58ca); /* สีน้ำเงิน */
+    background-image: linear-gradient(145deg, #0d6efd, #0a58ca);
     box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
     width: 100%;
     box-sizing: border-box;
-    order: 1; /* ปุ่มเขียนคำอวยพรอยู่บน */
+    order: 1;
 }
 .btn.btn-primary:hover {
     box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
@@ -580,7 +576,7 @@ input[type="radio"] { accent-color: var(--accent-color); }
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     width: 100%;
     box-sizing: border-box;
-    order: 2; /* ปุ่มแนบสลิปอยู่ล่าง */
+    order: 2;
 }
 .btn.btn-secondary:hover {
     background-color: var(--gray-light);
@@ -593,5 +589,5 @@ input[type="radio"] { accent-color: var(--accent-color); }
     margin-top: -5px;
     font-size: 0.9rem;
     word-break: break-all;
-    order: 3; /* ชื่อไฟล์อยู่ล่างสุด */
+    order: 3;
 }

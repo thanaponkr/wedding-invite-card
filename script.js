@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
             slipFilenameDisplay.textContent = `กำลังย่อขนาดไฟล์: ${file.name}`;
 
             // --- Image Resizing Logic ---
-            const MAX_WIDTH = 1024; // กำหนดความกว้างสูงสุดของรูป
+            const MAX_WIDTH = 1024;
             const reader = new FileReader();
 
             reader.onload = (e) => {
@@ -213,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const canvas = document.createElement('canvas');
                     let { width, height } = img;
                     
-                    // คำนวณขนาดใหม่เพื่อคงสัดส่วน
                     if (width > MAX_WIDTH) {
                         height *= MAX_WIDTH / width;
                         width = MAX_WIDTH;
@@ -224,7 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
                     
-                    // แปลงรูปที่ย่อแล้วเป็น Base64 ที่มีคุณภาพ 80% (ลดขนาดไฟล์)
                     slipAsBase64 = canvas.toDataURL('image/jpeg', 0.8);
                     
                     slipFilenameDisplay.textContent = `แนบไฟล์: ${file.name} (ย่อขนาดแล้ว)`;
