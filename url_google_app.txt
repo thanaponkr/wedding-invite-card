@@ -14,6 +14,9 @@ https://script.google.com/macros/s/AKfycbxQdI0XCsgEnh_i7-q1wggirJ5DPjByayq3JSoxN
 AppScript พร้อมแนบสลิปแก้ไข
 https://script.google.com/macros/s/AKfycbxpBG3Ft0q6aJ2SZyK5LmNGk7Dobimj5XgaQ--wdGzPZ3LT8jUv3xu6hmQl0InG8yWX/exec
 
+AppScript พร้อมแนบสลิปแก้ไขล่าสุด
+https://script.google.com/macros/s/AKfycbwv3OaRu56_f6sQ9dIRXmtk81uZBLC3E77q6ITDq7h5s_fwlaVg00K49FcEjviZBeFO/exec
+
 คำสั่งบันทึกและpushในgithub cmd
 
 git add .

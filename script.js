@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
 
         // !!! URL ที่อัปเดตแล้ว !!!
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpBG3Ft0q6aJ2SZyK5LmNGk7Dobimj5XgaQ--wdGzPZ3LT8jUv3xu6hmQl0InG8yWX/exec'; 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwv3OaRu56_f6sQ9dIRXmtk81uZBLC3E77q6ITDq7h5s_fwlaVg00K49FcEjviZBeFO/exec'; 
         
         const formData = new FormData(rsvpForm);
         const data = {};
