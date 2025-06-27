@@ -1,5 +1,14 @@
-// Wait for the initial HTML document to be completely loaded and parsed
+/**
+ * Script for index.html (Main RSVP Page)
+ * Handles music, countdown, lightbox, voice wishes, and RSVP form submission.
+ * This version has been cleaned up and does not contain slip upload logic.
+ * The fetch method has been corrected to handle CORS responses properly.
+ */
 document.addEventListener('DOMContentLoaded', function() {
+
+    // --- Global variables for form data ---
+    let audioAsBase64 = null;
+    let supportedMimeType = '';
 
     // --- Music Player ---
     const music = document.getElementById('bg-music');
@@ -28,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!hasInteracted) {
                 hasInteracted = true;
                 toggleMusic();
+                // Remove listeners after first interaction
                 document.body.removeEventListener('click', startMusicOnFirstInteraction);
                 document.body.removeEventListener('touchstart', startMusicOnFirstInteraction);
             }
@@ -41,15 +51,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Countdown Timer ---
     const countdownElem = document.getElementById('countdown');
     if (countdownElem) {
-        const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime(); // Note: Month is 0-indexed, so 6 is July.
+        const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime(); // Month is 0-indexed (6 = July)
         const countdownInterval = setInterval(() => {
             const now = new Date().getTime();
             const distance = weddingDate - now;
+
             if (distance < 0) {
                 clearInterval(countdownInterval);
-                countdownElem.innerHTML = "<h2>The Wedding Day is Here!</h2>";
+                document.getElementById("countdown").innerHTML = "<h2>ถึงวันสำคัญแล้ว!</h2>";
                 return;
             }
+
             document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
             document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
             document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
@@ -65,18 +77,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const closeLightbox = document.querySelector('.lightbox-close');
 
         lightboxTriggers.forEach(trigger => {
-            trigger.addEventListener('click', () => {
+            trigger.addEventListener('click', function() {
                 lightbox.style.display = "block";
-                lightboxImg.src = trigger.src;
+                lightboxImg.src = this.src;
             });
         });
 
-        closeLightbox.addEventListener('click', () => {
+        closeLightbox.addEventListener('click', function() {
             lightbox.style.display = "none";
         });
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) {
                 lightbox.style.display = "none";
             }
         });
@@ -87,16 +99,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (rsvpForm) {
         const submitBtn = document.getElementById('submit-rsvp');
         
+        // Show/hide guest count based on attendance
         document.querySelectorAll('input[name="attendance"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 document.getElementById('guest-count-group').style.display = e.target.value === 'Attending' ? 'block' : 'none';
             });
         });
 
+        // Show/hide shipping address based on favor request
         const favorRadios = document.querySelectorAll('input[name="wantsFavor"]');
-        const shippingAddressGroup = document.getElementById('shipping-address-group');
         favorRadios.forEach(radio => {
             radio.addEventListener('change', function() {
+                const shippingAddressGroup = document.getElementById('shipping-address-group');
                 const shippingAddressInput = document.getElementById('shippingAddress');
                 if (this.value === 'Yes') {
                     shippingAddressGroup.style.display = 'block';
@@ -110,9 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // --- Voice Recording Logic ---
         const recordBtn = document.getElementById('record-btn');
-        let audioAsBase64 = null;
-        let supportedMimeType = '';
-
         if (recordBtn) {
             const recordStatus = document.getElementById('record-status');
             const timerDisplay = document.getElementById('timer');
@@ -192,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
             submitBtn.disabled = true;
 
+            // !! สำคัญ: ตรวจสอบให้แน่ใจว่า URL นี้เป็นตัวล่าสุดที่คุณได้จากการ Deploy Apps Script !!
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec'; 
             
             const formData = new FormData(rsvpForm);
@@ -201,23 +213,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             data.audioData = audioAsBase64;
             data.mimeType = supportedMimeType;
+            // ไม่มี data.slipData ในฟอร์มนี้อีกต่อไป
 
             fetch(scriptURL, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' }
             })
-            .then(() => {
-                showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
-                rsvpForm.reset();
-                document.getElementById('guest-count-group').style.display = 'none';
-                document.getElementById('shipping-address-group').style.display = 'none';
-                if(audioPlayback) {
-                    audioPlayback.style.display = 'none';
-                    audioPlayback.src = '';
+            .then(response => response.json()) // รอรับและแปลงการตอบกลับเป็น JSON
+            .then(data => {
+                console.log('Success:', data);
+                if (data.result === 'success') {
+                    showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
+                    rsvpForm.reset();
+                    // Reset UI elements
+                    document.getElementById('guest-count-group').style.display = 'none';
+                    document.getElementById('shipping-address-group').style.display = 'none';
+                    const audioPlayback = document.getElementById('audio-playback');
+                    if(audioPlayback) {
+                        audioPlayback.style.display = 'none';
+                        audioPlayback.src = '';
+                    }
+                    const recordBtnIcon = document.getElementById('record-btn');
+                    if(recordBtnIcon) recordBtnIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
+                    audioAsBase64 = null;
+                } else {
+                    throw new Error(data.error || 'Unknown server error');
                 }
-                if(recordBtn) recordBtn.innerHTML = micIconSVG;
-                audioAsBase64 = null;
             })
             .catch(error => {
                 console.error('Fetch Error!', error);

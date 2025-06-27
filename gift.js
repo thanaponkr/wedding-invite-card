@@ -1,8 +1,16 @@
+/**
+ * Script for gift.html (Gift & Slip Submission Page)
+ * Handles slip resizing, form validation, and submission via fetch.
+ * The fetch method is corrected to handle CORS responses properly.
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- Toast Notification ---
+
+    let slipAsBase64 = null; // Variable to store the resized slip image data
+
+    // --- Toast Notification Helper Function ---
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
+        if (!toast) return;
         toast.innerText = message;
         toast.className = 'show';
         if (type === 'error') {
@@ -13,26 +21,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // --- Copy Button ---
+    // --- Copy Button Logic ---
     const copyBtn = document.getElementById('copy-btn');
-    if(copyBtn) {
+    if (copyBtn) {
         copyBtn.addEventListener('click', () => {
             const accountNumber = document.querySelector('.account-number').innerText;
             navigator.clipboard.writeText(accountNumber)
                 .then(() => showToast('คัดลอกเลขบัญชีแล้ว!'))
-                .catch(() => showToast('เกิดข้อผิดพลาด', 'error'));
+                .catch(() => showToast('เกิดข้อผิดพลาดในการคัดลอก', 'error'));
         });
     }
 
     // --- SLIP UPLOAD LOGIC WITH IMAGE RESIZING ---
-    let slipAsBase64 = null; 
     const uploadSlipBtn = document.getElementById('upload-slip-btn');
     const slipInput = document.getElementById('slip-input');
     const slipFilenameDisplay = document.getElementById('slip-filename');
 
-    if (uploadSlipBtn) {
+    if (uploadSlipBtn && slipInput && slipFilenameDisplay) {
         uploadSlipBtn.addEventListener('click', () => {
-            slipInput.click();
+            slipInput.click(); // Trigger the hidden file input
         });
 
         slipInput.addEventListener('change', (event) => {
@@ -41,36 +48,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
             slipFilenameDisplay.textContent = `กำลังย่อขนาดไฟล์: ${file.name}`;
 
-            const MAX_WIDTH = 1024;
+            // Image Resizing Logic
+            const MAX_WIDTH = 1024; // Max width for the resized image
             const reader = new FileReader();
+
             reader.onload = (e) => {
                 const img = new Image();
                 img.src = e.target.result;
+
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     let { width, height } = img;
+                    
+                    // Calculate new dimensions while maintaining aspect ratio
                     if (width > MAX_WIDTH) {
                         height *= MAX_WIDTH / width;
                         width = MAX_WIDTH;
                     }
+
                     canvas.width = width;
                     canvas.height = height;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Convert the resized image to a Base64 string (JPEG format at 80% quality)
                     slipAsBase64 = canvas.toDataURL('image/jpeg', 0.8);
+                    
                     slipFilenameDisplay.textContent = `แนบไฟล์: ${file.name} (ย่อขนาดแล้ว)`;
                     showToast('แนบไฟล์สลิปเรียบร้อยแล้ว', 'success');
                 };
+                 img.onerror = () => {
+                    showToast('ไม่สามารถอ่านไฟล์รูปภาพได้', 'error');
+                    slipFilenameDisplay.textContent = '';
+                };
             };
+            
             reader.readAsDataURL(file);
         });
     }
 
-    // --- Form Submission ---
+    // --- Gift Form Submission ---
     const giftForm = document.getElementById('gift-form');
-    const submitBtn = document.getElementById('submit-gift');
+    if (giftForm) {
+        const submitBtn = document.getElementById('submit-gift');
 
-    if(giftForm) {
         giftForm.addEventListener('submit', function(e) {
             e.preventDefault();
             if (!slipAsBase64) {
@@ -82,30 +103,42 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
             submitBtn.disabled = true;
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec';
-
+            // !! สำคัญ: ตรวจสอบให้แน่ใจว่า URL นี้เป็นตัวล่าสุดที่คุณได้จากการ Deploy Apps Script !!
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec'; 
+            
             const formData = new FormData(giftForm);
             const data = {};
             for (const [key, value] of formData.entries()) {
                 data[key] = value;
             }
             data.slipData = slipAsBase64;
-            data.formType = 'gift'; // ระบุประเภทของฟอร์มที่ส่ง
+            data.formType = 'gift'; // Identifier for the backend
 
             fetch(scriptURL, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' }
+                // No more 'mode: no-cors'
             })
-            .then(() => {
-                showToast('ส่งข้อมูลของขวัญสำเร็จ ขอบคุณครับ/ค่ะ!', 'success');
-                giftForm.reset();
-                slipFilenameDisplay.textContent = '';
-                slipAsBase64 = null;
-                // หลังจากส่งสำเร็จ อาจจะพาผู้ใช้กลับไปหน้าแรก
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok, status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.result === 'success') {
+                    showToast('ส่งข้อมูลของขวัญสำเร็จ ขอบคุณครับ/ค่ะ!', 'success');
+                    giftForm.reset();
+                    slipFilenameDisplay.textContent = '';
+                    slipAsBase64 = null;
+                    // Redirect back to the main page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html#gift';
+                    }, 2000);
+                } else {
+                    throw new Error(data.error || 'Unknown server error');
+                }
             })
             .catch(error => {
                 console.error('Fetch Error!', error);
