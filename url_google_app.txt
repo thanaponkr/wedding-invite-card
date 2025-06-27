@@ -20,6 +20,9 @@ https://script.google.com/macros/s/AKfycbwv3OaRu56_f6sQ9dIRXmtk81uZBLC3E77q6ITDq
 AppScript พร้อมแนบสลิปแก้ไขล่าสุดfinal
 https://script.google.com/macros/s/AKfycbwv3OaRu56_f6sQ9dIRXmtk81uZBLC3E77q6ITDq7h5s_fwlaVg00K49FcEjviZBeFO/exec
 
+AppScript พร้อมแนบสลิปแก้ไขล่าสุดfinal2
+https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec
+
 คำสั่งบันทึกและpushในgithub cmd
 
 git add .

@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
         submitBtn.disabled = true;
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpBG3Ft0q6aJ2SZyK5LmNGk7Dobimj5XgaQ--wdGzPZ3LT8jUv3xu6hmQl0InG8yWX/exec'; 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec'; 
         
         const formData = new FormData(rsvpForm);
         const data = {};
