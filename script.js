@@ -54,12 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
 
-    // --- Copy Button ---
-    document.getElementById('copy-btn').addEventListener('click', () => {
-        const accountNumber = document.querySelector('.account-number').innerText;
-        navigator.clipboard.writeText(accountNumber).then(() => showToast('คัดลอกเลขบัญชีแล้ว!'), () => showToast('เกิดข้อผิดพลาด', 'error'));
-    });
-    
     // --- Lightbox for Gallery and QR Code ---
     const lightbox = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -192,6 +186,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
+    // === โค้ดที่เพิ่มเข้ามาใหม่สำหรับจัดการไฟล์สลิป ===
+    let slipAsBase64 = null; 
+    const uploadSlipBtn = document.getElementById('upload-slip-btn');
+    const slipInput = document.getElementById('slip-input');
+    const slipFilenameDisplay = document.getElementById('slip-filename');
+
+    if (uploadSlipBtn) {
+        uploadSlipBtn.addEventListener('click', () => {
+            slipInput.click();
+        });
+
+        slipInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            slipFilenameDisplay.textContent = `ไฟล์: ${file.name}`;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                slipAsBase64 = reader.result;
+                showToast('แนบไฟล์สลิปเรียบร้อยแล้ว', 'success');
+            };
+            reader.onerror = () => {
+                showToast('ไม่สามารถอ่านไฟล์ได้', 'error');
+                slipAsBase64 = null;
+                slipFilenameDisplay.textContent = '';
+            };
+        });
+    }
+    // === จบส่วนที่เพิ่มเข้ามา ===
+
     // --- Form Submission ---
     rsvpForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -199,7 +224,8 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
         submitBtn.disabled = true;
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzllDZtsBJQ1lAZhxu-3LHOYOU-bK0lxLHajDs1GcBoZNokuS3K2KczMqd2-MC5pw/exec'; 
+        // !!! URL ที่อัปเดตแล้ว !!!
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxQdI0XCsgEnh_i7-q1wggirJ5DPjByayq3JSoxNBQJjE1WWz32VrRpLWVDyBNPtFKc/exec'; 
         
         const formData = new FormData(rsvpForm);
         const data = {};
@@ -208,11 +234,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         data.audioData = audioAsBase64;
         data.mimeType = supportedMimeType;
+        data.slipData = slipAsBase64; // << เพิ่มข้อมูลสลิป
 
         fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
-            mode: 'no-cors',
+            mode: 'no-cors', // สำคัญ: ใช้ no-cors สำหรับ Google Apps Script เพื่อลดข้อผิดพลาด CORS
             headers: { 'Content-Type': 'application/json' }
         })
         .then(() => {
@@ -222,8 +249,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('shipping-address-group').style.display = 'none';
             audioPlayback.style.display = 'none';
             audioPlayback.src = '';
-            recordBtn.innerHTML = micIconSVG; // Reset to mic icon
+            recordBtn.innerHTML = micIconSVG;
             audioAsBase64 = null;
+            
+            // รีเซ็ตข้อมูลสลิป
+            slipAsBase64 = null;
+            if(slipFilenameDisplay) slipFilenameDisplay.textContent = '';
+
         })
         .catch(error => {
             console.error('Fetch Error!', error);
