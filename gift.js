@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
             submitBtn.disabled = true;
 
-            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // <-- เราจะต้องใส่ URL ใหม่ตรงนี้
-            
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx4L0hyMii3jJmvF1_om-FTQ-JUrUP9_S9jgl4AKt0Wv5gT6TavS6VRkWHzjoYJ8_2S/exec';
+
             const formData = new FormData(giftForm);
             const data = {};
             for (const [key, value] of formData.entries()) {
