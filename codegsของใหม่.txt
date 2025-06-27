@@ -1,0 +1,55 @@
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const folder = DriveApp.getFolderById(FOLDER_ID); 
+    const data = JSON.parse(e.postData.contents);
+    const timestamp = new Date();
+
+    // ตรวจสอบว่าเป็นฟอร์มประเภทไหน
+    if (data.formType === 'gift') {
+      // --- จัดการข้อมูลจากฟอร์มของขวัญ ---
+      const guestName = data.guestName || "N/A";
+      const guestSide = data.guestSide || "N/A";
+      const amount = data.amount || "";
+      let slipUrl = "No Slip";
+
+      if (data.slipData) {
+        slipUrl = saveBase64ToDrive(folder, data.slipData, null, `GiftSlip_${guestName}_`);
+      }
+      
+      // บันทึกข้อมูลลง Sheet (สังเกตว่าข้อมูลจะอยู่คนละคอลัมน์กับ RSVP)
+      // คุณต้องจัดลำดับให้ตรงกับ Sheet ของคุณ
+      // ตัวอย่าง: Timestamp, Name, Attendance, Guests, Wishes, AudioLink, WantsFavor, ShippingAddress, Slip URL, Guest Side, Amount
+      sheet.appendRow([timestamp, guestName, "", "", "", "", "", "", slipUrl, guestSide, amount]);
+
+    } else {
+      // --- จัดการข้อมูลจากฟอร์ม RSVP (โค้ดเดิม) ---
+      const name = data.name || "N/A";
+      const attendance = data.attendance || "N/A";
+      const guests = data.guests || "";
+      const wishes = data.wishes || "N/A";
+      const wantsFavor = data.wantsFavor || "N/A";
+      const shippingAddress = data.shippingAddress || "";
+      let audioUrl = "No Audio";
+
+      if (data.audioData) {
+        audioUrl = saveBase64ToDrive(folder, data.audioData, data.mimeType, `Audio_${name}_`);
+      }
+      
+      // บันทึกข้อมูล RSVP ลง Sheet
+      sheet.appendRow([timestamp, name, attendance, guests, wishes, audioUrl, wantsFavor, shippingAddress, "", "", ""]);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    Logger.log("Critical Error in doPost: " + error.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'error', error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// **ฟังก์ชัน saveBase64ToDrive ไม่ต้องแก้ไข ใช้ตัวเดิมได้เลย**

@@ -1,0 +1,106 @@
+/**
+ * Wedding RSVP Script (Final Version)
+ * Handles form data, audio wishes, and resized slip uploads.
+ * Last Updated: June 27, 2025
+ */
+
+// ID ของโฟลเดอร์ใน Google Drive ที่จะใช้เก็บไฟล์ (ไม่ต้องเปลี่ยนแปลง)
+const FOLDER_ID = "1uGJcWJ-d_ebhfUQ0qw1gdl2SumaATwpk"; 
+
+/**
+ * ฟังก์ชันหลักที่ทำงานเมื่อมีการส่งข้อมูลจากฟอร์ม (HTTP POST)
+ */
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const folder = DriveApp.getFolderById(FOLDER_ID);
+    
+    const data = JSON.parse(e.postData.contents);
+    
+    // ดึงข้อมูลจากฟอร์ม
+    const name = data.name || "N/A";
+    const attendance = data.attendance || "N/A";
+    const guests = data.guests || "";
+    const wishes = data.wishes || "N/A";
+    const wantsFavor = data.wantsFavor || "N/A";
+    const shippingAddress = data.shippingAddress || "";
+    
+    const timestamp = new Date();
+    
+    let audioUrl = "No Audio"; 
+    let slipUrl = "No Slip";
+
+    // จัดการไฟล์เสียง ถ้ามีส่งมา
+    if (data.audioData) {
+      audioUrl = saveBase64ToDrive(folder, data.audioData, data.mimeType, `Audio_${name}_`);
+    }
+
+    // จัดการไฟล์สลิป ถ้ามีส่งมา
+    if (data.slipData) {
+      slipUrl = saveBase64ToDrive(folder, data.slipData, null, `Slip_${name}_`);
+    }
+    
+    // เพิ่มข้อมูลแถวใหม่ลงใน Google Sheet ตามลำดับคอลัมน์ที่ถูกต้อง
+    sheet.appendRow([timestamp, name, attendance, guests, wishes, audioUrl, wantsFavor, shippingAddress, slipUrl]);
+
+    // ส่งคำตอบกลับไปว่าสำเร็จ
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'success', row: sheet.getLastRow() }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    // กรณีเกิดข้อผิดพลาดร้ายแรงในฟังก์ชัน doPost
+    Logger.log("Critical Error in doPost: " + error.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'error', error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * ฟังก์ชันสำหรับแปลงข้อมูล Base64 เป็นไฟล์และบันทึกลงใน Google Drive
+ * (เวอร์ชันแก้ไขสุดท้าย: ตั้งชื่อไฟล์ใน Blob โดยตรง)
+ * @param {Folder} folder - อ็อบเจกต์โฟลเดอร์ของ DriveApp
+ * @param {string} base64Data - ข้อมูลไฟล์ในรูปแบบ Base64
+ * @param {string} mimeType - ประเภทของไฟล์ (เช่น 'audio/webm')
+ * @param {string} prefix - คำนำหน้าชื่อไฟล์ (เช่น 'Audio_' หรือ 'Slip_')
+ * @returns {string} URL ของไฟล์ที่สร้างขึ้น หรือข้อความ Error
+ */
+function saveBase64ToDrive(folder, base64Data, mimeType, prefix) {
+  try {
+    if (!base64Data) {
+      throw new Error("No base64 data received.");
+    }
+
+    const parts = base64Data.split(',');
+    if (parts.length !== 2) {
+      throw new Error("Invalid Base64 string format.");
+    }
+
+    const mimeMatch = parts[0].match(/:(.*?);/);
+    if (!mimeMatch || !mimeMatch[1]) {
+       throw new Error("Could not determine content type from Base64 string header.");
+    }
+
+    const contentType = mimeType || mimeMatch[1];
+    const decodedData = Utilities.base64Decode(parts[1]);
+    
+    const fileExtension = contentType.split('/')[1] || 'bin';
+    const fileName = `${prefix}${new Date().getTime()}.${fileExtension}`;
+    
+    // สร้าง Blob พร้อมกับตั้งชื่อไฟล์ไปเลยในขั้นตอนเดียว (การแก้ไขล่าสุด)
+    const blob = Utilities.newBlob(decodedData, contentType, fileName);
+    
+    // สร้างไฟล์จาก Blob ที่มีชื่อแล้ว
+    const file = folder.createFile(blob);
+    
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    
+    return file.getUrl();
+  } catch (f) {
+    // Log error เพื่อให้เราดูย้อนหลังได้ (ถ้ามีสิทธิ์)
+    Logger.log("Error in saveBase64ToDrive: " + f.toString());
+    // ส่งข้อความ error ที่แท้จริงกลับไปแสดงใน Sheet
+    return "Error: " + f.toString(); 
+  }
+}
