@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(scriptURL, {
                 method: 'POST',
                 body: JSON.stringify(data),
-                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(() => {
