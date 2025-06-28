@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-=======
-/**
- * Script for gift.html (Gift Page)
- * Final version with loading spinner on submit.
- */
->>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
 document.addEventListener('DOMContentLoaded', function() {
     let slipAsBase64 = null;
-    // ... (other setup logic for toast, copy, amount buttons, slip upload, etc. is correct) ...
 
-<<<<<<< HEAD
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         if (!toast) return;
@@ -107,12 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-=======
->>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
     const giftForm = document.getElementById('gift-form');
     if (giftForm) {
         const submitBtn = document.getElementById('submit-gift');
-        
         giftForm.addEventListener('submit', function(e) {
             e.preventDefault();
             if (!slipAsBase64) {
@@ -120,16 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-<<<<<<< HEAD
-=======
-            // --- Spinner Logic Start ---
->>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
-            // --- Spinner Logic End ---
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
-
+            const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE'; // <-- ใส่ URL ของคุณ
+            
             const formData = new FormData(giftForm);
             const data = {};
             for (const [key, value] of formData.entries()) {
@@ -147,16 +130,14 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
             .catch(error => console.error('Error (expected with no-cors mode):', error))
             .finally(() => {
                 showToast('ส่งข้อมูลของขวัญสำเร็จ ขอบคุณครับ/ค่ะ!', 'success');
-                // ... reset other UI elements ...
+                giftForm.reset();
+                slipFilenameDisplay.textContent = '';
+                slipAsBase64 = null;
+                amountBtns.forEach(b => b.classList.remove('active'));
                 setTimeout(() => { window.location.href = 'index.html#gift'; }, 2000);
                 
-<<<<<<< HEAD
-=======
-                // --- Spinner Logic Start ---
->>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
-                // --- Spinner Logic End ---
             });
         });
     }
