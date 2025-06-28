@@ -15,10 +15,6 @@
     
     <main class="container">
         <section id="gift-page" class="content-section">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gift-section-icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <h2>ส่งของขวัญและคำอวยพร</h2>
-            <p class="section-subtitle">ขอบคุณสำหรับน้ำใจและความรักที่มอบให้เราครับ/ค่ะ</p>
-
             <div class="gift-card">
                 <div class="gift-card-header">ข้อมูลการโอน</div>
                 <div class="gift-box-container" style="box-shadow: none; border: none; padding: 15px 0; margin: 0;">
@@ -33,10 +29,8 @@
             </div>
 
             <form id="gift-form" class="gift-card" style="margin-top: 30px;">
-                <div class="gift-card-header">กรอกข้อมูลเพื่อยืนยัน</div>
-
                 <div class="form-group">
-                    <label for="slip-input">แนบสลิปของคุณ (จำเป็น)</label>
+                    <label for="slip-input">แนบสลิปของคุณ</label>
                     <input type="file" id="slip-input" name="slipFile" accept="image/*" style="display: none;" required>
                     <label for="slip-input" class="drop-zone">
                         <span class="drop-zone__prompt">
@@ -68,15 +62,22 @@
                            placeholder="กรอกจำนวนเงิน"
                            inputmode="numeric">
                 </div>
+
                 <div class="form-submit-area">
                     <a href="index.html#gift" class="btn btn-cancel">ยกเลิก</a>
                     <button type="submit" class="btn" id="submit-gift">
                         <span class="btn-spinner"></span>
-                        <span class="btn-text">ส่งข้อมูล</span>
+                        <span class="btn-text">ส่ง</span>
                     </button>
                 </div>
             </form>
-        </section>
+
+            <div class="thank-you-footer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gift-section-icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <h2>ส่งของขวัญและคำอวยพร</h2>
+                <p class="section-subtitle">ขอบคุณสำหรับน้ำใจและความรักที่มอบให้เราครับ/ค่ะ</p>
+            </div>
+            </section>
     </main>
 
     <div id="toast"></div>
