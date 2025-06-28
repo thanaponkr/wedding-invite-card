@@ -1,11 +1,6 @@
-/**
- * Script for gift.html (Gift & Slip Submission Page)
- * Handles slip resizing, amount buttons, and form submission.
- */
 document.addEventListener('DOMContentLoaded', function() {
     let slipAsBase64 = null;
 
-    // Toast Notification Helper Function
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         if (!toast) return;
@@ -19,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Lightbox Logic for QR Code
     const lightbox = document.getElementById('lightbox-modal');
     if (lightbox) {
         const lightboxImg = document.getElementById('lightbox-img');
@@ -39,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Copy Button Logic
     const copyBtn = document.getElementById('copy-btn');
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {
@@ -50,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Amount Buttons Logic
     const amountInput = document.getElementById('amount');
     const amountBtns = document.querySelectorAll('.amount-btn');
     if (amountInput && amountBtns.length > 0) {
@@ -66,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Slip Upload Logic with Resizing
     const uploadSlipBtn = document.getElementById('upload-slip-btn');
     const slipInput = document.getElementById('slip-input');
     const slipFilenameDisplay = document.getElementById('slip-filename');
@@ -107,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Gift Form Submission Logic
     const giftForm = document.getElementById('gift-form');
     if (giftForm) {
         const submitBtn = document.getElementById('submit-gift');
@@ -117,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('กรุณาแนบไฟล์สลิป', 'error');
                 return;
             }
-            const originalBtnHTML = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
+            
+            submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
@@ -146,7 +136,7 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
                 amountBtns.forEach(b => b.classList.remove('active'));
                 setTimeout(() => { window.location.href = 'index.html#gift'; }, 2000);
                 
-                submitBtn.innerHTML = originalBtnHTML;
+                submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             });
         });

@@ -1,15 +1,7 @@
-/**
- * Script for index.html (Main RSVP Page)
- * Handles music, countdown, lightbox, voice wishes, and RSVP form submission.
- * This version ONLY contains logic for the main page.
- */
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Global variables for this page's form data
     let audioAsBase64 = null;
     let supportedMimeType = '';
 
-    // Toast Notification Helper Function
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         if (!toast) return;
@@ -23,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Music Player Logic
     const music = document.getElementById('bg-music');
     if (music) {
         music.volume = 0.3;
@@ -57,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.addEventListener('touchstart', startMusicOnFirstInteraction, { once: true });
     }
 
-    // Countdown Timer Logic
     const countdownElem = document.getElementById('countdown');
     if (countdownElem) {
         const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime();
@@ -80,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    // Lightbox Logic
     const lightbox = document.getElementById('lightbox-modal');
     if (lightbox) {
         const lightboxImg = document.getElementById('lightbox-img');
@@ -100,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Voice Recording Logic
     const recordBtn = document.getElementById('record-btn');
     if (recordBtn) {
         const recordStatus = document.getElementById('record-status');
@@ -111,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let timerInterval;
         const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
         const stopIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>`;
-
         const startTimer = () => {
             let seconds = 0;
             timerDisplay.textContent = "00:00";
@@ -126,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 timerDisplay.textContent = `${min}:${sec}`;
             }, 1000);
         };
-
         recordBtn.addEventListener('click', async () => {
             if (mediaRecorder && mediaRecorder.state === "recording") {
                 mediaRecorder.stop();
@@ -171,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- RSVP Form Logic ---
     const rsvpForm = document.getElementById('rsvp-form');
     if (rsvpForm) {
         const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
@@ -208,8 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const originalBtnHTML = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
+            submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
@@ -240,12 +224,12 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
                     audioPlayback.style.display = 'none';
                     audioPlayback.src = '';
                 }
-                if(recordBtn) {
-                     const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
-                     recordBtn.innerHTML = micIconSVG;
-                }
+                const recordBtnIcon = document.getElementById('record-btn');
+                const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
+                if(recordBtnIcon) recordBtnIcon.innerHTML = micIconSVG;
                 audioAsBase64 = null;
-                submitBtn.innerHTML = originalBtnHTML;
+                
+                submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             });
         });
