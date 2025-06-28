@@ -43,20 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const amountInput = document.getElementById('amount');
-    const amountBtns = document.querySelectorAll('.amount-btn');
-    if (amountInput && amountBtns.length > 0) {
-        amountBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                amountBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                amountInput.value = btn.dataset.amount;
-            });
-        });
-        amountInput.addEventListener('input', () => {
-            amountBtns.forEach(b => b.classList.remove('active'));
-        });
-    }
+    // --- Amount Buttons Logic (ถูกลบออกไปแล้ว) ---
 
     const uploadSlipBtn = document.getElementById('upload-slip-btn');
     const slipInput = document.getElementById('slip-input');
@@ -111,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec'; // <-- ใส่ URL ของคุณ
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec'; // <-- สำคัญ: ใส่ URL ล่าสุดของคุณที่นี่
             
             const formData = new FormData(giftForm);
             const data = {};
@@ -133,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 giftForm.reset();
                 slipFilenameDisplay.textContent = '';
                 slipAsBase64 = null;
-                amountBtns.forEach(b => b.classList.remove('active'));
+                // ไม่ต้อง reset .amount-btn อีกต่อไป
                 setTimeout(() => { window.location.href = 'index.html#gift'; }, 2000);
                 
                 submitBtn.classList.remove('loading');
