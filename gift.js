@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
-            const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE'; // <-- ใส่ URL ของคุณ
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec'; // <-- ใส่ URL ของคุณ
             
             const formData = new FormData(giftForm);
             const data = {};

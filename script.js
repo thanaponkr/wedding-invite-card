@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
-            const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE'; 
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec'; 
             
             const formData = new FormData(rsvpForm);
             const data = {};
