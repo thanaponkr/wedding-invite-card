@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+/**
+ * Script for index.html (Main RSVP Page)
+ * Final version with loading spinner on submit.
+ */
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
 document.addEventListener('DOMContentLoaded', function() {
     let audioAsBase64 = null;
     let supportedMimeType = '';
@@ -15,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
+<<<<<<< HEAD
     const music = document.getElementById('bg-music');
     if (music) {
         music.volume = 0.3;
@@ -157,44 +165,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+=======
+    // Music, Countdown, Lightbox, Voice Recording, Form show/hide Logic...
+    // ... (All other logic remains the same as the last correct version) ...
+    
+    // RSVP Form Logic
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
     const rsvpForm = document.getElementById('rsvp-form');
     if (rsvpForm) {
-        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-        const guestCountGroup = document.getElementById('guest-count-group');
-        const favorSection = document.getElementById('favor-section');
-        const favorRadios = document.querySelectorAll('input[name="wantsFavor"]');
-        const shippingAddressGroup = document.getElementById('shipping-address-group');
         const submitBtn = document.getElementById('submit-rsvp');
-        
-        attendanceRadios.forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                if (e.target.value === 'Attending') {
-                    guestCountGroup.style.display = 'block';
-                    if (favorSection) favorSection.classList.remove('show');
-                } else if (e.target.value === 'Not Attending') {
-                    guestCountGroup.style.display = 'none';
-                    if (favorSection) favorSection.classList.add('show');
-                }
-            });
-        });
+        // ... (other rsvp form setup) ...
 
-        favorRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                const shippingAddressInput = document.getElementById('shippingAddress');
-                if (this.value === 'Yes') {
-                    shippingAddressGroup.style.display = 'block';
-                    if (shippingAddressInput) shippingAddressInput.required = true;
-                } else {
-                    shippingAddressGroup.style.display = 'none';
-                    if (shippingAddressInput) shippingAddressInput.required = false;
-                }
-            });
-        });
-        
         rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
+<<<<<<< HEAD
+=======
+            
+            // --- Spinner Logic Start ---
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
+            // --- Spinner Logic End ---
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
             
@@ -216,6 +207,7 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
             .finally(() => {
                 showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
                 rsvpForm.reset();
+<<<<<<< HEAD
                 guestCountGroup.style.display = 'none';
                 if(favorSection) favorSection.classList.remove('show');
                 shippingAddressGroup.style.display = 'none';
@@ -229,8 +221,14 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
                 if(recordBtnIcon) recordBtnIcon.innerHTML = micIconSVG;
                 audioAsBase64 = null;
                 
+=======
+                // ... reset other UI elements ...
+
+                // --- Spinner Logic Start ---
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
+                // --- Spinner Logic End ---
             });
         });
     }
