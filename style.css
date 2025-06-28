@@ -82,10 +82,24 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .hero-logo { max-width: 210px; width: 80%; height: auto; margin-bottom: 1rem; opacity: 1; }
 .hero-text p { font-size: 1.2rem; margin: 0; letter-spacing: 2px; color: var(--text-color); text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.4); opacity: 1; }
 .countdown-container { padding: 40px 20px; background-color: var(--gray-light); text-align: center; }
-.countdown-icon { width: 48px; height: 48px; margin-top: 10px; margin-bottom: 0px; }
-.parent-names { margin-bottom: 10px; font-size: 1.2rem; }
-.parent-row { display: flex; justify-content: space-between; max-width: 450px; margin: 0 auto; padding: 0 10px; }
-.and-separator { text-align: center; margin: 0px 0 !important; font-size: 1.2rem; }
+.countdown-icon { width: 96px; height: 96px; margin-top: 10px; margin-bottom: 0px; }
+
+/* === ส่วนที่แก้ไข === */
+.parent-names {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    line-height: 1.8; /* เพิ่มระยะห่างระหว่างบรรทัด */
+}
+.parent-names p {
+    margin: 0; /* เอา margin เริ่มต้นของ p ออก */
+}
+.and-separator {
+    text-align: center;
+    margin: 8px 0 !important; /* เพิ่มระยะห่างบนล่างให้ 'และ' */
+    font-size: 1.2rem;
+}
+/* === จบส่วนที่แก้ไข === */
+
 .invitation-text { font-size: 1.2rem; line-height: 2.2; margin-top: 20px; margin-bottom: 0px; padding: 0; }
 .bride-groom-names { font-family: var(--heading-font); font-size: 2rem; font-weight: 500; display: block; margin: 20px 0; line-height: 1.4; }
 .and-separator-image { display: block; width: 100px; height: auto; margin: -5px auto; }
@@ -99,7 +113,6 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .schedule-item { display: flex; justify-content: center; align-items: baseline; gap: 20px; margin-bottom: 10px; font-size: 1.2rem; }
 .schedule-item .time { font-weight: 500; color: var(--strong-accent-color); flex-basis: 80px; text-align: right; }
 .schedule-item .event { text-align: left; flex-basis: 200px; }
-#program .program-subtitle { font-size: 1.2rem; font-weight: 400; line-height: 1.6; margin-bottom: 40px; color: var(--text-color); }
 .dress-code-section { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--gray-medium); }
 .dress-code-section h4 { font-family: var(--primary-font); font-weight: 500; font-size: var(--font-size-md); margin-bottom: 0; }
 .dress-code-section .section-subtitle { margin-top: 5px; margin-bottom: 20px; font-size: var(--font-size-sm); }
@@ -179,35 +192,8 @@ input[type="radio"] { accent-color: var(--accent-color); }
 .radio-toggle-label:first-of-type { border-right: 1px solid var(--gray-medium); }
 .cancel-link { display: block; text-align: center; margin-top: 15px; color: #6c757d; text-decoration: underline; font-size: 0.9rem; }
 .cancel-link:hover { color: var(--text-color); }
-
-/* === Spinner Styles === */
-.btn .btn-text {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: opacity 0.2s ease;
-}
-.btn .btn-spinner {
-    display: none;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ffffff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-.btn.loading .btn-text {
-    visibility: hidden;
-    opacity: 0;
-}
-.btn.loading .btn-spinner {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+.btn .btn-text { display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.2s ease; }
+.btn .btn-spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.3); border-top-color: #ffffff; border-radius: 50%; animation: spin 1s linear infinite; }
+.btn.loading .btn-text { visibility: hidden; opacity: 0; }
+.btn.loading .btn-spinner { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+@keyframes spin { to { transform: rotate(360deg); } }
