@@ -1,11 +1,11 @@
 /**
- * Script for gift.html (Gift Page)
- * This version includes logic for preset amount buttons.
+ * Script for gift.html (Gift & Slip Submission Page)
+ * Handles slip resizing, amount buttons, and form submission.
  */
 document.addEventListener('DOMContentLoaded', function() {
     let slipAsBase64 = null;
 
-    // --- Toast Notification Helper Function ---
+    // Toast Notification Helper Function
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         if (!toast) return;
@@ -19,7 +19,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // --- Copy Button Logic ---
+    // Lightbox Logic for QR Code
+    const lightbox = document.getElementById('lightbox-modal');
+    if (lightbox) {
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+        const closeLightbox = document.querySelector('.lightbox-close');
+        lightboxTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                lightbox.style.display = "block";
+                lightboxImg.src = this.src;
+            });
+        });
+        if(closeLightbox) {
+            closeLightbox.addEventListener('click', () => lightbox.style.display = "none");
+        }
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.style.display = "none";
+        });
+    }
+
+    // Copy Button Logic
     const copyBtn = document.getElementById('copy-btn');
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {
@@ -30,27 +50,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Amount Buttons Logic ---
+    // Amount Buttons Logic
     const amountInput = document.getElementById('amount');
     const amountBtns = document.querySelectorAll('.amount-btn');
-    amountBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            amountBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to the clicked button
-            btn.classList.add('active');
-            // Set the input value
-            amountInput.value = btn.dataset.amount;
+    if (amountInput && amountBtns.length > 0) {
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                amountBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                amountInput.value = btn.dataset.amount;
+            });
         });
-    });
-    // If user types in the input, remove active class from buttons
-    if(amountInput) {
         amountInput.addEventListener('input', () => {
             amountBtns.forEach(b => b.classList.remove('active'));
         });
     }
 
-    // --- Slip Upload Logic with Resizing ---
+    // Slip Upload Logic with Resizing
     const uploadSlipBtn = document.getElementById('upload-slip-btn');
     const slipInput = document.getElementById('slip-input');
     const slipFilenameDisplay = document.getElementById('slip-filename');
@@ -91,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // --- Gift Form Submission Logic ---
+    // Gift Form Submission Logic
     const giftForm = document.getElementById('gift-form');
     if (giftForm) {
         const submitBtn = document.getElementById('submit-gift');
@@ -105,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
             submitBtn.disabled = true;
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
-
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
+            
             const formData = new FormData(giftForm);
             const data = {};
             for (const [key, value] of formData.entries()) {
@@ -133,32 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.innerHTML = originalBtnHTML;
                 submitBtn.disabled = false;
             });
-        });
-    }
-
-    // --- Lightbox Logic for QR Code ---
-    const lightbox = document.getElementById('lightbox-modal');
-    if (lightbox) {
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
-        const closeLightbox = document.querySelector('.lightbox-close');
-
-        lightboxTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function() {
-                lightbox.style.display = "block";
-                lightboxImg.src = this.src;
-            });
-        });
-
-        if(closeLightbox) {
-            closeLightbox.addEventListener('click', function() {
-                lightbox.style.display = "none";
-            });
-        }
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === this) {
-                lightbox.style.display = "none";
-            }
         });
     }
 });
