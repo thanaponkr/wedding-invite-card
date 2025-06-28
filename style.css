@@ -591,3 +591,15 @@ input[type="radio"] { accent-color: var(--accent-color); }
     word-break: break-all;
     order: 3;
 }
+
+/* === โค้ดที่เพิ่มเข้ามาสำหรับซ่อน/แสดงผลของที่ระลึก === */
+#favor-section {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+#favor-section.show {
+    max-height: 300px; /* ค่าเผื่อสำหรับความสูงของเนื้อหาข้างใน */
+    opacity: 1;
+}

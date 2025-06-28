@@ -173,22 +173,22 @@
                         <audio id="audio-playback" controls style="display: none;"></audio>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label>รับของที่ระลึกทางไปรษณีย์ (สำหรับท่านที่ไม่สะดวกมา)</label>
-                    <div class="radio-group">
-                        <input type="radio" id="favor-yes" name="wantsFavor" value="Yes" required>
-                        <label for="favor-yes">รับของที่ระลึก</label>
-                        <input type="radio" id="favor-no" name="wantsFavor" value="No">
-                        <label for="favor-no">ไม่เป็นไรครับ/ค่ะ</label>
+                
+                <div id="favor-section"> 
+                    <div class="form-group">
+                        <label>รับของที่ระลึกทางไปรษณีย์ (สำหรับท่านที่ไม่สะดวกมา)</label>
+                        <div class="radio-group">
+                            <input type="radio" id="favor-yes" name="wantsFavor" value="Yes">
+                            <label for="favor-yes">รับของที่ระลึก</label>
+                            <input type="radio" id="favor-no" name="wantsFavor" value="No" checked>
+                            <label for="favor-no">ไม่เป็นไรครับ/ค่ะ</label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="shipping-address-group" style="display: none;">
+                        <label for="shippingAddress">ที่อยู่สำหรับจัดส่ง:</label>
+                        <textarea id="shippingAddress" name="shippingAddress" rows="4" placeholder="กรุณากรอกบ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด และรหัสไปรษณีย์"></textarea>
                     </div>
                 </div>
-                <div class="form-group" id="shipping-address-group" style="display: none;">
-                    <label for="shippingAddress">ที่อยู่สำหรับจัดส่ง:</label>
-                    <textarea id="shippingAddress" name="shippingAddress" rows="4" placeholder="กรุณากรอกบ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด และรหัสไปรษณีย์"></textarea>
-                </div>
-
-
                 <div class="form-submit-area">
                     <button type="submit" class="btn" id="submit-rsvp">
                         <span>ส่งคำตอบ</span>
@@ -212,6 +212,7 @@
                     <span>ส่งของขวัญ (คลิกที่นี่)</span>
                 </a>
             </div>
+
             <p class="couple-note">
                 "คำอวยพรและน้ำใจจากทุกท่านมีความหมายกับเรามาก<br>ขอบคุณจากใจจริงครับ/ค่ะ"
                 <br><strong>- เมย์ & เต้ย -</strong>
