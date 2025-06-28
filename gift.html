@@ -4,26 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ส่งของขวัญ | May & Toey Wedding</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Sarabun:wght@400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
     <main class="container">
         <section id="gift-page" class="content-section">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gift-section-icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
             <h2>ส่งของขวัญและคำอวยพร</h2>
             <p class="section-subtitle">ขอบคุณสำหรับน้ำใจและความรักที่มอบให้เราครับ/ค่ะ</p>
-
             <div class="gift-card">
                 <div class="gift-card-header">ข้อมูลการโอน</div>
                 <div class="gift-box-container" style="box-shadow: none; border: none; padding: 15px 0; margin: 0;">
                     <img src="images/qr-code.jpg" alt="Wedding Gift QR Code" class="qr-code-img lightbox-trigger">
-                    <div class="gift-box" id="gift-account" style="border-top: none; padding: 15px 0 0 0; margin-bottom: 15px;">
+                    <div class="gift-box" id="gift-account" style="border-top: none; padding: 15px 0 0 0; margin-bottom: 15px; text-align: center;">
                         <p>ธนาคารกสิกรไทย</p>
                         <p>ชื่อบัญชี: นาย  รัชพล แก้วกอ และ น.ส.กัลยาณี มั่งมี</p>
                         <p class="account-number">175-1-78854-8</p>
@@ -31,15 +27,12 @@
                     <button type="button" class="btn btn-secondary" id="copy-btn" style="width: 100%;">คัดลอกเลขบัญชี</button>
                 </div>
             </div>
-
             <form id="gift-form" class="gift-card" style="margin-top: 30px;">
                 <div class="gift-card-header">กรอกข้อมูลเพื่อยืนยัน</div>
-
                 <div class="form-group">
                     <label for="guestName">ชื่อของคุณ (ผู้อวยพร)</label>
                     <input type="text" id="guestName" name="guestName" placeholder="กรุณากรอกชื่อของคุณ" required>
                 </div>
-                
                 <div class="form-group">
                     <label>ท่านเป็นแขกของฝ่ายไหน</label>
                     <div class="radio-toggle-group">
@@ -49,7 +42,6 @@
                         <label for="side-bride" class="radio-toggle-label">เจ้าสาว</label>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label>ระบุจำนวนเงิน (ไม่บังคับ)</label>
                     <div class="amount-selector">
@@ -59,7 +51,6 @@
                     </div>
                     <input type="number" id="amount" name="amount" class="amount-input" placeholder="หรือกรอกจำนวนเงินอื่นๆ">
                 </div>
-
                 <div class="form-group">
                     <label for="slip-input">แนบสลิปของคุณ (จำเป็น)</label>
                     <button type="button" class="btn btn-secondary" id="upload-slip-btn" style="width: 100%;">
@@ -69,21 +60,25 @@
                     <input type="file" id="slip-input" name="slipFile" accept="image/*" style="display: none;" required>
                     <span id="slip-filename" class="slip-filename-display"></span>
                 </div>
-
                 <div class="form-submit-area">
-                    <button type="submit" class="btn" id="submit-gift" style="width: 100%; font-size: 1.2rem;">ส่งข้อมูล</button>
+                    <button type="submit" class="btn" id="submit-gift" style="width: 100%; font-size: 1.2rem;">
+                        <span class="btn-spinner"></span>
+                        <span class="btn-text">ส่งข้อมูล</span>
+<<<<<<< HEAD
+                    </button>
+=======
+                        </button>
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
                     <a href="index.html#gift" class="cancel-link">ยกเลิกและกลับไปหน้าแรก</a>
                 </div>
             </form>
         </section>
     </main>
-
     <div id="toast"></div>
     <div id="lightbox-modal" class="lightbox">
         <span class="lightbox-close">×</span>
         <img class="lightbox-content" id="lightbox-img">
     </div>
-    
     <script src="gift.js"></script>
 </body>
 </html>

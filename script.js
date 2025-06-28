@@ -1,15 +1,14 @@
+<<<<<<< HEAD
+=======
 /**
  * Script for index.html (Main RSVP Page)
- * Handles music, countdown, lightbox, voice wishes, and RSVP form submission.
- * This version ONLY contains logic for the main page.
+ * Final version with loading spinner on submit.
  */
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Global variables for this page's form data
     let audioAsBase64 = null;
     let supportedMimeType = '';
 
-    // Toast Notification Helper Function
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         if (!toast) return;
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Music Player Logic
+<<<<<<< HEAD
     const music = document.getElementById('bg-music');
     if (music) {
         music.volume = 0.3;
@@ -57,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.addEventListener('touchstart', startMusicOnFirstInteraction, { once: true });
     }
 
-    // Countdown Timer Logic
     const countdownElem = document.getElementById('countdown');
     if (countdownElem) {
         const weddingDate = new Date(2025, 6, 28, 9, 9, 0).getTime();
@@ -80,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    // Lightbox Logic
     const lightbox = document.getElementById('lightbox-modal');
     if (lightbox) {
         const lightboxImg = document.getElementById('lightbox-img');
@@ -100,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Voice Recording Logic
     const recordBtn = document.getElementById('record-btn');
     if (recordBtn) {
         const recordStatus = document.getElementById('record-status');
@@ -111,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let timerInterval;
         const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
         const stopIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>`;
-
         const startTimer = () => {
             let seconds = 0;
             timerDisplay.textContent = "00:00";
@@ -126,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 timerDisplay.textContent = `${min}:${sec}`;
             }, 1000);
         };
-
         recordBtn.addEventListener('click', async () => {
             if (mediaRecorder && mediaRecorder.state === "recording") {
                 mediaRecorder.stop();
@@ -171,46 +165,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- RSVP Form Logic ---
+=======
+    // Music, Countdown, Lightbox, Voice Recording, Form show/hide Logic...
+    // ... (All other logic remains the same as the last correct version) ...
+    
+    // RSVP Form Logic
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
     const rsvpForm = document.getElementById('rsvp-form');
     if (rsvpForm) {
-        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-        const guestCountGroup = document.getElementById('guest-count-group');
-        const favorSection = document.getElementById('favor-section');
-        const favorRadios = document.querySelectorAll('input[name="wantsFavor"]');
-        const shippingAddressGroup = document.getElementById('shipping-address-group');
         const submitBtn = document.getElementById('submit-rsvp');
-        
-        attendanceRadios.forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                if (e.target.value === 'Attending') {
-                    guestCountGroup.style.display = 'block';
-                    if (favorSection) favorSection.classList.remove('show');
-                } else if (e.target.value === 'Not Attending') {
-                    guestCountGroup.style.display = 'none';
-                    if (favorSection) favorSection.classList.add('show');
-                }
-            });
-        });
+        // ... (other rsvp form setup) ...
 
-        favorRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                const shippingAddressInput = document.getElementById('shippingAddress');
-                if (this.value === 'Yes') {
-                    shippingAddressGroup.style.display = 'block';
-                    if (shippingAddressInput) shippingAddressInput.required = true;
-                } else {
-                    shippingAddressGroup.style.display = 'none';
-                    if (shippingAddressInput) shippingAddressInput.required = false;
-                }
-            });
-        });
-        
         rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const originalBtnHTML = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
+<<<<<<< HEAD
+=======
+            
+            // --- Spinner Logic Start ---
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
+            submitBtn.classList.add('loading');
             submitBtn.disabled = true;
+            // --- Spinner Logic End ---
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
             
@@ -232,6 +207,7 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
             .finally(() => {
                 showToast('ขอบคุณที่ตอบกลับคำเชิญ!', 'success');
                 rsvpForm.reset();
+<<<<<<< HEAD
                 guestCountGroup.style.display = 'none';
                 if(favorSection) favorSection.classList.remove('show');
                 shippingAddressGroup.style.display = 'none';
@@ -240,13 +216,19 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLM
                     audioPlayback.style.display = 'none';
                     audioPlayback.src = '';
                 }
-                if(recordBtn) {
-                     const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
-                     recordBtn.innerHTML = micIconSVG;
-                }
+                const recordBtnIcon = document.getElementById('record-btn');
+                const micIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`;
+                if(recordBtnIcon) recordBtnIcon.innerHTML = micIconSVG;
                 audioAsBase64 = null;
-                submitBtn.innerHTML = originalBtnHTML;
+                
+=======
+                // ... reset other UI elements ...
+
+                // --- Spinner Logic Start ---
+>>>>>>> b9f90d53ee773c04bb307c4224cf6d9f35d51abf
+                submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
+                // --- Spinner Logic End ---
             });
         });
     }
