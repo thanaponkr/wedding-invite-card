@@ -1,6 +1,6 @@
 /**
  * Script for gift.html (Gift Page)
- * This version uses no-cors and the finally() block to show success messages.
+ * This version includes logic for preset amount buttons.
  */
 document.addEventListener('DOMContentLoaded', function() {
     let slipAsBase64 = null;
@@ -27,6 +27,26 @@ document.addEventListener('DOMContentLoaded', function() {
             navigator.clipboard.writeText(accountNumber)
                 .then(() => showToast('คัดลอกเลขบัญชีแล้ว!'))
                 .catch(() => showToast('เกิดข้อผิดพลาดในการคัดลอก', 'error'));
+        });
+    }
+
+    // --- Amount Buttons Logic ---
+    const amountInput = document.getElementById('amount');
+    const amountBtns = document.querySelectorAll('.amount-btn');
+    amountBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            amountBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to the clicked button
+            btn.classList.add('active');
+            // Set the input value
+            amountInput.value = btn.dataset.amount;
+        });
+    });
+    // If user types in the input, remove active class from buttons
+    if(amountInput) {
+        amountInput.addEventListener('input', () => {
+            amountBtns.forEach(b => b.classList.remove('active'));
         });
     }
 
@@ -71,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // --- The Corrected Form Submission Logic ---
+    // --- Gift Form Submission Logic ---
     const giftForm = document.getElementById('gift-form');
     if (giftForm) {
         const submitBtn = document.getElementById('submit-gift');
@@ -85,7 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<span>กำลังส่ง...</span>';
             submitBtn.disabled = true;
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';            
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec';
+
             const formData = new FormData(giftForm);
             const data = {};
             for (const [key, value] of formData.entries()) {
@@ -97,21 +118,47 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(scriptURL, {
                 method: 'POST',
                 body: JSON.stringify(data),
-                mode: 'no-cors', // <<< นำกลับมาใช้
+                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' }
             })
             .catch(error => console.error('Error (expected with no-cors mode):', error))
             .finally(() => {
-                // ย้ายโค้ดทั้งหมดที่ต้องการให้ทำงานหลังส่งสำเร็จมาไว้ที่นี่
                 showToast('ส่งข้อมูลของขวัญสำเร็จ ขอบคุณครับ/ค่ะ!', 'success');
                 giftForm.reset();
                 slipFilenameDisplay.textContent = '';
                 slipAsBase64 = null;
+                amountBtns.forEach(b => b.classList.remove('active'));
                 setTimeout(() => { window.location.href = 'index.html#gift'; }, 2000);
                 
                 submitBtn.innerHTML = originalBtnHTML;
                 submitBtn.disabled = false;
             });
+        });
+    }
+
+    // --- Lightbox Logic for QR Code ---
+    const lightbox = document.getElementById('lightbox-modal');
+    if (lightbox) {
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+        const closeLightbox = document.querySelector('.lightbox-close');
+
+        lightboxTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                lightbox.style.display = "block";
+                lightboxImg.src = this.src;
+            });
+        });
+
+        if(closeLightbox) {
+            closeLightbox.addEventListener('click', function() {
+                lightbox.style.display = "none";
+            });
+        }
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) {
+                lightbox.style.display = "none";
+            }
         });
     }
 });

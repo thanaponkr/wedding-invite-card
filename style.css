@@ -373,6 +373,10 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
     margin: 5px 0; 
     font-size: var(--font-size-sm); 
 }
+/* === จุดที่แก้ไข === */
+#gift-account {
+    text-align: center;
+}
 .account-number { 
     font-family: 'Montserrat', sans-serif;
     font-weight: 500; 
@@ -602,4 +606,101 @@ input[type="radio"] { accent-color: var(--accent-color); }
 #favor-section.show {
     max-height: 300px; /* ค่าเผื่อสำหรับความสูงของเนื้อหาข้างใน */
     opacity: 1;
+}
+
+/* === โค้ดที่เพิ่มเข้ามาสำหรับหน้า Gift ที่ปรับปรุงใหม่ === */
+.gift-card {
+    background-color: #ffffff;
+    padding: 20px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--gray-light);
+    text-align: left;
+}
+.gift-card-header {
+    font-family: var(--heading-font);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+/* --- Amount Buttons --- */
+.amount-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.amount-btn {
+    padding: 12px 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid var(--gray-medium);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+.amount-btn:hover {
+    border-color: var(--accent-color);
+    background-color: var(--gray-light);
+}
+.amount-btn.active {
+    background-color: var(--strong-accent-color);
+    color: white;
+    border-color: var(--strong-accent-color);
+}
+.amount-input {
+    text-align: right;
+    font-size: 1.2rem !important;
+    font-weight: 500;
+}
+
+/* --- Radio Toggles --- */
+.radio-toggle-group {
+    display: flex;
+    border: 1px solid var(--gray-medium);
+    border-radius: 50px;
+    overflow: hidden;
+}
+.radio-toggle-group input[type="radio"] {
+    display: none; /* Hide original radio button */
+}
+.radio-toggle-label {
+    flex: 1;
+    text-align: center;
+    padding: 12px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: white;
+    color: var(--text-color);
+    margin: 0 !important;
+}
+.radio-toggle-group input[type="radio"]:checked + .radio-toggle-label {
+    background-color: var(--accent-color);
+    color: var(--strong-accent-color);
+    font-weight: 500;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+.radio-toggle-label:first-of-type {
+    border-right: 1px solid var(--gray-medium);
+}
+
+/* --- Cancel Link --- */
+.cancel-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #6c757d;
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+.cancel-link:hover {
+    color: var(--text-color);
 }
