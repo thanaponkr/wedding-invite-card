@@ -241,8 +241,8 @@ input[type="radio"] { accent-color: var(--accent-color); }
     box-shadow: 0 4px 10px rgba(17, 53, 102, 0.2);
 }
 .btn.btn-gift:hover {
-    background-color: #1856c4;
-    border-color: #1856c4;
+    background-color: #113566;
+    border-color: #113566;
     box-shadow: 0 6px 15px rgba(24, 86, 196, 0.3);
 }
 .btn-logo-img {
