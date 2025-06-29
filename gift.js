@@ -1,11 +1,6 @@
-/**
- * Script for gift.html (Gift Page)
- * This version corrects the ID for the copy button functionality.
- */
 document.addEventListener('DOMContentLoaded', function() {
     let slipAsBase64 = null;
 
-    // Toast Notification Helper Function
     const toast = document.getElementById('toast');
     function showToast(message, type = 'success') {
         if (!toast) return;
@@ -19,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Lightbox Logic for QR Code
     const lightbox = document.getElementById('lightbox-modal');
     if (lightbox) {
         const lightboxImg = document.getElementById('lightbox-img');
@@ -39,8 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // === ส่วนที่แก้ไข: เปลี่ยน ID เป็น copy-text-btn ===
-    const copyBtn = document.getElementById('copy-text-btn'); 
+    const copyBtn = document.getElementById('copy-text-btn');
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {
             const accountNumber = document.querySelector('.account-number').innerText;
@@ -49,90 +42,78 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(() => showToast('เกิดข้อผิดพลาดในการคัดลอก', 'error'));
         });
     }
-    // === จบส่วนที่แก้ไข ===
 
-    // Amount Buttons Logic
-    const amountInput = document.getElementById('amount');
-    const amountBtns = document.querySelectorAll('.amount-btn');
-    if (amountInput && amountBtns.length > 0) {
-        amountBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                amountBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                amountInput.value = btn.dataset.amount;
-            });
-        });
-        amountInput.addEventListener('input', () => {
-            amountBtns.forEach(b => b.classList.remove('active'));
+    // SLIP UPLOAD LOGIC WITH NEW BUTTON AND PREVIEW
+    const slipInput = document.getElementById('slip-input');
+    const uploadButton = document.getElementById('slip-upload-button');
+    const previewContainer = document.querySelector('.slip-preview-container');
+
+    function updateSlipPreview(file) {
+        if (!file) {
+            previewContainer.innerHTML = '';
+            previewContainer.style.display = 'none';
+            if (uploadButton) uploadButton.style.display = 'flex';
+            return;
+        }
+
+        previewContainer.style.display = 'block';
+        if (uploadButton) uploadButton.style.display = 'none';
+        
+        previewContainer.innerHTML = `
+            <img src="" class="slip-preview-thumb" alt="ตัวอย่างสลิป">
+            <button type="button" class="slip-remove-btn">×</button>
+        `;
+        const thumbElement = previewContainer.querySelector(".slip-preview-thumb");
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            thumbElement.src = reader.result;
+            
+            const img = new Image();
+            img.src = reader.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let { width, height } = img;
+                const MAX_WIDTH = 1024;
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                slipAsBase64 = canvas.toDataURL('image/jpeg', 0.8);
+                showToast('แนบสลิปเรียบร้อยแล้ว', 'success');
+            };
+            img.onerror = () => {
+                showToast('ไม่สามารถอ่านไฟล์รูปภาพได้', 'error');
+                updateSlipPreview(null);
+            };
+        };
+        
+        previewContainer.querySelector(".slip-remove-btn").addEventListener("click", () => {
+            slipInput.value = null; 
+            slipAsBase64 = null;
+            updateSlipPreview(null);
         });
     }
 
-    // Slip Upload Logic with Resizing
-    const slipInput = document.getElementById('slip-input');
-    const dropZoneElement = document.querySelector(".drop-zone");
-    const previewContainer = document.querySelector(".drop-zone__preview-container");
-    if (slipInput && dropZoneElement && previewContainer) {
-        const updatePreview = (file) => {
-            if (!file) {
-                previewContainer.style.display = "none";
-                dropZoneElement.style.display = "flex";
-                return;
-            }
-            previewContainer.style.display = "block";
-            dropZoneElement.style.display = "none";
-            previewContainer.innerHTML = `<img src="" class="drop-zone__thumb"><div class="drop-zone__filename">${file.name}</div><button type="button" class="drop-zone__remove-btn">×</button>`;
-            const thumbElement = previewContainer.querySelector(".drop-zone__thumb");
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                thumbElement.src = reader.result;
-                const img = new Image();
-                img.src = reader.result;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    let { width, height } = img;
-                    const MAX_WIDTH = 1024;
-                    if (width > MAX_WIDTH) {
-                        height *= MAX_WIDTH / width;
-                        width = MAX_WIDTH;
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-                    slipAsBase64 = canvas.toDataURL('image/jpeg', 0.8);
-                    showToast('แนบไฟล์และย่อขนาดสำเร็จ', 'success');
-                };
-            };
-            previewContainer.querySelector(".drop-zone__remove-btn").addEventListener("click", () => {
-                slipInput.value = null;
-                slipAsBase64 = null;
-                updatePreview(null);
-            });
-        };
-        dropZoneElement.addEventListener("dragover", e => {
-            e.preventDefault();
-            dropZoneElement.classList.add("is-dragover");
+    if (uploadButton) {
+        uploadButton.addEventListener('click', () => {
+            slipInput.click();
         });
-        ["dragleave", "dragend"].forEach(type => {
-            dropZoneElement.addEventListener(type, e => dropZoneElement.classList.remove("is-dragover"));
-        });
-        dropZoneElement.addEventListener("drop", e => {
-            e.preventDefault();
-            if (e.dataTransfer.files.length) {
-                slipInput.files = e.dataTransfer.files;
-                updatePreview(e.dataTransfer.files[0]);
-            }
-            dropZoneElement.classList.remove("is-dragover");
-        });
-        slipInput.addEventListener("change", e => {
+    }
+    
+    if(slipInput){
+        slipInput.addEventListener("change", () => {
             if (slipInput.files.length) {
-                updatePreview(slipInput.files[0]);
+                updateSlipPreview(slipInput.files[0]);
             }
         });
     }
     
-    // Gift Form Submission Logic
     const giftForm = document.getElementById('gift-form');
     if (giftForm) {
         const submitBtn = document.getElementById('submit-gift');
@@ -144,7 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
-            const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE'; // <-- สำคัญ: ใส่ URL ล่าสุดของคุณที่นี่
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzcZW-opHKQtVhUtJxoLMaX8NUZDtKgE7-_G9tPFSjPTb73oo4fY_mAeHsbtr5-pRTO/exec'; // <-- สำคัญ: ใส่ URL ล่าสุดของคุณที่นี่
+            
             const formData = new FormData(giftForm);
             const data = {};
             for (const [key, value] of formData.entries()) {
@@ -152,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             data.slipData = slipAsBase64;
             data.formType = 'gift';
+
             fetch(scriptURL, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -162,11 +146,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(() => {
                 showToast('ส่งข้อมูลของขวัญสำเร็จ ขอบคุณครับ/ค่ะ!', 'success');
                 giftForm.reset();
-                if(previewContainer) previewContainer.style.display = "none";
-                if(dropZoneElement) dropZoneElement.style.display = "flex";
+                updateSlipPreview(null);
                 slipAsBase64 = null;
-                if(amountBtns) amountBtns.forEach(b => b.classList.remove('active'));
                 setTimeout(() => { window.location.href = 'index.html#gift'; }, 2000);
+                
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             });
