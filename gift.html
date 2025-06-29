@@ -37,15 +37,18 @@
                 <div class="form-group">
                     <label for="slip-input">แนบสลิปของคุณ</label>
                     <input type="file" id="slip-input" name="slipFile" accept="image/*" style="display: none;" required>
-                    <label for="slip-input" class="drop-zone">
-                        <span class="drop-zone__prompt">
-                            <svg class="drop-zone__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                            ลากและวางไฟล์ หรือคลิกเพื่อเลือก
-                        </span>
-                    </label>
-                    <div class="drop-zone__preview-container"></div>
-                </div>
+                    
+                    <button type="button" id="slip-upload-button" class="btn btn-full-width btn-cancel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        <span>เลือกไฟล์สลิป</span>
+                    </button>
 
+                    <div id="slip-preview-container" class="slip-preview-container" style="display: none;">
+                        <img id="slip-preview-thumb" src="#" alt="ตัวอย่างสลิป" class="slip-preview-thumb">
+                        <p id="slip-filename" class="slip-filename"></p>
+                        <button type="button" id="slip-remove-btn" class="slip-remove-btn">×</button>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="guestName">ชื่อของคุณ (ผู้อวยพร)</label>
                     <input type="text" id="guestName" name="guestName" placeholder="กรุณากรอกชื่อของคุณ" required>
