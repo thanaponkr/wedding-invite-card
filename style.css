@@ -115,7 +115,6 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .dress-code-section .section-subtitle { margin-top: 5px; margin-bottom: 20px; font-size: var(--font-size-sm); }
 .color-palette { display: flex; justify-content: center; gap: 15px; }
 .color-swatch { width: 50px; height: 50px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.location { margin-top: 40px; }
 .location-icon { width: 32px; height: 32px; stroke: var(--strong-accent-color); margin-bottom: 10px; }
 .location h4 { margin-top: 0; margin-bottom: 5px; font-family: var(--primary-font); font-weight: 500; font-size: var(--font-size-md); }
 .location p { margin-top: 5px; color: #6c757d; font-size: var(--font-size-sm); }
@@ -163,7 +162,6 @@ input[type="radio"] { accent-color: var(--accent-color); }
 .lightbox-close:hover, .lightbox-close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
 .site-footer { position: fixed; bottom: 70px; left: 0; width: 100%; text-align: center; padding: 10px 20px; background-color: var(--bg-color); color: #6c757d; font-size: var(--font-size-sm); z-index: 999; box-sizing: border-box; }
 .site-footer p { margin: 0; }
-.gift-actions { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
 .btn.btn-primary { background-image: linear-gradient(145deg, #0d6efd, #0a58ca); box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3); width: 100%; box-sizing: border-box; order: 1; }
 .btn.btn-primary:hover { box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4); }
 .btn.btn-secondary {
@@ -198,16 +196,6 @@ input[type="radio"] { accent-color: var(--accent-color); }
 .drop-zone__thumb { width: 100%; height: auto; max-height: 200px; object-fit: contain; border-radius: 8px; }
 .drop-zone__filename { display: block; text-align: center; font-size: 0.9rem; color: var(--text-color); margin-top: 10px; word-break: break-all; }
 .drop-zone__remove-btn { position: absolute; top: -12px; right: -12px; width: 28px; height: 28px; background: var(--danger-color); color: white; border: 2px solid white; border-radius: 50%; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-.form-submit-area {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    align-items: center;
-}
-/* === ส่วนที่เพิ่มเข้ามาใหม่ === */
-.form-submit-area.is-centered {
-    justify-content: center;
-}
 #submit-gift {
     flex-grow: 0;
     flex-shrink: 0;
@@ -243,4 +231,26 @@ input[type="radio"] { accent-color: var(--accent-color); }
     margin: 0 auto;
     text-align: left;
     box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+}
+.form-container-full-width, .location {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-container-full-width .btn, .location .btn {
+    width: 100%;
+}
+/* === ส่วนที่แก้ไข === */
+.form-submit-area {
+    margin-top: 20px;
+}
+.form-submit-area:not(.is-centered) {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+.btn-full-width, #submit-rsvp {
+    width: 100%;
+    font-size: 1.2rem;
 }
