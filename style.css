@@ -90,10 +90,16 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .countdown-icon { width: 96px; height: 96px; margin-top: 10px; margin-bottom: 0px; }
 .parent-names { margin-bottom: 20px; font-size: 1.2rem; line-height: 1.8; }
 .parent-names p { margin: 0; }
-.and-separator { text-align: center; margin: 8px 0 !important; font-size: 1.2rem; }
+.and-separator {
+    text-align: center;
+    margin: 8px 0 !important;
+    font-size: 1.2rem;
+}
+.invitation-text > .and-separator {
+    margin: -15px 0 !important;
+}
 .invitation-text { font-size: 1.2rem; line-height: 2.2; margin-top: 20px; margin-bottom: 0px; padding: 0; }
 .bride-groom-names { font-family: var(--heading-font); font-size: 2rem; font-weight: 500; display: block; margin: 20px 0; line-height: 1.4; }
-.and-separator-image { display: block; width: 100px; height: auto; margin: -5px auto; }
 .wedding-date-display { font-family: var(--primary-font); font-size: 1.6rem; color: var(--text-color); margin-top: 40px; margin-bottom: 12px; letter-spacing: 1px; font-weight: 400; }
 .countdown { display: flex; justify-content: center; gap: 40px; }
 .countdown div { text-align: center; color: var(--text-color); }
@@ -197,6 +203,10 @@ input[type="radio"] { accent-color: var(--accent-color); }
     justify-content: flex-end;
     gap: 15px;
     align-items: center;
+}
+/* === ส่วนที่เพิ่มเข้ามาใหม่ === */
+.form-submit-area.is-centered {
+    justify-content: center;
 }
 #submit-gift {
     flex-grow: 0;
