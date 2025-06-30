@@ -136,7 +136,7 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .gift-box { background-color: transparent; border: none; padding: 25px 0 0 0; margin: 0 auto 25px auto; max-width: 350px; border-top: 1px dashed var(--gray-medium); }
 .gift-box p { margin: 5px 0; font-size: var(--font-size-sm); }
 #gift-account { text-align: center; }
-.account-number { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 1.25rem; letter-spacing: 2px; margin-top: 10px !important; color: var(--text-color); background-color: var(--gray-light); padding: 8px 12px; border-radius: 8px; display: inline-block; }
+.account-number { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 1.6rem!important; letter-spacing: 2px; margin-top: 10px !important; color: var(--text-color); background-color: var(--gray-light); padding: 8px 12px; border-radius: 8px; display: inline-block; }
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 1.1rem; text-align: left; }
@@ -274,7 +274,7 @@ input[type="radio"] { accent-color: var(--accent-color); }
     font-size: 1rem;
     font-weight: 500;
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 0px;
 }
 .copy-link:hover {
     color: #113566;
@@ -330,4 +330,22 @@ input[type="radio"] { accent-color: var(--accent-color); }
 .btn.btn-cancel {
     gap: 8px;
     font-size: 1.1rem;
+}
+
+/* === สไตล์สำหรับข้อมูลบัญชี (อัปเดตล่าสุด) === */
+.account-details {
+    margin-top: -20px; /* ลองเพิ่มค่านี้ */
+    margin-bottom: 10px;
+}
+.account-details__header {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+.account-details__bank,
+.account-details__name {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 4px 0;
 }

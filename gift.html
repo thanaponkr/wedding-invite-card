@@ -24,8 +24,13 @@
                 <div class="gift-box-container" style="box-shadow: none; border: none; padding: 15px 0; margin: 0; text-align: center;">
                     <img src="images/qr-code.jpg" alt="Wedding Gift QR Code" class="qr-code-img lightbox-trigger">
                     <div class="gift-box" id="gift-account" style="border-top: none; padding: 15px 0 0 0; margin-bottom: 15px; text-align: center;">
-                        <p>ธนาคารกสิกรไทย</p>
-                        <p>ชื่อบัญชี: นาย  รัชพล แก้วกอ และ น.ส.กัลยาณี มั่งมี</p>
+                        
+                        <div class="account-details">
+                            <h4 class="account-details__header">ข้อมูลบัญชีเจ้าบ่าว-เจ้าสาว</h4>
+                            <p class="account-details__bank">ธนาคารกสิกรไทย</p>
+                            <p class="account-details__name">ชื่อบัญชี: นาย รัชพล แก้วกอ และ น.ส.กัลยาณี มั่งมี</p>
+                        </div>
+                        
                         <p class="account-number">175-1-78854-8</p>
                     </div>
                     <span id="copy-text-btn" class="copy-link">คัดลอกเลขบัญชี</span>
@@ -49,13 +54,14 @@
                         <button type="button" id="slip-remove-btn" class="slip-remove-btn">×</button>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="guestName">ชื่อของคุณ (ผู้อวยพร)</label>
                     <input type="text" id="guestName" name="guestName" placeholder="กรุณากรอกชื่อของคุณ" required>
                 </div>
                 
                 <div class="form-group">
-                    <label>ท่านเป็นแขกของฝ่ายไหน</label>
+                    <label>ท่านเป็นแขกของ</label>
                     <div class="radio-group">
                         <input type="radio" id="side-groom" name="guestSide" value="เจ้าบ่าว" required>
                         <label for="side-groom">เจ้าบ่าว</label>
@@ -75,7 +81,7 @@
                     <a href="index.html#gift" class="btn btn-cancel">ยกเลิก</a>
                     <button type="submit" class="btn" id="submit-gift">
                         <span class="btn-spinner"></span>
-                        <span class="btn-text">ส่ง</span>
+                        <span class="btn-text">ส่งสลิป</span>
                     </button>
                 </div>
             </form>
