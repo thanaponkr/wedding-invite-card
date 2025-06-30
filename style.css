@@ -136,7 +136,18 @@ h2, h3, h4 { font-family: var(--heading-font); font-weight: 500; }
 .gift-box { background-color: transparent; border: none; padding: 25px 0 0 0; margin: 0 auto 25px auto; max-width: 350px; border-top: 1px dashed var(--gray-medium); }
 .gift-box p { margin: 5px 0; font-size: var(--font-size-sm); }
 #gift-account { text-align: center; }
-.account-number { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 1.6rem!important; letter-spacing: 2px; margin-top: 10px !important; color: var(--text-color); background-color: var(--gray-light); padding: 8px 12px; border-radius: 8px; display: inline-block; }
+.account-number {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1.4rem !important;
+    letter-spacing: 2px;
+    margin-top: 10px !important;
+    color: var(--text-color);
+    background-color: #dee2e650;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+}
 #rsvp-form { max-width: 500px; margin: 0 auto; text-align: left; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 1.1rem; text-align: left; }
@@ -192,6 +203,7 @@ input[type="radio"] { accent-color: var(--accent-color); }
 #submit-gift {
     flex: 1;
     font-size: 1.2rem;
+    box-shadow: none; /* <--- เพิ่มบรรทัดนี้ */
 }
 .btn.btn-cancel {
     background-image: none;
@@ -235,18 +247,19 @@ input[type="radio"] { accent-color: var(--accent-color); }
 }
 .btn.btn-gift {
     background-image: none;
-    background-color: #113566;
+    background-color: #063d8c;
     color: #e6f0ff;
-    border: 2px solid #113566;
+    border: 2px solid #063d8c;
     box-shadow: 0 4px 10px rgba(17, 53, 102, 0.2);
+    font-size: 1.2rem; /* <--- เพิ่มบรรทัดนี้เพื่อปรับขนาดตัวอักษร */
 }
 .btn.btn-gift:hover {
-    background-color: #113566;
-    border-color: #113566;
+    background-color: #063d8c;
+    border-color: #063d8c;
     box-shadow: 0 6px 15px rgba(24, 86, 196, 0.3);
 }
 .btn-logo-img {
-    height: 24px;
+    height: 28px;
     width: auto;
     margin-right: 4px;
 }
@@ -274,7 +287,7 @@ input[type="radio"] { accent-color: var(--accent-color); }
     font-size: 1rem;
     font-weight: 500;
     display: inline-block;
-    margin-top: 0px;
+    margin-top: 15px;
 }
 .copy-link:hover {
     color: #113566;
@@ -334,8 +347,8 @@ input[type="radio"] { accent-color: var(--accent-color); }
 
 /* === สไตล์สำหรับข้อมูลบัญชี (อัปเดตล่าสุด) === */
 .account-details {
-    margin-top: -20px; /* ลองเพิ่มค่านี้ */
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 0;
 }
 .account-details__header {
     font-size: 1.2rem;
@@ -348,4 +361,45 @@ input[type="radio"] { accent-color: var(--accent-color); }
     font-size: 1.1rem;
     line-height: 1.6;
     margin: 4px 0;
+}
+
+/* === เปลี่ยนสีปุ่มส่งของขวัญ === */
+#submit-gift {
+    background-image: none; /* คำสั่งเพื่อลบสีแบบไล่ระดับ (gradient) ของเดิมออก */
+    background-color: #063d8c; /* ใส่รหัสสีใหม่ที่ต้องการ */
+    flex: 1;
+    font-size: 1.2rem;
+}
+
+/* ทำให้ปุ่มตอน hover ไม่เปลี่ยนกลับไปเป็นสีเดิม */
+#submit-gift:hover {
+    background-color: #063d8c; /* ใส่สีที่เข้มขึ้นเล็กน้อยสำหรับตอนเอาเมาส์ไปชี้ */
+}
+
+/* === ปรับเส้นขอบช่องกรอกจำนวนเงิน (สีเดียวกับปุ่มยกเลิก) === */
+#amount {
+  border: 2px solid #dee2e6; /* สีเทาอ่อนจากเส้นขอบปุ่ม 'ยกเลิก' */
+  transition: border-color 0.3s, box-shadow 0.3s; /* เพิ่มความนุ่มนวลตอนเปลี่ยนสไตล์ */
+}
+
+/* เพิ่มสไตล์ตอนที่กำลังกรอก (Focus) */
+#amount:focus {
+  border-color: #6c757d; /* สีเทาเข้มจาก 'ตัวอักษร' ของปุ่ม 'ยกเลิก' */
+  box-shadow: 0 0 8px rgba(108, 117, 125, 0.4); /* เงาเรืองแสงสีเทา */
+  outline: none; /* เอาเส้นขอบของเบราว์เซอร์ออก */
+}
+
+/* === ปรับเส้นขอบช่องกรอกข้อมูล (สไตล์เดียวกัน) === */
+#amount,
+#guestName {
+  border: 1.8px solid #dee2e6; /* สีเทาอ่อนจากเส้นขอบปุ่ม 'ยกเลิก' */
+  transition: border-color 0.3s, box-shadow 0.3s; /* เพิ่มความนุ่มนวลตอนเปลี่ยนสไตล์ */
+}
+
+/* เพิ่มสไตล์ตอนที่กำลังกรอก (Focus) */
+#amount:focus,
+#guestName:focus {
+  border-color: #6c757d; /* สีเทาเข้มจาก 'ตัวอักษร' ของปุ่ม 'ยกเลิก' */
+  box-shadow: 0 0 8px rgba(108, 117, 125, 0.4); /* เงาเรืองแสงสีเทา */
+  outline: none; /* เอาเส้นขอบของเบราว์เซอร์ออก */
 }
